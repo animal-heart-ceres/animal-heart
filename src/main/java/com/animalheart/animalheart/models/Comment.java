@@ -13,9 +13,6 @@ public class Comment {
     @Column(nullable = false, columnDefinition = "TEXT")
     private String comment;
 
-    @Column(nullable = false)
-    private String author;
-
     @ManyToOne
     @JoinColumn (name = "animal_id")
     private Animal animal;
@@ -27,4 +24,53 @@ public class Comment {
     @ManyToOne
     @JoinColumn (name = "org_id")
     private Organization organization;
+
+    public Comment() {}
+
+    public Comment(String comment, Animal animal, User user, Organization organization) {
+        this.comment = comment;
+        this.animal = animal;
+        this.user = user;
+        this.organization = organization;
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public String getComment() {
+        return comment;
+    }
+
+    public void setComment(String comment) {
+        this.comment = comment;
+    }
+
+    public Animal getAnimal() {
+        return animal;
+    }
+
+    public void setAnimal(Animal animal) {
+        this.animal = animal;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public Organization getOrganization() {
+        return organization;
+    }
+
+    public void setOrganization(Organization organization) {
+        this.organization = organization;
+    }
 }
