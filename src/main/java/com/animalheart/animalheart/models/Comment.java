@@ -21,17 +21,13 @@ public class Comment {
     @JoinColumn (name = "user_id")
     private User user;
 
-    @ManyToOne
-    @JoinColumn (name = "org_id")
-    private Organization organization;
 
     public Comment() {}
 
-    public Comment(String comment, Animal animal, User user, Organization organization) {
+    public Comment(String comment, Animal animal, User user) {
         this.comment = comment;
         this.animal = animal;
         this.user = user;
-        this.organization = organization;
     }
 
     public long getId() {
@@ -66,11 +62,4 @@ public class Comment {
         this.user = user;
     }
 
-    public Organization getOrganization() {
-        return organization;
-    }
-
-    public void setOrganization(Organization organization) {
-        this.organization = organization;
-    }
 }

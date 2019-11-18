@@ -20,26 +20,34 @@ public class User {
     @Column(nullable = false, length = 500)
     private String password;
 
+    @Column(nullable = false)
+    private Boolean isOrganization;
+
+    @Column(nullable = false)
+    private Boolean isAdmin;
+
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
     private List<Comment> commentList;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
     private List<Animal> animalList;
 
-    @ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(
-            name="users_organization",
-            joinColumns={@JoinColumn(name="user_id")},
-            inverseJoinColumns={@JoinColumn(name="org_id")}
-    )
-    private List<Organization> organizations;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
+    private List<Event> eventList;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
+    private List<Follower> followerList;
+
+
 
     public User(){}
 
-    public User(String username, String email, String password) {
+    public User(String username, String email, String password, Boolean isOrganization, Boolean isAdmin) {
         this.username = username;
         this.email = email;
         this.password = password;
+        this.isOrganization = isOrganization;
+        this.isAdmin = isAdmin;
     }
 
     public long getId() {
@@ -72,5 +80,37 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public Boolean getOrganization() {
+        return isOrganization;
+    }
+
+    public void setOrganization(Boolean organization) {
+        isOrganization = organization;
+    }
+
+    public Boolean getAdmin() {
+        return isAdmin;
+    }
+
+    public void setAdmin(Boolean admin) {
+        isAdmin = admin;
+    }
+
+    public List<Comment> getCommentList() {
+        return commentList;
+    }
+
+    public void setCommentList(List<Comment> commentList) {
+        this.commentList = commentList;
+    }
+
+    public List<Animal> getAnimalList() {
+        return animalList;
+    }
+
+    public void setAnimalList(List<Animal> animalList) {
+        this.animalList = animalList;
     }
 }

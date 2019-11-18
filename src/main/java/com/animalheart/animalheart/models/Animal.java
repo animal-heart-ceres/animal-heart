@@ -45,10 +45,6 @@ public class Animal {
     @JoinColumn (name = "user_id")
     private User user;
 
-    @ManyToOne
-    @JoinColumn (name = "org_id")
-    private Organization organization;
-
     public Animal(){}
 
     public Animal(String img, String type, String size, int age, String exoticType) {
