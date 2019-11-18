@@ -113,4 +113,20 @@ public class User {
     public void setAnimalList(List<Animal> animalList) {
         this.animalList = animalList;
     }
+
+    public List<Event> getEventList() {
+        return eventList;
+    }
+
+    public void setEventList(List<Event> eventList) {
+        this.eventList = eventList;
+    }
+
+    public List<Follower> getFollowerList() {
+        return followerList;
+    }
+
+    public void setFollowerList(List<Follower> followerList) {
+        this.followerList = followerList;
+    }
 }

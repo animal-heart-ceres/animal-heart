@@ -39,7 +39,7 @@ public class Animal {
     private Date dateCreated;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "animal")
-    private List<Animal> animals;
+    private List<Comment> commentList;
 
     @ManyToOne
     @JoinColumn (name = "user_id")

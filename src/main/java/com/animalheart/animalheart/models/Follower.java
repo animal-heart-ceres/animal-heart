@@ -11,11 +11,11 @@ public class Follower {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @Column(nullable = false, columnDefinition = "Unsigned")
+    @Column(nullable = false)
     private long followerId;
 
     @ManyToOne
-    @JoinColumn (name = "organization_id")
+    @JoinColumn (name = "user_organization_id")
     private User user;
 
     public Follower() {}
