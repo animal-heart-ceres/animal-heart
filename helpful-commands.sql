@@ -14,9 +14,11 @@ SELECT * FROM organization_profiles;
 
 SELECT * FROM user_profiles;
 
-SELECT * FROM animal;
+SELECT * FROM animals;
 
 SELECT * FROM comments;
+
+
 
 
 

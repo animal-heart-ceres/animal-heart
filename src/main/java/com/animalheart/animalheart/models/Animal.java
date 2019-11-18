@@ -9,6 +9,7 @@ import java.util.Date;
 import java.util.List;
 
 @Entity
+@Table(name = "animals")
 public class Animal {
 
 
@@ -32,7 +33,7 @@ public class Animal {
     @Column(nullable = false)
     private int age;
 
-    @Column(nullable = false)
+    @Column
     private String exoticType;
 
     @Column(columnDefinition = "DATETIME")
