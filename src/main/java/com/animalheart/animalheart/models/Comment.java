@@ -15,4 +15,16 @@ public class Comment {
 
     @Column(nullable = false)
     private String author;
+
+    @ManyToOne
+    @JoinColumn (name = "animal_id")
+    private Animal animal;
+
+    @ManyToOne
+    @JoinColumn (name = "user_id")
+    private User user;
+
+    @ManyToOne
+    @JoinColumn (name = "org_id")
+    private Organization organization;
 }

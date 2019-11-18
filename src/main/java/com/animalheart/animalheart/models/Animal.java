@@ -4,6 +4,9 @@ import net.bytebuddy.implementation.bind.annotation.Default;
 import org.springframework.beans.factory.annotation.Value;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
+import java.util.Date;
+import java.util.List;
 
 @Entity
 public class Animal {
@@ -31,6 +34,12 @@ public class Animal {
 
     @Column(nullable = false)
     private String exoticType;
+
+    @Column(columnDefinition = "DATETIME")
+    private Date dateCreated;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "animal")
+    private List<Animal> animals;
 
     @ManyToOne
     @JoinColumn (name = "user_id")

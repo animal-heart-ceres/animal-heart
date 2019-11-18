@@ -26,6 +26,9 @@ public class Organization {
     @ManyToMany(mappedBy = "organizations")
     private List<User> users;
 
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "organization")
+    private List<Comment> commentList;
+
     public Organization() {}
 
     public Organization(String org_name, String email, String password) {
