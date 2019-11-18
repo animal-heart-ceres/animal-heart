@@ -4,6 +4,7 @@ DB Design
 <img width="871" alt="Screen Shot 2019-11-18 at 2 20 25 PM" src="https://user-images.githubusercontent.com/52936652/69092994-35b60880-0a13-11ea-9ece-64faed3835aa.png">
 
 First Draft Features
+<br>
 1.Features comprising a functioning app.
 
     User
