@@ -19,15 +19,19 @@ public class OrganizationProfile {
     @Column(nullable = false, columnDefinition = "TEXT")
     private String description;
 
+    @Column(nullable = false)
+    private String address;
+
     @OneToOne
     private User organization;
 
     public OrganizationProfile() {}
 
-    public OrganizationProfile(String name, long taxNumber, String description, User organization) {
+    public OrganizationProfile(String name, long taxNumber, String description, String address, User organization) {
         this.name = name;
         this.taxNumber = taxNumber;
         this.description = description;
+        this.address = address;
         this.organization = organization;
     }
 
@@ -69,5 +73,13 @@ public class OrganizationProfile {
 
     public void setOrganization(User organization) {
         this.organization = organization;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
     }
 }
