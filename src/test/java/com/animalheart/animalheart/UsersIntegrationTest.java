@@ -85,15 +85,15 @@ public class UsersIntegrationTest {
                 .andExpect(status().is3xxRedirection());
     }
 
-    @Test
-    public void testCreateUserProfile() throws Exception {
-        this.mvc.perform(
-                post("/create-user-profile")
-                .param("firstName", "testFirstName")
-                .param("lastName", "testLastName")
-                .param("address", "testAddress"))
-
-                .andExpect(status().is3xxRedirection());
-    }
+//    @Test
+//    public void testCreateUserProfile() throws Exception {
+//        this.mvc.perform(
+//                post("/create-user-profile")
+//                .param("firstName", "testFirstName")
+//                .param("lastName", "testLastName")
+//                .param("address", "testAddress"))
+//
+//                .andExpect(status().is3xxRedirection());
+//    }
 
 }
