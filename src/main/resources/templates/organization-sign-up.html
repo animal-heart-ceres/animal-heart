@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css?family=Playfair+Display|Raleway&display=swap" rel="stylesheet">    <link rel="stylesheet" type="text/css" href="../static/css/organization-sign-up.css">
+    <title>Organization Sign Up</title>
+</head>
+<body>
+
+<div class="container-fluid" id="h1-border">
+    <div class="row">
+        <div class="col-8">
+            <h1 class="text-center">ORGANIZATION REGISTER</h1>
+            <div class="form-group text-center" id="form-div" >
+                <form th:action="@{/sign-up}" method="post">
+                    <input id="username" name="username" type="text" placeholder="USERNAME" />
+                    <input id="email" name="email" type="text" placeholder="EMAIL" />
+                    <input id="password" name="password" type="password" placeholder="PASSWORD" />
+                    <input id="submit-btn" type="submit" value="SIGN UP"/>
+                </form>
+                <div class="row-2">
+                    <a id="home" href="/index">HOME</a>
+                    <a id="user-signup" href="/sign-up">USER SIGNUP</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-4">
+            <img id="img" src="../static/img/signup-paw.jpg" width="475" height="360" alt="cat-paw">
+            <img id="img" src="../static/img/signup-cat.jpg" width="475" height="360" alt="white-cat">
+            <img id="img" src="../static/img/signup-dog.jpg" width="475" height="360" alt="french-bulldog">
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
