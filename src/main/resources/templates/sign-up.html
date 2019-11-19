@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css?family=Playfair+Display|Raleway&display=swap" rel="stylesheet">    <link rel="stylesheet" type="text/css" href="../static/css/sign-up.css">
+    <title>Sign Up</title>
+</head>
+<body>
+
+    <div class="container-fluid" id="h1-border">
+        <div class="row">
+            <div class="col-8">
+                <h1 class="text-center">USER REGISTER</h1>
+                <div class="form-group text-center" id="form-div" >
+                    <form th:action="@{/sign-up}" method="post">
+                        <input id="first-name" name="first-name" type="text" placeholder="FIRST NAME" />
+                        <input id="last-name" name="last-name" type="text" placeholder="LAST NAME" />
+                        <input id="username" name="username" type="text" placeholder="USERNAME" />
+                        <input id="email" name="email" type="text" placeholder="EMAIL" />
+                        <input id="address" name="address" type="text" placeholder="ADDRESS" />
+                        <input id="password" name="password" type="password" placeholder="PASSWORD" />
+                        <input id="submit-btn" type="submit" value="SIGN UP"/>
+                    </form>
+                        <div class="row-2">
+                            <a id="home" href="/index">HOME</a>
+                            <a id="rescue-signup" href="/rescue-sign-up">RESCUE SIGNUP</a>
+                        </div>
+                </div>
+            </div>
+
+            <div class="col-4">
+                <img id="img"  src="img/signup-paw.jpg" width="475" height="350"  alt="cat-paw">
+                <img  id="img" src="img/signup-cat.jpg" width="475" height="350" alt="white-cat">
+                <img  id="img" src="img/signup-dog.jpg" width="475" height="350" alt="french-bulldog">
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
