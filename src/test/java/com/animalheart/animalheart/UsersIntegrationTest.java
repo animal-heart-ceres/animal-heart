@@ -1,6 +1,7 @@
 package com.animalheart.animalheart;
 
 import com.animalheart.animalheart.models.User;
+import com.animalheart.animalheart.repositories.UserProfileRepository;
 import com.animalheart.animalheart.repositories.UserRepository;
 import org.junit.Before;
 import org.junit.Test;
@@ -34,8 +35,6 @@ public class UsersIntegrationTest {
     @Autowired
     UserRepository userDao;
 
-//    @Autowired
-//    AdRepository adsDao;
 
 //    @Autowired
 //    private PasswordEncoder passwordEncoder;
@@ -83,6 +82,17 @@ public class UsersIntegrationTest {
 //                        .param("isAdmin", "true")
 //                        .param("isOrganization", "false")
         )
+                .andExpect(status().is3xxRedirection());
+    }
+
+    @Test
+    public void testCreateUserProfile() throws Exception {
+        this.mvc.perform(
+                post("/create-user-profile")
+                .param("firstName", "testFirstName")
+                .param("lastName", "testLastName")
+                .param("address", "testAddress"))
+
                 .andExpect(status().is3xxRedirection());
     }
 
