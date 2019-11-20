@@ -31,10 +31,10 @@ public class UserProfileController {
         return "/index";
     }
 
-    @PostMapping("/profile/{id}/edit")
-    public String editUserProfile(@PathVariable long id){
-
-    }
+//    @PostMapping("/profile/{id}/edit")
+//    public String editUserProfile(@PathVariable long id){
+//
+//    }
 
 //    @PostMapping("/posts/{id}/edit")
 //    public String editPost(@PathVariable long id, @RequestParam(name = "title") String title, @RequestParam(name = "body") String body){
