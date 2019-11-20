@@ -2,6 +2,7 @@ package com.animalheart.animalheart;
 
 import com.animalheart.animalheart.models.OrganizationProfile;
 import com.animalheart.animalheart.models.User;
+import com.animalheart.animalheart.models.UserProfile;
 import com.animalheart.animalheart.repositories.OrganizationProfileRepository;
 import com.animalheart.animalheart.repositories.UserProfileRepository;
 import com.animalheart.animalheart.repositories.UserRepository;
@@ -46,6 +47,9 @@ public class UsersIntegrationTest {
 
     @Autowired
     OrganizationProfileRepository organizationProfileDao;
+
+    @Autowired
+    UserProfileRepository userProfileDao;
 
     @Before
     public void setup() throws Exception {
@@ -130,9 +134,16 @@ public class UsersIntegrationTest {
                 post("/create-user-profile")
                 .param("firstName", "testFirstName")
                 .param("lastName", "testLastName")
-                .param("address", "testAddress"));
-//                .andExpect(status().is3xxRedirection());
+                .param("address", "testAddress")
+                .param("user_id", Long.toString(testUser.getId())))
+                .andExpect(status().is3xxRedirection());
+
+        UserProfile currentUserProfile = userProfileDao.findByFirstName("testFirstName");
+
+        userProfileDao.delete(currentUserProfile);
     }
+
+
 
     @Test
     public void testCreateOrganizationProfile() throws Exception {
@@ -153,8 +164,12 @@ public class UsersIntegrationTest {
     @Test
     public void testViewUserProfile() throws Exception {
         User currentUser = userDao.findByUsername("testUser");
+
         this.mvc.perform(get("/user-profile/" + currentUser.getId()))
                 .andExpect(status().is3xxRedirection());
+
+
+
     }
 
 
