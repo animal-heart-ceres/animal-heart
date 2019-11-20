@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css?family=Playfair+Display|Raleway&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <title>Organization Profile</title>
     <link rel="stylesheet" href="../static/css/veiw-animals.css">
 </head>
@@ -21,6 +22,29 @@
 
     <header class="jumbotron my-1 bg-white" id="animal-jumbotron" >
         <h1 class="display-3 text-center">AVAILABLE ANIMALS</h1>
+
+<!--        hoping to use this similarly to how the coffee projects filter works-->
+        <div class="dropdown">
+            <button class="btn btn-white dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                FILTER
+            </button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <a class="dropdown-item" href="#">Large</a>
+                <a class="dropdown-item" href="#">Small</a>
+                <a class="dropdown-item" href="#">Medium</a>
+                <a class="dropdown-item" href="#">Dog</a>
+                <a class="dropdown-item" href="#">Cat</a>
+                <a class="dropdown-item" href="#">Exotic</a>
+                <a class="dropdown-item" href="#">Female</a>
+                <a class="dropdown-item" href="#">Male</a>
+            </div>
+        </div>
+
+        <form class="search" action="action_page.php">
+            <input type="text" placeholder="Search.." name="search">
+            <button type="submit"><i class="fa fa-search"></i></button>
+        </form>
+
     </header>
 
 <!--        <div class="card">-->
