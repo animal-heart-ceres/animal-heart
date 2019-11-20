@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
@@ -25,5 +26,10 @@ public class UserProfileController {
     public String createUserProfile(@ModelAttribute UserProfile userProfile) {
         userProfileDao.save(userProfile);
         return "redirect:/";
+    }
+
+    @GetMapping("/user-profile/{id}")
+    public String showUserProfile(@PathVariable long id) {
+        return "/index";
     }
 }

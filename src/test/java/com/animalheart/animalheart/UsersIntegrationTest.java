@@ -66,7 +66,11 @@ public class UsersIntegrationTest {
             newUser.setAdmin(true);
             newUser.setOrganization(false);
             testUser = userDao.save(newUser);
-
+            UserProfile newUserProfile = new UserProfile();
+            newUserProfile.setFirstName("TestFirstName");
+            newUserProfile.setLastName("TestLastName");
+            newUserProfile.setUser(newUser);
+            newUserProfile.setAddress("600 Navarro, San Antonio, TX 78254");
 
         }
 
@@ -166,7 +170,7 @@ public class UsersIntegrationTest {
         User currentUser = userDao.findByUsername("testUser");
 
         this.mvc.perform(get("/user-profile/" + currentUser.getId()))
-                .andExpect(status().is3xxRedirection());
+                .andExpect(status().isOk());
 
 
 
