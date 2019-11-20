@@ -5,10 +5,7 @@ import com.animalheart.animalheart.repositories.UserProfileRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 public class UserProfileController {
@@ -29,7 +26,22 @@ public class UserProfileController {
     }
 
     @GetMapping("/user-profile/{id}")
-    public String showUserProfile(@PathVariable long id) {
+    public String showUserProfile(@PathVariable long id, Model vModel) {
+        vModel.addAttribute("userProfile", userProfileDao.findById(id));
         return "/index";
     }
+
+    @PostMapping("/profile/{id}/edit")
+    public String editUserProfile(@PathVariable long id){
+
+    }
+
+//    @PostMapping("/posts/{id}/edit")
+//    public String editPost(@PathVariable long id, @RequestParam(name = "title") String title, @RequestParam(name = "body") String body){
+//        Post oldPost = postDao.getOne(id);
+//        oldPost.setTitle(title);
+//        oldPost.setBody(body);
+//        postDao.save(oldPost);
+//        return "redirect:/posts";
+//    }
 }
