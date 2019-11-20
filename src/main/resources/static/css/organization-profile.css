@@ -1,0 +1,62 @@
+#org-pic{
+    background-color: #A6A6A6;
+}
+
+#img{
+    width: 460px;
+    height: 460px;
+    position: relative;
+    overflow: hidden;
+    border-radius: 50%;
+}
+
+h1{
+    color: white;
+    font-family: 'Playfair Display', serif;
+}
+
+h3{
+    font-family: 'Playfair Display', serif;
+    font-size: 40px;
+}
+
+
+#pet-btn{
+    float: right;
+    width: 25%;
+    /*background-color: #C7D0D8;*/
+    /*font-family: 'Playfair Display', serif;*/
+    font-size: 25px;
+    border: 5px solid #99a6b1;
+    /*margin-bottom: 125px;*/
+}
+
+#event-btn{
+    float: right;
+    width: 25%;
+    /*background-color: #C7D0D8;*/
+    /*font-family: 'Playfair Display', serif;*/
+    font-size: 25px;
+    border: 5px solid #99a6b1;
+    /*margin-bottom: 125px;*/
+}
+
+#edit-btn{
+    width: 25%;
+    /*background-color: #C7D0D8;*/
+    /*font-family: 'Playfair Display', serif;*/
+    font-size: 25px;
+    border: 5px solid #99a6b1;
+    /*margin-bottom: 125px;*/
+    float: left;
+}
+
+#delete-btn{
+    width: 25%;
+    /*background-color: #C7D0D8;*/
+    /*font-family: 'Playfair Display', serif;*/
+    font-size: 25px;
+    border: 5px solid #99a6b1;
+    /*margin-bottom: 125px;*/
+    float: right;
+}

@@ -14,20 +14,18 @@
                 <h1 class="text-center">MEMBER LOGIN</h1>
                 <div class="form-group text-center" id="form-div" >
                     <form th:action="@{/login}" method="post">
-                        <label for="username">Username</label>
-                        <input id="username" name="username" type="text"/>
-                        <label for="password">Password</label>
-                        <input id="password" name="password" type="password"/>
-                        <input type="submit" value="Log In"/>
+                        <input id="username" name="username" type="text" placeholder="USERNAME" />
+                        <input id="password" name="password" type="password" placeholder="PASSWORD" />
+                        <input id="submit-btn" type="submit" value="Log In"/>
                     </form>
                     <a href="/index">HOME</a>
                 </div>
             </div>
 
             <div class="col-4">
-                <img id="img"  src="img/login-dog-cat.jpg" width="475" height="400"  alt="animal-pals">
-                <img  id="img" src="img/login-cat.jpg" width="475" height="400" alt="calico-cat">
-                <img  id="img" src="img/login-dog.jpg" width="475" height="400" alt="black-lab">
+                <img id="img"  src="../static/img/login-dog-cat.jpg" width="475" height="300"  alt="animal-pals">
+                <img  id="img" src="../static/img/login-cat.jpg" width="475" height="300" alt="calico-cat">
+                <img  id="img" src="../static/img/login-dog.jpg" width="475" height="300" alt="black-lab">
             </div>
         </div>
     </div>
