@@ -6,6 +6,11 @@ p{
     font-family: 'Playfair Display', serif;
 }
 
+h1{
+    font-family: 'Playfair Display', serif;
+    color: #49484A;
+}
+
 .navbar-brand{
     font-size: 27px;
 }
@@ -18,8 +23,31 @@ nav{
     color: #A24848;
 }
 
+
+/*EVERYTHING IN THE JUMBOTRON*/
+
 #animal-jumbotron {
     box-sizing: border-box;
     border-bottom: 3px solid black;
+    padding-top: 100px;
 
 }
+
+.dropdown{
+    float: left;
+}
+
+#dropdownMenuButton{
+    border: 5px solid #49484A;
+    border-radius: 10px;
+    width: 170px;
+}
+
+.search{
+    float: right;
+    border: 5px solid #49484A;
+    border-radius: 10px;
+    width: 220px;
+
+}
+
