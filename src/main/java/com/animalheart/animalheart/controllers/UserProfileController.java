@@ -19,8 +19,4 @@ public class UserProfileController {
         return "/create-user-profile";
     }
 
-//    @PostMapping("/create-user-profile")
-//    public String createUserProfile(@ModelAttribute UserProfile userProfile) {
-//        userProfileDao.save(userProfile);
-//    }
 }
