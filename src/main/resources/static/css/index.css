@@ -30,6 +30,8 @@ a{
 
 #index-jumbotron{
     border-bottom: 3px solid #A4A3A4;
+    border-left: 6px solid #A4A3A4;
+    border-right: 6px solid #A4A3A4;
 }
 
 #container-id{
