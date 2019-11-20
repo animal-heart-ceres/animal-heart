@@ -35,10 +35,6 @@ public class UsersIntegrationTest {
     @Autowired
     UserRepository userDao;
 
-
-//    @Autowired
-//    private PasswordEncoder passwordEncoder;
-
     @Before
     public void setup() throws Exception {
 
@@ -65,8 +61,6 @@ public class UsersIntegrationTest {
             newUser.setOrganization(true);
             testOrganization = userDao.save(newUser);
         }
-
-
     }
 
     @Test
@@ -74,15 +68,15 @@ public class UsersIntegrationTest {
         // Makes a Post request to /sign-up and expect a redirection to the home
         this.mvc.perform(
                 post("/sign-up")
-//                        .session((MockHttpSession) httpSession)
-                        // Add all the required parameters to your request like this
-                        .param("username", "testUserSignUp")
-                        .param("email", "testUserSignUp@email.com")
-                        .param("password", "testUserSignUpPassword")
-//                        .param("isAdmin", "true")
-//                        .param("isOrganization", "false")
+                        .param("username", "newTestUserSignUp")
+                        .param("email", "newTestUserSignUp@email.com")
+                        .param("password", "newTestUserSignUpPassword")
         )
                 .andExpect(status().is3xxRedirection());
+
+        User existingUser = userDao.findByUsername("newTestUserSignUp");
+        System.out.println("USER WAS CREATED " + existingUser.getUsername());
+        userDao.delete(existingUser);
     }
 
     @Test
@@ -92,7 +86,6 @@ public class UsersIntegrationTest {
                 .param("firstName", "testFirstName")
                 .param("lastName", "testLastName")
                 .param("address", "testAddress"))
-
                 .andExpect(status().is3xxRedirection());
     }
 
