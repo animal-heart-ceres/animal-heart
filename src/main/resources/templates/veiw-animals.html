@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css?family=Playfair+Display|Raleway&display=swap" rel="stylesheet">
+    <title>Organization Profile</title>
+    <link rel="stylesheet" href="../static/css/veiw-animals.css">
+</head>
+<body>
+    <nav class="navbar fixed-top navbar-light bg-white" id="index-navbar" th:fragment="main-navbar">
+        <p class="navbar-brand" href="">ANIMAL<span id="heart" >HEART</span></p>
+        <span class="d-flex flex-row bd-highlight mb-3">
+            <a class="navbar-brand" href="">EVENTS</a>
+            <a class="navbar-brand" href="">VEIW PETS</a>
+            <a class="navbar-brand" href="" >MAP</a>
+            <a class="navbar-brand" href="">MESSAGES</a>
+            <a class="navbar-brand" href="/index">LOGOUT</a>
+        </span>
+    </nav>
+
+    <header class="jumbotron my-1 bg-white" id="animal-jumbotron" >
+        <h1 class="display-3 text-center">AVAILABLE ANIMALS</h1>
+    </header>
+
+<!--        <div class="card">-->
+<!--            <h5 class="card-header" th:text="${animal.name}" ></h5>-->
+<!--            <div class="card-body">-->
+<!--                <h6 class="card-subtitle mb-2 text-muted" th:text="${size}" ></h6>-->
+<!--                <h6 class="card-subtitle mb-2 text-muted" th:text="${gender}" ></h6>-->
+<!--                <h6 class="card-subtitle mb-2 text-muted" th:text="${age}" ></h6>-->
+<!--                <h6 class="card-subtitle mb-2 text-muted" th:text="${type}" ></h6>-->
+<!--            </div>-->
+<!--            <div class="card-footer d-flex">-->
+<!--                <button id="${id}edit">Edit</button>-->
+<!--                <button id="${id}delete">Delete</button>-->
+<!--            </div>-->
+<!--        </div>-->
+</body>
+</html>

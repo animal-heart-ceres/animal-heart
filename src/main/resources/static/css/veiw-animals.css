@@ -1,0 +1,25 @@
+a{
+    font-family: 'Raleway', sans-serif;
+}
+
+p{
+    font-family: 'Playfair Display', serif;
+}
+
+.navbar-brand{
+    font-size: 27px;
+}
+
+nav{
+    border-bottom: 5px solid #A24848;
+}
+
+#heart{
+    color: #A24848;
+}
+
+#animal-jumbotron {
+    box-sizing: border-box;
+    border-bottom: 3px solid black;
+
+}

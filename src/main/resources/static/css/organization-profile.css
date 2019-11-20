@@ -24,8 +24,6 @@ h3{
 #pet-btn{
     float: right;
     width: 25%;
-    /*background-color: #C7D0D8;*/
-    /*font-family: 'Playfair Display', serif;*/
     font-size: 25px;
     border: 5px solid #99a6b1;
     /*margin-bottom: 125px;*/
@@ -34,8 +32,6 @@ h3{
 #event-btn{
     float: right;
     width: 25%;
-    /*background-color: #C7D0D8;*/
-    /*font-family: 'Playfair Display', serif;*/
     font-size: 25px;
     border: 5px solid #99a6b1;
     /*margin-bottom: 125px;*/
@@ -43,8 +39,6 @@ h3{
 
 #edit-btn{
     width: 25%;
-    /*background-color: #C7D0D8;*/
-    /*font-family: 'Playfair Display', serif;*/
     font-size: 25px;
     border: 5px solid #99a6b1;
     /*margin-bottom: 125px;*/
@@ -53,10 +47,7 @@ h3{
 
 #delete-btn{
     width: 25%;
-    /*background-color: #C7D0D8;*/
-    /*font-family: 'Playfair Display', serif;*/
     font-size: 25px;
     border: 5px solid #99a6b1;
-    /*margin-bottom: 125px;*/
     float: right;
 }
