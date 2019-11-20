@@ -17,8 +17,10 @@ import org.springframework.test.web.servlet.MockMvc;
 
 import javax.servlet.http.HttpSession;
 
+import static org.hamcrest.CoreMatchers.containsString;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @RunWith(SpringRunner.class)
@@ -113,20 +115,23 @@ public class ProfileIntegrationTests {
 
     }
 
-    @Test
-    public void EditUserProfile() throws Exception{
-
-        this.mvc.perform(
-                post("/profile/" + testUser.getId() + "/edit")
-                        .param("firstName", "FirstNameEdit")
-                        .param("lastName", "LastNameEdit")
-                        .param("address", "AddressEdit"))
-                .andExpect(status().is3xxRedirection());
-
-//        UserProfile currentUserProfile = userProfileDao.findByFirstName("testFirstName");
-
-//        userProfileDao.delete(currentUserProfile);
-    }
+//    @Test
+//    public void EditUserProfile() throws Exception{
+//        this.mvc.perform(
+//                post("/profile/" + testUser.getId() + "/edit")
+//                        .param("firstName", "FirstNameEdit")
+//                        .param("lastName", "LastNameEdit")
+//                        .param("address", "AddressEdit"))
+//                .andExpect(status().is3xxRedirection());
+//
+//        this.mvc.perform(get("/profile/" + testUser.getId()))
+//                .andExpect(status().isOk())
+//                // Test the dynamic content of the page
+//                .andExpect(content().string(containsString("FirstNameEdit")))
+//                .andExpect(content().string(containsString("LastNameEdit")))
+//                .andExpect(content().string(containsString("AddressEdit")));
+//
+//    }
 
 //    @Test
 //    public void EditOrganizationProfile() throws Exception{
