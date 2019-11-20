@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css?family=Playfair+Display|Raleway&display=swap" rel="stylesheet">    <link rel="stylesheet" type="text/css" href="../static/css/organization-profile.css">
+    <title>Organization Profile</title>
+</head>
+
+<body>
+
+
+    <div class="container-fluid" id="h1-border">
+        <div class="row">
+            <div id="org-pic" class="col-5">
+                <h1 class="text-center">PLACEHOLDER</h1>
+                <div class="form-group text-center" id="form-div" >
+                    <img id="img"  src="../static/img/login-dog-cat.jpg" width="475" height="300"  alt="animal-pals">
+                </div>
+                <input id="edit-btn" type="submit" value="EDIT"/>
+                <input id="delete-btn" type="submit" value="DELETE"/>
+            </div>
+
+            <div class="col-7">
+                <h3>YOUR PETS</h3>
+                <input id="pet-btn" type="submit" value="ADD PET"/>
+             <span th:if="${isOrganization}" >
+                <h3>EVENTS</h3>
+                <input id="event-btn" type="submit" value="ADD EVENT"/>
+             </span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>

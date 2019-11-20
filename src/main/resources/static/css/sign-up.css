@@ -9,7 +9,7 @@ h1{
 input {
     width: 75%;
     padding: 20px 20px;
-    margin: 8px 0;
+    margin: 25px 0;
     display: inline-block;
     border: 5px solid #A4A3A4;
     border-radius: 15px;
@@ -24,6 +24,7 @@ input {
     font-family: 'Playfair Display', serif;
     font-size: 35px;
     border: 5px solid #99a6b1;
+    margin-bottom: 55px;
 }
 
 label{
