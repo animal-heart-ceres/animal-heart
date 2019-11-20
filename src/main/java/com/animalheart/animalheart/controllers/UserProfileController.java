@@ -3,11 +3,14 @@ package com.animalheart.animalheart.controllers;
 import com.animalheart.animalheart.models.UserProfile;
 import com.animalheart.animalheart.repositories.UserProfileRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
+@Controller
 public class UserProfileController {
 
     @Autowired
@@ -19,8 +22,14 @@ public class UserProfileController {
         return "/create-user-profile";
     }
 
-//    @PostMapping("/create-user-profile")
-//    public String createUserProfile(@ModelAttribute UserProfile userProfile) {
-//        userProfileDao.save(userProfile);
-//    }
+    @PostMapping("/create-user-profile")
+    public String createUserProfile(@ModelAttribute UserProfile userProfile) {
+        userProfileDao.save(userProfile);
+        return "redirect:/";
+    }
+
+    @GetMapping("/user-profile/{id}")
+    public String showUserProfile(@PathVariable long id) {
+        return "/index";
+    }
 }
