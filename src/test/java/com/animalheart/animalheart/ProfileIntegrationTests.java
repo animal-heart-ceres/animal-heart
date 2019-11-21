@@ -30,7 +30,6 @@ public class ProfileIntegrationTests {
 
     private User testUser;
     private User testOrganization;
-    private UserProfile testUserProfile;
     private HttpSession httpSessionUser;
     private HttpSession httpSessionOrganization;
 
@@ -88,8 +87,6 @@ public class ProfileIntegrationTests {
 
         testUserProfile.setUser(testUser);
 
-        this.testUserProfile = testUserProfile;
-
         userProfileDao.save(testUserProfile);
     }
 
@@ -102,31 +99,28 @@ public class ProfileIntegrationTests {
                         .param("description", "A San Antonio rescue shelter")
                         .param("address", "600 Navarro St, San Antonio, TX"))
                 .andExpect(status().is3xxRedirection());
-
     }
 
     @Test
     public void ViewUserProfile() throws Exception {
         User currentUser = userDao.findByUsername("testUser");
-
         this.mvc.perform(get("/user-profile/" + currentUser.getId()))
                 .andExpect(status().isOk());
-
     }
 
     @Test
     public void ViewOrganizationProfile() throws Exception {
         User currentUser = userDao.findByUsername("testOrganization");
-
         this.mvc.perform(get("/user-profile/" + currentUser.getId()))
                 .andExpect(status().isOk());
-
     }
 
     @Test
     public void EditUserProfile() throws Exception{
+        UserProfile currentUserProfile = userProfileDao.findByFirstName("testFirstName");
+
         this.mvc.perform(
-                post("/profile/" + testUser.getId() + "/edit")
+                post("/profile/" + currentUserProfile.getId() + "/edit")
                         .param("firstName", "FirstNameEdit")
                         .param("lastName", "LastNameEdit")
                         .param("address", "AddressEdit"))
@@ -148,16 +142,17 @@ public class ProfileIntegrationTests {
 //    @Test
 //    public void EditOrganizationProfile() throws Exception{
 //
+//        OrganizationProfile currentTestOrganizationProfile = organizationProfileDao.findByName("testOrganizationName");
+//
 //        this.mvc.perform(
-//                post("/profile/" + currentUser.getId() + "/edit")
-//                        .param("firstName", newUserProfile.setFirstName())
+//                post("/profile/" + currentTestOrganizationProfile.getId() + "/edit")
+//                        .param("name", "testOrganizationNameEdit")
 //                        .param("lastName", "testLastNameEdit")
-//                        .param("address", "testAddressEdit")
-//                        .param("user_id", Long.toString(currentUser.getId())))
+//                        .param("address", "testAddressEdit"))
 //                .andExpect(status().is3xxRedirection());
 //
-//        UserProfile currentUserProfile = userProfileDao.findByFirstName("testFirstName");
+//        OrganizationProfile editedTestOrganizationProfile = organizationProfileDao.findByName("testOrganizationNameEdit");
 //
-//        userProfileDao.delete(currentUserProfile);
+//        organizationProfileDao.delete(editedTestOrganizationProfile);
 //    }
 }

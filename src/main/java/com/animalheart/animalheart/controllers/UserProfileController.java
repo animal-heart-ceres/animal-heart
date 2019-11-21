@@ -39,7 +39,7 @@ public class UserProfileController {
 
     @PostMapping("/profile/{id}/edit")
     public String editUserProfile(@PathVariable long id, @RequestParam(name = "firstName") String firstName, @RequestParam(name = "lastName") String lastName, @RequestParam(name = "address") String address){
-        UserProfile oldProfile = userProfileDao.findByFirstName("testFirstName");
+        UserProfile oldProfile = userProfileDao.getOne(id);
         oldProfile.setFirstName(firstName);
         oldProfile.setLastName(lastName);
         oldProfile.setAddress(address);
@@ -47,12 +47,4 @@ public class UserProfileController {
         return "redirect:/";
     }
 
-//    @PostMapping("/posts/{id}/edit")
-//    public String editPost(@PathVariable long id, @RequestParam(name = "title") String title, @RequestParam(name = "body") String body){
-//        Post oldPost = postDao.getOne(id);
-//        oldPost.setTitle(title);
-//        oldPost.setBody(body);
-//        postDao.save(oldPost);
-//        return "redirect:/posts";
-//    }
 }
