@@ -65,22 +65,16 @@ public class UserController {
         return "redirect:/";
     }
 
-//    @PostMapping("/delete-follow/{userId}/{orgId}")
-//    public String deleteFollower(@PathVariable Long userId, @PathVariable Long orgId) {
-//        List<Follower> newFollowerList = new ArrayList<>();
-//        User currentUser = userDao.getOne(userId);
-//        List<Follower> followerList = currentUser.getFollowerList();
-//        for(Follower follower: followerList) {
-//            if(follower.getId() != orgId) {
-//                newFollowerList.add(follower);
-//            }
-//        }
-//
-//        currentUser.setFollowerList(newFollowerList);
-//
-//        userDao.save(currentUser);
-//
-//        return "redirect:/";
-//    }
+    @PostMapping("/delete-follow/{userId}/{orgId}")
+    public String deleteFollower(@PathVariable Long userId, @PathVariable Long orgId) {
+
+        List<Follower> followerList = followerDao.findAll();
+        for(Follower follower : followerList){
+            if(follower.getFollowerId() == userId && follower.getUser().getId() == orgId) {
+                followerDao.delete(follower);
+            }
+        }
+        return "redirect:/";
+    }
 
 }
