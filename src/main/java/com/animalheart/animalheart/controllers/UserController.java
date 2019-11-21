@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -64,18 +65,22 @@ public class UserController {
         return "redirect:/";
     }
 
-    @PostMapping("/delete-follow/{userId}/{orgId}")
-    public String deleteFollower(@PathVariable Long userId, @PathVariable Long orgId) {
-        Follower followerDelete = followerDao.deleteFollower(userId,orgId);
-        System.out.println(followerDelete);
-//        List<Follower> followsList = followerDao.findFollowersByFollowerId(userId);
-//        Follower newFollower = new Follower(userId);
-//        User currentUser = userDao.getOne(orgId);
-//        newFollower.setUser(currentUser);
-//        if(followsList.contains(newFollower)) {
-//               followerDao.delete(newFollower);
+//    @PostMapping("/delete-follow/{userId}/{orgId}")
+//    public String deleteFollower(@PathVariable Long userId, @PathVariable Long orgId) {
+//        List<Follower> newFollowerList = new ArrayList<>();
+//        User currentUser = userDao.getOne(userId);
+//        List<Follower> followerList = currentUser.getFollowerList();
+//        for(Follower follower: followerList) {
+//            if(follower.getId() != orgId) {
+//                newFollowerList.add(follower);
+//            }
 //        }
-        return "redirect:/";
-    }
+//
+//        currentUser.setFollowerList(newFollowerList);
+//
+//        userDao.save(currentUser);
+//
+//        return "redirect:/";
+//    }
 
 }

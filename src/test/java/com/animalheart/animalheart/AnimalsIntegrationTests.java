@@ -1,8 +1,10 @@
 package com.animalheart.animalheart;
 
-import com.animalheart.animalheart.models.Follower;
+
+import com.animalheart.animalheart.models.Animal;
 import com.animalheart.animalheart.models.User;
-import com.animalheart.animalheart.repositories.FollowerRepository;
+import com.animalheart.animalheart.models.UserProfile;
+import com.animalheart.animalheart.repositories.AnimalRepository;
 import com.animalheart.animalheart.repositories.OrganizationProfileRepository;
 import com.animalheart.animalheart.repositories.UserProfileRepository;
 import com.animalheart.animalheart.repositories.UserRepository;
@@ -15,28 +17,36 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
-import javax.servlet.http.HttpSession;
+import javax.transaction.Transactional;
+import java.util.List;
 
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = AnimalHeartApplication.class)
 @AutoConfigureMockMvc
-public class FollowersIntegrationTests {
+@Transactional
+public class AnimalsIntegrationTests {
 
     private User testUser;
     private User testOrganization;
-    private HttpSession httpSessionUser;
-    private HttpSession httpSessionOrganization;
 
     @Autowired
     private MockMvc mvc;
 
     @Autowired
-    FollowerRepository followerDao;
+    UserRepository userDao;
 
     @Autowired
-    UserRepository userDao;
+    OrganizationProfileRepository organizationProfileDao;
+
+    @Autowired
+    UserProfileRepository userProfileDao;
+
+    @Autowired
+    AnimalRepository animalDao;
 
     @Before
     public void setup() throws Exception {
@@ -68,24 +78,42 @@ public class FollowersIntegrationTests {
     }
 
     @Test
-    public void createFollow() throws Exception {
+    public void CreateAnimal() throws Exception {
         this.mvc.perform(
-                post("/follow")
-                    .param("followerId", Long.toString(testUser.getId())));
+                post("/create-animal")
+                        .param("name", "testAnimalName")
+                        .param("type", "dog")
+                        .param("size", "Large")
+                        .param("age", "7"))
+                .andExpect(status().is3xxRedirection());
 
-        Follower testFollow = followerDao.findByFollowerId(testUser.getId());
+        Animal testAnimal = animalDao.findByName("testAnimalName");
 
-        testFollow.setUser(testOrganization);
+        testAnimal.setUser(testUser);
 
-        followerDao.save(testFollow);
-
+        animalDao.save(testAnimal);
     }
 
-//    @Test
-//    public void deleteFollower() throws Exception {
-//        this.mvc.perform(
-//                post("/delete-follow/" + testUser.getId() + "/" + testOrganization.getId()));
-//
-//    }
+    @Test
+    public void showAllAnimals() throws Exception {
+
+        this.mvc.perform(get("/animals"))
+                .andExpect(status().isOk());
+    }
+
+    @Test
+    public void showAnimal() throws Exception {
+        Animal currentAnimal = animalDao.findByName("testAnimalName");
+
+        this.mvc.perform(get("/animal/" + currentAnimal.getId()))
+                .andExpect(status().isOk());
+    }
+
+    @Test
+    public void showUsersAnimals() throws Exception {
+
+        this.mvc.perform(get("/animals/" + testUser.getId()))
+                .andExpect(status().isOk());
+    }
 
 }
