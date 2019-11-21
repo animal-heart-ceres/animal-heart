@@ -29,9 +29,7 @@ public class Follower {
         this.user = user;
     }
 
-    public Follower(Long followerId, Long organizationId) {
 
-    }
 
     public long getId() {
         return id;
