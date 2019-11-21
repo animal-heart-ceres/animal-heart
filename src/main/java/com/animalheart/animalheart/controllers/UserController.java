@@ -7,10 +7,9 @@ import com.animalheart.animalheart.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @Controller
 public class UserController {
@@ -65,5 +64,16 @@ public class UserController {
         return "redirect:/";
     }
 
+//    @PostMapping("/delete-follow/{userId}/{orgId}")
+//    public String deleteFollower(@PathVariable Long userId, @PathVariable Long orgId) {
+//        List<Follower> followsList = followerDao.findFollowersByFollowerId(userId);
+//        Follower newFollower = new Follower(userId);
+//        User currentUser = userDao.getOne(orgId);
+//        newFollower.setUser(currentUser);
+//        if(followsList.contains(newFollower)) {
+//               followerDao.delete(newFollower);
+//        }
+//        return "redirect:/";
+//    }
 
 }

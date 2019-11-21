@@ -23,7 +23,7 @@ public class OrganizationProfileController {
     @PostMapping("/organization-sign-up")
     public String createOrganizationProfile(@ModelAttribute OrganizationProfile organizationProfile) {
         organizationProfileDao.save(organizationProfile);
-        return "redirect:/";
+        return "redirect:";
     }
 
     @PostMapping("/organization-profile/{id}/edit")

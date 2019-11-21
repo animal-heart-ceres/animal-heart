@@ -81,15 +81,11 @@ public class FollowersIntegrationTests {
 
     }
 
-    @Test
-    public void deleteFollower() throws Exception {
-        this.mvc.perform(
-                post("/delete-follow")
-                    .param("followerId", Long.toString(testUser.getId())));
-        Follower testFollow = followerDao.findByFollowerId(testUser.getId());
-
-        followerDao.delete(testFollow);
-
-    }
+//    @Test
+//    public void deleteFollower() throws Exception {
+//        this.mvc.perform(
+//                post("/delete-follow/" + testUser.getId() + "/" + testOrganization.getId()));
+//
+//    }
 
 }

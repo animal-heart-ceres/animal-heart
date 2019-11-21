@@ -20,9 +20,17 @@ public class Follower {
 
     public Follower() {}
 
+    public Follower(long followerId) {
+        this.followerId = followerId;
+    }
+
     public Follower(long followerId, User user) {
         this.followerId = followerId;
         this.user = user;
+    }
+
+    public Follower(Long followerId, Long organizationId) {
+
     }
 
     public long getId() {
