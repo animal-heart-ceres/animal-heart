@@ -1,5 +1,7 @@
 package com.animalheart.animalheart.models;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import javax.persistence.*;
 import java.util.List;
 
@@ -30,6 +32,7 @@ public class User {
     private List<Comment> commentList;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
+    @JsonBackReference
     private List<Animal> animalList;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")

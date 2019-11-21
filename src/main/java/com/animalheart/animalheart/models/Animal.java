@@ -1,5 +1,7 @@
 package com.animalheart.animalheart.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import net.bytebuddy.implementation.bind.annotation.Default;
 import org.springframework.beans.factory.annotation.Value;
 
@@ -44,6 +46,7 @@ public class Animal {
 
     @ManyToOne
     @JoinColumn (name = "user_id")
+    @JsonManagedReference
     private User user;
 
     public Animal(){}

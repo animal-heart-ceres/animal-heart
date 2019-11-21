@@ -11,4 +11,9 @@ public class HomeController {
         return "index";
     }
 
+    @GetMapping("/animals/ajax")
+    public String viewAllAdsWithAjax() {
+        return "Json";
+    }
+
 }
