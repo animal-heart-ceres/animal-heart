@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css?family=Playfair+Display|Raleway&display=swap" rel="stylesheet">
+    <title>Set Up Profile</title>
+    <link rel="stylesheet" href="../static/css/set-up-profile.css">
+</head>
+</head>
+<body>
+
+<div class="container-fluid" id="h1-border">
+    <div class="form-group text-center" id="form-div">
+        <h1>SET UP YOUR PROFILE</h1>
+        <form th:action="@{/set-up-profile.html}" th:method="post" th:object="${user}">
+            <input id="fist-name" th:field="*{user.firstname}" type="text" placeholder="FIRST NAME"/>
+            <input id="last-name" th:field="*{user.lastname}" type="text" placeholder="LAST NAME"/>
+            <input id="address" th:field="*{user.address}" type="password" placeholder="ADDRESS"/>
+            <div th:if="${isOrganization}">
+                <input id="org-name" th:field="*{user.organizationname}" type="password"
+                       placeholder="ORGANIZATION NAME"/>
+                <input id="tax-num" th:field="*{user.taxnumber}" type="password" placeholder="TAX NUMBER"/>
+            </div>
+            <input id="submit-btn" type="submit" value="SET UP PROFILE"/>
+        </form>
+    </div>
+</div>
+</body>
+</html>
