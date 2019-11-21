@@ -6,9 +6,7 @@ import com.animalheart.animalheart.repositories.OrganizationProfileRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 public class OrganizationProfileController {
@@ -27,5 +25,15 @@ public class OrganizationProfileController {
         organizationProfileDao.save(organizationProfile);
         return "redirect:/";
     }
+
+//    @PostMapping("/organization-profile/{id}/edit")
+//    public String editUserProfile(@PathVariable long id, @RequestParam(name = "name") String name, @RequestParam(name = "lastName") String lastName, @RequestParam(name = "address") String address){
+//        OrganizationProfile oldProfile = organizationProfileDao.getOne(id);
+//        oldProfile.setName(firstName);
+//        oldProfile.setLastName(lastName);
+//        oldProfile.setAddress(address);
+//        userProfileDao.save(oldProfile);
+//        return "redirect:/";
+//    }
 
 }

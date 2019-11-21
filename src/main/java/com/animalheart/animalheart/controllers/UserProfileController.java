@@ -26,7 +26,7 @@ public class UserProfileController {
 
     @PostMapping("/create-user-profile")
     public String createUserProfile(@ModelAttribute UserProfile userProfile) {
-        userProfile.setUser(userDao.getOne(14L));
+        //userProfileDao.setUser().setId() SETS THE FOREIGN KEY
         userProfileDao.save(userProfile);
         return "redirect:/";
     }
@@ -47,12 +47,4 @@ public class UserProfileController {
         return "redirect:/";
     }
 
-//    @PostMapping("/posts/{id}/edit")
-//    public String editPost(@PathVariable long id, @RequestParam(name = "title") String title, @RequestParam(name = "body") String body){
-//        Post oldPost = postDao.getOne(id);
-//        oldPost.setTitle(title);
-//        oldPost.setBody(body);
-//        postDao.save(oldPost);
-//        return "redirect:/posts";
-//    }
 }

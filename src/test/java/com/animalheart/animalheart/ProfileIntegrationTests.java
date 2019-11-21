@@ -83,6 +83,11 @@ public class ProfileIntegrationTests {
                         .param("address", "testAddress"))
                 .andExpect(status().is3xxRedirection());
 
+        UserProfile testUserProfile = userProfileDao.findByFirstName("testFirstName");
+
+        testUserProfile.setUser(testUser);
+
+        userProfileDao.save(testUserProfile);
     }
 
     @Test
@@ -94,58 +99,60 @@ public class ProfileIntegrationTests {
                         .param("description", "A San Antonio rescue shelter")
                         .param("address", "600 Navarro St, San Antonio, TX"))
                 .andExpect(status().is3xxRedirection());
-
     }
 
     @Test
     public void ViewUserProfile() throws Exception {
         User currentUser = userDao.findByUsername("testUser");
-
         this.mvc.perform(get("/user-profile/" + currentUser.getId()))
                 .andExpect(status().isOk());
-
     }
 
     @Test
     public void ViewOrganizationProfile() throws Exception {
         User currentUser = userDao.findByUsername("testOrganization");
-
         this.mvc.perform(get("/user-profile/" + currentUser.getId()))
                 .andExpect(status().isOk());
-
     }
 
-//    @Test
-//    public void EditUserProfile() throws Exception{
-//        this.mvc.perform(
-//                post("/profile/" + testUser.getId() + "/edit")
-//                        .param("firstName", "FirstNameEdit")
-//                        .param("lastName", "LastNameEdit")
-//                        .param("address", "AddressEdit"))
-//                .andExpect(status().is3xxRedirection());
-//
+    @Test
+    public void EditUserProfile() throws Exception{
+        UserProfile currentUserProfile = userProfileDao.findByFirstName("testFirstName");
+
+        this.mvc.perform(
+                post("/profile/" + currentUserProfile.getId() + "/edit")
+                        .param("firstName", "FirstNameEdit")
+                        .param("lastName", "LastNameEdit")
+                        .param("address", "AddressEdit"))
+                .andExpect(status().is3xxRedirection());
+
+        UserProfile editedTestUserProfile = userProfileDao.findByFirstName("FirstNameEdit");
+
+        userProfileDao.delete(editedTestUserProfile);
+
 //        this.mvc.perform(get("/profile/" + testUser.getId()))
 //                .andExpect(status().isOk())
 //                // Test the dynamic content of the page
 //                .andExpect(content().string(containsString("FirstNameEdit")))
 //                .andExpect(content().string(containsString("LastNameEdit")))
 //                .andExpect(content().string(containsString("AddressEdit")));
-//
-//    }
+
+    }
 
 //    @Test
 //    public void EditOrganizationProfile() throws Exception{
 //
+//        OrganizationProfile currentTestOrganizationProfile = organizationProfileDao.findByName("testOrganizationName");
+//
 //        this.mvc.perform(
-//                post("/profile/" + currentUser.getId() + "/edit")
-//                        .param("firstName", newUserProfile.setFirstName())
+//                post("/profile/" + currentTestOrganizationProfile.getId() + "/edit")
+//                        .param("name", "testOrganizationNameEdit")
 //                        .param("lastName", "testLastNameEdit")
-//                        .param("address", "testAddressEdit")
-//                        .param("user_id", Long.toString(currentUser.getId())))
+//                        .param("address", "testAddressEdit"))
 //                .andExpect(status().is3xxRedirection());
 //
-//        UserProfile currentUserProfile = userProfileDao.findByFirstName("testFirstName");
+//        OrganizationProfile editedTestOrganizationProfile = organizationProfileDao.findByName("testOrganizationNameEdit");
 //
-//        userProfileDao.delete(currentUserProfile);
+//        organizationProfileDao.delete(editedTestOrganizationProfile);
 //    }
 }
