@@ -64,8 +64,10 @@ public class UserController {
         return "redirect:/";
     }
 
-//    @PostMapping("/delete-follow/{userId}/{orgId}")
-//    public String deleteFollower(@PathVariable Long userId, @PathVariable Long orgId) {
+    @PostMapping("/delete-follow/{userId}/{orgId}")
+    public String deleteFollower(@PathVariable Long userId, @PathVariable Long orgId) {
+        Follower followerDelete = followerDao.deleteFollower(userId,orgId);
+        System.out.println(followerDelete);
 //        List<Follower> followsList = followerDao.findFollowersByFollowerId(userId);
 //        Follower newFollower = new Follower(userId);
 //        User currentUser = userDao.getOne(orgId);
@@ -73,7 +75,7 @@ public class UserController {
 //        if(followsList.contains(newFollower)) {
 //               followerDao.delete(newFollower);
 //        }
-//        return "redirect:/";
-//    }
+        return "redirect:/";
+    }
 
 }

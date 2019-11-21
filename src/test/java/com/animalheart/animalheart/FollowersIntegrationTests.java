@@ -81,11 +81,11 @@ public class FollowersIntegrationTests {
 
     }
 
-//    @Test
-//    public void deleteFollower() throws Exception {
-//        this.mvc.perform(
-//                post("/delete-follow/" + testUser.getId() + "/" + testOrganization.getId()));
-//
-//    }
+    @Test
+    public void deleteFollower() throws Exception {
+        this.mvc.perform(
+                post("/delete-follow/" + testUser.getId() + "/" + testOrganization.getId()));
+
+    }
 
 }
