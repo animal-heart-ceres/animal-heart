@@ -40,13 +40,13 @@ public class UserController {
         return "redirect:/";
     }
 
-    @GetMapping("/sign-up/organization")
+    @GetMapping("/sign-up-organization")
     public String showOrganizationSignUpForm(Model model){
         model.addAttribute("user", new User());
-        return "sign-up";
+        return "organization-sign-up";
     }
 
-    @PostMapping("/sign-up/organization")
+    @PostMapping("/sign-up-organization")
     public String createOrganization(@ModelAttribute User user){
         user.setAdmin(false);
         user.setOrganization(true);
