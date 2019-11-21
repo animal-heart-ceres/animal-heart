@@ -26,7 +26,7 @@ public class UserProfileController {
 
     @PostMapping("/create-user-profile")
     public String createUserProfile(@ModelAttribute UserProfile userProfile) {
-        userProfile.setUser(userDao.getOne(14L));
+        //userProfileDao.setUser().setId() SETS THE FOREIGN KEY
         userProfileDao.save(userProfile);
         return "redirect:/";
     }
@@ -39,7 +39,7 @@ public class UserProfileController {
 
     @PostMapping("/profile/{id}/edit")
     public String editUserProfile(@PathVariable long id, @RequestParam(name = "firstName") String firstName, @RequestParam(name = "lastName") String lastName, @RequestParam(name = "address") String address){
-        UserProfile oldProfile = userProfileDao.getOne(id);
+        UserProfile oldProfile = userProfileDao.findByFirstName("testFirstName");
         oldProfile.setFirstName(firstName);
         oldProfile.setLastName(lastName);
         oldProfile.setAddress(address);

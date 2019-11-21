@@ -30,6 +30,7 @@ public class ProfileIntegrationTests {
 
     private User testUser;
     private User testOrganization;
+    private UserProfile testUserProfile;
     private HttpSession httpSessionUser;
     private HttpSession httpSessionOrganization;
 
@@ -83,6 +84,13 @@ public class ProfileIntegrationTests {
                         .param("address", "testAddress"))
                 .andExpect(status().is3xxRedirection());
 
+        UserProfile testUserProfile = userProfileDao.findByFirstName("testFirstName");
+
+        testUserProfile.setUser(testUser);
+
+        this.testUserProfile = testUserProfile;
+
+        userProfileDao.save(testUserProfile);
     }
 
     @Test
@@ -115,23 +123,27 @@ public class ProfileIntegrationTests {
 
     }
 
-//    @Test
-//    public void EditUserProfile() throws Exception{
-//        this.mvc.perform(
-//                post("/profile/" + testUser.getId() + "/edit")
-//                        .param("firstName", "FirstNameEdit")
-//                        .param("lastName", "LastNameEdit")
-//                        .param("address", "AddressEdit"))
-//                .andExpect(status().is3xxRedirection());
-//
+    @Test
+    public void EditUserProfile() throws Exception{
+        this.mvc.perform(
+                post("/profile/" + testUser.getId() + "/edit")
+                        .param("firstName", "FirstNameEdit")
+                        .param("lastName", "LastNameEdit")
+                        .param("address", "AddressEdit"))
+                .andExpect(status().is3xxRedirection());
+
+        UserProfile editedTestUserProfile = userProfileDao.findByFirstName("FirstNameEdit");
+
+        userProfileDao.delete(editedTestUserProfile);
+
 //        this.mvc.perform(get("/profile/" + testUser.getId()))
 //                .andExpect(status().isOk())
 //                // Test the dynamic content of the page
 //                .andExpect(content().string(containsString("FirstNameEdit")))
 //                .andExpect(content().string(containsString("LastNameEdit")))
 //                .andExpect(content().string(containsString("AddressEdit")));
-//
-//    }
+
+    }
 
 //    @Test
 //    public void EditOrganizationProfile() throws Exception{
