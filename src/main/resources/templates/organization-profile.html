@@ -9,8 +9,8 @@
 </head>
 
 <body>
-
-<div th:replace="fragments/navbar :: main-navbar"></div>
+<!--tried to add a fragment navbar but no work right now-->
+<!--<div th:replace="fragments/navbar :: main-navbar"></div>-->
 
     <div class="container-fluid" id="h1-border">
         <div class="row">
@@ -26,9 +26,23 @@
             <div class="col-7">
                 <h3>YOUR PETS</h3>
                 <input id="pet-btn" type="submit" value="ADD PET"/>
+                <div class="card" style="width: 12rem; height: 12rem;">
+                    <img src="/static/img/signup-cat.jpg" height="150" width="150" class="card-img-top" alt="">
+                    <div class="card-body">
+                        <h5 class="card-title" th:text="@{animal.name}" >Card title</h5>
+                        <a href="" class="btn" id="delete">X</a>
+                    </div>
+                </div>
              <span th:if="${isOrganization}">
                 <h3>EVENTS</h3>
                 <input id="event-btn" type="submit" value="ADD EVENT"/>
+                 <div class="card" style="width: 12rem; height: 12rem;">
+                    <img src="/static/img/signup-cat.jpg" height="150" width="150" class="card-img-top" alt="">
+                    <div class="card-body">
+                        <h5 class="card-title" th:text="@{event.name}" >Card title</h5>
+                        <a href="" class="btn" id="delete2">X</a>
+                    </div>
+                </div>
              </span>
             </div>
         </div>

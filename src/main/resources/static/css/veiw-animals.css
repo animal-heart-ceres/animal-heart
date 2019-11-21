@@ -28,8 +28,9 @@ nav{
 
 #animal-jumbotron {
     box-sizing: border-box;
-    border-bottom: 3px solid black;
+    border: 3px solid black;
     padding-top: 100px;
+    border-radius: 5px;
 }
 
 .dropdown{

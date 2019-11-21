@@ -2,30 +2,33 @@
 <html xmlns:th="https://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css?family=Playfair+Display|Raleway&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <title>Available Animals</title>
     <link rel="stylesheet" href="../static/css/veiw-animals.css">
 </head>
 <body>
-    <nav class="navbar fixed-top navbar-light bg-white" id="index-navbar" th:fragment="main-navbar">
-        <p class="navbar-brand" href="">ANIMAL<span id="heart" >HEART</span></p>
-        <span class="d-flex flex-row bd-highlight mb-3">
+<nav class="navbar fixed-top navbar-light bg-white" id="index-navbar" th:fragment="main-navbar">
+    <p class="navbar-brand" href="">ANIMAL<span id="heart">HEART</span></p>
+    <span class="d-flex flex-row bd-highlight mb-3">
             <a class="navbar-brand" href="">EVENTS</a>
             <a class="navbar-brand" href="">VEIW PETS</a>
-            <a class="navbar-brand" href="" >MAP</a>
+            <a class="navbar-brand" href="">MAP</a>
             <a class="navbar-brand" href="">MESSAGES</a>
             <a class="navbar-brand" href="/index">LOGOUT</a>
         </span>
-    </nav>
+</nav>
 
-    <header class="jumbotron my-1 bg-white" id="animal-jumbotron" >
+<div class="container-fluid" id="h1-border">
+    <header class="jumbotron my-1 bg-white" id="animal-jumbotron">
         <h1 class="display-3 text-center">AVAILABLE ANIMALS</h1>
 
-<!--        hoping to use this similarly to how the coffee projects filter works-->
+        <!--        hoping to use this similarly to how the coffee projects filter works-->
         <div class="dropdown">
-            <button class="btn btn-white dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <button class="btn btn-white dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
+                    aria-haspopup="true" aria-expanded="false">
                 FILTER
             </button>
             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
@@ -51,10 +54,12 @@
         <img src="/static/img/signup-cat.jpg" height="150" width="150" class="card-img-top" alt="">
         <div class="card-body">
             <h5 class="card-title">Card title</h5>
-            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's
+                content.</p>
             <a href="" class="btn">VEIW PET</a>
             <a href="" class="btn">LIKE PET</a>
         </div>
     </div>
+</div>
 </body>
 </html>
