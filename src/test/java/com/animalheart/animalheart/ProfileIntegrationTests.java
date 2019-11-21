@@ -139,20 +139,21 @@ public class ProfileIntegrationTests {
 
     }
 
-//    @Test
-//    public void EditOrganizationProfile() throws Exception{
-//
-//        OrganizationProfile currentTestOrganizationProfile = organizationProfileDao.findByName("testOrganizationName");
-//
-//        this.mvc.perform(
-//                post("/profile/" + currentTestOrganizationProfile.getId() + "/edit")
-//                        .param("name", "testOrganizationNameEdit")
-//                        .param("lastName", "testLastNameEdit")
-//                        .param("address", "testAddressEdit"))
-//                .andExpect(status().is3xxRedirection());
-//
-//        OrganizationProfile editedTestOrganizationProfile = organizationProfileDao.findByName("testOrganizationNameEdit");
-//
-//        organizationProfileDao.delete(editedTestOrganizationProfile);
-//    }
+    @Test
+    public void EditOrganizationProfile() throws Exception{
+
+        OrganizationProfile currentTestOrganizationProfile = organizationProfileDao.findByName("testOrganizationName");
+
+        this.mvc.perform(
+                post("/organization-profile/" + currentTestOrganizationProfile.getId() + "/edit")
+                        .param("name", "testOrganizationNameEdit")
+                        .param("taxNumber", "12333333")
+                        .param("address", "testOrganizationAddressEdit")
+                        .param("description", "A very good test organization"))
+                .andExpect(status().is3xxRedirection());
+
+        OrganizationProfile editedTestOrganizationProfile = organizationProfileDao.findByName("testOrganizationNameEdit");
+
+        organizationProfileDao.delete(editedTestOrganizationProfile);
+    }
 }

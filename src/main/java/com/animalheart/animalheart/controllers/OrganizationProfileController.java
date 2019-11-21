@@ -15,25 +15,26 @@ public class OrganizationProfileController {
     OrganizationProfileRepository organizationProfileDao;
 
     @GetMapping("/organization-sign-up")
-    public String showCreateUserProfileForm(Model vModel) {
+    public String showCreateOrganizationProfileForm(Model vModel) {
         vModel.addAttribute("organizationProfile", new OrganizationProfile());
         return "/organization-sign-up";
     }
 
     @PostMapping("/organization-sign-up")
-    public String createUserProfile(@ModelAttribute OrganizationProfile organizationProfile) {
+    public String createOrganizationProfile(@ModelAttribute OrganizationProfile organizationProfile) {
         organizationProfileDao.save(organizationProfile);
         return "redirect:/";
     }
 
-//    @PostMapping("/organization-profile/{id}/edit")
-//    public String editUserProfile(@PathVariable long id, @RequestParam(name = "name") String name, @RequestParam(name = "lastName") String lastName, @RequestParam(name = "address") String address){
-//        OrganizationProfile oldProfile = organizationProfileDao.getOne(id);
-//        oldProfile.setName(firstName);
-//        oldProfile.setLastName(lastName);
-//        oldProfile.setAddress(address);
-//        userProfileDao.save(oldProfile);
-//        return "redirect:/";
-//    }
+    @PostMapping("/organization-profile/{id}/edit")
+    public String editOrganizationProfile(@PathVariable long id, @RequestParam(name = "name") String name, @RequestParam(name = "taxNumber") Long taxNumber, @RequestParam(name = "address") String address, @RequestParam(name = "description") String description){
+        OrganizationProfile oldProfile = organizationProfileDao.getOne(id);
+        oldProfile.setName(name);
+        oldProfile.setTaxNumber(taxNumber);
+        oldProfile.setAddress(address);
+        oldProfile.setDescription(description);
+        organizationProfileDao.save(oldProfile);
+        return "redirect:/";
+    }
 
 }

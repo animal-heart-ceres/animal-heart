@@ -1,6 +1,8 @@
 package com.animalheart.animalheart.controllers;
 
+import com.animalheart.animalheart.models.Follower;
 import com.animalheart.animalheart.models.User;
+import com.animalheart.animalheart.repositories.FollowerRepository;
 import com.animalheart.animalheart.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -8,12 +10,16 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class UserController {
 
     @Autowired
     UserRepository userDao;
+
+    @Autowired
+    FollowerRepository followerDao;
 
     @GetMapping("/login")
     public String showLoginForm() {
@@ -47,4 +53,17 @@ public class UserController {
         userDao.save(user);
         return "redirect:/";
     }
+
+    @PostMapping("/follow")
+    public String createFollower(@RequestParam(name = "followerId") Long followerId) {
+        //set the fk to the id of the organization
+
+        Follower newFollower = new Follower();
+        newFollower.setFollowerId(followerId);
+        followerDao.save(newFollower);
+
+        return "redirect:/";
+    }
+
+
 }
