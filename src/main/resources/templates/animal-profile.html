@@ -25,19 +25,19 @@
     <div class="container-fluid">
         <div class="row">
             <div id="pet-pic" class="col-5">
-
+            <img src="../static/img/signup-dog.jpg">
             </div>
 
         </div>
 
         <div class="col-7">
-            <div class="row-3">
-                <h2>MEET <span th:text="@{pet.name}">DUKE</span></h2>
-                <span>age</span>
-                <span>size</span>
-                <span>type</span>
-                <span>gender</span>
-            </div>
+<!--            <div class="row-3">-->
+                <h2>MEET <span th:text="@{animal.name}">DUKE</span></h2>
+                <span th:text="@{animal.age}" >age</span>
+                <span th:text="@{animal.size}" >size</span>
+                <span th:text="@{animal.type}" >type</span>
+                <span th:text="@{animal.gender}" >gender</span>
+<!--            </div>-->
             <div class="row-9">
 
             </div>
