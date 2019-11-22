@@ -17,6 +17,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
+import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
 import java.util.List;
 
@@ -27,7 +28,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = AnimalHeartApplication.class)
 @AutoConfigureMockMvc
-@Transactional
+//@Transactional
 public class AnimalsIntegrationTests {
 
     private User testUser;
@@ -104,7 +105,7 @@ public class AnimalsIntegrationTests {
     @Test
     public void showAnimal() throws Exception {
         Animal currentAnimal = animalDao.findByName("testAnimalName");
-
+        System.out.println (currentAnimal.getId());
         this.mvc.perform(get("/animal/" + currentAnimal.getId()))
                 .andExpect(status().isOk());
     }
@@ -114,6 +115,28 @@ public class AnimalsIntegrationTests {
 
         this.mvc.perform(get("/animals/" + testUser.getId()))
                 .andExpect(status().isOk());
+    }
+
+    @Test
+    public void editAnimal() throws Exception {
+        Animal currentAnimal = animalDao.findByName("testAnimalName");
+
+        this.mvc.perform(
+                post("/animal/" + currentAnimal.getId() + "/edit")
+            .param("name", "testAnimalNameEdit")
+            .param("size", "medium")
+            .param("age", "3"))
+                .andExpect(status().is3xxRedirection());
+
+    }
+
+    @Test
+    public void deleteAnimal() throws Exception {
+        Animal currentAnimal = animalDao.findByName("testAnimalNameEdit");
+
+        this.mvc.perform(
+                post("/delete-animal/" + currentAnimal.getId()))
+        .andExpect(status().is3xxRedirection());
     }
 
 }

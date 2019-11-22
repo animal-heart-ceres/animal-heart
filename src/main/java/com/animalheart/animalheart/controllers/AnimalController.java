@@ -6,10 +6,7 @@ import com.animalheart.animalheart.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -60,5 +57,24 @@ public class AnimalController {
         }
         vModel.addAttribute("usersAnimals", usersAnimals);
         return "/index";
+    }
+
+    @PostMapping("/animal/{id}/edit")
+    public String editAnimal(@PathVariable Long id, @RequestParam(name = "name") String name, @RequestParam(name = "size") String size, @RequestParam(name = "age") int age) {
+        Animal animalToEdit = animalDao.getOne(id);
+        animalToEdit.setName(name);
+        animalToEdit.setSize(size);
+        animalToEdit.setAge(age);
+        animalDao.save(animalToEdit);
+        return "redirect:/";
+    }
+
+    @PostMapping("/delete-animal/{id}")
+    public String deleteAnimal(@PathVariable Long id) {
+        Animal animalToDelete = animalDao.getOne(id);
+
+        animalDao.delete(animalToDelete);
+
+        return "redirect: /";
     }
 }
