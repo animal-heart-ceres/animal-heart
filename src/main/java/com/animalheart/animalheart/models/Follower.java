@@ -1,5 +1,7 @@
 package com.animalheart.animalheart.models;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
 
 @Entity
@@ -15,6 +17,7 @@ public class Follower {
     private long followerId;
 
     @ManyToOne
+    @JsonManagedReference
     @JoinColumn (name = "user_organization_id")
     private User user;
 

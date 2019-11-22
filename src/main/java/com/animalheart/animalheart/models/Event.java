@@ -1,5 +1,6 @@
 package com.animalheart.animalheart.models;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import org.hibernate.annotations.Proxy;
 
 import javax.persistence.*;
@@ -30,6 +31,7 @@ public class Event {
     private Date endTime;
 
     @ManyToOne
+    @JsonManagedReference
     @JoinColumn (name = "user_id")
     private User user;
 

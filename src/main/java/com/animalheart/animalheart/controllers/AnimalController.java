@@ -33,6 +33,7 @@ public class AnimalController {
         return "redirect:/";
     }
 
+    // JSON
 //    @GetMapping("/animals.json")
 //    public @ResponseBody List<Animal> showAllAnimalsInJSON() {
 //        return animalDao.findAll();
