@@ -22,7 +22,7 @@ public class UserProfileController {
     public String showCreateUserProfileForm(@PathVariable Long id, Model vModel) {
         vModel.addAttribute("userProfile", new UserProfile());
         vModel.addAttribute("userId", id);
-        return "/create-user-profile";
+        return "create-user-profile";
     }
 
     @PostMapping("/create-user-profile")
