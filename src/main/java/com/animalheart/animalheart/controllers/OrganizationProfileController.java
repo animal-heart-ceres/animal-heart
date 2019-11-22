@@ -23,7 +23,7 @@ public class OrganizationProfileController {
     public String showCreateOrganizationProfileForm(@PathVariable Long id, Model vModel) {
         vModel.addAttribute("organizationProfile", new OrganizationProfile());
         vModel.addAttribute("userId", id);
-        return "/create-organization-profile";
+        return "create-organization-profile";
     }
 
     @PostMapping("/create-organization-profile")
