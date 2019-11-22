@@ -1,5 +1,7 @@
 package com.animalheart.animalheart.models;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import net.bytebuddy.implementation.bind.annotation.Default;
 import org.springframework.beans.factory.annotation.Value;
 
@@ -40,9 +42,11 @@ public class Animal {
     private Date dateCreated;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "animal")
+    @JsonBackReference
     private List<Comment> commentList;
 
     @ManyToOne
+    @JsonManagedReference
     @JoinColumn (name = "user_id")
     private User user;
 

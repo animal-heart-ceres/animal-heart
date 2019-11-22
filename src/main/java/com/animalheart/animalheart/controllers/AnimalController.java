@@ -33,11 +33,16 @@ public class AnimalController {
         return "redirect:/";
     }
 
+//    @GetMapping("/animals.json")
+//    public @ResponseBody List<Animal> showAllAnimalsInJSON() {
+//        return animalDao.findAll();
+//    }
+
     @GetMapping("/animals")
     public String showAllAnimals(Model vModel) {
         List<Animal> animalList = animalDao.findAll();
         vModel.addAttribute("animalList", animalList);
-        return "/index";
+        return "view-animals";
     }
 
     @GetMapping("/animal/{id}")

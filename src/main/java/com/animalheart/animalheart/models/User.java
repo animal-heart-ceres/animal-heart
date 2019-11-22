@@ -1,5 +1,8 @@
 package com.animalheart.animalheart.models;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.List;
 
@@ -18,6 +21,7 @@ public class User {
     private String email;
 
     @Column(nullable = false, length = 500)
+    @JsonIgnore
     private String password;
 
     @Column(nullable = false)
@@ -27,15 +31,19 @@ public class User {
     private Boolean isAdmin;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
+    @JsonBackReference
     private List<Comment> commentList;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
+    @JsonBackReference
     private List<Animal> animalList;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
+    @JsonBackReference
     private List<Event> eventList;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
+    @JsonBackReference
     private List<Follower> followerList;
 
 
