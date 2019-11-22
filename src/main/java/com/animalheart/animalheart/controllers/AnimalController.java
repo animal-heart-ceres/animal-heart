@@ -1,7 +1,9 @@
 package com.animalheart.animalheart.controllers;
 
 import com.animalheart.animalheart.models.Animal;
+import com.animalheart.animalheart.models.Comment;
 import com.animalheart.animalheart.repositories.AnimalRepository;
+import com.animalheart.animalheart.repositories.CommentRepository;
 import com.animalheart.animalheart.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -19,6 +21,9 @@ public class AnimalController {
 
     @Autowired
     UserRepository userDao;
+
+    @Autowired
+    CommentRepository commentDao;
 
     @GetMapping("/create-animal")
     public String showAnimalForm(Model vModel){
@@ -42,7 +47,12 @@ public class AnimalController {
 
     @GetMapping("/animal/{id}")
     public String showAnimal(@PathVariable Long id, Model vModel){
-        vModel.addAttribute("animal", animalDao.getOne(id));
+        Animal animal = animalDao.getOne(id);
+        List<Comment> commentList =  animal.getCommentList();
+        vModel.addAttribute("animal", animal);
+        vModel.addAttribute("comments", commentList);
+
+
         return"/index";
     }
 
