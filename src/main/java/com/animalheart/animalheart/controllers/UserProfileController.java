@@ -18,15 +18,17 @@ public class UserProfileController {
     @Autowired
     UserRepository userDao;
 
-    @GetMapping("/create-user-profile")
-    public String showCreateUserProfileForm(Model vModel) {
+    @GetMapping("/create-user-profile/{id}")
+    public String showCreateUserProfileForm(@PathVariable Long id, Model vModel) {
         vModel.addAttribute("userProfile", new UserProfile());
+        vModel.addAttribute("userId", id);
         return "/create-user-profile";
     }
 
     @PostMapping("/create-user-profile")
-    public String createUserProfile(@ModelAttribute UserProfile userProfile) {
-        //userProfileDao.setUser().setId() SETS THE FOREIGN KEY
+    public String createUserProfile(@ModelAttribute UserProfile userProfile, @RequestParam(name = "userId") Long id) {
+        User user = userDao.getOne(id);
+        userProfile.setUser(user);
         userProfileDao.save(userProfile);
         return "redirect:/";
     }

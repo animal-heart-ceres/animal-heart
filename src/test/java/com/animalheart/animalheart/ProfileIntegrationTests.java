@@ -80,24 +80,21 @@ public class ProfileIntegrationTests {
                 post("/create-user-profile")
                         .param("firstName", "testFirstName")
                         .param("lastName", "testLastName")
-                        .param("address", "testAddress"))
+                        .param("address", "testAddress")
+                        .param("userId", Long.toString(testUser.getId())))
                 .andExpect(status().is3xxRedirection());
 
-        UserProfile testUserProfile = userProfileDao.findByFirstName("testFirstName");
-
-        testUserProfile.setUser(testUser);
-
-        userProfileDao.save(testUserProfile);
     }
 
     @Test
     public void CreateOrganizationProfile() throws Exception {
         this.mvc.perform(
-                post("/organization-sign-up")
+                post("/create-organization-profile")
                         .param("name", "testOrganizationName")
                         .param("taxNumber", "123456789")
                         .param("description", "A San Antonio rescue shelter")
-                        .param("address", "600 Navarro St, San Antonio, TX"))
+                        .param("address", "600 Navarro St, San Antonio, TX")
+                        .param("userId", Long.toString(testOrganization.getId())))
                 .andExpect(status().is3xxRedirection());
     }
 

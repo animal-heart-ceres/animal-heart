@@ -33,25 +33,16 @@ public class UserController {
     }
 
     @PostMapping("/sign-up")
-    public String createUser(@ModelAttribute User user){
+    public String createUser(@ModelAttribute User user, @RequestParam(name = "isOrganization") boolean isOrganization){
         user.setAdmin(false);
-        user.setOrganization(false);
+        user.setOrganization(isOrganization);
         userDao.save(user);
-        return "redirect:/";
-    }
+        if(user.getOrganization()) {
+            return "redirect:/create-organization-profile/" + user.getId();
+        } else {
+            return "redirect:/create-user-profile/" + user.getId();
+        }
 
-    @GetMapping("/sign-up-organization")
-    public String showOrganizationSignUpForm(Model model){
-        model.addAttribute("user", new User());
-        return "organization-sign-up";
-    }
-
-    @PostMapping("/sign-up-organization")
-    public String createOrganization(@ModelAttribute User user){
-        user.setAdmin(false);
-        user.setOrganization(true);
-        userDao.save(user);
-        return "redirect:/";
     }
 
     @PostMapping("/follow")

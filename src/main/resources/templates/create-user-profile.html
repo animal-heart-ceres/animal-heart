@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css?family=Playfair+Display|Raleway&display=swap" rel="stylesheet">    <link rel="stylesheet" type="text/css" href="css/organization-sign-up.css">
+    <title>Organization Sign Up</title>
+</head>
+<body>
+
+<div class="container-fluid" id="h1-border">
+    <div class="row">
+        <div class="col-8">
+            <h1 class="text-center">Create User Profile</h1>
+            <div class="form-group text-center" id="form-div" >
+                <form th:action="@{/create-user-profile}" th:method="post" th:object="${userProfile}">
+                    <input id="username" th:field="*{firstName}" type="text" placeholder="FIRST NAME" />
+                    <input id="email" th:field="*{lastName}" type="text" placeholder="LAST NAME" />
+                    <input id="password" th:field="*{address}" type="password" placeholder="ADDRESS" />
+                    <input id="userId" type="hidden" name="userId" th:value="${userId}">
+                    <input id="submit-btn" type="submit" value="SIGN UP"/>
+                </form>
+                <div class="row-2">
+                    <a id="home" href="/">HOME</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-4">
+            <img id="img" src="img/signup-paw.jpg" width="475" height="360" alt="cat-paw">
+            <img id="img" src="img/signup-cat.jpg" width="475" height="360" alt="white-cat">
+            <img id="img" src="img/signup-dog.jpg" width="475" height="360" alt="french-bulldog">
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

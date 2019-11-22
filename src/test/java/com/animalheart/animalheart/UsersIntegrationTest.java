@@ -57,6 +57,7 @@ public class UsersIntegrationTest {
                         .param("username", "testUserSignUp")
                         .param("email", "testUserSignUp@email.com")
                         .param("password", "testUserSignUpPassword")
+                        .param("isOrganization", "false")
         )
                 .andExpect(status().is3xxRedirection());
 
