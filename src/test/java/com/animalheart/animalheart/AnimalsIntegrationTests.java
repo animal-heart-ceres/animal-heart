@@ -1,6 +1,7 @@
 package com.animalheart.animalheart;
 
 
+import com.animalheart.animalheart.controllers.AnimalController;
 import com.animalheart.animalheart.models.Animal;
 import com.animalheart.animalheart.models.User;
 import com.animalheart.animalheart.models.UserProfile;
@@ -8,8 +9,13 @@ import com.animalheart.animalheart.repositories.AnimalRepository;
 import com.animalheart.animalheart.repositories.OrganizationProfileRepository;
 import com.animalheart.animalheart.repositories.UserProfileRepository;
 import com.animalheart.animalheart.repositories.UserRepository;
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.MethodOrderer;
+import org.junit.jupiter.api.Order;
+import org.junit.jupiter.api.TestMethodOrder;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -28,7 +34,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = AnimalHeartApplication.class)
 @AutoConfigureMockMvc
-//@Transactional
 public class AnimalsIntegrationTests {
 
     private User testUser;
@@ -88,12 +93,13 @@ public class AnimalsIntegrationTests {
                         .param("age", "7"))
                 .andExpect(status().is3xxRedirection());
 
-        Animal testAnimal = animalDao.findByName("testAnimalName");
+        Animal testAnimal = animalDao.findByName("testAnimalName").get(0);
 
         testAnimal.setUser(testUser);
 
         animalDao.save(testAnimal);
     }
+
 
     @Test
     public void showAllAnimals() throws Exception {
@@ -102,13 +108,15 @@ public class AnimalsIntegrationTests {
                 .andExpect(status().isOk());
     }
 
+
     @Test
     public void showAnimal() throws Exception {
-        Animal currentAnimal = animalDao.findByName("testAnimalName");
+        Animal currentAnimal = animalDao.findByName("testAnimalName").get(0);
         System.out.println (currentAnimal.getId());
         this.mvc.perform(get("/animal/" + currentAnimal.getId()))
                 .andExpect(status().isOk());
     }
+
 
     @Test
     public void showUsersAnimals() throws Exception {
@@ -117,9 +125,10 @@ public class AnimalsIntegrationTests {
                 .andExpect(status().isOk());
     }
 
+
     @Test
     public void editAnimal() throws Exception {
-        Animal currentAnimal = animalDao.findByName("testAnimalName");
+        Animal currentAnimal = animalDao.findByName("testAnimalName").get(0);
 
         this.mvc.perform(
                 post("/animal/" + currentAnimal.getId() + "/edit")
@@ -130,9 +139,10 @@ public class AnimalsIntegrationTests {
 
     }
 
+
     @Test
     public void deleteAnimal() throws Exception {
-        Animal currentAnimal = animalDao.findByName("testAnimalNameEdit");
+        Animal currentAnimal = animalDao.findByName("testAnimalNameEdit").get(0);
 
         this.mvc.perform(
                 post("/delete-animal/" + currentAnimal.getId()))

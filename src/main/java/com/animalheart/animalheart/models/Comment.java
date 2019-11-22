@@ -1,5 +1,7 @@
 package com.animalheart.animalheart.models;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
 
 @Entity
@@ -14,10 +16,12 @@ public class Comment {
     private String comment;
 
     @ManyToOne
+    @JsonManagedReference
     @JoinColumn (name = "animal_id")
     private Animal animal;
 
     @ManyToOne
+    @JsonManagedReference
     @JoinColumn (name = "user_id")
     private User user;
 
