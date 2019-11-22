@@ -12,17 +12,16 @@
 <div class="container-fluid" id="h1-border">
     <div class="row">
         <div class="col-8">
-            <h1 class="text-center">ORGANIZATION REGISTER</h1>
+            <h1 class="text-center">Create User Profile</h1>
             <div class="form-group text-center" id="form-div" >
-                <form th:action="@{/sign-up-organization}" th:method="post" th:object="${user}">
-                    <input id="username" th:field="*{username}" type="text" placeholder="USERNAME" />
-                    <input id="email" th:field="*{email}" type="text" placeholder="EMAIL" />
-                    <input id="password" th:field="*{password}" type="password" placeholder="PASSWORD" />
+                <form th:action="@{/create-user-profile}" th:method="post" th:object="${userProfile}">
+                    <input id="username" th:field="*{firstName}" type="text" placeholder="FIRST NAME" />
+                    <input id="email" th:field="*{lastName}" type="text" placeholder="LAST NAME" />
+                    <input id="password" th:field="*{address}" type="password" placeholder="ADDRESS" />
                     <input id="submit-btn" type="submit" value="SIGN UP"/>
                 </form>
                 <div class="row-2">
                     <a id="home" href="/">HOME</a>
-                    <a id="user-signup" href="/sign-up">USER SIGNUP</a>
                 </div>
             </div>
         </div>

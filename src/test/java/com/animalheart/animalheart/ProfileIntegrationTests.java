@@ -93,7 +93,7 @@ public class ProfileIntegrationTests {
     @Test
     public void CreateOrganizationProfile() throws Exception {
         this.mvc.perform(
-                post("/organization-sign-up")
+                post("/create-organization-profile")
                         .param("name", "testOrganizationName")
                         .param("taxNumber", "123456789")
                         .param("description", "A San Antonio rescue shelter")

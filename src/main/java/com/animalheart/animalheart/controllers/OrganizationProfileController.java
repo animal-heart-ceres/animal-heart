@@ -14,13 +14,13 @@ public class OrganizationProfileController {
     @Autowired
     OrganizationProfileRepository organizationProfileDao;
 
-    @GetMapping("/organization-sign-up")
+    @GetMapping("/create-organization-profile")
     public String showCreateOrganizationProfileForm(Model vModel) {
         vModel.addAttribute("organizationProfile", new OrganizationProfile());
         return "/organization-sign-up";
     }
 
-    @PostMapping("/organization-sign-up")
+    @PostMapping("/create-organization-profile")
     public String createOrganizationProfile(@ModelAttribute OrganizationProfile organizationProfile) {
         organizationProfileDao.save(organizationProfile);
         return "redirect:";

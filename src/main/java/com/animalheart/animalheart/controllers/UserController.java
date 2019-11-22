@@ -35,24 +35,30 @@ public class UserController {
     @PostMapping("/sign-up")
     public String createUser(@ModelAttribute User user){
         user.setAdmin(false);
-        user.setOrganization(false);
         userDao.save(user);
-        return "redirect:/";
+        if(user.getOrganization()) {
+            return "redirect:/create-organization-profile";
+        } else {
+            return "redirect:/create-user-profile";
+        }
+
     }
 
-    @GetMapping("/sign-up-organization")
-    public String showOrganizationSignUpForm(Model model){
-        model.addAttribute("user", new User());
-        return "organization-sign-up";
-    }
+    //This will be deleted
+//    @GetMapping("/sign-up-organization")
+//    public String showOrganizationSignUpForm(Model model){
+//        model.addAttribute("user", new User());
+//        return "organization-sign-up";
+//    }
 
-    @PostMapping("/sign-up-organization")
-    public String createOrganization(@ModelAttribute User user){
-        user.setAdmin(false);
-        user.setOrganization(true);
-        userDao.save(user);
-        return "redirect:/";
-    }
+    //This will be deleted
+//    @PostMapping("/sign-up-organization")
+//    public String createOrganization(@ModelAttribute User user){
+//        user.setAdmin(false);
+//        user.setOrganization(true);
+//        userDao.save(user);
+//        return "redirect:/";
+//    }
 
     @PostMapping("/follow")
     public String createFollower(@RequestParam(name = "followerId") Long followerId) {
