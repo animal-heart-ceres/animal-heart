@@ -31,24 +31,24 @@
                     aria-haspopup="true" aria-expanded="false">
                 FILTER
             </button>
-            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                <a class="dropdown-item" href="#">Large</a>
-                <a class="dropdown-item" href="#">Small</a>
-                <a class="dropdown-item" href="#">Medium</a>
-                <a class="dropdown-item" href="#">Dog</a>
-                <a class="dropdown-item" href="#">Cat</a>
-                <a class="dropdown-item" href="#">Exotic</a>
-                <a class="dropdown-item" href="#">Female</a>
-                <a class="dropdown-item" href="#">Male</a>
+            <div class="dropdown-menu myInput2" aria-labelledby="dropdownMenuButton">
+<!--                <a class="dropdown-item">All</a>-->
+                <a class="dropdown-item">Large</a>
+                <a class="dropdown-item">Small</a>
+                <a class="dropdown-item">Medium</a>
+                <a class="dropdown-item">Dog</a>
+                <a class="dropdown-item">Cat</a>
+                <a class="dropdown-item">Exotic</a>
             </div>
         </div>
 
-        <form class="search" action="action_page.php">
+        <div class="search">
             <input id="myInput" type="text" placeholder="Search.." name="search">
             <button type="submit"><i class="fa fa-search"></i></button>
-        </form>
+        </div>
 
     </header>
+
     <div class="d-flex">
         <div class="card" style="width: 18rem;"  th:each="animal : ${animalList}">
             <img th:src="${animal.img}" height="150" width="150" class="card-img-top" alt="">
