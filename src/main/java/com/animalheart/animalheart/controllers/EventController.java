@@ -70,6 +70,11 @@ public class EventController {
         return"redirect:/";
     }
 
-
+    @PostMapping("/event/{id}/delete")
+    public String deleteEvent(@PathVariable Long id) {
+        Event currentEvent = eventDao.getOne(id);
+        eventDao.delete(currentEvent);
+        return "redirect:/";
+    }
 
 }

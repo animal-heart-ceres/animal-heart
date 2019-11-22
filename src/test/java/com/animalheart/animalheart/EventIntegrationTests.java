@@ -122,10 +122,10 @@ public class EventIntegrationTests {
 
     @Test
     public void deleteEvent() throws Exception {
-        Animal currentAnimal = animalDao.findByName("testAnimalNameEdit");
+        Event currentEvent = eventDao.findByTitle("testEventEdited");
 
         this.mvc.perform(
-                post("/delete-animal/" + currentAnimal.getId()))
+                post("/event/" + currentEvent.getId() + "/delete"))
                 .andExpect(status().is3xxRedirection());
     }
 
