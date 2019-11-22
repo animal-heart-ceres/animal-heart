@@ -28,18 +28,18 @@ public class User {
     @Column(nullable = false)
     private Boolean isAdmin;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
-    private List<Comment> commentList;
+//    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
+//    private List<Comment> commentList;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
     @JsonBackReference
     private List<Animal> animalList;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
-    private List<Event> eventList;
+//    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
+//    private List<Event> eventList;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
-    private List<Follower> followerList;
+//    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
+//    private List<Follower> followerList;
 
 
 
@@ -101,13 +101,13 @@ public class User {
         isAdmin = admin;
     }
 
-    public List<Comment> getCommentList() {
-        return commentList;
-    }
+//    public List<Comment> getCommentList() {
+//        return commentList;
+//    }
 
-    public void setCommentList(List<Comment> commentList) {
-        this.commentList = commentList;
-    }
+//    public void setCommentList(List<Comment> commentList) {
+//        this.commentList = commentList;
+//    }
 
     public List<Animal> getAnimalList() {
         return animalList;
@@ -117,19 +117,19 @@ public class User {
         this.animalList = animalList;
     }
 
-    public List<Event> getEventList() {
-        return eventList;
-    }
+//    public List<Event> getEventList() {
+//        return eventList;
+//    }
 
-    public void setEventList(List<Event> eventList) {
-        this.eventList = eventList;
-    }
+//    public void setEventList(List<Event> eventList) {
+//        this.eventList = eventList;
+//    }
 
-    public List<Follower> getFollowerList() {
-        return followerList;
-    }
+//    public List<Follower> getFollowerList() {
+//        return followerList;
+//    }
 
-    public void setFollowerList(List<Follower> followerList) {
-        this.followerList = followerList;
-    }
+//    public void setFollowerList(List<Follower> followerList) {
+//        this.followerList = followerList;
+//    }
 }

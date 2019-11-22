@@ -41,8 +41,8 @@ public class Animal {
     @Column(columnDefinition = "DATETIME")
     private Date dateCreated;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "animal")
-    private List<Comment> commentList;
+//    @OneToMany(cascade = CascadeType.ALL, mappedBy = "animal")
+//    private List<Comment> commentList;
 
     @ManyToOne
     @JoinColumn (name = "user_id")
@@ -123,13 +123,13 @@ public class Animal {
         this.dateCreated = dateCreated;
     }
 
-    public List<Comment> getCommentList() {
-        return commentList;
-    }
+//    public List<Comment> getCommentList() {
+//        return commentList;
+//    }
 
-    public void setCommentList(List<Comment> commentList) {
-        this.commentList = commentList;
-    }
+//    public void setCommentList(List<Comment> commentList) {
+//        this.commentList = commentList;
+//    }
 
     public User getUser() {
         return user;
