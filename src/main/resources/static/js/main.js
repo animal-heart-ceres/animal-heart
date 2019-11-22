@@ -5,6 +5,14 @@
             $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
         });
     });
+
+
+    $(".myInput2 a").click(function() {
+        let value = $(this).text().toLowerCase();
+            $(".card").filter(function() {
+                $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+            });
+    });
 })(jQuery);
 
 
