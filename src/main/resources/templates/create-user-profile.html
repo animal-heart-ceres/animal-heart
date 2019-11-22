@@ -18,6 +18,7 @@
                     <input id="username" th:field="*{firstName}" type="text" placeholder="FIRST NAME" />
                     <input id="email" th:field="*{lastName}" type="text" placeholder="LAST NAME" />
                     <input id="password" th:field="*{address}" type="password" placeholder="ADDRESS" />
+                    <input id="userId" type="hidden" name="userId" th:value="${userId}">
                     <input id="submit-btn" type="submit" value="SIGN UP"/>
                 </form>
                 <div class="row-2">

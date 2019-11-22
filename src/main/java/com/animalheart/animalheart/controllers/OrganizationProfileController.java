@@ -1,8 +1,10 @@
 package com.animalheart.animalheart.controllers;
 
 import com.animalheart.animalheart.models.OrganizationProfile;
+import com.animalheart.animalheart.models.User;
 import com.animalheart.animalheart.models.UserProfile;
 import com.animalheart.animalheart.repositories.OrganizationProfileRepository;
+import com.animalheart.animalheart.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,16 +16,22 @@ public class OrganizationProfileController {
     @Autowired
     OrganizationProfileRepository organizationProfileDao;
 
-    @GetMapping("/create-organization-profile")
-    public String showCreateOrganizationProfileForm(Model vModel) {
+    @Autowired
+    UserRepository userDao;
+
+    @GetMapping("/create-organization-profile/{id}")
+    public String showCreateOrganizationProfileForm(@PathVariable Long id, Model vModel) {
         vModel.addAttribute("organizationProfile", new OrganizationProfile());
-        return "/organization-sign-up";
+        vModel.addAttribute("userId", id);
+        return "/create-organization-profile";
     }
 
     @PostMapping("/create-organization-profile")
-    public String createOrganizationProfile(@ModelAttribute OrganizationProfile organizationProfile) {
+    public String createOrganizationProfile(@ModelAttribute OrganizationProfile organizationProfile, @RequestParam(name = "userId") Long id) {
+        User organization = userDao.getOne(id);
+        organizationProfile.setOrganization(organization);
         organizationProfileDao.save(organizationProfile);
-        return "redirect:";
+        return "redirect:/";
     }
 
     @PostMapping("/organization-profile/{id}/edit")
