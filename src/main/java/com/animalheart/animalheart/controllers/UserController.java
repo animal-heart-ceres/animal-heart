@@ -45,18 +45,20 @@ public class UserController {
 
     }
 
-    @PostMapping("/follow")
-    public String createFollower(@RequestParam(name = "followerId") Long followerId) {
-        //set the fk to the id of the organization
+    @PostMapping("/follower/{orgId}")
+    public String createFollower(@PathVariable Long orgId, @RequestParam(name = "followerId") Long followerId) {
 
-        Follower newFollower = new Follower();
-        newFollower.setFollowerId(followerId);
-        followerDao.save(newFollower);
+        User organization = userDao.getOne(orgId);
 
-        return "redirect:/";
+        Follower createdFollower = new Follower();
+        createdFollower.setFollowerId(followerId);
+        createdFollower.setUser(organization);
+        followerDao.save(createdFollower);
+
+        return "redirect:/organization-profile/" + orgId;
     }
 
-    @PostMapping("/delete-follow/{userId}/{orgId}")
+    @PostMapping("/follower/{userId}/{orgId}/delete")
     public String deleteFollower(@PathVariable Long userId, @PathVariable Long orgId) {
 
         List<Follower> followerList = followerDao.findAll();
@@ -65,7 +67,7 @@ public class UserController {
                 followerDao.delete(follower);
             }
         }
-        return "redirect:/";
+        return "redirect:/organization-profile/" + orgId;
     }
 
 }
