@@ -139,8 +139,7 @@ public class AnimalsIntegrationTests {
 
     @Test
     public void showAllAnimals() throws Exception {
-
-        this.mvc.perform(get("/animals"))
+        this.mvc.perform(get("/animals/showAll"))
                 .andExpect(status().isOk());
     }
 
@@ -180,9 +179,12 @@ public class AnimalsIntegrationTests {
     public void deleteAnimal() throws Exception {
 
         Animal currentAnimal = findAnimalByName("animalToDelete");
+
         this.mvc.perform(
                 post("/delete-animal/" + currentAnimal.getId()))
         .andExpect(status().is3xxRedirection());
+
+        Assert.assertNotEquals("", currentAnimal.getName());
     }
 
 }

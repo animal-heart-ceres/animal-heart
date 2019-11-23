@@ -2,6 +2,7 @@ package com.animalheart.animalheart.controllers;
 
 import com.animalheart.animalheart.models.Animal;
 import com.animalheart.animalheart.models.Comment;
+import com.animalheart.animalheart.models.User;
 import com.animalheart.animalheart.repositories.AnimalRepository;
 import com.animalheart.animalheart.repositories.CommentRepository;
 import com.animalheart.animalheart.repositories.UserRepository;
@@ -44,7 +45,7 @@ public class AnimalController {
 //        return animalDao.findAll();
 //    }
 
-    @GetMapping("/animals")
+    @GetMapping("/animals/showAll")
     public String showAllAnimals(Model vModel) {
         List<Animal> animalList = animalDao.findAll();
         vModel.addAttribute("animalList", animalList);
@@ -60,19 +61,6 @@ public class AnimalController {
         return "animal-profile";
     }
 
-    @GetMapping("/animals/{userId}")
-    public String showUsersAnimals(@PathVariable Long userId, Model vModel){
-        List<Animal> allAnimals = animalDao.findAll();
-        List<Animal> usersAnimals = new ArrayList<>();
-        for(Animal animal : allAnimals) {
-            if(animal.getUser().getId() == userId) {
-                usersAnimals.add(animal);
-            }
-        }
-        vModel.addAttribute("usersAnimals", usersAnimals);
-        return "/index";
-    }
-
     @PostMapping("/animal/{animalId}/edit")
     public String editAnimal(@PathVariable Long animalId, @RequestParam(name = "name") String name, @RequestParam(name = "size") String size, @RequestParam(name = "age") int age) {
         Animal animalToEdit = animalDao.getOne(animalId);
@@ -83,12 +71,19 @@ public class AnimalController {
         return "redirect:/animal/" + animalId;
     }
 
-    @PostMapping("/delete-animal/{id}")
-    public String deleteAnimal(@PathVariable Long id) {
-        Animal animalToDelete = animalDao.getOne(id);
+    @PostMapping("/delete-animal/{animalId}")
+    public String deleteAnimal(@PathVariable Long animalId) {
+
+        Animal animalToDelete = animalDao.getOne(animalId);
+
+        User user = animalDao.getOne(animalId).getUser();
 
         animalDao.delete(animalToDelete);
 
-        return "redirect:/";
+        if(user.getOrganization()) {
+            return "redirect:/organization-profile" + user.getId();
+        } else {
+            return "redirect:/user-profile/" + user.getId();
+        }
     }
 }
