@@ -1,5 +1,6 @@
 package com.animalheart.animalheart.controllers;
 
+import com.animalheart.animalheart.models.Animal;
 import com.animalheart.animalheart.models.User;
 import com.animalheart.animalheart.models.UserProfile;
 import com.animalheart.animalheart.repositories.UserProfileRepository;
@@ -8,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @Controller
 public class UserProfileController {
@@ -26,17 +29,23 @@ public class UserProfileController {
     }
 
     @PostMapping("/create-user-profile")
-    public String createUserProfile(@ModelAttribute UserProfile userProfile, @RequestParam(name = "userId") Long id) {
-        User user = userDao.getOne(id);
-        userProfile.setUser(user);
+    public String createUserProfile(@ModelAttribute UserProfile userProfile) {
+        //need to set FK
         userProfileDao.save(userProfile);
         return "redirect:/";
     }
 
-    @GetMapping("/user-profile/{id}")
-    public String showUserProfile(@PathVariable long id, Model vModel) {
-        vModel.addAttribute("userProfile", userProfileDao.findById(id));
-        return "/index";
+    @GetMapping("/user-profile/{userId}")
+    public String showUserProfile(@PathVariable long userId, Model vModel) {
+        //When I go to my profile, I expect to see all the animals I have added
+        User loggedInUser = userDao.getOne(userId);
+        List<Animal> animalList = loggedInUser.getAnimalList();
+
+        UserProfile loggedInUserProfile = userProfileDao.findByUserId(userId);
+
+        vModel.addAttribute("userProfile", loggedInUserProfile);
+        vModel.addAttribute("animals", animalList);
+        return "user-profile";
     }
 
     @PostMapping("/profile/{id}/edit")

@@ -8,7 +8,4 @@ import java.util.List;
 
 public interface FollowerRepository extends JpaRepository<Follower, Long> {
     Follower findByFollowerId(Long id);
-
-//    @Query(value = "SELECT * FROM FOLLOWERS WHERE follower_id = ? AND user_organization_id = ?", nativeQuery = true)
-//    Follower deleteFollower(Long followerId, Long userOrganizationId);
 }

@@ -1,7 +1,7 @@
 package com.animalheart.animalheart.controllers;
-
 import com.animalheart.animalheart.models.Animal;
 import com.animalheart.animalheart.models.Comment;
+import com.animalheart.animalheart.models.User;
 import com.animalheart.animalheart.repositories.AnimalRepository;
 import com.animalheart.animalheart.repositories.CommentRepository;
 import com.animalheart.animalheart.repositories.UserRepository;
@@ -9,8 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -33,7 +31,7 @@ public class AnimalController {
 
     @PostMapping("/create-animal")
     public String createAnimal(@ModelAttribute Animal animal){
-//        set fk
+//        set fk, will be the current user
         animalDao.save(animal);
         return "redirect:/";
     }
@@ -44,7 +42,7 @@ public class AnimalController {
 //        return animalDao.findAll();
 //    }
 
-    @GetMapping("/animals")
+    @GetMapping("/animals/showAll")
     public String showAllAnimals(Model vModel) {
         List<Animal> animalList = animalDao.findAll();
         vModel.addAttribute("animalList", animalList);
@@ -57,40 +55,32 @@ public class AnimalController {
         List<Comment> commentList =  animal.getCommentList();
         vModel.addAttribute("animal", animal);
         vModel.addAttribute("comments", commentList);
-
-
-        return"/index";
+        return "animal-profile";
     }
 
-    @GetMapping("/animals/{userId}")
-    public String showUsersAnimals(@PathVariable Long userId, Model vModel){
-        List<Animal> allAnimals = animalDao.findAll();
-        List<Animal> usersAnimals = new ArrayList<>();
-        for(Animal animal : allAnimals) {
-            if(animal.getUser().getId() == userId) {
-                usersAnimals.add(animal);
-            }
-        }
-        vModel.addAttribute("usersAnimals", usersAnimals);
-        return "/index";
-    }
-
-    @PostMapping("/animal/{id}/edit")
-    public String editAnimal(@PathVariable Long id, @RequestParam(name = "name") String name, @RequestParam(name = "size") String size, @RequestParam(name = "age") int age) {
-        Animal animalToEdit = animalDao.getOne(id);
+    @PostMapping("/animal/{animalId}/edit")
+    public String editAnimal(@PathVariable Long animalId, @RequestParam(name = "name") String name, @RequestParam(name = "size") String size, @RequestParam(name = "age") int age) {
+        Animal animalToEdit = animalDao.getOne(animalId);
         animalToEdit.setName(name);
         animalToEdit.setSize(size);
         animalToEdit.setAge(age);
         animalDao.save(animalToEdit);
-        return "redirect:/";
+        return "redirect:/animal/" + animalId;
     }
 
-    @PostMapping("/delete-animal/{id}")
-    public String deleteAnimal(@PathVariable Long id) {
-        Animal animalToDelete = animalDao.getOne(id);
+    @PostMapping("/delete-animal/{animalId}")
+    public String deleteAnimal(@PathVariable Long animalId) {
+
+        Animal animalToDelete = animalDao.getOne(animalId);
+
+        User user = animalDao.getOne(animalId).getUser();
 
         animalDao.delete(animalToDelete);
 
-        return "redirect: /";
+        if(user.getOrganization()) {
+            return "redirect:/organization-profile" + user.getId();
+        } else {
+            return "redirect:/user-profile/" + user.getId();
+        }
     }
 }

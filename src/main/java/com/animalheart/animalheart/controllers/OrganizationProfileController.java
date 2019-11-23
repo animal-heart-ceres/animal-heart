@@ -27,9 +27,8 @@ public class OrganizationProfileController {
     }
 
     @PostMapping("/create-organization-profile")
-    public String createOrganizationProfile(@ModelAttribute OrganizationProfile organizationProfile, @RequestParam(name = "userId") Long id) {
-        User organization = userDao.getOne(id);
-        organizationProfile.setOrganization(organization);
+    public String createOrganizationProfile(@ModelAttribute OrganizationProfile organizationProfile) {
+        //set fk
         organizationProfileDao.save(organizationProfile);
         return "redirect:/";
     }

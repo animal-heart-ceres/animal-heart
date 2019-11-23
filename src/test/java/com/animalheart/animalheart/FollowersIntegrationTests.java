@@ -6,6 +6,7 @@ import com.animalheart.animalheart.repositories.FollowerRepository;
 import com.animalheart.animalheart.repositories.OrganizationProfileRepository;
 import com.animalheart.animalheart.repositories.UserProfileRepository;
 import com.animalheart.animalheart.repositories.UserRepository;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -26,6 +27,7 @@ public class FollowersIntegrationTests {
 
     private User testUser;
     private User testOrganization;
+    private Follower followerToDelete;
     private HttpSession httpSessionUser;
     private HttpSession httpSessionOrganization;
 
@@ -65,28 +67,32 @@ public class FollowersIntegrationTests {
             testOrganization = userDao.save(newUser);
         }
 
+        Follower followerToDelete = new Follower();
+        followerToDelete.setUser(testOrganization);
+        followerToDelete.setFollowerId(testUser.getId());
+        followerDao.save(followerToDelete);
+
     }
 
     @Test
-    public void createFollow() throws Exception {
+    public void createFollower() throws Exception {
         this.mvc.perform(
-                post("/follow")
+                post("/follower")
                     .param("followerId", Long.toString(testUser.getId())));
 
-        Follower testFollow = followerDao.findByFollowerId(testUser.getId());
+        Follower createdFollower = followerDao.findByFollowerId(testUser.getId());
 
-        testFollow.setUser(testOrganization);
+        Assert.assertNotNull(followerDao.findByFollowerId(testUser.getId()));
 
-        followerDao.save(testFollow);
-
+        followerDao.delete(createdFollower);
 
     }
 
     @Test
     public void deleteFollower() throws Exception {
         this.mvc.perform(
-                post("/delete-follow/" + testUser.getId() + "/" + testOrganization.getId()));
-        
+                post("/follower/" + testUser.getId() + "/" + testOrganization.getId() + "/delete"));
+        Assert.assertNull(followerDao.findByFollowerId(testUser.getId()));
     }
 
 }

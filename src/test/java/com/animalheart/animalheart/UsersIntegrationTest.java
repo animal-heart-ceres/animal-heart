@@ -6,6 +6,7 @@ import com.animalheart.animalheart.models.UserProfile;
 import com.animalheart.animalheart.repositories.OrganizationProfileRepository;
 import com.animalheart.animalheart.repositories.UserProfileRepository;
 import com.animalheart.animalheart.repositories.UserRepository;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -61,9 +62,8 @@ public class UsersIntegrationTest {
         )
                 .andExpect(status().is3xxRedirection());
 
-        User existingUser = userDao.findByUsername("testUserSignUp");
-        System.out.println("USER WAS CREATED " + existingUser.getUsername());
-        userDao.delete(existingUser);
+        User createdUser = userDao.findByUsername("testUserSignUp");
+        userDao.delete(createdUser);
     }
 
 }

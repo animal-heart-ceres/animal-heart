@@ -6,6 +6,7 @@ import com.animalheart.animalheart.models.User;
 import com.animalheart.animalheart.repositories.AnimalRepository;
 import com.animalheart.animalheart.repositories.CommentRepository;
 import com.animalheart.animalheart.repositories.UserRepository;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -46,7 +47,7 @@ public class CommentsIntegrationTests {
     public void setup() throws Exception {
 
         testUser = userDao.findByUsername("testUser");
-        testAnimal = animalDao.findByName("testAnimalName");
+        testAnimal = animalDao.findByName("testAnimalName").get(0);
 
         // Creates the test user if not exists
         if (testUser == null) {
@@ -69,8 +70,28 @@ public class CommentsIntegrationTests {
             testAnimal = animalDao.save(newAnimal);
         }
 
+        Comment commentToView = new Comment();
+        commentToView.setComment("This is a comment to view");
+        commentToView.setAnimal(testAnimal);
+        commentToView.setUser(testUser);
+        commentDao.save(commentToView);
 
+        Comment commentToDelete = new Comment();
+        commentToDelete.setComment("This is a comment to delete");
+        commentToDelete.setAnimal(testAnimal);
+        commentToDelete.setUser(testUser);
+        commentDao.save(commentToDelete);
 
+        Comment commentToEdit = new Comment();
+        commentToEdit.setComment("This is a comment to edit");
+        commentToEdit.setAnimal(testAnimal);
+        commentToEdit.setUser(testUser);
+        commentDao.save(commentToEdit);
+
+    }
+
+    public Comment findCommentByMessage(String message) {
+        return commentDao.findByComment(message).get(0);
     }
 
     @Test
@@ -80,12 +101,46 @@ public class CommentsIntegrationTests {
                     .param("comment", "Test Comment!"))
         .andExpect(status().is3xxRedirection());
 
+        Comment createdComment = findCommentByMessage("Test Comment!");
+
+        commentDao.delete(createdComment);
+
     }
 
+    //Logic is in the animal profile view controller
     @Test
     public void viewComments() throws Exception {
-        Animal testAnimal = animalDao.findByName("testAnimalName");
         this.mvc.perform(get("/animal/" + testAnimal.getId()))
                 .andExpect(status().isOk());
     }
+
+    @Test
+    public void editComment() throws Exception {
+        Comment commentToBeEdited = findCommentByMessage("This is a comment to edit");
+
+        this.mvc.perform(post("/comment/" + commentToBeEdited.getId() + "/edit")
+            .param("comment", "This comment has been edited"));
+
+        Comment commentThatWasEdited = findCommentByMessage("This comment has been edited");
+
+        Assert.assertNotEquals("This is a comment to edit", commentThatWasEdited.getComment());
+    }
+
+    //When the delete button is clicked, it will have that comments ID in the form waiting. So when it  gets to the controller, it will know which comment to delete.
+    @Test
+    public void deleteComment() throws Exception {
+
+        Comment commentToBeDeleted = findCommentByMessage("This is a comment to delete");
+
+        Assert.assertNotNull(commentToBeDeleted);
+
+        this.mvc.perform(post("/comment/" + commentToBeDeleted.getId() + "/delete"));
+
+        Assert.assertNotEquals("", commentToBeDeleted.getComment());
+    }
+
+
+
+
+
 }
