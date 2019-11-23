@@ -92,6 +92,7 @@ public class AnimalsIntegrationTests {
         animalToView.setAge(3);
         animalToView.setSize("large");
         animalToView.setUser(testUser);
+        animalDao.save(animalToView);
 
         Animal animalToEdit = new Animal();
         animalToEdit.setName("animalToEdit");

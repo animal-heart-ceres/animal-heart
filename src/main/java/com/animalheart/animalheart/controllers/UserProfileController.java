@@ -29,9 +29,8 @@ public class UserProfileController {
     }
 
     @PostMapping("/create-user-profile")
-    public String createUserProfile(@ModelAttribute UserProfile userProfile, @RequestParam(name = "userId") Long id) {
-        User user = userDao.getOne(id);
-        userProfile.setUser(user);
+    public String createUserProfile(@ModelAttribute UserProfile userProfile) {
+        //need to set FK
         userProfileDao.save(userProfile);
         return "redirect:/";
     }

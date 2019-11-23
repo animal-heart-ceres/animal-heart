@@ -1,5 +1,4 @@
 package com.animalheart.animalheart.controllers;
-
 import com.animalheart.animalheart.models.Animal;
 import com.animalheart.animalheart.models.Comment;
 import com.animalheart.animalheart.models.User;
@@ -10,8 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.ArrayList;
 import java.util.List;
 
 @Controller
