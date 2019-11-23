@@ -90,6 +90,10 @@ public class CommentsIntegrationTests {
 
     }
 
+    public Comment findCommentByMessage(String message) {
+        return commentDao.findByComment(message).get(0);
+    }
+
     @Test
     public void createComment() throws Exception {
         this.mvc.perform(
@@ -97,7 +101,7 @@ public class CommentsIntegrationTests {
                     .param("comment", "Test Comment!"))
         .andExpect(status().is3xxRedirection());
 
-        Comment createdComment = commentDao.findByComment("Test Comment!").get(0);
+        Comment createdComment = findCommentByMessage("Test Comment!");
 
         commentDao.delete(createdComment);
 
@@ -112,12 +116,12 @@ public class CommentsIntegrationTests {
 
     @Test
     public void editComment() throws Exception {
-        Comment commentToBeEdited = commentDao.findByComment("This is a comment to edit").get(0);
+        Comment commentToBeEdited = findCommentByMessage("This is a comment to edit");
 
         this.mvc.perform(post("/comment/" + commentToBeEdited.getId() + "/edit")
             .param("comment", "This comment has been edited"));
 
-        Comment commentThatWasEdited = commentDao.findByComment("This comment has been edited").get(0);
+        Comment commentThatWasEdited = findCommentByMessage("This comment has been edited");
 
         Assert.assertNotEquals("This is a comment to edit", commentThatWasEdited.getComment());
     }
@@ -125,7 +129,8 @@ public class CommentsIntegrationTests {
     //When the delete button is clicked, it will have that comments ID in the form waiting. So when it  gets to the controller, it will know which comment to delete.
     @Test
     public void deleteComment() throws Exception {
-        Comment commentToBeDeleted = commentDao.findByComment("This is a comment to delete").get(0);
+
+        Comment commentToBeDeleted = findCommentByMessage("This is a comment to delete");
 
         Assert.assertNotNull(commentToBeDeleted);
 
@@ -133,6 +138,7 @@ public class CommentsIntegrationTests {
 
         Assert.assertNotEquals("", commentToBeDeleted.getComment());
     }
+
 
 
 
