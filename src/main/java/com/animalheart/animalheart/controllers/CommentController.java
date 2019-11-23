@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 public class CommentController {
@@ -37,6 +38,12 @@ public class CommentController {
         commentDao.save(newComment);
 
         return "redirect:/";
+    }
+
+    @PostMapping("/delete-comment/id{}")
+    public void deleteComment(@PathVariable Long commentId) {
+        Comment commentToDelete = commentDao.getOne(commentId);
+        commentDao.delete(commentToDelete);
     }
 
 

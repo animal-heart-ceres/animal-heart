@@ -6,6 +6,7 @@ import com.animalheart.animalheart.models.User;
 import com.animalheart.animalheart.repositories.AnimalRepository;
 import com.animalheart.animalheart.repositories.CommentRepository;
 import com.animalheart.animalheart.repositories.UserRepository;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -46,7 +47,7 @@ public class CommentsIntegrationTests {
     public void setup() throws Exception {
 
         testUser = userDao.findByUsername("testUser");
-        testAnimal = animalDao.findByName("testAnimalName");
+        testAnimal = animalDao.findByName("testAnimalName").get(0);
 
         // Creates the test user if not exists
         if (testUser == null) {
@@ -69,7 +70,23 @@ public class CommentsIntegrationTests {
             testAnimal = animalDao.save(newAnimal);
         }
 
+        Comment commentToView = new Comment();
+        commentToView.setComment("This is a comment to view");
+        commentToView.setAnimal(testAnimal);
+        commentToView.setUser(testUser);
+        commentDao.save(commentToView);
 
+        Comment commentToDelete = new Comment();
+        commentToDelete.setComment("This is a comment to delete");
+        commentToDelete.setAnimal(testAnimal);
+        commentToDelete.setUser(testUser);
+        commentDao.save(commentToDelete);
+
+        Comment commentToEdit = new Comment();
+        commentToEdit.setComment("This is a comment to edit");
+        commentToEdit.setAnimal(testAnimal);
+        commentToEdit.setUser(testUser);
+        commentDao.save(commentToEdit);
 
     }
 
@@ -80,12 +97,32 @@ public class CommentsIntegrationTests {
                     .param("comment", "Test Comment!"))
         .andExpect(status().is3xxRedirection());
 
+        Comment createdComment = commentDao.findByComment("Test Comment!").get(0);
+
+        commentDao.delete(createdComment);
+
     }
 
+    //Logic is in the animal profile view controller
     @Test
     public void viewComments() throws Exception {
-        Animal testAnimal = animalDao.findByName("testAnimalName");
         this.mvc.perform(get("/animal/" + testAnimal.getId()))
                 .andExpect(status().isOk());
     }
+
+    //When the delete button is clicked, it will have that comments ID in the form waiting. So when it  gets to the controller, it will know which comment to delete.
+    @Test
+    public void deleteComment() throws Exception {
+        Comment commentToBeDeleted = commentDao.findByComment("This is a comment to delete").get(0);
+
+        Assert.assertNotNull(commentToBeDeleted);
+
+        this.mvc.perform(get("/delete-comment/" + commentToBeDeleted.getId()));
+
+        Assert.assertNotEquals("", commentToBeDeleted.getComment());
+    }
+
+
+
+
 }
