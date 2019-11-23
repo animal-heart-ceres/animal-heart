@@ -40,10 +40,32 @@ public class CommentController {
         return "redirect:/";
     }
 
-    @PostMapping("/delete-comment/id{}")
-    public void deleteComment(@PathVariable Long commentId) {
-        Comment commentToDelete = commentDao.getOne(commentId);
-        commentDao.delete(commentToDelete);
+    @PostMapping("/comment/{commentId}/edit")
+    public String editComment(@PathVariable Long commentId, @RequestParam(name = "comment") String editedComment) {
+        Comment commentToBeEdited = commentDao.getOne(commentId);
+
+        commentToBeEdited.setComment(editedComment);
+
+        commentDao.save(commentToBeEdited);
+
+        //Gets the animal profile, so that we can redirect to it after edit.
+        Animal animalProfileToReturnTo = commentToBeEdited.getAnimal();
+
+        return "redirect:/animal/" + animalProfileToReturnTo.getId();
+
+    }
+
+    @PostMapping("/comment/{commentId}/delete")
+    public String deleteComment(@PathVariable Long commentId) {
+
+        Comment commentToBeDeleted = commentDao.getOne(commentId);
+
+        //Gets the animal profile, so that we can redirect to it after delete.
+        Animal animalProfileToReturnTo = commentToBeDeleted.getAnimal();
+
+        commentDao.delete(commentToBeDeleted);
+
+        return "redirect:/animal/" + animalProfileToReturnTo.getId();
     }
 
 

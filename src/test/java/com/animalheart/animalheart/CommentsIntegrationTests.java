@@ -110,6 +110,18 @@ public class CommentsIntegrationTests {
                 .andExpect(status().isOk());
     }
 
+    @Test
+    public void editComment() throws Exception {
+        Comment commentToBeEdited = commentDao.findByComment("This is a comment to edit").get(0);
+
+        this.mvc.perform(post("/comment/" + commentToBeEdited.getId() + "/edit")
+            .param("comment", "This comment has been edited"));
+
+        Comment commentThatWasEdited = commentDao.findByComment("This comment has been edited").get(0);
+
+        Assert.assertNotEquals("This is a comment to edit", commentThatWasEdited.getComment());
+    }
+
     //When the delete button is clicked, it will have that comments ID in the form waiting. So when it  gets to the controller, it will know which comment to delete.
     @Test
     public void deleteComment() throws Exception {
@@ -117,7 +129,7 @@ public class CommentsIntegrationTests {
 
         Assert.assertNotNull(commentToBeDeleted);
 
-        this.mvc.perform(get("/delete-comment/" + commentToBeDeleted.getId()));
+        this.mvc.perform(post("/comment/" + commentToBeDeleted.getId() + "/delete"));
 
         Assert.assertNotEquals("", commentToBeDeleted.getComment());
     }
