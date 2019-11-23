@@ -33,7 +33,7 @@ public class AnimalController {
 
     @PostMapping("/create-animal")
     public String createAnimal(@ModelAttribute Animal animal){
-//        set fk
+//        set fk, will be the current user
         animalDao.save(animal);
         return "redirect:/";
     }
@@ -57,9 +57,7 @@ public class AnimalController {
         List<Comment> commentList =  animal.getCommentList();
         vModel.addAttribute("animal", animal);
         vModel.addAttribute("comments", commentList);
-
-
-        return"/index";
+        return "animal-profile";
     }
 
     @GetMapping("/animals/{userId}")
@@ -75,14 +73,14 @@ public class AnimalController {
         return "/index";
     }
 
-    @PostMapping("/animal/{id}/edit")
-    public String editAnimal(@PathVariable Long id, @RequestParam(name = "name") String name, @RequestParam(name = "size") String size, @RequestParam(name = "age") int age) {
-        Animal animalToEdit = animalDao.getOne(id);
+    @PostMapping("/animal/{animalId}/edit")
+    public String editAnimal(@PathVariable Long animalId, @RequestParam(name = "name") String name, @RequestParam(name = "size") String size, @RequestParam(name = "age") int age) {
+        Animal animalToEdit = animalDao.getOne(animalId);
         animalToEdit.setName(name);
         animalToEdit.setSize(size);
         animalToEdit.setAge(age);
         animalDao.save(animalToEdit);
-        return "redirect:/";
+        return "redirect:/animal/" + animalId;
     }
 
     @PostMapping("/delete-animal/{id}")
@@ -91,6 +89,6 @@ public class AnimalController {
 
         animalDao.delete(animalToDelete);
 
-        return "redirect: /";
+        return "redirect:/";
     }
 }

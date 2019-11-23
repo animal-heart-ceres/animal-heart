@@ -10,6 +10,7 @@ import com.animalheart.animalheart.repositories.OrganizationProfileRepository;
 import com.animalheart.animalheart.repositories.UserProfileRepository;
 import com.animalheart.animalheart.repositories.UserRepository;
 import org.junit.After;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.jupiter.api.AfterAll;
@@ -34,10 +35,14 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = AnimalHeartApplication.class)
 @AutoConfigureMockMvc
+@Transactional
 public class AnimalsIntegrationTests {
 
     private User testUser;
     private User testOrganization;
+    private Animal animalToView;
+    private Animal animalToEdit;
+    private Animal animalToDelete;
 
     @Autowired
     private MockMvc mvc;
@@ -81,23 +86,54 @@ public class AnimalsIntegrationTests {
             testOrganization = userDao.save(newUser);
         }
 
+        Animal animalToView = new Animal();
+        animalToView.setName("animalToView");
+        animalToView.setType("dog");
+        animalToView.setAge(3);
+        animalToView.setSize("large");
+        animalToView.setUser(testUser);
+
+        Animal animalToEdit = new Animal();
+        animalToEdit.setName("animalToEdit");
+        animalToEdit.setType("dog");
+        animalToEdit.setAge(3);
+        animalToEdit.setSize("large");
+        animalToEdit.setUser(testUser);
+        animalDao.save(animalToEdit);
+
+        Animal animalToDelete = new Animal();
+        animalToDelete.setName("animalToDelete");
+        animalToDelete.setType("dog");
+        animalToDelete.setAge(3);
+        animalToDelete.setSize("large");
+        animalToDelete.setUser(testUser);
+        animalDao.save(animalToDelete);
+
+    }
+
+    public Animal findAnimalByName(String animalName) {
+        return animalDao.findByName(animalName).get(0);
     }
 
     @Test
     public void CreateAnimal() throws Exception {
         this.mvc.perform(
                 post("/create-animal")
-                        .param("name", "testAnimalName")
+                        .param("name", "createdAnimal")
                         .param("type", "dog")
                         .param("size", "Large")
                         .param("age", "7"))
                 .andExpect(status().is3xxRedirection());
 
-        Animal testAnimal = animalDao.findByName("testAnimalName").get(0);
+        Animal createdAnimal = findAnimalByName("createdAnimal");
 
-        testAnimal.setUser(testUser);
+        createdAnimal.setUser(testUser);
 
-        animalDao.save(testAnimal);
+        animalDao.save(createdAnimal);
+
+        Assert.assertNotNull(createdAnimal);
+
+        animalDao.delete(createdAnimal);
     }
 
 
@@ -111,8 +147,7 @@ public class AnimalsIntegrationTests {
 
     @Test
     public void showAnimal() throws Exception {
-        Animal currentAnimal = animalDao.findByName("testAnimalName").get(0);
-        System.out.println (currentAnimal.getId());
+        Animal currentAnimal = findAnimalByName("animalToView");
         this.mvc.perform(get("/animal/" + currentAnimal.getId()))
                 .andExpect(status().isOk());
     }
@@ -120,30 +155,31 @@ public class AnimalsIntegrationTests {
 
     @Test
     public void showUsersAnimals() throws Exception {
-
-        this.mvc.perform(get("/animals/" + testUser.getId()))
+        this.mvc.perform(get("/user-profile/" + testUser.getId()))
                 .andExpect(status().isOk());
     }
 
-
     @Test
     public void editAnimal() throws Exception {
-        Animal currentAnimal = animalDao.findByName("testAnimalName").get(0);
+        Animal currentAnimal = findAnimalByName("animalToEdit");
 
         this.mvc.perform(
                 post("/animal/" + currentAnimal.getId() + "/edit")
-            .param("name", "testAnimalNameEdit")
+            .param("name", "animalNameEdited")
             .param("size", "medium")
             .param("age", "3"))
                 .andExpect(status().is3xxRedirection());
 
-    }
+        String editedName = findAnimalByName("animalToEdit").getName();
 
+        Assert.assertNotEquals("animalToEdit", editedName);
+
+    }
 
     @Test
     public void deleteAnimal() throws Exception {
-        Animal currentAnimal = animalDao.findByName("testAnimalNameEdit").get(0);
 
+        Animal currentAnimal = findAnimalByName("animalToDelete");
         this.mvc.perform(
                 post("/delete-animal/" + currentAnimal.getId()))
         .andExpect(status().is3xxRedirection());
