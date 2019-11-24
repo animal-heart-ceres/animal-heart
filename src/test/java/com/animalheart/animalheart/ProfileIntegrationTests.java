@@ -28,7 +28,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = AnimalHeartApplication.class)
 @AutoConfigureMockMvc
-@Transactional
 public class ProfileIntegrationTests {
 
     private User testUser;

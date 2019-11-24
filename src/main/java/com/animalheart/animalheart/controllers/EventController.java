@@ -38,31 +38,34 @@ public class EventController {
     public String showAllEvents(Model vModel) {
         List<Event> eventList = eventDao.findAll();
         vModel.addAttribute("eventList", eventList);
-        return "/index";
+        return "/view-events";
     }
 
-    @GetMapping("/event/{id}")
-    public String showEvent(@PathVariable Long id, Model vModel){
-        vModel.addAttribute("event", eventDao.getOne(id));
-        return"/index";
+    @GetMapping("/event-profile/{eventId}")
+    public String showEvent(@PathVariable Long eventId, Model vModel){
+        Event currentEvent = eventDao.getOne(eventId);
+        vModel.addAttribute("event", currentEvent);
+        return"/event-profile";
     }
 
-    @GetMapping("/events/{userId}")
-    public String showUsersEvents(@PathVariable Long userId, Model vModel){
-        List<Event> allEvents = eventDao.findAll();
-        List<Event> usersEvents = new ArrayList<>();
-        for(Event event : allEvents) {
-            if(event.getUser().getId() == userId) {
-                usersEvents.add(event);
-            }
-        }
-        vModel.addAttribute("usersEvents", usersEvents);
-        return "/index";
-    }
+    //Logic moved to view organization-profile controller. When I go to my profile, I expect to see all my events that I have created.
 
-    @PostMapping("/event/{id}/edit")
-    public String editEvent(@PathVariable Long id, @RequestParam(name = "title") String title, @RequestParam(name = "description") String description, @RequestParam(name = "location") String location) {
-        Event oldEvent = eventDao.getOne(id);
+//    @GetMapping("/events/{userId}")
+//    public String showUsersEvents(@PathVariable Long userId, Model vModel){
+//        List<Event> allEvents = eventDao.findAll();
+//        List<Event> usersEvents = new ArrayList<>();
+//        for(Event event : allEvents) {
+//            if(event.getUser().getId() == userId) {
+//                usersEvents.add(event);
+//            }
+//        }
+//        vModel.addAttribute("usersEvents", usersEvents);
+//        return "/index";
+//    }
+
+    @PostMapping("/event/{eventId}/edit")
+    public String editEvent(@PathVariable Long eventId, @RequestParam(name = "title") String title, @RequestParam(name = "description") String description, @RequestParam(name = "location") String location) {
+        Event oldEvent = eventDao.getOne(eventId);
         oldEvent.setTitle(title);
         oldEvent.setDescription(description);
         oldEvent.setLocation(location);
@@ -70,9 +73,9 @@ public class EventController {
         return"redirect:/";
     }
 
-    @PostMapping("/event/{id}/delete")
-    public String deleteEvent(@PathVariable Long id) {
-        Event currentEvent = eventDao.getOne(id);
+    @PostMapping("/event/{eventId}/delete")
+    public String deleteEvent(@PathVariable Long eventId) {
+        Event currentEvent = eventDao.getOne(eventId);
         eventDao.delete(currentEvent);
         return "redirect:/";
     }

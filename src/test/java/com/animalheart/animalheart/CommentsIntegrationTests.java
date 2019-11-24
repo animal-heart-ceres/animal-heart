@@ -25,7 +25,6 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = AnimalHeartApplication.class)
 @AutoConfigureMockMvc
-@Transactional
 public class CommentsIntegrationTests {
 
     private User testUser;
@@ -110,6 +109,8 @@ public class CommentsIntegrationTests {
         .andExpect(status().is3xxRedirection());
 
         Comment createdComment = findCommentByMessage("Test Comment!");
+
+        Assert.assertNotNull(createdComment);
 
         commentDao.delete(createdComment);
 

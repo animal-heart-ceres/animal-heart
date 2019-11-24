@@ -41,7 +41,7 @@ public class Animal {
     @Column(columnDefinition = "DATETIME")
     private Date dateCreated;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "animal")
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "animal")
     @JsonBackReference
     private List<Comment> commentList;
 
