@@ -49,14 +49,14 @@ public class UserProfileController {
         return "user-profile";
     }
 
-    @PostMapping("/profile/{id}/edit")
-    public String editUserProfile(@PathVariable long id, @RequestParam(name = "firstName") String firstName, @RequestParam(name = "lastName") String lastName, @RequestParam(name = "address") String address){
-        UserProfile oldProfile = userProfileDao.getOne(id);
+    @PostMapping("/profile/{profileId}/edit")
+    public String editUserProfile(@PathVariable long profileId, @RequestParam(name = "firstName") String firstName, @RequestParam(name = "lastName") String lastName, @RequestParam(name = "address") String address){
+        UserProfile oldProfile = userProfileDao.getOne(profileId);
         oldProfile.setFirstName(firstName);
         oldProfile.setLastName(lastName);
         oldProfile.setAddress(address);
         userProfileDao.save(oldProfile);
-        return "redirect:/";
+        return "redirect:/user-profile/" + profileId;
     }
 
 }

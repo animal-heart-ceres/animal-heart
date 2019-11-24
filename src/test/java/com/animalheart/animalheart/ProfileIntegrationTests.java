@@ -120,7 +120,7 @@ public class ProfileIntegrationTests {
         if(organizationProfileToView == null) {
             OrganizationProfile organizationProfileToView = new OrganizationProfile();
             organizationProfileToView.setName("organizationProfileToViewName");
-            organizationProfileToView.setAddress("userProfileToViewAddress");
+            organizationProfileToView.setAddress("organizationProfileToViewAddress");
             organizationProfileToView.setTaxNumber(123456789);
             organizationProfileToView.setDescription("An organization to view");
             organizationProfileToView.setOrganization(testOrganization);
@@ -130,7 +130,7 @@ public class ProfileIntegrationTests {
         if(organizationProfileToEdit == null) {
             OrganizationProfile organizationProfileToEdit = new OrganizationProfile();
             organizationProfileToEdit.setName("organizationProfileToEditName");
-            organizationProfileToEdit.setAddress("userProfileToEditAddress");
+            organizationProfileToEdit.setAddress("organizationProfileToEditAddress");
             organizationProfileToEdit.setTaxNumber(123456789);
             organizationProfileToEdit.setDescription("An organization to edit");
             organizationProfileToEdit.setOrganization(testOrganization);
@@ -140,7 +140,7 @@ public class ProfileIntegrationTests {
         if(organizationProfileToDelete == null) {
             OrganizationProfile organizationProfileToDelete = new OrganizationProfile();
             organizationProfileToDelete.setName("organizationProfileToDeleteName");
-            organizationProfileToDelete.setAddress("userProfileToDeleteAddress");
+            organizationProfileToDelete.setAddress("organizationProfileToDeleteAddress");
             organizationProfileToDelete.setTaxNumber(123456789);
             organizationProfileToDelete.setDescription("An organization to delete");
             organizationProfileToDelete.setOrganization(testOrganization);
@@ -214,16 +214,17 @@ public class ProfileIntegrationTests {
 
     @Test
     public void EditUserProfile() throws Exception{
-        UserProfile currentUserProfile = userProfileDao.findByFirstName("testFirstName");
 
         this.mvc.perform(
-                post("/profile/" + currentUserProfile.getId() + "/edit")
-                        .param("firstName", "FirstNameEdit")
-                        .param("lastName", "LastNameEdit")
-                        .param("address", "AddressEdit"))
+                post("/profile/" + userProfileToEdit.getId() + "/edit")
+                        .param("firstName", "FirstNameEdited")
+                        .param("lastName", "LastNameEdited")
+                        .param("address", "AddressEdited"))
                 .andExpect(status().is3xxRedirection());
 
-        UserProfile editedTestUserProfile = userProfileToEdit;
+        UserProfile editedTestUserProfile = userProfileDao.findByFirstName("FirstNameEdited");
+
+        Assert.assertNotEquals("userProfileToEditFirstName", "FirstNameEdited");
 
         userProfileDao.delete(editedTestUserProfile);
 
@@ -232,17 +233,15 @@ public class ProfileIntegrationTests {
     @Test
     public void EditOrganizationProfile() throws Exception{
 
-        OrganizationProfile currentTestOrganizationProfile = organizationProfileDao.findByName("testOrganizationName");
-
         this.mvc.perform(
-                post("/organization-profile/" + currentTestOrganizationProfile.getId() + "/edit")
-                        .param("name", "testOrganizationNameEdit")
+                post("/organization-profile/" + organizationProfileToEdit.getId() + "/edit")
+                        .param("name", "organizationNameEdited")
                         .param("taxNumber", "12333333")
-                        .param("address", "testOrganizationAddressEdit")
-                        .param("description", "A very good test organization"))
+                        .param("address", "organizationAddressEdited")
+                        .param("description", "Organization profile was edited"))
                 .andExpect(status().is3xxRedirection());
 
-        OrganizationProfile editedTestOrganizationProfile = organizationProfileDao.findByName("testOrganizationNameEdit");
+        OrganizationProfile editedTestOrganizationProfile = organizationProfileDao.findByName("organizationNameEdited");
 
         organizationProfileDao.delete(editedTestOrganizationProfile);
     }

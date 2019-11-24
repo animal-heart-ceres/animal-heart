@@ -38,8 +38,13 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @Transactional
 public class AnimalsIntegrationTests {
 
+    public Animal findAnimalByName(String animalName) {
+        return animalDao.findByName(animalName).get(0);
+    }
+
     private User testUser;
     private User testOrganization;
+    private UserProfile testUserProfile;
     private Animal animalToView;
     private Animal animalToEdit;
     private Animal animalToDelete;
@@ -64,6 +69,11 @@ public class AnimalsIntegrationTests {
 
         testUser = userDao.findByUsername("testUser");
         testOrganization = userDao.findByUsername("testOrganization");
+        testUserProfile = userProfileDao.findByFirstName("testUserFirstName");
+
+//        animalToView = findAnimalByName("animalToView");
+//        animalToEdit = findAnimalByName("animalToEdit");
+//        animalToDelete = findAnimalByName("animalToDelete");
 
         // Creates the test user if not exists
         if (testUser == null) {
@@ -76,6 +86,15 @@ public class AnimalsIntegrationTests {
             testUser = userDao.save(newUser);
         }
 
+        if(testUserProfile == null) {
+            UserProfile testUserProfile = new UserProfile();
+            testUserProfile.setFirstName("testUserFirstName");
+            testUserProfile.setLastName("testUserLastName");
+            testUserProfile.setAddress("testUserAddress");
+            testUserProfile.setUser(testUser);
+            testUserProfile = userProfileDao.save(testUserProfile);
+        }
+
         if (testOrganization == null) {
             User newUser = new User();
             newUser.setUsername("testOrganization");
@@ -86,35 +105,39 @@ public class AnimalsIntegrationTests {
             testOrganization = userDao.save(newUser);
         }
 
-        Animal animalToView = new Animal();
-        animalToView.setName("animalToView");
-        animalToView.setType("dog");
-        animalToView.setAge(3);
-        animalToView.setSize("large");
-        animalToView.setUser(testUser);
-        animalDao.save(animalToView);
+        if(animalToView == null) {
+            Animal animalToView = new Animal();
+            animalToView.setName("animalToView");
+            animalToView.setType("dog");
+            animalToView.setAge(3);
+            animalToView.setSize("large");
+            animalToView.setUser(testUser);
+            animalDao.save(animalToView);
+        }
 
-        Animal animalToEdit = new Animal();
-        animalToEdit.setName("animalToEdit");
-        animalToEdit.setType("dog");
-        animalToEdit.setAge(3);
-        animalToEdit.setSize("large");
-        animalToEdit.setUser(testUser);
-        animalDao.save(animalToEdit);
+        if(animalToEdit == null) {
+            Animal animalToEdit = new Animal();
+            animalToEdit.setName("animalToEdit");
+            animalToEdit.setType("dog");
+            animalToEdit.setAge(3);
+            animalToEdit.setSize("large");
+            animalToEdit.setUser(testUser);
+            animalDao.save(animalToEdit);
+        }
 
-        Animal animalToDelete = new Animal();
-        animalToDelete.setName("animalToDelete");
-        animalToDelete.setType("dog");
-        animalToDelete.setAge(3);
-        animalToDelete.setSize("large");
-        animalToDelete.setUser(testUser);
-        animalDao.save(animalToDelete);
+        if(animalToDelete == null) {
+            Animal animalToDelete = new Animal();
+            animalToDelete.setName("animalToDelete");
+            animalToDelete.setType("dog");
+            animalToDelete.setAge(3);
+            animalToDelete.setSize("large");
+            animalToDelete.setUser(testUser);
+            animalDao.save(animalToDelete);
+        }
 
     }
 
-    public Animal findAnimalByName(String animalName) {
-        return animalDao.findByName(animalName).get(0);
-    }
+
 
     @Test
     public void CreateAnimal() throws Exception {
@@ -155,7 +178,7 @@ public class AnimalsIntegrationTests {
 
     @Test
     public void showUsersAnimals() throws Exception {
-        this.mvc.perform(get("/user-profile/" + testUser.getId()))
+        this.mvc.perform(get("/user-profile/" + testUserProfile.getId()))
                 .andExpect(status().isOk());
     }
 
@@ -170,9 +193,13 @@ public class AnimalsIntegrationTests {
             .param("age", "3"))
                 .andExpect(status().is3xxRedirection());
 
-        String editedName = findAnimalByName("animalToEdit").getName();
+        String editedName = findAnimalByName("animalNameEdited").getName();
+
+        Animal editedAnimal = findAnimalByName("animalNameEdited");
 
         Assert.assertNotEquals("animalToEdit", editedName);
+
+        animalDao.delete(editedAnimal);
 
     }
 
