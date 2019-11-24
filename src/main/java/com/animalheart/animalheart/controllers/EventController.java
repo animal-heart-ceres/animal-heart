@@ -34,7 +34,7 @@ public class EventController {
         return "redirect:/";
     }
 
-    @GetMapping("/events")
+    @GetMapping("/events/showAll")
     public String showAllEvents(Model vModel) {
         List<Event> eventList = eventDao.findAll();
         vModel.addAttribute("eventList", eventList);

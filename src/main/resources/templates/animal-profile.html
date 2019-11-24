@@ -7,20 +7,21 @@
     <link href="https://fonts.googleapis.com/css?family=Playfair+Display|Raleway&display=swap" rel="stylesheet">
     <title>Animal Profile</title>
     <link rel="stylesheet" href="css/index.css">
-    <link rel="stylesheet" href="../static/css/animal-profile.css">
+    <link rel="stylesheet" href="css/animal-profile.css">
 </head>
 <body>
 
-    <nav class="navbar fixed-top navbar-light bg-white" id="index-navbar" th:fragment="main-navbar">
-        <p class="navbar-brand" href="">ANIMAL<span id="heart">HEART</span></p>
-        <span class="d-flex flex-row bd-highlight mb-3">
-                    <a class="navbar-brand" href="">EVENTS</a>
-                    <a class="navbar-brand" href="">VEIW PETS</a>
-                    <a class="navbar-brand" href="">MAP</a>
-                    <a class="navbar-brand" href="">MESSAGES</a>
-                    <a class="navbar-brand" href="/index">LOGOUT</a>
-                </span>
-    </nav>
+    <th:block th:replace="fragments/navbar"/>
+<!--    <nav class="navbar fixed-top navbar-light bg-white" id="index-navbar" th:fragment="main-navbar">-->
+<!--        <p class="navbar-brand" href="">ANIMAL<span id="heart">HEART</span></p>-->
+<!--        <span class="d-flex flex-row bd-highlight mb-3">-->
+<!--                    <a class="navbar-brand" href="">EVENTS</a>-->
+<!--                    <a class="navbar-brand" href="">VEIW PETS</a>-->
+<!--                    <a class="navbar-brand" href="">MAP</a>-->
+<!--                    <a class="navbar-brand" href="">MESSAGES</a>-->
+<!--                    <a class="navbar-brand" href="/index">LOGOUT</a>-->
+<!--                </span>-->
+<!--    </nav>-->
 
     <div class="container-fluid">
         <div class="row">

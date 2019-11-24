@@ -8,15 +8,17 @@
     <link rel="stylesheet" href="../../static/css/navbar.css">
 </head>
 <body>
-<nav class="navbar fixed-top navbar-light bg-white" id="index-navbar" th:fragment="main-navbar">
-    <p class="navbar-brand" href="">ANIMAL<span id="heart" >HEART</span></p>
-    <span class="d-flex flex-row bd-highlight mb-3">
-              <a class="navbar-brand" href="">EVENTS</a>
-              <a class="navbar-brand" href="">VEIW PETS</a>
-              <a class="navbar-brand" href="" >MAP</a>
-              <a class="navbar-brand" href="">MESSAGES</a>
-              <a class="navbar-brand" href="/index">LOGOUT</a>
-          </span>
-</nav>
+<th:block th:fragment="">
+    <nav class="navbar fixed-top navbar-light bg-white" id="index-navbar">
+        <p class="navbar-brand" href="">ANIMAL<span id="heart" >HEART</span></p>
+        <span class="d-flex flex-row bd-highlight mb-3">
+            <a class="navbar-brand" href="/events/showAll">EVENTS</a>
+            <a class="navbar-brand" href="/animals/showAll">VIEW ANIMALS</a>
+            <a class="navbar-brand" href="/map" >MAP</a>
+            <a class="navbar-brand" href="/messages">MESSAGES</a>
+            <a class="navbar-brand" href="/index">LOGOUT</a>
+        </span>
+    </nav>
+</th:block>
 </body>
 </html>

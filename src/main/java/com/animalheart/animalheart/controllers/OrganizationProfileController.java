@@ -27,15 +27,17 @@ public class OrganizationProfileController {
     @GetMapping("/create-organization-profile/{id}")
     public String showCreateOrganizationProfileForm(@PathVariable Long id, Model vModel) {
         vModel.addAttribute("organizationProfile", new OrganizationProfile());
-        vModel.addAttribute("userId", id);
+        vModel.addAttribute("organizationId", id);
         return "create-organization-profile";
     }
 
     @PostMapping("/create-organization-profile")
-    public String createOrganizationProfile(@ModelAttribute OrganizationProfile organizationProfile) {
-        //set fk
+    public String createOrganizationProfile(@ModelAttribute OrganizationProfile organizationProfile, @RequestParam(name = "organizationId") Long organizationId) {
+        User organization = userDao.getOne(organizationId);
+        organizationProfile.setOrganization(organization);
         organizationProfileDao.save(organizationProfile);
-        return "redirect:/";
+
+        return "redirect:/organization-profile/" + organizationProfile.getId();
     }
 
     @GetMapping("/organization-profile/{profileId}")

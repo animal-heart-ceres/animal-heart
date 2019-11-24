@@ -9,20 +9,18 @@
 </head>
 
 <body>
-<!--tried to add a fragment navbar but no work right now-->
-<!--<div th:replace="fragments/navbar :: main-navbar"></div>-->
 
+<th:block th:replace="fragments/navbar"/>
     <div class="container-fluid" id="h1-border">
         <div class="row">
             <div id="org-pic" class="col-5">
-                <h1 class="text-center" >PLACEHOLDER</h1>
+                <h1 class="text-center" >Organization's Profile</h1>
                 <div class="form-group text-center" id="form-div" >
                     <img id="img"  src="../static/img/login-dog-cat.jpg" width="475" height="300"  alt="animal-pals">
                 </div>
                 <input id="edit-btn" type="submit" value="EDIT"/>
                 <input id="delete-btn" type="submit" value="DELETE"/>
             </div>
-
             <div class="col-7">
                 <h3>YOUR PETS</h3>
                 <input id="pet-btn" type="submit" value="ADD PET"/>
@@ -33,7 +31,6 @@
                         <a href="" class="btn" id="delete">X</a>
                     </div>
                 </div>
-             <span th:if="${isOrganization}">
                 <h3>EVENTS</h3>
                 <input id="event-btn" type="submit" value="ADD EVENT"/>
                  <div class="card" style="width: 12rem; height: 12rem;">
@@ -43,7 +40,6 @@
                         <a href="" class="btn" id="delete2">X</a>
                     </div>
                 </div>
-             </span>
             </div>
         </div>
         <div class="row">

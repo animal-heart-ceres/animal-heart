@@ -29,10 +29,11 @@ public class UserProfileController {
     }
 
     @PostMapping("/create-user-profile")
-    public String createUserProfile(@ModelAttribute UserProfile userProfile) {
-        //need to set FK
+    public String createUserProfile(@ModelAttribute UserProfile userProfile, @RequestParam(name = "userId") Long userId) {
+        User currentUser = userDao.getOne(userId);
+        userProfile.setUser(currentUser);
         userProfileDao.save(userProfile);
-        return "redirect:/";
+        return "redirect:/user-profile/" + userProfile.getId();
     }
 
     @GetMapping("/user-profile/{profileId}")
