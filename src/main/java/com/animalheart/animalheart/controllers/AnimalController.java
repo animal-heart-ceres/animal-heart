@@ -26,7 +26,7 @@ public class AnimalController {
     @GetMapping("/create-animal")
     public String showAnimalForm(Model vModel){
         vModel.addAttribute("animal", new Animal());
-        return"/index";
+        return"/";
     }
 
     @PostMapping("/create-animal")

@@ -25,11 +25,13 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = AnimalHeartApplication.class)
 @AutoConfigureMockMvc
-@Transactional
 public class CommentsIntegrationTests {
 
     private User testUser;
     private Animal testAnimal;
+    private Comment commentToView;
+    private Comment commentToEdit;
+    private Comment commentToDelete;
 
     @Autowired
     UserRepository userDao;
@@ -47,7 +49,6 @@ public class CommentsIntegrationTests {
     public void setup() throws Exception {
 
         testUser = userDao.findByUsername("testUser");
-        testAnimal = animalDao.findByName("testAnimalName").get(0);
 
         // Creates the test user if not exists
         if (testUser == null) {
@@ -70,23 +71,29 @@ public class CommentsIntegrationTests {
             testAnimal = animalDao.save(newAnimal);
         }
 
-        Comment commentToView = new Comment();
-        commentToView.setComment("This is a comment to view");
-        commentToView.setAnimal(testAnimal);
-        commentToView.setUser(testUser);
-        commentDao.save(commentToView);
+        if(commentToView == null) {
+            Comment commentToView = new Comment();
+            commentToView.setComment("This is a comment to view");
+            commentToView.setAnimal(testAnimal);
+            commentToView.setUser(testUser);
+            commentToView = commentDao.save(commentToView);
+        }
 
-        Comment commentToDelete = new Comment();
-        commentToDelete.setComment("This is a comment to delete");
-        commentToDelete.setAnimal(testAnimal);
-        commentToDelete.setUser(testUser);
-        commentDao.save(commentToDelete);
+        if(commentToDelete == null) {
+            Comment commentToDelete = new Comment();
+            commentToDelete.setComment("This is a comment to delete");
+            commentToDelete.setAnimal(testAnimal);
+            commentToDelete.setUser(testUser);
+            commentToDelete = commentDao.save(commentToDelete);
+        }
 
-        Comment commentToEdit = new Comment();
-        commentToEdit.setComment("This is a comment to edit");
-        commentToEdit.setAnimal(testAnimal);
-        commentToEdit.setUser(testUser);
-        commentDao.save(commentToEdit);
+        if(commentToEdit == null) {
+            Comment commentToEdit = new Comment();
+            commentToEdit.setComment("This is a comment to edit");
+            commentToEdit.setAnimal(testAnimal);
+            commentToEdit.setUser(testUser);
+            commentToEdit = commentDao.save(commentToEdit);
+        }
 
     }
 
@@ -102,6 +109,8 @@ public class CommentsIntegrationTests {
         .andExpect(status().is3xxRedirection());
 
         Comment createdComment = findCommentByMessage("Test Comment!");
+
+        Assert.assertNotNull(createdComment);
 
         commentDao.delete(createdComment);
 
@@ -124,6 +133,8 @@ public class CommentsIntegrationTests {
         Comment commentThatWasEdited = findCommentByMessage("This comment has been edited");
 
         Assert.assertNotEquals("This is a comment to edit", commentThatWasEdited.getComment());
+
+        commentDao.delete(commentThatWasEdited);
     }
 
     //When the delete button is clicked, it will have that comments ID in the form waiting. So when it  gets to the controller, it will know which comment to delete.

@@ -17,6 +17,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
 import javax.servlet.http.HttpSession;
+import javax.transaction.Transactional;
 
 import static org.hamcrest.CoreMatchers.containsString;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -33,7 +34,7 @@ public class ProfileIntegrationTests {
     private User testOrganization;
     private UserProfile userProfileToView;
     private UserProfile userProfileToEdit;
-    private UserProfile userProfiletoDelete;
+    private UserProfile userProfileToDelete;
     private OrganizationProfile organizationProfileToView;
     private OrganizationProfile organizationProfileToEdit;
     private OrganizationProfile organizationProfileToDelete;
@@ -59,6 +60,14 @@ public class ProfileIntegrationTests {
         testUser = userDao.findByUsername("testUser");
         testOrganization = userDao.findByUsername("testOrganization");
 
+        userProfileToView = userProfileDao.findByFirstName("userProfileToViewFirstName");
+        userProfileToEdit = userProfileDao.findByFirstName("userProfileToEditFirstName");
+        userProfileToDelete = userProfileDao.findByFirstName("userProfileToDeleteFirstName");
+
+        organizationProfileToView = organizationProfileDao.findByName("organizationProfileToViewName");
+        organizationProfileToEdit = organizationProfileDao.findByName("organizationProfileToEditName");
+        organizationProfileToDelete = organizationProfileDao.findByName("organizationProfileToDeleteName");
+
         // Creates the test user if not exists
         if (testUser == null) {
             User newUser = new User();
@@ -80,50 +89,62 @@ public class ProfileIntegrationTests {
             testOrganization = userDao.save(newUser);
         }
 
-        UserProfile userProfileToView = new UserProfile();
-        userProfileToView.setFirstName("userProfileToViewFirstName");
-        userProfileToView.setLastName("userProfileToViewLastName");
-        userProfileToView.setAddress("userProfileToViewAddress");
-        userProfileToView.setUser(testUser);
-        userProfileDao.save(userProfileToView);
+        if(userProfileToView == null) {
+            UserProfile userProfileToView = new UserProfile();
+            userProfileToView.setFirstName("userProfileToViewFirstName");
+            userProfileToView.setLastName("userProfileToViewLastName");
+            userProfileToView.setAddress("userProfileToViewAddress");
+            userProfileToView.setUser(testUser);
+            userProfileToView = userProfileDao.save(userProfileToView);
+        }
 
-        UserProfile userProfileToEdit = new UserProfile();
-        userProfileToEdit.setFirstName("userProfileToEditFirstName");
-        userProfileToEdit.setLastName("userProfileToEditLastName");
-        userProfileToEdit.setAddress("userProfileToEditAddress");
-        userProfileToEdit.setUser(testUser);
-        userProfileDao.save(userProfileToEdit);
+        if(userProfileToEdit == null) {
+            UserProfile userProfileToEdit = new UserProfile();
+            userProfileToEdit.setFirstName("userProfileToEditFirstName");
+            userProfileToEdit.setLastName("userProfileToEditLastName");
+            userProfileToEdit.setAddress("userProfileToEditAddress");
+            userProfileToEdit.setUser(testUser);
+            userProfileToEdit = userProfileDao.save(userProfileToEdit);
+        }
 
-        UserProfile userProfileToDelete = new UserProfile();
-        userProfileToDelete.setFirstName("userProfileToDeleteFirstName");
-        userProfileToDelete.setLastName("userProfileToDeleteLastName");
-        userProfileToDelete.setAddress("userProfileToDeleteAddress");
-        userProfileToDelete.setUser(testUser);
-        userProfileDao.save(userProfileToDelete);
+        if(userProfileToDelete == null) {
+            UserProfile userProfileToDelete = new UserProfile();
+            userProfileToDelete.setFirstName("userProfileToDeleteFirstName");
+            userProfileToDelete.setLastName("userProfileToDeleteLastName");
+            userProfileToDelete.setAddress("userProfileToDeleteAddress");
+            userProfileToDelete.setUser(testUser);
+            userProfileToDelete = userProfileDao.save(userProfileToDelete);
+        }
 
-        OrganizationProfile organizationProfileToView = new OrganizationProfile();
-        organizationProfileToView.setName("organizationProfileToViewName");
-        organizationProfileToView.setAddress("userProfileToViewAddress");
-        organizationProfileToView.setTaxNumber(123456789);
-        organizationProfileToView.setDescription("An organization to view");
-        organizationProfileToView.setOrganization(testOrganization);
-        organizationProfileDao.save(organizationProfileToView);
+        if(organizationProfileToView == null) {
+            OrganizationProfile organizationProfileToView = new OrganizationProfile();
+            organizationProfileToView.setName("organizationProfileToViewName");
+            organizationProfileToView.setAddress("organizationProfileToViewAddress");
+            organizationProfileToView.setTaxNumber(123456789);
+            organizationProfileToView.setDescription("An organization to view");
+            organizationProfileToView.setOrganization(testOrganization);
+            organizationProfileToView = organizationProfileDao.save(organizationProfileToView);
+        }
 
-        OrganizationProfile organizationProfileToEdit = new OrganizationProfile();
-        organizationProfileToEdit.setName("organizationProfileToEditName");
-        organizationProfileToEdit.setAddress("userProfileToEditAddress");
-        organizationProfileToEdit.setTaxNumber(123456789);
-        organizationProfileToEdit.setDescription("An organization to edit");
-        organizationProfileToEdit.setOrganization(testOrganization);
-        organizationProfileDao.save(organizationProfileToEdit);
+        if(organizationProfileToEdit == null) {
+            OrganizationProfile organizationProfileToEdit = new OrganizationProfile();
+            organizationProfileToEdit.setName("organizationProfileToEditName");
+            organizationProfileToEdit.setAddress("organizationProfileToEditAddress");
+            organizationProfileToEdit.setTaxNumber(123456789);
+            organizationProfileToEdit.setDescription("An organization to edit");
+            organizationProfileToEdit.setOrganization(testOrganization);
+            organizationProfileToEdit = organizationProfileDao.save(organizationProfileToEdit);
+        }
 
-        OrganizationProfile organizationProfileToDelete = new OrganizationProfile();
-        organizationProfileToDelete.setName("organizationProfileToDeleteName");
-        organizationProfileToDelete.setAddress("userProfileToDeleteAddress");
-        organizationProfileToDelete.setTaxNumber(123456789);
-        organizationProfileToDelete.setDescription("An organization to delete");
-        organizationProfileToDelete.setOrganization(testOrganization);
-        organizationProfileDao.save(organizationProfileToDelete);
+        if(organizationProfileToDelete == null) {
+            OrganizationProfile organizationProfileToDelete = new OrganizationProfile();
+            organizationProfileToDelete.setName("organizationProfileToDeleteName");
+            organizationProfileToDelete.setAddress("organizationProfileToDeleteAddress");
+            organizationProfileToDelete.setTaxNumber(123456789);
+            organizationProfileToDelete.setDescription("An organization to delete");
+            organizationProfileToDelete.setOrganization(testOrganization);
+            organizationProfileToDelete = organizationProfileDao.save(organizationProfileToDelete);
+        }
 
 
     }
@@ -180,56 +201,46 @@ public class ProfileIntegrationTests {
 
     @Test
     public void ViewUserProfile() throws Exception {
-        User currentUser = userDao.findByUsername("testUser");
-        this.mvc.perform(get("/user-profile/" + currentUser.getId()))
+        this.mvc.perform(get("/user-profile/" + userProfileToView.getId()))
                 .andExpect(status().isOk());
     }
 
     @Test
     public void ViewOrganizationProfile() throws Exception {
-        User currentUser = userDao.findByUsername("testOrganization");
-        this.mvc.perform(get("/user-profile/" + currentUser.getId()))
+        this.mvc.perform(get("/organization-profile/" + organizationProfileToView.getId()))
                 .andExpect(status().isOk());
     }
 
     @Test
     public void EditUserProfile() throws Exception{
-        UserProfile currentUserProfile = userProfileDao.findByFirstName("testFirstName");
 
         this.mvc.perform(
-                post("/profile/" + currentUserProfile.getId() + "/edit")
-                        .param("firstName", "FirstNameEdit")
-                        .param("lastName", "LastNameEdit")
-                        .param("address", "AddressEdit"))
+                post("/profile/" + userProfileToEdit.getId() + "/edit")
+                        .param("firstName", "FirstNameEdited")
+                        .param("lastName", "LastNameEdited")
+                        .param("address", "AddressEdited"))
                 .andExpect(status().is3xxRedirection());
 
-        UserProfile editedTestUserProfile = userProfileDao.findByFirstName("FirstNameEdit");
+        UserProfile editedTestUserProfile = userProfileDao.findByFirstName("FirstNameEdited");
+
+        Assert.assertNotEquals("userProfileToEditFirstName", "FirstNameEdited");
 
         userProfileDao.delete(editedTestUserProfile);
-
-//        this.mvc.perform(get("/profile/" + testUser.getId()))
-//                .andExpect(status().isOk())
-//                // Test the dynamic content of the page
-//                .andExpect(content().string(containsString("FirstNameEdit")))
-//                .andExpect(content().string(containsString("LastNameEdit")))
-//                .andExpect(content().string(containsString("AddressEdit")));
 
     }
 
     @Test
     public void EditOrganizationProfile() throws Exception{
 
-        OrganizationProfile currentTestOrganizationProfile = organizationProfileDao.findByName("testOrganizationName");
-
         this.mvc.perform(
-                post("/organization-profile/" + currentTestOrganizationProfile.getId() + "/edit")
-                        .param("name", "testOrganizationNameEdit")
+                post("/organization-profile/" + organizationProfileToEdit.getId() + "/edit")
+                        .param("name", "organizationNameEdited")
                         .param("taxNumber", "12333333")
-                        .param("address", "testOrganizationAddressEdit")
-                        .param("description", "A very good test organization"))
+                        .param("address", "organizationAddressEdited")
+                        .param("description", "Organization profile was edited"))
                 .andExpect(status().is3xxRedirection());
 
-        OrganizationProfile editedTestOrganizationProfile = organizationProfileDao.findByName("testOrganizationNameEdit");
+        OrganizationProfile editedTestOrganizationProfile = organizationProfileDao.findByName("organizationNameEdited");
 
         organizationProfileDao.delete(editedTestOrganizationProfile);
     }

@@ -35,27 +35,28 @@ public class UserProfileController {
         return "redirect:/";
     }
 
-    @GetMapping("/user-profile/{userId}")
-    public String showUserProfile(@PathVariable long userId, Model vModel) {
+    @GetMapping("/user-profile/{profileId}")
+    public String showUserProfile(@PathVariable long profileId, Model vModel) {
         //When I go to my profile, I expect to see all the animals I have added
-        User loggedInUser = userDao.getOne(userId);
-        List<Animal> animalList = loggedInUser.getAnimalList();
+        UserProfile loggedInUserProfile = userProfileDao.getOne(profileId);
 
-        UserProfile loggedInUserProfile = userProfileDao.findByUserId(userId);
+        User loggedInUser = loggedInUserProfile.getUser();
+
+        List<Animal> animalList = loggedInUser.getAnimalList();
 
         vModel.addAttribute("userProfile", loggedInUserProfile);
         vModel.addAttribute("animals", animalList);
         return "user-profile";
     }
 
-    @PostMapping("/profile/{id}/edit")
-    public String editUserProfile(@PathVariable long id, @RequestParam(name = "firstName") String firstName, @RequestParam(name = "lastName") String lastName, @RequestParam(name = "address") String address){
-        UserProfile oldProfile = userProfileDao.getOne(id);
+    @PostMapping("/profile/{profileId}/edit")
+    public String editUserProfile(@PathVariable long profileId, @RequestParam(name = "firstName") String firstName, @RequestParam(name = "lastName") String lastName, @RequestParam(name = "address") String address){
+        UserProfile oldProfile = userProfileDao.getOne(profileId);
         oldProfile.setFirstName(firstName);
         oldProfile.setLastName(lastName);
         oldProfile.setAddress(address);
         userProfileDao.save(oldProfile);
-        return "redirect:/";
+        return "redirect:/user-profile/" + profileId;
     }
 
 }

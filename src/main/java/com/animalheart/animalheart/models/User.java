@@ -34,7 +34,7 @@ public class User {
     @JsonBackReference
     private List<Comment> commentList;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "user")
     @JsonBackReference
     private List<Animal> animalList;
 
