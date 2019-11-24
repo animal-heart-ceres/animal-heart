@@ -35,13 +35,14 @@ public class UserProfileController {
         return "redirect:/";
     }
 
-    @GetMapping("/user-profile/{userId}")
-    public String showUserProfile(@PathVariable long userId, Model vModel) {
+    @GetMapping("/user-profile/{profileId}")
+    public String showUserProfile(@PathVariable long profileId, Model vModel) {
         //When I go to my profile, I expect to see all the animals I have added
-        User loggedInUser = userDao.getOne(userId);
-        List<Animal> animalList = loggedInUser.getAnimalList();
+        UserProfile loggedInUserProfile = userProfileDao.getOne(profileId);
 
-        UserProfile loggedInUserProfile = userProfileDao.findByUserId(userId);
+        User loggedInUser = loggedInUserProfile.getUser();
+
+        List<Animal> animalList = loggedInUser.getAnimalList();
 
         vModel.addAttribute("userProfile", loggedInUserProfile);
         vModel.addAttribute("animals", animalList);

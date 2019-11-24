@@ -1,5 +1,6 @@
 package com.animalheart.animalheart.controllers;
 
+import com.animalheart.animalheart.models.Animal;
 import com.animalheart.animalheart.models.OrganizationProfile;
 import com.animalheart.animalheart.models.User;
 import com.animalheart.animalheart.models.UserProfile;
@@ -9,6 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @Controller
 public class OrganizationProfileController {
@@ -33,6 +36,19 @@ public class OrganizationProfileController {
         return "redirect:/";
     }
 
+    @GetMapping("/organization-profile/{profileId}")
+    public String showOrganizationProfile(@PathVariable long profileId, Model vModel) {
+        //When I go to my profile, I expect to see all the animals I have added
+        OrganizationProfile loggedInOrganizationProfile = organizationProfileDao.getOne(profileId);
+
+        User loggedInOrganization = loggedInOrganizationProfile.getOrganization();
+
+        List<Animal> animalList = loggedInOrganization.getAnimalList();
+
+        vModel.addAttribute("organizationProfile", loggedInOrganizationProfile);
+        vModel.addAttribute("animals", animalList);
+        return "organization-profile";
+    }
     @PostMapping("/organization-profile/{id}/edit")
     public String editOrganizationProfile(@PathVariable long id, @RequestParam(name = "name") String name, @RequestParam(name = "taxNumber") Long taxNumber, @RequestParam(name = "address") String address, @RequestParam(name = "description") String description){
         OrganizationProfile oldProfile = organizationProfileDao.getOne(id);
@@ -43,5 +59,6 @@ public class OrganizationProfileController {
         organizationProfileDao.save(oldProfile);
         return "redirect:/";
     }
+
 
 }
