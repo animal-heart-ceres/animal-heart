@@ -30,7 +30,7 @@ public class Event {
     @Column
     private Date endTime;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JsonManagedReference
     @JoinColumn (name = "user_id")
     private User user;
