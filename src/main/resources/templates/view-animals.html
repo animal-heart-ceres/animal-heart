@@ -10,17 +10,7 @@
     <link rel="stylesheet" href="css/veiw-animals.css">
 </head>
 <body>
-<nav class="navbar fixed-top navbar-light bg-white" id="index-navbar" th:fragment="main-navbar">
-    <p class="navbar-brand" href="">ANIMAL<span id="heart">HEART</span></p>
-    <span class="d-flex flex-row bd-highlight mb-3">
-            <a class="navbar-brand" href="">EVENTS</a>
-            <a class="navbar-brand" href="">VEIW PETS</a>
-            <a class="navbar-brand" href="">MAP</a>
-            <a class="navbar-brand" href="">MESSAGES</a>
-            <a class="navbar-brand" href="/index">LOGOUT</a>
-        </span>
-</nav>
-
+<th:block th:replace="fragments/navbar"/>
 <div class="container-fluid" id="h1-border">
     <header class="jumbotron my-1 bg-white" id="animal-jumbotron">
         <h1 class="display-3 text-center">AVAILABLE ANIMALS</h1>
@@ -57,8 +47,7 @@
                 <p class="card-text" th:text="'Type: ' + ${animal.type}">Animal Type</p>
                 <p class="card-text" th:text="'Size: ' + ${animal.size}">Animal Size</p>
                 <p class="card-text" th:text="'Age: ' + ${animal.age}">Animal Age</p>
-                <a href="" class="btn">VIEW PET</a>
-                <a href="" class="btn">LIKE PET</a>
+                <a href="" class="btn">VIEW ANIMAL</a>
             </div>
         </div>
     </div>
