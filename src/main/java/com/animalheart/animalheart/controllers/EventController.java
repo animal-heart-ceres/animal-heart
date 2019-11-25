@@ -24,7 +24,7 @@ public class EventController {
     @GetMapping("/create-event")
     public String showAnimalForm(Model vModel){
         vModel.addAttribute("event", new Event());
-        return"/index";
+        return "index";
     }
 
     @PostMapping("/create-event")
@@ -38,14 +38,14 @@ public class EventController {
     public String showAllEvents(Model vModel) {
         List<Event> eventList = eventDao.findAll();
         vModel.addAttribute("eventList", eventList);
-        return "/view-events";
+        return "view-events";
     }
 
     @GetMapping("/event-profile/{eventId}")
     public String showEvent(@PathVariable Long eventId, Model vModel){
         Event currentEvent = eventDao.getOne(eventId);
         vModel.addAttribute("event", currentEvent);
-        return"/event-profile";
+        return"event-profile";
     }
 
     //Logic moved to view organization-profile controller. When I go to my profile, I expect to see all my events that I have created.
