@@ -28,7 +28,7 @@ public class UserController {
 
     @PostMapping("/login")
     public String login() {
-        return "/index";
+        return "index";
     }
 
     @GetMapping("/sign-up")
