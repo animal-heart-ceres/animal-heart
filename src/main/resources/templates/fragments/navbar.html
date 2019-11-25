@@ -1,24 +1,15 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <link href="https://fonts.googleapis.com/css?family=Playfair+Display|Raleway&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="../../static/css/navbar.css">
-</head>
-<body>
-<th:block th:fragment="">
-    <nav class="navbar fixed-top navbar-light bg-white" id="index-navbar">
-        <p class="navbar-brand" href="">ANIMAL<span id="heart" >HEART</span></p>
+<th:block th:fragment="main-navbar">
+    <nav class="navbar sticky-top navbar-light bg-white" id="index-navbar">
+        <p class="navbar-brand">ANIMAL<span id="heart" >HEART</span></p>
         <span class="d-flex flex-row bd-highlight mb-3">
             <a class="navbar-brand" href="/events/showAll">EVENTS</a>
-            <a class="navbar-brand" href="/animals/showAll">VIEW ANIMALS</a>
+            <a class="navbar-brand" href="/animal/showAll">VIEW ANIMALS</a>
             <a class="navbar-brand" href="/map" >MAP</a>
             <a class="navbar-brand" href="/messages">MESSAGES</a>
             <a class="navbar-brand" href="/index">LOGOUT</a>
         </span>
     </nav>
 </th:block>
-</body>
 </html>
