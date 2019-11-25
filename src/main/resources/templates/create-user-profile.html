@@ -7,8 +7,11 @@
     <link href="https://fonts.googleapis.com/css?family=Playfair+Display|Raleway&display=swap" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="../css/set-up-profile.css">
     <title>Organization Sign Up</title>
+    <th:block th:replace="fragments/header :: main-header" />
+
 </head>
 <body>
+<th:block th:replace="fragments/navbar :: main-navbar"/>
 
 <div class="container-fluid" id="h1-border">
     <div class="row">
@@ -29,9 +32,9 @@
         </div>
 
         <div class="col-4">
-            <img id="img" src="img/signup-paw.jpg" width="475" height="360" alt="cat-paw">
-            <img id="img" src="img/signup-cat.jpg" width="475" height="360" alt="white-cat">
-            <img id="img" src="img/signup-dog.jpg" width="475" height="360" alt="french-bulldog">
+            <img id="img" src="/img/signup-paw.jpg" width="475" height="360" alt="cat-paw">
+            <img id="img" src="/img/signup-cat.jpg" width="475" height="360" alt="white-cat">
+            <img id="img" src="/img/signup-dog.jpg" width="475" height="360" alt="french-bulldog">
         </div>
     </div>
 </div>

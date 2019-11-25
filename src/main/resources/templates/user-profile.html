@@ -31,11 +31,10 @@
                         <p class="card-text" th:text="'Size: ' + ${animal.size}">Animal Size</p>
                         <p class="card-text" th:text="'Age: ' + ${animal.age}">Animal Age</p>
                         <a href="" class="btn">VIEW ANIMAL PROFILE</a>
-                        <form th:action="@{'/delete-animal/' + ${animal.id}}" th:method="post">
-<!--                            <input id="delete-btn" type="submit" value="DELETE ANIMAL"/>-->
-                            <button>Delete Animal</button>
+                        <form th:action="@{'/delete-animal/' + ${animal.id}}" method="post">
+                            <input id="delete-btn" type="submit" value="DELETE ANIMAL"/>
                         </form>
-                        <form th:action="@{'/animal/' + ${animal.id} + '/edit'}" th:method="post">
+                        <form th:action="@{'/animal/' + ${animal.id} + '/edit'}" method="post">
                             <input id="edit-animal-btn" type="submit" value="EDIT ANIMAL"/>
                         </form>
                     </div>
