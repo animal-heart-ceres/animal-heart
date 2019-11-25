@@ -41,6 +41,7 @@
     </header>
 
     <div class="d-flex">
+
         <div class="card" style="width: 18rem;"  th:each="animal : ${animalList}">
             <img th:src="${animal.img}" height="150" width="150" class="card-img-top" alt="">
             <div class="card-body">
@@ -48,12 +49,10 @@
                 <p class="card-text" th:text="'Type: ' + ${animal.type}">Animal Type</p>
                 <p class="card-text" th:text="'Size: ' + ${animal.size}">Animal Size</p>
                 <p class="card-text" th:text="'Age: ' + ${animal.age}">Animal Age</p>
-                <a href="" class="btn">VIEW ANIMAL</a>
+                <a th:href="@{${animal.id}}" class="btn">VIEW ANIMAL</a>
             </div>
         </div>
     </div>
-
-<!--    <div id="new-card" class="d-flex"></div>-->
 
 </div>
 

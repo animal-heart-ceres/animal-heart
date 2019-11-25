@@ -37,12 +37,12 @@ public class AnimalController {
     }
 
     // JSON
-//    @GetMapping("/animals.json")
+//    @GetMapping("/animal.json")
 //    public @ResponseBody List<Animal> showAllAnimalsInJSON() {
 //        return animalDao.findAll();
 //    }
 
-    @GetMapping("/animals/showAll")
+    @GetMapping("/animal/showAll")
     public String showAllAnimals(Model vModel) {
         List<Animal> animalList = animalDao.findAll();
         vModel.addAttribute("animalList", animalList);
