@@ -6,34 +6,92 @@
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css?family=Playfair+Display|Raleway&display=swap" rel="stylesheet">
     <title>Animal Profile</title>
-    <th:block th:replace="fragments/header :: main-header" />
+    <th:block th:replace="fragments/header :: main-header"/>
     <link rel="stylesheet" href="../css/animal-profile.css">
 </head>
 <body>
 <th:block th:replace="fragments/navbar :: main-navbar"/>
-    <div class="container-fluid">
-        <div class="row">
-            <div id="pet-pic" class="col-5">
+<div class="container-fluid">
+    <div class="row">
+        <div id="pet-pic" class="col-5">
             <img src="../static/img/signup-dog.jpg">
-            </div>
         </div>
+    </div>
 
-        <div class="col-7">
-            <div class="row-3">
-                <h2>MEET <span th:text="${animal.name}">DUKE</span></h2>
-                <span th:text="${animal.age}" >age</span>
-                <span th:text="${animal.size}" >size</span>
-                <span th:text="${animal.type}" >type</span>
+    <div class="col-7">
+        <div class="row-3">
+            <h2>MEET <span th:text="${animal.name}">DUKE</span></h2>
+            <span th:text="${animal.age}">age</span>
+            <span th:text="${animal.size}">size</span>
+            <span th:text="${animal.type}">type</span>
+        </div>
+        <div class="row-9">
+            <form th:action="@{'/delete-animal' + ${animal.id}}" method="post">
+                <button>Delete</button>
+            </form>
+
+            <!-- Button to trigger edit modal -->
+            <form th:action="@{'/animal' + ${animal.id} + '/edit'}" method="post">
+                <button type="button" data-toggle="modal" data-target="#exampleModal" id="pet-edit-btn">Edit</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">EDIT ANIMAL</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
             </div>
-            <div class="row-9">
-                <form th:action="@{'/delete-animal' + ${animal.id}}" method="post">
-                    <button>Delete</button>
-                </form>
-                <form th:action="@{'/animal' + ${animal.id} + '/edit'}" method="post">
-                    <button>Edit</button>
-                </form>
+            <div class="modal-body">
+
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="edit-animal">Name</label>
+                        <input id="edit-animal" class="form-control" th:text="${animal.name}" type="text">
+                    </div>
+                    <div class="form-group">
+                        <label for="edit-type">Type</label>
+                        <input id="edit-type" class="form-control"  th:text="${animal.type}" type="text">
+                    </div>
+                    <div class="form-group">
+                        <label for="edit-size">Size</label>
+                        <input id="edit-size" class="form-control" th:text="${animal.size}" type="text">
+                    </div>
+                    <div class="form-group">
+                        <label for="edit-age">Age</label>
+                        <input id="edit-age" class="form-control" th:text="${animal.age}" type="text">
+                    </div>
+                </div>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
             </div>
         </div>
     </div>
+</div>
+
+
+
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+
 </body>
 </html>
