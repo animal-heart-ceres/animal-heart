@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="https://www.thymeleaf.org">
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
@@ -13,7 +13,7 @@
 <div class="container-fluid" id="h1-border">
     <div class="row">
         <div id="org-pic" class="col-5">
-            <h1 class="text-center" >User's Profile</h1>
+            <h1 class="text-center" th:text="${userProfile.firstName}">User's Profile</h1>
             <div class="form-group text-center" id="form-div" >
                 <img id="img"  src="../static/img/login-dog-cat.jpg" width="475" height="300"  alt="animal-pals">
             </div>
@@ -31,10 +31,11 @@
                         <p class="card-text" th:text="'Size: ' + ${animal.size}">Animal Size</p>
                         <p class="card-text" th:text="'Age: ' + ${animal.age}">Animal Age</p>
                         <a href="" class="btn">VIEW ANIMAL PROFILE</a>
-                        <form th:action="@{'/delete-animal' + ${animal.id}}" method="post">
-                            <input id="delete-btn" type="submit" value="DELETE ANIMAL"/>
+                        <form th:action="@{'/delete-animal/' + ${animal.id}}" th:method="post">
+<!--                            <input id="delete-btn" type="submit" value="DELETE ANIMAL"/>-->
+                            <button>Delete Animal</button>
                         </form>
-                        <form th:action="@{'/animal' + ${animal.id} + '/edit'}" method="post">
+                        <form th:action="@{'/animal/' + ${animal.id} + '/edit'}" th:method="post">
                             <input id="edit-animal-btn" type="submit" value="EDIT ANIMAL"/>
                         </form>
                     </div>

@@ -1,10 +1,6 @@
 package com.animalheart.animalheart.controllers;
-import com.animalheart.animalheart.models.Animal;
-import com.animalheart.animalheart.models.Comment;
-import com.animalheart.animalheart.models.User;
-import com.animalheart.animalheart.repositories.AnimalRepository;
-import com.animalheart.animalheart.repositories.CommentRepository;
-import com.animalheart.animalheart.repositories.UserRepository;
+import com.animalheart.animalheart.models.*;
+import com.animalheart.animalheart.repositories.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,6 +18,12 @@ public class AnimalController {
 
     @Autowired
     CommentRepository commentDao;
+
+    @Autowired
+    OrganizationProfileRepository organizationProfileDao;
+
+    @Autowired
+    UserProfileRepository userProfileDao;
 
     @GetMapping("/create-animal")
     public String showAnimalForm(Model vModel){
@@ -73,14 +75,26 @@ public class AnimalController {
 
         Animal animalToDelete = animalDao.getOne(animalId);
 
+        List<Comment> commentList =  animalToDelete.getCommentList();
+
+        for(Comment comment : commentList) {
+            comment.setUser(null);
+            comment.setAnimal(null);
+            commentDao.delete(comment);
+        }
+
         User user = animalDao.getOne(animalId).getUser();
+
+        animalToDelete.setUser(null);
 
         animalDao.delete(animalToDelete);
 
         if(user.getOrganization()) {
-            return "redirect:/organization-profile" + user.getId();
+            OrganizationProfile organizationProfile = organizationProfileDao.findByOrganizationId(user.getId());
+            return "redirect:/organization-profile/" + organizationProfile.getId();
         } else {
-            return "redirect:/user-profile/" + user.getId();
+            UserProfile userProfile = userProfileDao.findByUserId(user.getId());
+            return "redirect:/user-profile/" + userProfile.getId();
         }
     }
 }
