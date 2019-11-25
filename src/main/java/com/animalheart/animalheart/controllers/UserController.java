@@ -26,6 +26,11 @@ public class UserController {
         return "login";
     }
 
+    @PostMapping("/login")
+    public String login() {
+        return "/index";
+    }
+
     @GetMapping("/sign-up")
     public String showSignupForm(Model model){
         model.addAttribute("user", new User());
