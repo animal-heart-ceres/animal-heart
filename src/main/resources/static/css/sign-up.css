@@ -1,15 +1,15 @@
 h1{
     font-family: 'Playfair Display', serif;
     font-size: 6.5rem !important;
-    padding-bottom: 55px;
-    padding-top: 50px;
+    padding-bottom: 30px;
+    padding-top: 30px;
     color: #49484A;
 }
 
 input {
     width: 75%;
     padding: 20px 20px;
-    margin: 25px 0;
+    margin: 10px 0;
     display: inline-block;
     border: 5px solid #A4A3A4;
     border-radius: 15px;
@@ -24,7 +24,7 @@ input {
     font-family: 'Playfair Display', serif;
     font-size: 35px;
     border: 5px solid #99a6b1;
-    margin-bottom: 55px;
+    margin-bottom: 20px;
 }
 
 label{
@@ -36,7 +36,7 @@ label{
 }
 
 form{
-    padding-top: 55px;
+    /*padding-top: 5px;*/
 }
 
 
