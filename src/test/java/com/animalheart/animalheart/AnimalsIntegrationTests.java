@@ -162,7 +162,7 @@ public class AnimalsIntegrationTests {
 
     @Test
     public void showAllAnimals() throws Exception {
-        this.mvc.perform(get("/animals/showAll"))
+        this.mvc.perform(get("/animal/showAll"))
                 .andExpect(status().isOk());
     }
 
