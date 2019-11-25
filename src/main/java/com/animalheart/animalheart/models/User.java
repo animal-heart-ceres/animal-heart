@@ -30,19 +30,27 @@ public class User {
     @Column(nullable = false)
     private Boolean isAdmin;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
-    @JsonBackReference
-    private List<Comment> commentList;
+    @OneToOne(mappedBy = "user",
+            cascade = CascadeType.ALL, orphanRemoval = true)
+    private UserProfile userProfile;
 
-    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "user")
+    @OneToOne(mappedBy = "organization",
+            cascade = CascadeType.ALL, orphanRemoval = true)
+    private OrganizationProfile organizationProfile;
+
+//    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user", orphanRemoval = true)
+//    @JsonBackReference
+//    private List<Comment> commentList;
+
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "user", orphanRemoval = true)
     @JsonBackReference
     private List<Animal> animalList;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user", orphanRemoval = true)
     @JsonBackReference
     private List<Event> eventList;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user", orphanRemoval = true)
     @JsonBackReference
     private List<Follower> followerList;
 
@@ -106,13 +114,13 @@ public class User {
         isAdmin = admin;
     }
 
-    public List<Comment> getCommentList() {
-        return commentList;
-    }
+//    public List<Comment> getCommentList() {
+//        return commentList;
+//    }
 
-    public void setCommentList(List<Comment> commentList) {
-        this.commentList = commentList;
-    }
+//    public void setCommentList(List<Comment> commentList) {
+//        this.commentList = commentList;
+//    }
 
     public List<Animal> getAnimalList() {
         return animalList;

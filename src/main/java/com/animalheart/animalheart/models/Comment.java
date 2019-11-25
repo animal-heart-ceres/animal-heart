@@ -15,23 +15,26 @@ public class Comment {
     @Column(nullable = false, columnDefinition = "TEXT")
     private String comment;
 
+    @Column(nullable = false)
+    private long userId;
+
     @ManyToOne
     @JsonManagedReference
     @JoinColumn (name = "animal_id")
     private Animal animal;
 
-    @ManyToOne
-    @JsonManagedReference
-    @JoinColumn (name = "user_id")
-    private User user;
+//    @ManyToOne
+//    @JsonManagedReference
+//    @JoinColumn (name = "user_id")
+//    private User user;
 
 
     public Comment() {}
 
-    public Comment(String comment, Animal animal, User user) {
+    public Comment(String comment, long userId, Animal animal) {
         this.comment = comment;
+        this.userId = userId;
         this.animal = animal;
-        this.user = user;
     }
 
     public long getId() {
@@ -58,12 +61,19 @@ public class Comment {
         this.animal = animal;
     }
 
-    public User getUser() {
-        return user;
+    public long getUserId() {
+        return userId;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setUserId(long userId) {
+        this.userId = userId;
     }
+    //    public User getUser() {
+//        return user;
+//    }
+
+//    public void setUser(User user) {
+//        this.user = user;
+//    }
 
 }

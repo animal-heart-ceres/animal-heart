@@ -33,7 +33,7 @@ public class CommentController {
         Comment newComment = new Comment();
         newComment.setComment(comment);
         newComment.setAnimal(animal);
-        newComment.setUser(user);
+        newComment.setUserId(userId);
 
         commentDao.save(newComment);
 

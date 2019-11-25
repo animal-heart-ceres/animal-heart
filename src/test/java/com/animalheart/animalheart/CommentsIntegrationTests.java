@@ -71,29 +71,29 @@ public class CommentsIntegrationTests {
             testAnimal = animalDao.save(newAnimal);
         }
 
-        if(commentToView == null) {
-            Comment commentToView = new Comment();
-            commentToView.setComment("This is a comment to view");
-            commentToView.setAnimal(testAnimal);
-            commentToView.setUser(testUser);
-            commentToView = commentDao.save(commentToView);
-        }
-
-        if(commentToDelete == null) {
-            Comment commentToDelete = new Comment();
-            commentToDelete.setComment("This is a comment to delete");
-            commentToDelete.setAnimal(testAnimal);
-            commentToDelete.setUser(testUser);
-            commentToDelete = commentDao.save(commentToDelete);
-        }
-
-        if(commentToEdit == null) {
-            Comment commentToEdit = new Comment();
-            commentToEdit.setComment("This is a comment to edit");
-            commentToEdit.setAnimal(testAnimal);
-            commentToEdit.setUser(testUser);
-            commentToEdit = commentDao.save(commentToEdit);
-        }
+//        if(commentToView == null) {
+//            Comment commentToView = new Comment();
+//            commentToView.setComment("This is a comment to view");
+//            commentToView.setAnimal(testAnimal);
+//            commentToView.setUser(testUser);
+//            commentToView = commentDao.save(commentToView);
+//        }
+//
+//        if(commentToDelete == null) {
+//            Comment commentToDelete = new Comment();
+//            commentToDelete.setComment("This is a comment to delete");
+//            commentToDelete.setAnimal(testAnimal);
+//            commentToDelete.setUser(testUser);
+//            commentToDelete = commentDao.save(commentToDelete);
+//        }
+//
+//        if(commentToEdit == null) {
+//            Comment commentToEdit = new Comment();
+//            commentToEdit.setComment("This is a comment to edit");
+//            commentToEdit.setAnimal(testAnimal);
+//            commentToEdit.setUser(testUser);
+//            commentToEdit = commentDao.save(commentToEdit);
+//        }
 
     }
 
