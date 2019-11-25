@@ -42,7 +42,7 @@ public class User {
 //    @JsonBackReference
 //    private List<Comment> commentList;
 
-    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "user", orphanRemoval = true)
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.REMOVE, mappedBy = "user", orphanRemoval = true)
     @JsonBackReference
     private List<Animal> animalList;
 
