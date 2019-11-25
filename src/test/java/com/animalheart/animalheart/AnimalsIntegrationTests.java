@@ -148,11 +148,13 @@ public class AnimalsIntegrationTests {
                         .param("age", "7"))
                 .andExpect(status().is3xxRedirection());
 
+
+//        createdAnimal.setUser(testUser);
+
+
+//        animalDao.save(createdAnimal);
+
         Animal createdAnimal = findAnimalByName("createdAnimal");
-
-        createdAnimal.setUser(testUser);
-
-        animalDao.save(createdAnimal);
 
         Assert.assertNotNull(createdAnimal);
 

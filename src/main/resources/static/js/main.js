@@ -21,15 +21,6 @@
 
 
 
-
-// EDIT BUTTON MODALS (attempt)
-
-
-$('#btn').click(function() {
-    $('#modelWindow').modal('show');
-});
-
-
 // Dynamic HTML for JSON
 
 // let request = $.ajax({'url': '/animals.json'});
