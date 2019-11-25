@@ -50,6 +50,7 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
+
             <div class="modal-body">
 
                 <div class="modal-body">
@@ -75,6 +76,20 @@
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                 <button type="button" class="btn btn-primary">Save changes</button>
+           </div>
+            <div class="row-9">
+                <form th:action="@{'/delete-animal/' + ${animal.id}}" th:method="post">
+                    <input id="delete-btn" type="submit" value="DELETE ANIMAL"/>
+                </form>
+                <form th:action="@{'/animal/' + ${animal.id} + '/edit'}" th:method="post">
+                    <input id="edit-animal-btn" type="submit" value="EDIT ANIMAL"/>
+                </form>
+
+            
+            <div class="row-9">
+                <div th:each="comment : ${comments}">
+                    <p th:text="${comment.comment}"></p>
+                </div>
             </div>
         </div>
     </div>

@@ -11,20 +11,36 @@
 </head>
 <body>
 <th:block th:replace="fragments/navbar :: main-navbar"/>
-<div class="container-fluid" id="h1-border">
-    <div class="row">
-        <div id="org-pic" class="col-5">
-            <h1 class="text-center">Organization's Profile</h1>
-            <div class="form-group text-center" id="form-div">
-                <img id="img" src="../static/img/login-dog-cat.jpg" width="475" height="300" alt="animal-pals">
+    <div class="container-fluid" id="h1-border">
+        <div class="row">
+            <div id="org-pic" class="col-5">
+                <h1 class="text-center" th:text="${organizationProfile.name}" >Organization's Profile</h1>
+                <div class="form-group text-center" id="form-div" >
+                    <img id="img"  src="../static/img/login-dog-cat.jpg" width="475" height="300"  alt="animal-pals">
+                </div>
+                <input id="edit-btn" type="submit" value="EDIT"/>
+                <input id="delete-btn" type="submit" value="DELETE"/>
             </div>
-            <input id="edit-btn" type="submit" value="EDIT"/>
-            <input id="delete-btn" type="submit" value="DELETE"/>
-        </div>
-        <div class="col-7">
-            <h3>YOUR PETS</h3>
-            <input id="pet-btn" type="submit" value="ADD PET"/>
-
+            <div class="col-7">
+                <h3>YOUR PETS</h3>
+                <input id="pet-btn" type="submit" value="ADD PET"/>
+                <div class="d-flex">
+                    <div class="card" style="width: 18rem;"  th:each="animal : ${animals}">
+                        <img th:src="${animal.img}" height="150" width="150" class="card-img-top" alt="">
+                        <div class="card-body">
+                            <h5 class="card-title" th:text="'Name: ' + ${animal.name}">Animal Name</h5>
+                            <p class="card-text" th:text="'Type: ' + ${animal.type}">Animal Type</p>
+                            <p class="card-text" th:text="'Size: ' + ${animal.size}">Animal Size</p>
+                            <p class="card-text" th:text="'Age: ' + ${animal.age}">Animal Age</p>
+                            <a href="" class="btn">VIEW ANIMAL</a>
+                            <a href="" class="btn" id="delete">X</a>
+                            <!-- Button trigger modal -->
+                            <form th:action="@{'/animal' + ${animal.id} + '/edit'}" method="post" >
+                            <a href="" class="btn" data-toggle="modal" data-target="#exampleModal" id="edit">EDIT</a>
+                            </form>
+                        </div>
+                    </div>
+                </div>
             <div class="d-flex">
                 <div class="card" style="width: 18rem;" th:each="animal : ${animalList}">
                     <img th:src="${animal.img}" height="150" width="150" class="card-img-top" alt="">
@@ -35,7 +51,6 @@
                     </div>
                 </div>
             </div>
-
             <h3>EVENTS</h3>
             <input id="event-btn" type="submit" value="ADD EVENT"/>
             <div class="card" style="width: 12rem; height: 12rem;">
