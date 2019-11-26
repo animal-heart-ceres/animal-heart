@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -50,20 +51,21 @@ public class UserProfileController {
         User loggedInUser = loggedInUserProfile.getUser();
 
         List<Animal> animalList = loggedInUser.getAnimalList();
-        List<Event> eventList = eventDao.findAll();
-
         List<Follower> followerList = followerDao.findAll();
-//        for(Follower follower : followerList){
-//            if(follower.getFollowerId() == loggedInUser.getId()) {
-//            }
-//        }
+        List<Event> followerEvents = new ArrayList<>();
+
+        for(Follower follow : followerList){
+            List<Event> eventList1 = follow.getUser().getEventList();
+            if(follow.getFollowerId() == loggedInUser.getId())
+            followerEvents.addAll(eventList1);
+        }
+
 
         vModel.addAttribute("userProfile", loggedInUserProfile);
         vModel.addAttribute("animals", animalList);
         vModel.addAttribute("animal", new Animal());
-        vModel.addAttribute("events", eventList);
+        vModel.addAttribute("events", followerEvents);
         vModel.addAttribute("follows", followerList);
-
 
         return "user-profile";
     }
