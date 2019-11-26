@@ -30,11 +30,7 @@ public class User {
     @Column(nullable = false)
     private Boolean isAdmin;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
-    @JsonBackReference
-    private List<Comment> commentList;
-
-    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "user")
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.REMOVE, mappedBy = "user", orphanRemoval = true)
     @JsonBackReference
     private List<Animal> animalList;
 
@@ -45,8 +41,6 @@ public class User {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
     @JsonBackReference
     private List<Follower> followerList;
-
-
 
     public User(){}
 
@@ -104,14 +98,6 @@ public class User {
 
     public void setAdmin(Boolean admin) {
         isAdmin = admin;
-    }
-
-    public List<Comment> getCommentList() {
-        return commentList;
-    }
-
-    public void setCommentList(List<Comment> commentList) {
-        this.commentList = commentList;
     }
 
     public List<Animal> getAnimalList() {

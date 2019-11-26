@@ -28,12 +28,11 @@ public class CommentController {
     @PostMapping("/create-comment/{animalId}/{userId}")
     public String createComment(@PathVariable Long animalId, @PathVariable Long userId, @RequestParam(name = "comment") String comment) {
         Animal animal = animalDao.getOne(animalId);
-        User user = userDao.getOne(userId);
 
         Comment newComment = new Comment();
         newComment.setComment(comment);
         newComment.setAnimal(animal);
-        newComment.setUser(user);
+        newComment.setUserId(userId);
 
         commentDao.save(newComment);
 
