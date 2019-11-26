@@ -31,9 +31,22 @@
                     <img th:src="${animal.img}" height="150" width="150" class="card-img-top" alt="">
                     <div class="card-body">
                         <h5 class="card-title" th:text="'Name: ' + ${animal.name}">Animal Name</h5>
-                        <a href="" class="btn">VIEW ANIMAL PROFILE</a>
+                        <a th:href="@{'/animal/' + ${animal.id}}" class="btn">VIEW ANIMAL PROFILE</a>
                         <form th:action="@{'/delete-animal/' + ${animal.id}}" method="post">
                             <input id="delete-btn" type="submit" value="X"/>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <h3>Your Events</h3>
+            <div class="d-flex">
+                <div class="card" style="width: 18rem;" th:each="event : ${events}" >
+                    <img  height="150" width="150" class="card-img-top" alt="">
+                    <div class="card-body">
+                        <h5 class="card-title" th:text="'Title: ' + ${event.title}">Event Title</h5>
+                        <a th:href="@{'/event-profile/' + ${event.id}}" class="btn">VIEW Event PROFILE</a>
+                        <form th:action="@{'/event/' + ${event.id} + '/delete'}" method="post">
+                            <input class="delete-btn" type="submit" value="X"/>
                         </form>
                     </div>
                 </div>
@@ -53,7 +66,7 @@
 <div class="modal fade" id="edit-user-Modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
      aria-hidden="true">
     <div class="modal-dialog" role="document">
-        <div class="modal-content">
+        <form th:action="@{'/profile/' + ${userProfile.id} + '/edit'}" th:method="post" class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="edit-profile-ModalLabel">EDIT PROFILE</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -64,28 +77,23 @@
 
                 <div class="form-group">
                     <label for="edit-first-name">First Name</label>
-                    <input id="edit-first-name" class="form-control" th:text="${user.firstName}" type="text">
+                    <input id="edit-first-name" class="form-control" name="firstName" th:value="${userProfile.firstName}" type="text">
                 </div>
                 <div class="form-group">
                     <label for="edit-last-name">Last Name</label>
-                    <input id="edit-last-name" class="form-control" th:text="${user.lastName}" type="text">
+                    <input id="edit-last-name" class="form-control" name="lastName" th:value="${userProfile.lastName}" type="text">
                 </div>
                 <div class="form-group">
                     <label for="edit-location">Address</label>
-                    <input id="edit-location" class="form-control" th:text="${user.address}" type="text">
+                    <input id="edit-location" class="form-control" name="address" th:value="${userProfile.address}" type="text">
                 </div>
-                <div class="form-group">
-                    <label for="edit-username">Username</label>
-                    <input id="edit-username" class="form-control" th:text="${user.username}" type="text">
-                </div>
-
 
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
+                <button type="submit" class="btn btn-primary">Save changes</button>
             </div>
-        </div>
+        </form>
     </div>
 </div>
 
@@ -94,7 +102,7 @@
 
 <div class="modal fade" id="add-pet-Modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
-        <div class="modal-content">
+        <form th:action="@{/create-animal}" th:method="post" th:object="${animal}" class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="add-pet-ModalLabel">NEW PET</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -105,27 +113,27 @@
 
                 <div class="form-group">
                     <label for="edit-animal">Name</label>
-                    <input id="edit-animal" class="form-control" type="text">
+                    <input id="edit-animal" class="form-control" th:field="*{name}" type="text">
                 </div>
                 <div class="form-group">
                     <label for="edit-type">Type</label>
-                    <input id="edit-type" class="form-control" type="text">
+                    <input id="edit-type" class="form-control" th:field="*{type}" type="text">
                 </div>
                 <div class="form-group">
                     <label for="edit-size">Size</label>
-                    <input id="edit-size" class="form-control" type="text">
+                    <input id="edit-size" class="form-control" th:field="*{size}" type="text">
                 </div>
                 <div class="form-group">
                     <label for="edit-age">Age</label>
-                    <input id="edit-age" class="form-control" type="text">
+                    <input id="edit-age" class="form-control" th:field="*{age}" type="text">
                 </div>
 
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
+                <button type="submit" class="btn btn-primary">Save changes</button>
             </div>
-        </div>
+        </form>
     </div>
 </div>
 

@@ -32,14 +32,12 @@ public class AnimalController {
     }
 
     @PostMapping("/create-animal")
-    public String createAnimal(@ModelAttribute Animal animal){
+    public String createAnimal(@ModelAttribute Animal animal) {
 //        set fk, will be the current user
         animal.setUser(userDao.getOne(1L));
         animalDao.save(animal);
-
         return "redirect:/animal/showAll";
     }
-
     // JSON
 //    @GetMapping("/animal.json")
 //    public @ResponseBody List<Animal> showAllAnimalsInJSON() {
@@ -63,9 +61,10 @@ public class AnimalController {
     }
 
     @PostMapping("/animal/{animalId}/edit")
-    public String editAnimal(@PathVariable Long animalId, @RequestParam(name = "name") String name, @RequestParam(name = "size") String size, @RequestParam(name = "age") int age) {
+    public String editAnimal(@PathVariable Long animalId,@RequestParam(name = "type") String type, @RequestParam(name = "name") String name, @RequestParam(name = "size") String size, @RequestParam(name = "age") int age) {
         Animal animalToEdit = animalDao.getOne(animalId);
         animalToEdit.setName(name);
+        animalToEdit.setType(type);
         animalToEdit.setSize(size);
         animalToEdit.setAge(age);
         animalDao.save(animalToEdit);

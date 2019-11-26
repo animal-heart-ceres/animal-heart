@@ -1,8 +1,8 @@
 package com.animalheart.animalheart.controllers;
 
-import com.animalheart.animalheart.models.Animal;
-import com.animalheart.animalheart.models.User;
-import com.animalheart.animalheart.models.UserProfile;
+import com.animalheart.animalheart.models.*;
+import com.animalheart.animalheart.repositories.EventRepository;
+import com.animalheart.animalheart.repositories.FollowerRepository;
 import com.animalheart.animalheart.repositories.UserProfileRepository;
 import com.animalheart.animalheart.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -20,6 +21,12 @@ public class UserProfileController {
 
     @Autowired
     UserRepository userDao;
+
+    @Autowired
+    FollowerRepository followerDao;
+
+    @Autowired
+    EventRepository eventDao;
 
     @GetMapping("/create-user-profile/{id}")
     public String showCreateUserProfileForm(@PathVariable Long id, Model vModel) {
@@ -44,9 +51,22 @@ public class UserProfileController {
         User loggedInUser = loggedInUserProfile.getUser();
 
         List<Animal> animalList = loggedInUser.getAnimalList();
+        List<Follower> followerList = followerDao.findAll();
+        List<Event> followerEvents = new ArrayList<>();
+
+        for(Follower follow : followerList){
+            List<Event> eventList1 = follow.getUser().getEventList();
+            if(follow.getFollowerId() == loggedInUser.getId())
+            followerEvents.addAll(eventList1);
+        }
+
 
         vModel.addAttribute("userProfile", loggedInUserProfile);
         vModel.addAttribute("animals", animalList);
+        vModel.addAttribute("animal", new Animal());
+        vModel.addAttribute("events", followerEvents);
+        vModel.addAttribute("follows", followerList);
+
         return "user-profile";
     }
 
