@@ -30,9 +30,9 @@
                 <button type="submit">Delete</button>
             </form>
             <!-- Button to trigger edit modal -->
-            <form th:action="@{'/animal/' + ${animal.id} + '/edit'}" th:method="post">
+            <div>
                 <button type="button" data-toggle="modal" data-target="#exampleModal" id="pet-edit-btn">Edit</button>
-            </form>
+            </div>
         </div>
     </div>
 </div>
@@ -46,7 +46,7 @@
 <!-- Modal -->
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
-        <div class="modal-content">
+        <form th:action="@{'/animal/' + ${animal.id} + '/edit'}" th:method="post" class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalLabel">EDIT ANIMAL</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -59,28 +59,28 @@
                 <div class="modal-body">
                     <div class="form-group">
                         <label for="edit-animal">Name</label>
-                        <input id="edit-animal" class="form-control" th:text="${animal.name}" type="text">
+                        <input id="edit-animal" class="form-control" name="name" th:value="${animal.name}" type="text">
                     </div>
                     <div class="form-group">
                         <label for="edit-type">Type</label>
-                        <input id="edit-type" class="form-control"  th:text="${animal.type}" type="text">
+                        <input id="edit-type" class="form-control" name="type" th:value="${animal.type}" type="text">
                     </div>
                     <div class="form-group">
                         <label for="edit-size">Size</label>
-                        <input id="edit-size" class="form-control" th:text="${animal.size}" type="text">
+                        <input id="edit-size" class="form-control" name="size" th:value="${animal.size}" type="text">
                     </div>
                     <div class="form-group">
                         <label for="edit-age">Age</label>
-                        <input id="edit-age" class="form-control" th:text="${animal.age}" type="text">
+                        <input id="edit-age" class="form-control" name="age" th:value="${animal.age}" type="text">
                     </div>
                 </div>
 
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
+                <button type="submit" class="btn btn-primary">Save changes</button>
            </div>
-        </div>
+        </form>
     </div>
 </div>
 
