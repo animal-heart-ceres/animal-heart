@@ -5,10 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com    /css?family=Playfair+Display|Raleway&display=swap" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="../css/set-up-profile.css">
+    <link rel="stylesheet" type="text/css" th:href="@{/public/css/set-up-profile.css}">
+    <th:block th:replace="fragments/header :: main-header" />
     <title>Organization Sign Up</title>
 </head>
 <body>
+
+<th:block th:replace="fragments/navbar :: main-navbar"/>
 
 <div class="container-fluid" id="h1-border">
     <div class="row">
@@ -29,9 +32,9 @@
         </div>
 
         <div class="col-4">
-            <img id="img" src="img/signup-paw.jpg" width="475" height="360" alt="cat-paw">
-            <img id="img" src="img/signup-cat.jpg" width="475" height="360" alt="white-cat">
-            <img id="img" src="img/signup-dog.jpg" width="475" height="360" alt="french-bulldog">
+            <img id="img1" src="img/signup-paw.jpg" width="475" height="360" alt="cat-paw">
+            <img id="img2" src="img/signup-cat.jpg" width="475" height="360" alt="white-cat">
+            <img id="img3" src="img/signup-dog.jpg" width="475" height="360" alt="french-bulldog">
         </div>
     </div>
 </div>
