@@ -32,7 +32,7 @@
                             <h5 class="card-title" th:text="'Name: ' + ${animal.name}">Animal Name</h5>
                             <a th:href="@{'/animal/' + ${animal.id}}" class="btn">VIEW ANIMAL</a>
                             <form th:action="@{'/delete-animal/' + ${animal.id}}" th:method="post">
-                                <button type="submit">Delete</button>
+                                <button type="submit">DELETE ANIMAL</button>
                             </form>
                         </div>
                     </div>
@@ -40,13 +40,19 @@
             <h3>EVENTS</h3>
 <!--                ADD EVENTS TRIGGER-->
             <input id="event-btn" type="submit" data-toggle="modal" data-target="#add-event-Modal" value="ADD EVENT"/>
-            <div class="card" style="width: 12rem; height: 12rem;">
-                <img src="/static/img/signup-cat.jpg" height="150" width="150" class="card-img-top" alt="">
-                <div class="card-body">
-                    <h5 class="card-title" th:text="@{event.name}">Card title</h5>
-                    <a href="" class="btn" id="delete2">X</a>
+            <div class="d-flex">
+                <div class="card" style="width: 12rem; height: 12rem;" th:each="event : ${usersEvents}">
+                    <img src="/static/img/signup-cat.jpg" height="150" width="150" class="card-img-top" alt="">
+                    <div class="card-body">
+                        <h5 class="card-title" th:text="${event.title}">Card title</h5>
+                        <p class="card-text" th:text="'Location: ' + ${event.location}">Location</p>
+                        <form th:action="@{'/event/' + ${event.id} + '/delete'}" th:method="post">
+                            <button type="submit">DELETE EVENT</button>
+                        </form>
+                    </div>
                 </div>
             </div>
+
         </div>
     </div>
     <div class="row">
