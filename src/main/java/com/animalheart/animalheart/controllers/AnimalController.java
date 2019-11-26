@@ -34,8 +34,10 @@ public class AnimalController {
     @PostMapping("/create-animal")
     public String createAnimal(@ModelAttribute Animal animal){
 //        set fk, will be the current user
+        animal.setUser(userDao.getOne(1L));
         animalDao.save(animal);
-        return "redirect:/";
+
+        return "redirect:/animal/showAll";
     }
 
     // JSON
