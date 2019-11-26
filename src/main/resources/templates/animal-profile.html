@@ -7,14 +7,14 @@
     <link href="https://fonts.googleapis.com/css?family=Playfair+Display|Raleway&display=swap" rel="stylesheet">
     <title>Animal Profile</title>
     <th:block th:replace="fragments/header :: main-header"/>
-    <link rel="stylesheet" href="../css/animal-profile.css">
+    <link rel="stylesheet" th:href="@{/public/css/animal-profile.css}">
 </head>
 <body>
 <th:block th:replace="fragments/navbar :: main-navbar"/>
 <div class="container-fluid">
     <div class="row">
         <div id="pet-pic" class="col-5">
-            <img src="../static/img/signup-dog.jpg">
+            <img th:src="@{/img/signup-dog.jpg}">
         </div>
     </div>
 
