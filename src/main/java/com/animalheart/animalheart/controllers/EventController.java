@@ -30,6 +30,7 @@ public class EventController {
     @PostMapping("/create-event")
     public String createEvent(@ModelAttribute Event event){
 //        set fk
+        event.setUser(userDao.getOne(2L));
         eventDao.save(event);
         return "redirect:/";
     }
@@ -47,21 +48,6 @@ public class EventController {
         vModel.addAttribute("event", currentEvent);
         return"event-profile";
     }
-
-    //Logic moved to view organization-profile controller. When I go to my profile, I expect to see all my events that I have created.
-
-//    @GetMapping("/events/{userId}")
-//    public String showUsersEvents(@PathVariable Long userId, Model vModel){
-//        List<Event> allEvents = eventDao.findAll();
-//        List<Event> usersEvents = new ArrayList<>();
-//        for(Event event : allEvents) {
-//            if(event.getUser().getId() == userId) {
-//                usersEvents.add(event);
-//            }
-//        }
-//        vModel.addAttribute("usersEvents", usersEvents);
-//        return "/index";
-//    }
 
     @PostMapping("/event/{eventId}/edit")
     public String editEvent(@PathVariable Long eventId, @RequestParam(name = "title") String title, @RequestParam(name = "description") String description, @RequestParam(name = "location") String location) {

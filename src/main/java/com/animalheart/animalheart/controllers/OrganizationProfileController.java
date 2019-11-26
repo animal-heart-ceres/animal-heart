@@ -60,15 +60,17 @@ public class OrganizationProfileController {
         }
 
         vModel.addAttribute("usersEvents", usersEvents);
+        vModel.addAttribute("animal", new Animal());
+        vModel.addAttribute("event", new Event());
         vModel.addAttribute("organizationProfile", loggedInOrganizationProfile);
         vModel.addAttribute("animals", animalList);
         return "organization-profile";
     }
     @PostMapping("/organization-profile/{id}/edit")
-    public String editOrganizationProfile(@PathVariable long id, @RequestParam(name = "name") String name, @RequestParam(name = "taxNumber") Long taxNumber, @RequestParam(name = "address") String address, @RequestParam(name = "description") String description){
+    public String editOrganizationProfile(@PathVariable long id, @RequestParam(name = "name") String name, @RequestParam(name = "taxNumber") String taxNumber, @RequestParam(name = "address") String address, @RequestParam(name = "description") String description){
         OrganizationProfile oldProfile = organizationProfileDao.getOne(id);
         oldProfile.setName(name);
-        oldProfile.setTaxNumber(taxNumber);
+        oldProfile.setTaxNumber(Long.parseLong(taxNumber));
         oldProfile.setAddress(address);
         oldProfile.setDescription(description);
         organizationProfileDao.save(oldProfile);
