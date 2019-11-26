@@ -38,11 +38,6 @@ public class AnimalController {
         animalDao.save(animal);
         return "redirect:/animal/showAll";
     }
-    // JSON
-//    @GetMapping("/animal.json")
-//    public @ResponseBody List<Animal> showAllAnimalsInJSON() {
-//        return animalDao.findAll();
-//    }
 
     @GetMapping("/animal/showAll")
     public String showAllAnimals(Model vModel) {
