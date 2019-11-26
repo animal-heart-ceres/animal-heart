@@ -2,45 +2,63 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css?family=Playfair+Display|Raleway&display=swap" rel="stylesheet">
-<!--    <link rel="stylesheet" type="text/css" href="css/index.css">-->
+    <!--    <link rel="stylesheet" type="text/css" href="css/index.css">-->
     <title>Animal Heart</title>
-    <link rel="stylesheet" href="css/index.css">
+<!--        <link rel="stylesheet" href="../css/index.css">-->
+
+<!--  use this for the css to show up-->
+    <link rel="stylesheet" th:href="@{/public/css/index.css}">
 </head>
 <body>
-    <nav class="navbar fixed-top navbar-light bg-white" id="index-navbar" >
-        <a class="navbar-brand" href="/animal/showAll">View Animals</a>
-      <span class="d-flex flex-row bd-highlight mb-3">
-          <a class="navbar-brand" href="/sign-up">Sign Up</a>
-          <a class="navbar-brand" href="/login">Login</a>
 
-      </span>
+<!--small screen width-->
+
+<h5 id="smHead" class="d-lg-none text-center">ANIMAL<span id="heart">HEART</span></h5>
+<p id="smText" class="d-lg-none text-center">GIVING SAN ANTONIO PETS A SECOND CHANCE AT LIFE</p>
+<div class="d-lg-none text-center" id="smLinks">
+    <a class="link" href="/animal/showAll">View Animals</a>
+    <a class="link" href="/sign-up">Sign Up</a>
+    <a class="link" href="/login">Login</a>
+</div>
+
+
+<!--large screen width-->
+
+    <nav class="navbar fixed-top navbar-light bg-white d-sm-none d-none d-lg-block " id="index-navbar">
+        <a class="navbar-brand " href="/animal/showAll">View Animals</a>
+          <a class="navbar-brand float-right" href="/sign-up">Sign Up</a>
+          <a class="navbar-brand float-right" href="/login">Login</a>
+
     </nav>
 
-    <header class="jumbotron my-1 bg-white" id="index-jumbotron" >
-        <h1 class="display-3 text-center">ANIMALHEART</h1>
-        <p class="text-center">GIVING <span>SAN ANTONIO</span> PETS A SECOND CHANCE AT LIFE</p>
-    </header>
 
-    <div id="container-id" class="container-fluid">
-        <div class="row">
-            <div class="col-4">
-                <img  id="img1" src="img/jack-dog.jpg" width="475" height="600" alt="dog outside">
-            </div>
-            <div class="col-4">
-                <img id="img2"  src="img/cat.jpg" width="475" height="600"  alt="cat">
-            </div>
-            <div class="col-4">
-                <img id="img3"  src="img/golden-dog.jpg" width="475" height="600"  alt="dog outside">
-            </div>
+<header class="d-sm-none jumbotron my-1 bg-white d-none d-lg-block " id="index-jumbotron">
+    <h1 class="display-3 text-center">ANIMALHEART</h1>
+    <p class="text-center">GIVING <span>SAN ANTONIO</span> PETS A SECOND CHANCE AT LIFE</p>
+</header>
+
+
+<div id="container-id" class="d-sm-none container-fluid d-none d-lg-block ">
+    <div class="row">
+        <div class="col-4">
+            <img id="img1" src="img/jack-dog.jpg" width="475" height="600" alt="dog outside">
+        </div>
+        <div class="col-4">
+            <img id="img2" src="img/cat.jpg" width="475" height="600" alt="cat">
+        </div>
+        <div class="col-4">
+            <img id="img3" src="img/golden-dog.jpg" width="475" height="600" alt="dog outside">
         </div>
     </div>
+</div>
 
 
-    <nav class="navbar fixed-bottom navbar-light bg-white">
-        <a class="navbar-brand" href="/about-us">About Us</a>
-    </nav>
+<nav class="navbar fixed-bottom navbar-light bg-white">
+    <a class="navbar-brand" href="/about-us">About Us</a>
+</nav>
 
 </body>
 </html>
