@@ -2,10 +2,12 @@
 <html lang="en" xmlns:th="https://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <link href="https://fonts.googleapis.com/css?family=Playfair+Display|Raleway&display=swap" rel="stylesheet">    <link rel="stylesheet" type="text/css" href="../static/css/organization-profile.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css?family=Playfair+Display|Raleway&display=swap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="../static/css/organization-profile.css">
     <title>Organization Profile</title>
-    <th:block th:replace="fragments/header :: main-header" />
+    <th:block th:replace="fragments/header :: main-header"/>
 </head>
 
 <body>
@@ -14,28 +16,24 @@
     <div class="row">
         <div id="org-pic" class="col-5">
             <h1 class="text-center" th:text="${userProfile.firstName}">User's Profile</h1>
-            <div class="form-group text-center" id="form-div" >
-                <img id="img"  src="../static/img/login-dog-cat.jpg" width="475" height="300"  alt="animal-pals">
+            <div class="form-group text-center" id="form-div">
+                <img id="img" src="../static/img/login-dog-cat.jpg" width="475" height="300" alt="animal-pals">
             </div>
-            <input id="edit-btn" type="submit" value="EDIT PROFILE"/>
-            <input id="pet-btn" type="submit" value="ADD PET"/>
+
+            <!--            MODAL TRIGGERS-->
+            <input id="edit-btn" type="submit" data-toggle="modal" data-target="#edit-user-Modal" value="EDIT PROFILE"/>
+            <input id="pet-btn" type="submit" data-toggle="modal" data-target="#add-pet-Modal" value="ADD PET"/>
         </div>
         <div class="col-7">
             <h3>YOUR PETS</h3>
             <div class="d-flex">
-                <div class="card" style="width: 18rem;"  th:each="animal : ${animals}">
+                <div class="card" style="width: 18rem;" th:each="animal : ${animals}">
                     <img th:src="${animal.img}" height="150" width="150" class="card-img-top" alt="">
                     <div class="card-body">
                         <h5 class="card-title" th:text="'Name: ' + ${animal.name}">Animal Name</h5>
-                        <p class="card-text" th:text="'Type: ' + ${animal.type}">Animal Type</p>
-                        <p class="card-text" th:text="'Size: ' + ${animal.size}">Animal Size</p>
-                        <p class="card-text" th:text="'Age: ' + ${animal.age}">Animal Age</p>
                         <a href="" class="btn">VIEW ANIMAL PROFILE</a>
                         <form th:action="@{'/delete-animal/' + ${animal.id}}" method="post">
-                            <input id="delete-btn" type="submit" value="DELETE ANIMAL"/>
-                        </form>
-                        <form th:action="@{'/animal/' + ${animal.id} + '/edit'}" method="post">
-                            <input id="edit-animal-btn" type="submit" value="EDIT ANIMAL"/>
+                            <input id="delete-btn" type="submit" value="X"/>
                         </form>
                     </div>
                 </div>
@@ -48,6 +46,100 @@
     </div>
 </div>
 
-</body>
+<!--MODALS-->
 
+<!--USER EDIT PROFILE MODAL-->
+
+<div class="modal fade" id="edit-user-Modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="edit-profile-ModalLabel">EDIT PROFILE</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+
+                <div class="form-group">
+                    <label for="edit-first-name">First Name</label>
+                    <input id="edit-first-name" class="form-control" th:text="${user.firstName}" type="text">
+                </div>
+                <div class="form-group">
+                    <label for="edit-last-name">Last Name</label>
+                    <input id="edit-last-name" class="form-control" th:text="${user.lastName}" type="text">
+                </div>
+                <div class="form-group">
+                    <label for="edit-location">Address</label>
+                    <input id="edit-location" class="form-control" th:text="${user.address}" type="text">
+                </div>
+                <div class="form-group">
+                    <label for="edit-username">Username</label>
+                    <input id="edit-username" class="form-control" th:text="${user.username}" type="text">
+                </div>
+
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!--ADD ANIMAL MODAL-->
+
+<div class="modal fade" id="add-pet-Modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="add-pet-ModalLabel">NEW PET</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+
+                <div class="form-group">
+                    <label for="edit-animal">Name</label>
+                    <input id="edit-animal" class="form-control" type="text">
+                </div>
+                <div class="form-group">
+                    <label for="edit-type">Type</label>
+                    <input id="edit-type" class="form-control" type="text">
+                </div>
+                <div class="form-group">
+                    <label for="edit-size">Size</label>
+                    <input id="edit-size" class="form-control" type="text">
+                </div>
+                <div class="form-group">
+                    <label for="edit-age">Age</label>
+                    <input id="edit-age" class="form-control" type="text">
+                </div>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+</body>
 </html>
