@@ -21,12 +21,12 @@ INSERT INTO organization_profiles (description, name, tax_number, organization_i
 INSERT INTO user_profiles (address, first_name, last_name, user_id) VALUE ('10418 Shaenfield Rd, San Antonio, TX 78254', 'Ryan', 'Smith', 1);
 INSERT INTO user_profiles (address, first_name, last_name, user_id) VALUE ('9807 Charline Lane, San Antonio, TX 28254', 'Kyndall', 'Simss', 3);
 
-INSERT INTO animals (age, exotic_type, name, size, type, user_id) VALUE (5, 'Prairie Dog', 'Poppy', 'small', 'Exotic', 5);
-INSERT INTO animals (age, name, size, type, user_id) VALUE (4, 'Ava', 'medium', 'Dog', 5);
-INSERT INTO animals (age, name, size, type, user_id) VALUE (5, 'Poppy', 'large', 'Dog', 5);
-INSERT INTO animals (age, name, size, type, user_id) VALUE (5, 'Michael', 'large', 'Cat', 5);
-INSERT INTO animals (age, name, size, type, user_id) VALUE (5, 'Rodger', 'large', 'Cat', 5);
-INSERT INTO animals (age, name, size, type, user_id) VALUE (5, 'Sally Mae', 'small', 'Dog', 5);
+INSERT INTO animals (age, exotic_type, name, size, type, user_id) VALUE (5, 'Prairie Dog', 'Poppy', 'small', 'Exotic', 2);
+INSERT INTO animals (age, name, size, type, user_id) VALUE (4, 'Ava', 'medium', 'Dog', 3);
+INSERT INTO animals (age, name, size, type, user_id) VALUE (5, 'Poppy', 'large', 'Dog', 2);
+INSERT INTO animals (age, name, size, type, user_id) VALUE (5, 'Michael', 'large', 'Cat', 1);
+INSERT INTO animals (age, name, size, type, user_id) VALUE (5, 'Rodger', 'large', 'Cat', 2);
+INSERT INTO animals (age, name, size, type, user_id) VALUE (5, 'Sally Mae', 'small', 'Dog', 1);
 
 INSERT INTO comments (comment, animal_id, user_id) VALUE('Hey I can take that little guy.', 1, 1);
 INSERT INTO comments (comment, animal_id, user_id) VALUE('Hey lets meet up so I can that little guy home', 1, 2);

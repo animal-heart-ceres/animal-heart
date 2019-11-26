@@ -75,7 +75,7 @@ public class CommentsIntegrationTests {
             Comment commentToView = new Comment();
             commentToView.setComment("This is a comment to view");
             commentToView.setAnimal(testAnimal);
-            commentToView.setUser(testUser);
+            commentToView.setUserId(testUser.getId());
             commentToView = commentDao.save(commentToView);
         }
 
@@ -83,7 +83,7 @@ public class CommentsIntegrationTests {
             Comment commentToDelete = new Comment();
             commentToDelete.setComment("This is a comment to delete");
             commentToDelete.setAnimal(testAnimal);
-            commentToDelete.setUser(testUser);
+            commentToDelete.setUserId(testUser.getId());
             commentToDelete = commentDao.save(commentToDelete);
         }
 
@@ -91,7 +91,7 @@ public class CommentsIntegrationTests {
             Comment commentToEdit = new Comment();
             commentToEdit.setComment("This is a comment to edit");
             commentToEdit.setAnimal(testAnimal);
-            commentToEdit.setUser(testUser);
+            commentToEdit.setUserId(testUser.getId());
             commentToEdit = commentDao.save(commentToEdit);
         }
 

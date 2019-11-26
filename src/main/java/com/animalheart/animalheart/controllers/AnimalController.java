@@ -74,20 +74,14 @@ public class AnimalController {
     public String deleteAnimal(@PathVariable Long animalId) {
 
         Animal animalToDelete = animalDao.getOne(animalId);
+        User user = animalToDelete.getUser();
+        List<Animal> animalList = user.getAnimalList();
 
-        List<Comment> commentList =  animalToDelete.getCommentList();
-
-        for(Comment comment : commentList) {
-            comment.setUser(null);
-            comment.setAnimal(null);
-            commentDao.delete(comment);
+        for(Animal animal : animalList) {
+            if(animal.getId() == animalToDelete.getId()) {
+                animalDao.delete(animal);
+            }
         }
-
-        User user = animalDao.getOne(animalId).getUser();
-
-        animalToDelete.setUser(null);
-
-        animalDao.delete(animalToDelete);
 
         if(user.getOrganization()) {
             OrganizationProfile organizationProfile = organizationProfileDao.findByOrganizationId(user.getId());
