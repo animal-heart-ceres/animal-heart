@@ -72,30 +72,32 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <div class="modal-body">
 
-                    <div class="form-group">
-                        <label for="edit-name">Organization Name</label>
-                        <input id="edit-name" class="form-control" th:text="${organizationProfile.name}" type="text">
-                    </div>
-                    <div class="form-group">
-                        <label for="edit-tax">Tax Number</label>
-                        <input id="edit-tax" class="form-control"  th:text="${organizationProfile.taxNumber}" type="text">
-                    </div>
-                    <div class="form-group">
-                        <label for="edit-location">Address</label>
-                        <input id="edit-location" class="form-control" th:text="${organizationProfile.address}" type="text">
-                    </div>
-                    <div class="form-group">
-                        <label for="edit-description">Description</label>
-                        <input id="edit-description" class="form-control" th:text="${organizationProfile.description}" type="text">
-                    </div>
+            <form th:action="@{'/create-animal/' + ${organizationProfile.id} + '/edit'}" th:method="post" th:object="${animal}">
+                <div class="modal-body">
+                        <div class="form-group">
+                            <label for="edit-name">Organization Name</label>
+                            <input id="edit-name" class="form-control" name="name" th:value="${organizationProfile.name}" type="text">
+                        </div>
+                        <div class="form-group">
+                            <label for="edit-tax">Tax Number</label>
+                            <input id="edit-tax" class="form-control"  name="taxNumber" th:value="${organizationProfile.taxNumber}" type="text">
+                        </div>
+                        <div class="form-group">
+                            <label for="edit-location">Address</label>
+                            <input id="edit-location" class="form-control" name="address" th:value="${organizationProfile.address}" type="text">
+                        </div>
+                        <div class="form-group">
+                            <label for="edit-description">Description</label>
+                            <input id="edit-description" class="form-control" name="description" th:value="${organizationProfile.description}" type="text">
+                        </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Save changes</button>
+                </div>
+            </form>
 
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
-            </div>
         </div>
     </div>
 </div>
@@ -116,30 +118,32 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <div class="modal-body">
 
-                <div class="form-group">
-                    <label for="edit-animal">Name</label>
-                    <input id="edit-animal" class="form-control" type="text">
-                </div>
-                <div class="form-group">
-                    <label for="edit-type">Type</label>
-                    <input id="edit-type" class="form-control" type="text">
-                </div>
-                <div class="form-group">
-                    <label for="edit-size">Size</label>
-                    <input id="edit-size" class="form-control" type="text">
-                </div>
-                <div class="form-group">
-                    <label for="edit-age">Age</label>
-                    <input id="edit-age" class="form-control" type="text">
-                </div>
+            <form th:action="@{/create-animal}" th:method="post" th:object="${animal}">
+                <div class="modal-body">
 
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
-            </div>
+                    <div class="form-group">
+                        <label for="edit-animal">Name</label>
+                        <input id="edit-animal" th:field="*{name}" class="form-control" type="text">
+                    </div>
+                    <div class="form-group">
+                        <label for="edit-type">Type</label>
+                        <input id="edit-type" th:field="*{type}" class="form-control" type="text">
+                    </div>
+                    <div class="form-group">
+                        <label for="edit-size">Size</label>
+                        <input id="edit-size" th:field="*{size}" class="form-control" type="text">
+                    </div>
+                    <div class="form-group">
+                        <label for="edit-age">Age</label>
+                        <input id="edit-age" th:field="*{age}" class="form-control" type="text">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Save changes</button>
+                </div>
+            </form>
         </div>
     </div>
 </div>
@@ -158,38 +162,30 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <div class="modal-body">
 
-                <div class="form-group">
-                    <label>Event Name</label>
-                    <input class="form-control" type="text">
+                <form th:action="@{'/create-event'}" th:method="post" th:object="${event}">
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label>Event Name</label>
+                        <input class="form-control" th:field="*{title}" type="text">
+                    </div>
+                    <div class="form-group">
+                        <label>Location</label>
+                        <input class="form-control" th:field="*{location}" type="text">
+                    </div>
+                    <div class="form-group">
+                        <label>Description</label>
+                        <input class="form-control" th:field="*{description}" type="text">
+                    </div>
                 </div>
-                <div class="form-group">
-                    <label>Location</label>
-                    <input class="form-control" type="text">
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Save changes</button>
                 </div>
-                <div class="form-group">
-                    <label>Description</label>
-                    <input class="form-control" type="text">
-                </div>
-                <div class="form-group">
-                    <label>Start Time</label>
-                    <input class="form-control" type="text">
-                </div>
-                <div class="form-group">
-                    <label>End Time</label>
-                    <input class="form-control" type="text">
-                </div>
-
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
-            </div>
+                </form>
         </div>
     </div>
 </div>
-
 
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"

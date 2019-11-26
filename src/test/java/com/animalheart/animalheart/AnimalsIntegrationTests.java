@@ -170,7 +170,7 @@ public class AnimalsIntegrationTests {
 
 
     @Test
-    public void showAnimal() throws Exception {
+    public void     showAnimal() throws Exception {
         Animal currentAnimal = findAnimalByName("animalToView");
         this.mvc.perform(get("/animal/" + currentAnimal.getId()))
                 .andExpect(status().isOk());
