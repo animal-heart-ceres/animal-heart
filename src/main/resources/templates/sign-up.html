@@ -18,9 +18,9 @@
                         <input id="email" th:field="*{email}" type="text" placeholder="EMAIL" />
                         <input id="password" th:field="*{password}" type="password" placeholder="PASSWORD" />
                         <p>Are you a rescue organization?</p>
-                        <select th:name="*{isOrganization}">
-                            <option th:value="${false}" th:text="No"></option>
-                            <option th:value="${true}" th:text="Yes"></option>
+                        <select th:name="${isOrganization}">
+                            <option th:value="false" th:text="No"></option>
+                            <option th:value="true" th:text="Yes"></option>
                         </select>
                         <input id="submit-btn" type="submit" value="SIGN UP"/>
                     </form>
