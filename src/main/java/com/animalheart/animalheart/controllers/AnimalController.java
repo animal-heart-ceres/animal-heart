@@ -36,7 +36,7 @@ public class AnimalController {
 //        set fk, will be the current user
         animal.setUser(userDao.getOne(1L));
         animalDao.save(animal);
-        return "redirect:/animal/showAll";
+        return "redirect:animal/showAll";
     }
 
     @GetMapping("/animal/showAll")
