@@ -4,7 +4,9 @@ import com.animalheart.animalheart.models.Follower;
 import com.animalheart.animalheart.models.User;
 import com.animalheart.animalheart.repositories.FollowerRepository;
 import com.animalheart.animalheart.repositories.UserRepository;
+import com.animalheart.animalheart.repositories.Users;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -14,6 +16,14 @@ import java.util.List;
 
 @Controller
 public class UserController {
+
+    private Users users;
+    private PasswordEncoder passwordEncoder;
+
+    public UserController(Users users, PasswordEncoder passwordEncoder) {
+        this.users = users;
+        this.passwordEncoder = passwordEncoder;
+    }
 
     @Autowired
     UserRepository userDao;
@@ -39,6 +49,8 @@ public class UserController {
 
     @PostMapping("/sign-up")
     public String createUser(@ModelAttribute User user, @RequestParam(name = "isOrganization") boolean isOrganization){
+        String hash = passwordEncoder.encode(user.getPassword());
+        user.setPassword(hash);
         user.setAdmin(false);
         user.setOrganization(isOrganization);
         userDao.save(user);

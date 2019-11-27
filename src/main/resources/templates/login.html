@@ -15,6 +15,12 @@
     <div class="container-fluid" id="h1-border">
         <div class="row">
             <div class="col-8">
+                <div th:if="${param.error}">
+                    Invalid Username and Password.
+                </div>
+                <div th:if="${param.logout}">
+                    You have been logged out.
+                </div>
                 <h1 class="text-center">MEMBER LOGIN</h1>
                 <div class="form-group text-center" id="form-div" >
                     <form th:action="@{/login}" method="post">

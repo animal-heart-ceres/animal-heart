@@ -9,7 +9,9 @@
             <a class="navbar-brand" href="/map" >MAP</a>
             <a class="navbar-brand" href="/user-profile/1" >MY PROFILE</a>
             <a class="navbar-brand" href="/messages">MESSAGES</a>
-            <a class="navbar-brand" href="/">LOGOUT</a>
+            <form th:action="@{/logout}" th:method="post">
+                <button class="navbar-brand" type="submit">LOGOUT</button>
+            </form>
         </span>
     </nav>
 </th:block>
