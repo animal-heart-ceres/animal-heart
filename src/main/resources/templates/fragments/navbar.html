@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <th:block th:fragment="main-navbar">
     <nav class="navbar sticky-top navbar-light bg-white" id="index-navbar">
         <a href="/"><p class="navbar-brand">ANIMAL<span id="heart" >HEART</span></p></a>
@@ -7,10 +7,16 @@
             <a class="navbar-brand" href="/events/showAll">EVENTS</a>
             <a class="navbar-brand" href="/animal/showAll">VIEW ANIMALS</a>
             <a class="navbar-brand" href="/map" >MAP</a>
-            <a class="navbar-brand" href="/user-profile/1" >MY PROFILE</a>
-            <a class="navbar-brand" href="/messages">MESSAGES</a>
-            <form th:action="@{/logout}" th:method="post">
+            <form sec:authorize="isAuthenticated()" th:action="@{/logout}" th:method="post">
+                <a class="navbar-brand" href="/user-profile/" >MY PROFILE</a>
+                <a class="navbar-brand" href="/messages">MESSAGES</a>
                 <button class="navbar-brand" type="submit">LOGOUT</button>
+            </form>
+            <div sec:authorize="!isAuthenticated()" class="border border-primary m-1" th:href="@{/login}">
+            <a th:href="@{/login}" class="btn-link btn ml-auto">Login</a>
+            </div>
+            <form sec:authorize="!isAuthenticated()" class="border border-primary m-1" th:action="@{/sign-up}" th:method="GET">
+                <button class="btn-link btn ml-auto">Signup</button>
             </form>
         </span>
     </nav>
