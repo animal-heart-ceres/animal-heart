@@ -50,17 +50,23 @@
             </div>
             <h3>Your Events</h3>
             <div class="d-flex">
-                <div class="card" style="width: 18rem;" th:each="event : ${events}" >
-                    <img  height="150" width="150" class="card-img-top" alt="">
-                    <div class="card-body">
-                        <h5 class="card-title" th:text="'Title: ' + ${event.title}">Event Title</h5>
-                        <p class="card-text" th:text="'Location: ' + ${event.location}">Location</p>
-                        <a th:href="@{'/event-profile/' + ${event.id}}" class="btn">VIEW Event PROFILE</a>
-                        <form th:action="@{'/event/' + ${event.id} + '/delete'}" th:method="post">
-                            <button type="submit">DELETE EVENT</button>
-                        </form>
-                    </div>
-                </div>
+
+                        <div class="card" style="width: 18rem;" th:each="event : ${events}" >
+                            <img  height="150" width="150" class="card-img-top" alt="">
+                            <div class="card-body">
+                                <h5 class="card-title" th:text="'Title: ' + ${event.title}">Event Title</h5>
+                                <p class="card-text" th:text="'Location: ' + ${event.location}">Location</p>
+                                <a th:href="@{'/event-profile/' + ${event.id}}" class="btn">VIEW Event PROFILE</a>
+                                <th:block sec:authorize="isAuthenticated()">
+                                    <th:block th:if="${event.user.id == #authentication.principal.id}">
+                                        <form th:action="@{'/event/' + ${event.id} + '/delete'}" th:method="post">
+                                            <button type="submit">DELETE EVENT</button>
+                                        </form>
+                                    </th:block>
+                                </th:block>
+                            </div>
+                        </div>
+
             </div>
         </div>
     </div>
