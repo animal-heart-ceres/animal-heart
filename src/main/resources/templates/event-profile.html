@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
@@ -26,13 +26,21 @@
 <!--            <span th:text="${animal.type}">type</span>-->
         </div>
         <div class="row-9">
-            <form th:action="@{'/event/' + ${event.id} + '/delete'}" th:method="post">
-                <button type="submit">Delete</button>
-            </form>
+            <th:block sec:authorize="isAuthenticated()">
+                <th:block th:if="${event.user.id == #authentication.principal.id}">
+                    <form th:action="@{'/event/' + ${event.id} + '/delete'}" th:method="post">
+                        <button type="submit">Delete</button>
+                    </form>
+                </th:block>
+            </th:block>
             <!-- Button to trigger edit modal -->
-            <div>
-                <button type="button" data-toggle="modal" data-target="#exampleModal" id="pet-edit-btn">Edit</button>
-            </div>
+            <th:block sec:authorize="isAuthenticated()">
+                <th:block th:if="${event.user.id == #authentication.principal.id}">
+                    <div>
+                        <button type="button" data-toggle="modal" data-target="#exampleModal" id="pet-edit-btn">Edit</button>
+                    </div>
+                </th:block>
+            </th:block>
         </div>
     </div>
 </div>

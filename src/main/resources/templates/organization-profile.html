@@ -24,6 +24,7 @@
                         <div>
                             <input id="edit-btn" type="button" data-toggle="modal" data-target="#edit-profile-Modal" value="EDIT PROFILE"/>
                             <input id="pet-btn" type="submit" data-toggle="modal" data-target="#add-pet-Modal" value="ADD PET"/>
+                            <input id="event-btn" type="submit" data-toggle="modal" data-target="#add-event-Modal" value="ADD EVENT"/>
                         </div>
                     </th:block>
                 </th:block>
@@ -49,16 +50,19 @@
                 </div>
             <h3>EVENTS</h3>
 <!--                ADD EVENTS TRIGGER-->
-            <input id="event-btn" type="submit" data-toggle="modal" data-target="#add-event-Modal" value="ADD EVENT"/>
             <div class="d-flex">
                 <div class="card" style="width: 12rem; height: 12rem;" th:each="event : ${usersEvents}">
                     <img src="/static/img/signup-cat.jpg" height="150" width="150" class="card-img-top" alt="">
                     <div class="card-body">
                         <h5 class="card-title" th:text="${event.title}">Card title</h5>
                         <p class="card-text" th:text="'Location: ' + ${event.location}">Location</p>
-                        <form th:action="@{'/event/' + ${event.id} + '/delete'}" th:method="post">
-                            <button type="submit">DELETE EVENT</button>
-                        </form>
+                        <th:block sec:authorize="isAuthenticated()">
+                            <th:block th:if="${event.user.id == #authentication.principal.id}">
+                                <form th:action="@{'/event/' + ${event.id} + '/delete'}" th:method="post">
+                                    <button type="submit">DELETE EVENT</button>
+                                </form>
+                            </th:block>
+                        </th:block>
                     </div>
                 </div>
             </div>
