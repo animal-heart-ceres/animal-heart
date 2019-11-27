@@ -5,6 +5,7 @@ import com.animalheart.animalheart.repositories.EventRepository;
 import com.animalheart.animalheart.repositories.OrganizationProfileRepository;
 import com.animalheart.animalheart.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -40,21 +41,21 @@ public class OrganizationProfileController {
         return "redirect:/organization-profile/" + organizationProfile.getId();
     }
 
-    @GetMapping("/organization-profile/{profileId}")
+    @GetMapping("/organization-profile")
     public String showOrganizationProfile(@PathVariable long profileId, Model vModel) {
         //When I go to my profile, I expect to see all the animals I have added
-        OrganizationProfile loggedInOrganizationProfile = organizationProfileDao.getOne(profileId);
+        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
-        User loggedInOrganization = loggedInOrganizationProfile.getOrganization();
+        OrganizationProfile loggedInOrganizationProfile = organizationProfileDao.findByOrganizationId(user.getId());
 
-        List<Animal> animalList = loggedInOrganization.getAnimalList();
+        List<Animal> animalList = user.getAnimalList();
 
         List<Event> allEvents = eventDao.findAll();
 
         List<Event> usersEvents = new ArrayList<>();
 
         for(Event event : allEvents) {
-            if(event.getUser().getId() == loggedInOrganization.getId()) {
+            if(event.getUser().getId() == loggedInOrganizationProfile.getId()) {
                 usersEvents.add(event);
             }
         }
