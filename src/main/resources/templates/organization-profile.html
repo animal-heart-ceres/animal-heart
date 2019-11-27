@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="https://www.thymeleaf.org">
+<html xmlns:th="https://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
@@ -19,21 +19,31 @@
                     <img id="img"  src="../static/img/login-dog-cat.jpg" width="475" height="300"  alt="animal-pals">
                 </div>
 <!--                EDIT PROFILE TRIGGER-->
-                <input id="edit-btn" type="button" data-toggle="modal" data-target="#edit-profile-Modal" value="EDIT PROFILE"/>
+                <th:block sec:authorize="isAuthenticated()">
+                    <th:block th:if="${organizationProfile.organization.id == #authentication.principal.id}">
+                        <div>
+                            <input id="edit-btn" type="button" data-toggle="modal" data-target="#edit-profile-Modal" value="EDIT PROFILE"/>
+                            <input id="pet-btn" type="submit" data-toggle="modal" data-target="#add-pet-Modal" value="ADD PET"/>
+                        </div>
+                    </th:block>
+                </th:block>
             </div>
             <div class="col-7">
                 <h3>YOUR PETS</h3>
 <!--                ADD PET TRIGGER-->
-                <input id="pet-btn" type="submit" data-toggle="modal" data-target="#add-pet-Modal" value="ADD PET"/>
                 <div class="d-flex">
                     <div class="card" style="width: 18rem;"  th:each="animal : ${animals}">
                         <img th:src="${animal.img}" height="150" width="150" class="card-img-top" alt="">
                         <div class="card-body">
                             <h5 class="card-title" th:text="'Name: ' + ${animal.name}">Animal Name</h5>
                             <a th:href="@{'/animal/' + ${animal.id}}" class="btn">VIEW ANIMAL</a>
-                            <form th:action="@{'/delete-animal/' + ${animal.id}}" th:method="post">
-                                <button type="submit">DELETE ANIMAL</button>
-                            </form>
+                            <th:block sec:authorize="isAuthenticated()">
+                                <th:block th:if="${animal.user.id == #authentication.principal.id}">
+                                    <form th:action="@{'/delete-animal/' + ${animal.id}}" th:method="post">
+                                        <button type="submit">Delete</button>
+                                    </form>
+                                </th:block>
+                            </th:block>
                         </div>
                     </div>
                 </div>
