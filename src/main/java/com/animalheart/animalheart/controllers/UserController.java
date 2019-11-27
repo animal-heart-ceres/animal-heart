@@ -6,6 +6,7 @@ import com.animalheart.animalheart.repositories.FollowerRepository;
 import com.animalheart.animalheart.repositories.UserRepository;
 import com.animalheart.animalheart.repositories.Users;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -38,7 +39,12 @@ public class UserController {
 
     @PostMapping("/login")
     public String login() {
-        return "index";
+        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        if(user.getOrganization()) {
+            return "redirect:/create-organization-profile/" + user.getId();
+        } else {
+            return "redirect:/create-user-profile/" + user.getId();
+        }
     }
 
     @GetMapping("/sign-up")
@@ -54,11 +60,7 @@ public class UserController {
         user.setAdmin(false);
         user.setOrganization(isOrganization);
         userDao.save(user);
-        if(user.getOrganization()) {
-            return "redirect:/create-organization-profile/" + user.getId();
-        } else {
-            return "redirect:/create-user-profile/" + user.getId();
-        }
+        return "redirect:/login";
 
     }
 

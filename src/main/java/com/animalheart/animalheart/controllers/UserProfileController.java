@@ -6,6 +6,7 @@ import com.animalheart.animalheart.repositories.FollowerRepository;
 import com.animalheart.animalheart.repositories.UserProfileRepository;
 import com.animalheart.animalheart.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -43,10 +44,12 @@ public class UserProfileController {
         return "redirect:/user-profile/" + userProfile.getId();
     }
 
-    @GetMapping("/user-profile/{profileId}")
-    public String showUserProfile(@PathVariable long profileId, Model vModel) {
+    @GetMapping("/user-profile")
+    public String showUserProfile(Model vModel) {
         //When I go to my profile, I expect to see all the animals I have added
-        UserProfile loggedInUserProfile = userProfileDao.getOne(profileId);
+        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+        UserProfile loggedInUserProfile = userProfileDao.findByUserId(user.getId());
 
         User loggedInUser = loggedInUserProfile.getUser();
 
