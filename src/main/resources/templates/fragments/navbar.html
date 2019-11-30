@@ -5,8 +5,9 @@
         <a href="/"><p class="navbar-brand">ANIMAL<span id="heart" >HEART</span></p></a>
         <span class="d-flex flex-row bd-highlight mb-3">
             <a class="navbar-brand" href="/events/showAll">EVENTS</a>
-            <a class="navbar-brand" href="/animal/showAll">VIEW ANIMALS</a>
-            <a class="navbar-brand" href="/map" >MAP</a>
+            <a class="navbar-brand" href="/animal/showAll">ANIMALS</a>
+            <a class="navbar-brand" href="/organizations">RESCUES</a>
+<!--            <a class="navbar-brand" href="/map" >MAP</a>-->
             <form sec:authorize="isAuthenticated()" th:action="@{/logout}" th:method="post">
                 <a class="navbar-brand" href="/user-profile/" >MY PROFILE</a>
                 <a class="navbar-brand" href="/messages">MESSAGES</a>

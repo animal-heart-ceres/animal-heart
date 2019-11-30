@@ -41,8 +41,15 @@ public class OrganizationProfileController {
         return "redirect:/organization-profile/" + organizationProfile.getId();
     }
 
+    @GetMapping("/organizations")
+    public String viewAllOrganizations(Model vModel){
+        List<OrganizationProfile> allProfiles = organizationProfileDao.findAll();
+        vModel.addAttribute("organizations", allProfiles);
+        return"view-organizations";
+    }
+
     @GetMapping("/organization-profile")
-    public String showOrganizationProfile(@PathVariable long profileId, Model vModel) {
+    public String showOrganizationProfile( Model vModel ) {
         //When I go to my profile, I expect to see all the animals I have added
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
@@ -65,6 +72,7 @@ public class OrganizationProfileController {
         vModel.addAttribute("event", new Event());
         vModel.addAttribute("organizationProfile", loggedInOrganizationProfile);
         vModel.addAttribute("animals", animalList);
+
         return "organization-profile";
     }
     @PostMapping("/organization-profile/{id}/edit")
