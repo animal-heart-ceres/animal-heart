@@ -29,7 +29,7 @@
             <th:block sec:authorize="isAuthenticated()">
                 <th:block th:if="${animal.user.id == #authentication.principal.id}">
                     <form th:action="@{'/delete-animal/' + ${animal.id}}" th:method="post">
-                        <button type="submit">Delete</button>
+                        <button type="submit">Delete Animal</button>
                     </form>
                 </th:block>
             </th:block>
@@ -37,7 +37,7 @@
             <th:block sec:authorize="isAuthenticated()">
                 <th:block th:if="${animal.user.id == #authentication.principal.id}">
                     <div>
-                        <button type="button" data-toggle="modal" data-target="#exampleModal" id="pet-edit-btn">Edit
+                        <button type="button" data-toggle="modal" data-target="#exampleModal" id="pet-edit-btn">Edit Animal Profile
                         </button>
                     </div>
                 </th:block>
@@ -48,7 +48,49 @@
 <div class="row-9">
     <div th:each="comment : ${comments}">
         <p th:text="${comment.comment}"></p>
+        <th:block sec:authorize="isAuthenticated()">
+            <th:block th:if="${comment.userId == #authentication.principal.id}">
+                <form th:action="@{'/comment/' + ${comment.id} + '/delete'}" th:method="post">
+                    <button type="submit">Delete Comment</button>
+                </form>
+                <div>
+                    <button type="button" data-toggle="modal" data-target="#editCommentModal" id="comment-edit-btn">Edit Comment
+                    </button>
+                </div>
+                <div class="modal fade" id="editCommentModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+                     aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <form th:action="@{'/comment/' + ${comment.id} + '/edit'}" th:method="post" class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title">EDIT Comment</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="modal-body">
+                                    <div class="form-group">
+                                        <label for="edit-animal">Comment</label>
+                                        <input id="edit-message" class="form-control" name="comment" th:value="${comment.comment}" type="text">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                <button type="submit" class="btn btn-primary">Save changes</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </th:block>
+        </th:block>
     </div>
+    <th:block sec:authorize="isAuthenticated()">
+            <form th:action="@{'/create-comment/' + ${animal.id} + '/' + ${#authentication.principal.id}}" th:method="post">
+                <input id="leave-comment" class="form-control" th:name="comment" type="text">
+                <button type="submit">Leave Comment</button>
+            </form>
+    </th:block>
 </div>
 
 
@@ -93,6 +135,32 @@
         </form>
     </div>
 </div>
+
+<!--<div class="modal fade" id="editCommentModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"-->
+<!--     aria-hidden="true">-->
+<!--    <div class="modal-dialog" role="document">-->
+<!--        <form th:action="@{'/comment/' + ${comment.id} + '/edit'}" th:method="post" class="modal-content">-->
+<!--            <div class="modal-header">-->
+<!--                <h5 class="modal-title">EDIT Comment</h5>-->
+<!--                <button type="button" class="close" data-dismiss="modal" aria-label="Close">-->
+<!--                    <span aria-hidden="true">&times;</span>-->
+<!--                </button>-->
+<!--            </div>-->
+<!--            <div class="modal-body">-->
+<!--                <div class="modal-body">-->
+<!--                    <div class="form-group">-->
+<!--                        <label for="edit-animal">Comment</label>-->
+<!--                        <input id="edit-message" class="form-control" name="comment" th:value="${comment.comment}" type="text">-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--            <div class="modal-footer">-->
+<!--                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>-->
+<!--                <button type="submit" class="btn btn-primary">Save changes</button>-->
+<!--            </div>-->
+<!--        </form>-->
+<!--    </div>-->
+<!--</div>-->
 
 
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
