@@ -51,6 +51,7 @@ public class AnimalController {
         Animal animal = animalDao.getOne(id);
         List<Comment> commentList =  animal.getCommentList();
         vModel.addAttribute("animal", animal);
+        vModel.addAttribute("comment", new Comment());
         vModel.addAttribute("comments", commentList);
         return "animal-profile";
     }

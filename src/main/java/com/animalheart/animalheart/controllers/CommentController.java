@@ -36,7 +36,7 @@ public class CommentController {
 
         commentDao.save(newComment);
 
-        return "redirect:/";
+        return "redirect:/animal/" + animalId;
     }
 
     @PostMapping("/comment/{commentId}/edit")
