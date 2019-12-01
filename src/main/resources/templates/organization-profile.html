@@ -18,6 +18,11 @@
                 <div class="form-group text-center" id="form-div" >
                     <img id="img"  src="../static/img/login-dog-cat.jpg" width="475" height="300"  alt="animal-pals">
                 </div>
+                <th:block sec:authorize="isAuthenticated()">
+                        <form th:action="@{'/follower/' + ${organizationProfile.organization.id}}" th:method="post">
+                            <button type="submit">Follow</button>
+                        </form>
+                </th:block>
 <!--                EDIT PROFILE TRIGGER-->
                 <th:block sec:authorize="isAuthenticated()">
                     <th:block th:if="${organizationProfile.organization.id == #authentication.principal.id}">

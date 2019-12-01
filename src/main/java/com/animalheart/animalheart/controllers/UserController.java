@@ -1,8 +1,10 @@
 package com.animalheart.animalheart.controllers;
 
 import com.animalheart.animalheart.models.Follower;
+import com.animalheart.animalheart.models.OrganizationProfile;
 import com.animalheart.animalheart.models.User;
 import com.animalheart.animalheart.repositories.FollowerRepository;
+import com.animalheart.animalheart.repositories.OrganizationProfileRepository;
 import com.animalheart.animalheart.repositories.UserRepository;
 import com.animalheart.animalheart.repositories.Users;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,6 +33,9 @@ public class UserController {
 
     @Autowired
     FollowerRepository followerDao;
+
+    @Autowired
+    OrganizationProfileRepository organizationProfileDao;
 
     @GetMapping("/login")
     public String showLoginForm() {
@@ -65,16 +70,17 @@ public class UserController {
     }
 
     @PostMapping("/follower/{orgId}")
-    public String createFollower(@PathVariable Long orgId, @RequestParam(name = "followerId") Long followerId) {
+    public String createFollower(@PathVariable Long orgId) {
 
         User organization = userDao.getOne(orgId);
-
+        OrganizationProfile organizationProfile = organizationProfileDao.findByOrganizationId(organization.getId());
+        User follower = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         Follower createdFollower = new Follower();
-        createdFollower.setFollowerId(followerId);
+        createdFollower.setFollowerId(follower.getId());
         createdFollower.setUser(organization);
         followerDao.save(createdFollower);
 
-        return "redirect:/organization-profile/" + orgId;
+        return "redirect:/organization-profile/" + organizationProfile.getId();
     }
 
     @PostMapping("/follower/{userId}/{orgId}/delete")

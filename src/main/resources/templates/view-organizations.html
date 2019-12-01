@@ -20,7 +20,7 @@
             <div class="card-body">
                 <h5 class="card-title" th:text="'Rescue: ' + ${organization.name}">Rescue Name</h5>
                 <p class="card-text" th:text="'Description: ' + ${organization.description}">Rescue Description</p>
-                <a th:href="@{/organization-profile}" class="btn">VIEW RESCUE</a>
+                <a th:href="@{'/organization-profile/' + ${organization.id}" class="btn">VIEW RESCUE</a>
             </div>
         </div>
     </div>

@@ -45,15 +45,15 @@ public class OrganizationProfileController {
     public String viewAllOrganizations(Model vModel){
         List<OrganizationProfile> allProfiles = organizationProfileDao.findAll();
         vModel.addAttribute("organizations", allProfiles);
-        return"view-organizations";
+        return "view-organizations";
     }
 
-    @GetMapping("/organization-profile")
-    public String showOrganizationProfile( Model vModel ) {
+    @GetMapping("/organization-profile/{orgProfileId}")
+    public String showOrganizationProfile( Model vModel,@PathVariable Long orgProfileId) {
         //When I go to my profile, I expect to see all the animals I have added
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
-        OrganizationProfile loggedInOrganizationProfile = organizationProfileDao.findByOrganizationId(user.getId());
+        OrganizationProfile loggedInOrganizationProfile = organizationProfileDao.getOne(orgProfileId);
 
         List<Animal> animalList = user.getAnimalList();
 
