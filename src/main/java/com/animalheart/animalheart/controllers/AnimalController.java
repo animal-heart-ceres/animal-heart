@@ -82,12 +82,6 @@ public class AnimalController {
             }
         }
 
-        if(user.getOrganization()) {
-            OrganizationProfile organizationProfile = organizationProfileDao.findByOrganizationId(user.getId());
-            return "redirect:/organization-profile/" + organizationProfile.getId();
-        } else {
-            UserProfile userProfile = userProfileDao.findByUserId(user.getId());
-            return "redirect:/user-profile/" + userProfile.getId();
-        }
+        return "redirect:/user-profile";
     }
 }
