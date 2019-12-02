@@ -12,7 +12,32 @@
 
 <th:block th:replace="fragments/navbar :: main-navbar"/>
 
-    <div class="container-fluid" id="h1-border">
+<!--SMALL SCREEN SIZE-->
+<div class="container-fluid d-lg-none text-center" id="sm-h1-border">
+    <div class="row">
+        <div class="col">
+            <div th:if="${param.error}">
+                Invalid Username and Password.
+            </div>
+            <div th:if="${param.logout}">
+                You have been logged out.
+            </div>
+            <h1 class="text-center">MEMBER LOGIN</h1>
+            <div class="form-group text-center" id="sm-form-div" >
+                <form th:action="@{/login}" method="post">
+                    <input id="smUsername" name="username" type="text" placeholder="USERNAME" />
+                    <input id="smPassword" name="password" type="password" placeholder="PASSWORD" />
+                    <input id="smSubmit-btn" type="submit" value="Log In"/>
+                </form>
+                <a href="/">HOME</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!--LARGE SCREEN SIZE-->
+    <div class="container-fluid d-sm-none d-none d-lg-block" id="h1-border">
         <div class="row">
             <div class="col-8">
                 <div th:if="${param.error}">

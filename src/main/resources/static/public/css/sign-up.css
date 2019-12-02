@@ -35,9 +35,6 @@ label{
     border-top: 20px solid #A74115;
 }
 
-form{
-    /*padding-top: 5px;*/
-}
 
 
 #rescue-signup{
@@ -53,4 +50,19 @@ a{
     color: #49484A;
     font-weight: bold;
     font-size: 23px;
+}
+
+/*SMALL SCREEN SIZE*/
+
+#sm-form-div{
+    border-top: 15px solid #A74115;
+}
+
+#smSubmit-btn{
+    width: 25%;
+    background-color: #C7D0D8;
+    font-family: 'Playfair Display', serif;
+    font-size: 35px;
+    border: 5px solid #99a6b1;
+    margin-bottom: 20px;
 }

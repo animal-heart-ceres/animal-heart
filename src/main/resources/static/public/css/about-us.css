@@ -1,0 +1,25 @@
+.row{
+    margin-top: 90px;
+}
+
+.img{
+    position: relative;
+    overflow: hidden;
+    border-radius: 50%;
+}
+
+.text-center{
+    margin-top: 50px;
+}
+
+h1{
+    font-family: 'Playfair Display', serif;
+}
+
+p{
+    font-family: 'Raleway', sans-serif;
+}
+
+#mission{
+    color: #A24848;
+}
