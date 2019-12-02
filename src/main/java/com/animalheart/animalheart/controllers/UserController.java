@@ -96,7 +96,7 @@ public class UserController {
                 followerDao.delete(follower);
             }
         }
-        return "redirect:/organization-profile/" + orgId;
+        return "redirect:/organization-profile";
     }
 
 

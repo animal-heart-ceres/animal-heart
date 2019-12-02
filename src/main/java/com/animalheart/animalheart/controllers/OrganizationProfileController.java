@@ -2,6 +2,7 @@ package com.animalheart.animalheart.controllers;
 
 import com.animalheart.animalheart.models.*;
 import com.animalheart.animalheart.repositories.EventRepository;
+import com.animalheart.animalheart.repositories.FollowerRepository;
 import com.animalheart.animalheart.repositories.OrganizationProfileRepository;
 import com.animalheart.animalheart.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +25,9 @@ public class OrganizationProfileController {
 
     @Autowired
     EventRepository eventDao;
+
+    @Autowired
+    FollowerRepository followerDao;
 
     @GetMapping("/create-organization-profile/{id}")
     public String showCreateOrganizationProfileForm(@PathVariable Long id, Model vModel) {
@@ -60,11 +64,14 @@ public class OrganizationProfileController {
 
         List<Event> usersEvents = loggedInUser.getEventList();
 
+        List<Follower> followerList = followerDao.findAll();
+
         vModel.addAttribute("organizationProfile", loggedInOrganizationProfile);
         vModel.addAttribute("usersEvents", usersEvents);
         vModel.addAttribute("animal", new Animal());
         vModel.addAttribute("event", new Event());
         vModel.addAttribute("animals", animalList);
+        vModel.addAttribute("followerList", followerList);
 
         return "organization-profile";
     }
@@ -80,12 +87,14 @@ public class OrganizationProfileController {
 
         List<Event> usersEvents = loggedInUser.getEventList();
 
+        List<Follower> followerList = followerDao.findAll();
 
         vModel.addAttribute("usersEvents", usersEvents);
         vModel.addAttribute("animal", new Animal());
         vModel.addAttribute("event", new Event());
         vModel.addAttribute("animals", animalList);
         vModel.addAttribute("organizationProfile", currentOrganizationProfile);
+        vModel.addAttribute("followerList", followerList);
         return "organization-profile";
     }
 
