@@ -2,6 +2,7 @@ package com.animalheart.animalheart.controllers;
 import com.animalheart.animalheart.models.*;
 import com.animalheart.animalheart.repositories.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -33,8 +34,8 @@ public class AnimalController {
 
     @PostMapping("/create-animal")
     public String createAnimal(@ModelAttribute Animal animal) {
-//        set fk, will be the current user
-        animal.setUser(userDao.getOne(5L));
+        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        animal.setUser(userDao.getOne(user.getId()));
         animalDao.save(animal);
         return "redirect:animal/showAll";
     }

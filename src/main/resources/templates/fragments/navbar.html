@@ -9,7 +9,7 @@
             <a class="navbar-brand" href="/organizations">RESCUES</a>
 <!--            <a class="navbar-brand" href="/map" >MAP</a>-->
             <form sec:authorize="isAuthenticated()" th:action="@{/logout}" th:method="post">
-                <a class="navbar-brand" href="/user-profile/" >MY PROFILE</a>
+                <a class="navbar-brand" href="/user-profile" >MY PROFILE</a>
                 <a class="navbar-brand" href="/messages">MESSAGES</a>
                 <button class="navbar-brand" type="submit">LOGOUT</button>
             </form>
