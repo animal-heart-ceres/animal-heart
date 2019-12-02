@@ -2,9 +2,11 @@ package com.animalheart.animalheart.controllers;
 
 import com.animalheart.animalheart.models.Animal;
 import com.animalheart.animalheart.models.Event;
+import com.animalheart.animalheart.models.User;
 import com.animalheart.animalheart.repositories.EventRepository;
 import com.animalheart.animalheart.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -30,7 +32,8 @@ public class EventController {
     @PostMapping("/create-event")
     public String createEvent(@ModelAttribute Event event){
 //        set fk
-        event.setUser(userDao.getOne(2L));
+        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        event.setUser(userDao.getOne(user.getId()));
         eventDao.save(event);
         return "redirect:/";
     }
