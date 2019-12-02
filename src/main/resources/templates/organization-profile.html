@@ -98,7 +98,7 @@
                 </button>
             </div>
 
-            <form th:action="@{'/create-animal/' + ${organizationProfile.id} + '/edit'}" th:method="post" th:object="${animal}">
+            <form th:action="@{'/organization-profile/' + ${organizationProfile.id} + '/edit'}" th:method="post">
                 <div class="modal-body">
                         <div class="form-group">
                             <label for="edit-name">Organization Name</label>

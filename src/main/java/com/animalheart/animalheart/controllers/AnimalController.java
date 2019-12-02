@@ -37,7 +37,8 @@ public class AnimalController {
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         animal.setUser(userDao.getOne(user.getId()));
         animalDao.save(animal);
-        return "redirect:animal/showAll";
+
+        return "redirect:/user-profile";
     }
 
     @GetMapping("/animal/showAll")

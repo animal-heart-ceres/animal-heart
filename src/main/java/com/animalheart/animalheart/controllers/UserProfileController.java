@@ -84,7 +84,7 @@ public class UserProfileController {
         oldProfile.setLastName(lastName);
         oldProfile.setAddress(address);
         userProfileDao.save(oldProfile);
-        return "redirect:/user-profile/" + profileId;
+        return "redirect:/user-profile";
     }
 
 }
