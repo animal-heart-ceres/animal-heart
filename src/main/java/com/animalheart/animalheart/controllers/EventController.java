@@ -31,11 +31,11 @@ public class EventController {
 
     @PostMapping("/create-event")
     public String createEvent(@ModelAttribute Event event){
-//        set fk
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         event.setUser(userDao.getOne(user.getId()));
         eventDao.save(event);
-        return "redirect:/";
+
+        return "redirect:/organization-profile";
     }
 
     @GetMapping("/events/showAll")
@@ -59,14 +59,14 @@ public class EventController {
         oldEvent.setDescription(description);
         oldEvent.setLocation(location);
         eventDao.save(oldEvent);
-        return"redirect:/";
+        return "redirect:/organization-profile";
     }
 
     @PostMapping("/event/{eventId}/delete")
     public String deleteEvent(@PathVariable Long eventId) {
         Event currentEvent = eventDao.getOne(eventId);
         eventDao.delete(currentEvent);
-        return "redirect:/";
+        return "redirect:/organization-profile";
     }
 
 }

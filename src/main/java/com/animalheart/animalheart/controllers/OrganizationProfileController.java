@@ -37,7 +37,6 @@ public class OrganizationProfileController {
         User organization = userDao.getOne(organizationId);
         organizationProfile.setOrganization(organization);
         organizationProfileDao.save(organizationProfile);
-
         return "redirect:/login";
     }
 
@@ -53,14 +52,13 @@ public class OrganizationProfileController {
         //When I go to my profile, I expect to see all the animals I have added
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
-        OrganizationProfile loggedInOrganizationProfile = organizationProfileDao.findByOrganizationId(user.getId());
-
-        List<Animal> animalList = user.getAnimalList();
-
         User loggedInUser = userDao.getOne(user.getId());
 
-        List<Event> usersEvents = loggedInUser.getEventList();
+        OrganizationProfile loggedInOrganizationProfile = organizationProfileDao.findByOrganizationId(user.getId());
 
+        List<Animal> animalList = loggedInUser.getAnimalList();
+
+        List<Event> usersEvents = loggedInUser.getEventList();
 
         vModel.addAttribute("organizationProfile", loggedInOrganizationProfile);
         vModel.addAttribute("usersEvents", usersEvents);
@@ -100,7 +98,7 @@ public class OrganizationProfileController {
         oldProfile.setAddress(address);
         oldProfile.setDescription(description);
         organizationProfileDao.save(oldProfile);
-        return "redirect:/";
+        return "redirect:/organization-profile";
     }
 
 
