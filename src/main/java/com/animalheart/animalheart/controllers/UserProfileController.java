@@ -41,7 +41,7 @@ public class UserProfileController {
         User currentUser = userDao.getOne(userId);
         userProfile.setUser(currentUser);
         userProfileDao.save(userProfile);
-        return "redirect:/user-profile/" + userProfile.getId();
+        return "redirect:/login";
     }
 
     @GetMapping("/user-profile")

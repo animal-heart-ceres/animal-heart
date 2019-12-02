@@ -46,9 +46,9 @@ public class UserController {
     public String login() {
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         if(user.getOrganization()) {
-            return "redirect:/create-organization-profile/" + user.getId();
+            return "redirect:/organization-profile";
         } else {
-            return "redirect:/create-user-profile/" + user.getId();
+            return "redirect:/user-profile";
         }
     }
 
@@ -65,7 +65,11 @@ public class UserController {
         user.setAdmin(false);
         user.setOrganization(isOrganization);
         userDao.save(user);
-        return "redirect:/login";
+        if(user.getOrganization()) {
+            return "redirect:/create-organization-profile/" + user.getId();
+        } else {
+            return "redirect:/create-user-profile/" + user.getId();
+        }
 
     }
 
