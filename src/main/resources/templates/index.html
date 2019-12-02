@@ -17,34 +17,13 @@
 
 <th:block th:replace="fragments/navbar :: main-navbar"/>
 
-<!--small screen width-->
-
-<!--<h5 id="smHead" class="d-lg-none text-center">ANIMAL<span id="heart">HEART</span></h5>-->
-<!--<p id="smText" class="d-lg-none text-center">GIVING SAN ANTONIO PETS A SECOND CHANCE AT LIFE</p>-->
-<!--<div class="d-lg-none text-center" id="smLinks">-->
-<!--    <a class="link" href="/animal/showAll">View Animals</a>-->
-<!--    <a class="link" href="/sign-up">Sign Up</a>-->
-<!--    <a class="link" href="/login">Login</a>-->
-<!--</div>-->
-
-
-<!--large screen width-->
-
-<!--    <nav class="navbar fixed-top navbar-light bg-white d-sm-none d-none d-lg-block " id="index-navbar">-->
-<!--        <a class="navbar-brand " href="/animal/showAll">View Animals</a>-->
-<!--          <a class="navbar-brand float-right" href="/sign-up">Sign Up</a>-->
-<!--          <a class="navbar-brand float-right" href="/login">Login</a>-->
-
-<!--    </nav>-->
-
-
 <header class="d-sm-none jumbotron my-1 bg-white d-none d-lg-block " id="index-jumbotron">
     <h1 class="display-3 text-center">ANIMALHEART</h1>
     <p class="text-center">GIVING <span>SAN ANTONIO</span> PETS A SECOND CHANCE AT LIFE</p>
 </header>
 
 
-<div id="container-id" class="d-sm-none container-fluid d-none d-lg-block ">
+<div id="container-id" class="d-sm-none d-none d-lg-block ">
     <div class="row">
         <div class="col-4">
             <img id="img1" src="img/jack-dog.jpg" width="475" height="600" alt="dog outside">
@@ -62,6 +41,6 @@
 <nav class="navbar fixed-bottom navbar-light bg-white">
     <a class="navbar-brand" href="/about-us">About Us</a>
 </nav>
-
+<th:block th:replace="fragments/footer :: main-footer"/>
 </body>
 </html>
