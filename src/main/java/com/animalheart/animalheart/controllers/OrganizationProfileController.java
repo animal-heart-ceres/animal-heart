@@ -38,7 +38,7 @@ public class OrganizationProfileController {
         organizationProfile.setOrganization(organization);
         organizationProfileDao.save(organizationProfile);
 
-        return "redirect:/organization-profile/" + organizationProfile.getId();
+        return "redirect:/login";
     }
 
     @GetMapping("/organizations")
@@ -49,7 +49,7 @@ public class OrganizationProfileController {
     }
 
     @GetMapping("/organization-profile")
-    public String showOrganizationProfile( Model vModel ) {
+    public String showOrganizationProfile( Model vModel, @PathVariable Long orgProfileId) {
         //When I go to my profile, I expect to see all the animals I have added
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 

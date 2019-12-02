@@ -41,36 +41,40 @@ public class UserProfileController {
         User currentUser = userDao.getOne(userId);
         userProfile.setUser(currentUser);
         userProfileDao.save(userProfile);
-        return "redirect:/user-profile/" + userProfile.getId();
+        return "redirect:/login";
     }
 
     @GetMapping("/user-profile")
     public String showUserProfile(Model vModel) {
         //When I go to my profile, I expect to see all the animals I have added
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        User loggedInOrganization = userDao.getOne(user.getId());
+        if(loggedInOrganization.getOrganization()) {
+            return "redirect:/organization-profile";
+        } else {
+            UserProfile loggedInUserProfile = userProfileDao.findByUserId(user.getId());
 
-        UserProfile loggedInUserProfile = userProfileDao.findByUserId(user.getId());
+            User loggedInUser = loggedInUserProfile.getUser();
 
-        User loggedInUser = loggedInUserProfile.getUser();
+            List<Animal> animalList = loggedInUser.getAnimalList();
+            List<Follower> followerList = followerDao.findAll();
+            List<Event> followerEvents = new ArrayList<>();
 
-        List<Animal> animalList = loggedInUser.getAnimalList();
-        List<Follower> followerList = followerDao.findAll();
-        List<Event> followerEvents = new ArrayList<>();
+            for(Follower follow : followerList){
+                List<Event> eventList1 = follow.getUser().getEventList();
+                if(follow.getFollowerId() == loggedInUser.getId())
+                followerEvents.addAll(eventList1);
+            }
 
-        for(Follower follow : followerList){
-            List<Event> eventList1 = follow.getUser().getEventList();
-            if(follow.getFollowerId() == loggedInUser.getId())
-            followerEvents.addAll(eventList1);
+
+            vModel.addAttribute("userProfile", loggedInUserProfile);
+            vModel.addAttribute("animals", animalList);
+            vModel.addAttribute("animal", new Animal());
+            vModel.addAttribute("events", followerEvents);
+            vModel.addAttribute("follows", followerList);
+
+            return "user-profile";
         }
-
-
-        vModel.addAttribute("userProfile", loggedInUserProfile);
-        vModel.addAttribute("animals", animalList);
-        vModel.addAttribute("animal", new Animal());
-        vModel.addAttribute("events", followerEvents);
-        vModel.addAttribute("follows", followerList);
-
-        return "user-profile";
     }
 
     @PostMapping("/profile/{profileId}/edit")
