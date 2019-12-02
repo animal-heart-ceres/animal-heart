@@ -2,6 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css?family=Playfair+Display|Raleway&display=swap" rel="stylesheet">
@@ -13,7 +14,7 @@
     <link rel="stylesheet" th:href="@{/public/css/index.css}">
     <th:block th:replace="fragments/header :: main-header" />
 </head>
-<body>
+<body class="container-fluid">
 
 <th:block th:replace="fragments/navbar :: main-navbar"/>
 
@@ -38,22 +39,22 @@
 <!--    </nav>-->
 
 
-<header class="d-sm-none jumbotron my-1 bg-white d-none d-lg-block " id="index-jumbotron">
+<header class="jumbotron my-1 bg-white" id="index-jumbotron">
     <h1 class="display-3 text-center">ANIMALHEART</h1>
     <p class="text-center">GIVING <span>SAN ANTONIO</span> PETS A SECOND CHANCE AT LIFE</p>
 </header>
 
 
-<div id="container-id" class="d-sm-none container-fluid d-none d-lg-block ">
-    <div class="row">
+<div id="container-id">
+    <div class="row no-gutters">
         <div class="col-4">
-            <img id="img1" src="img/jack-dog.jpg" width="475" height="600" alt="dog outside">
+            <img class="img" src="img/jack-dog.jpg" alt="dog outside">
         </div>
         <div class="col-4">
-            <img id="img2" src="img/cat.jpg" width="475" height="600" alt="cat">
+            <img class="img" src="img/cat.jpg" alt="cat">
         </div>
         <div class="col-4">
-            <img id="img3" src="img/golden-dog.jpg" width="475" height="600" alt="dog outside">
+            <img class="img" src="img/golden-dog.jpg" alt="dog outside">
         </div>
     </div>
 </div>
