@@ -13,7 +13,34 @@
 
 <th:block th:replace="fragments/navbar :: main-navbar"/>
 
-    <div class="container-fluid" id="h1-border">
+<div class="container-fluid d-lg-none" id="sm-h1-border">
+    <div class="row">
+        <div class="col">
+            <h1 class="text-center">USER REGISTER</h1>
+            <div class="form-group text-center" id="sm-form-div" >
+                <form th:action="@{/sign-up}" th:method="post" th:object="${user}">
+                    <input id="sm-username" th:field="*{username}" type="text" placeholder="USERNAME" />
+                    <input id="sm-email" th:field="*{email}" type="text" placeholder="EMAIL" />
+                    <input id="sm-password" th:field="*{password}" type="password" placeholder="PASSWORD" />
+                    <p>Are you a rescue organization?</p>
+                    <select name="isOrganization">
+                        <option th:value="${false}" th:text="No"></option>
+                        <option th:value="${true}" th:text="Yes"></option>
+                    </select>
+                    <input id="smSubmit-btn" type="submit" value="SIGN UP"/>
+                </form>
+                <div class="row-2">
+                    <a id="smhome" href="/">HOME</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<!--LARGE SCREEN SIZE -->
+    <div class="container-fluid d-sm-none d-none d-lg-block" id="h1-border">
         <div class="row">
             <div class="col-8">
                 <h1 class="text-center">USER REGISTER</h1>

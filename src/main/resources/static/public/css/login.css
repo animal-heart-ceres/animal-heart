@@ -32,7 +32,6 @@ input {
     border: 5px solid #A4A3A4;
     border-radius: 15px;
     box-sizing: border-box;
-    /*font-weight: bold;*/
     font-size: 20px;
 }
 
@@ -43,6 +42,7 @@ input {
     font-size: 35px;
     border: 5px solid #99a6b1;
     margin-bottom: 125px;
+    margin-top: 20px;
 }
 
 label{
@@ -55,4 +55,20 @@ a{
     color: #49484A;
     font-weight: bold;
     font-size: 23px;
+}
+
+/*SMALL SCREEN SIZE*/
+
+#smSubmit-btn{
+    width: 25%;
+    background-color: #C7D0D8;
+    font-family: 'Playfair Display', serif;
+    font-size: 35px;
+    border: 5px solid #99a6b1;
+    margin-bottom: 125px;
+    margin-top: 20px;
+}
+
+#sm-form-div{
+    border-top: 10px solid #A74115;
 }
