@@ -9,51 +9,25 @@
     <th:block th:replace="fragments/header :: main-header" />
 
 </head>
-<body>
+<body class="container-fluid">
 
 <th:block th:replace="fragments/navbar :: main-navbar"/>
 
-<div class="container-fluid d-lg-none" id="sm-h1-border">
-    <div class="row">
-        <div class="col">
-            <h1 class="text-center">USER REGISTER</h1>
-            <div class="form-group text-center" id="sm-form-div" >
-                <form th:action="@{/sign-up}" th:method="post" th:object="${user}">
-                    <input id="sm-username" th:field="*{username}" type="text" placeholder="USERNAME" />
-                    <input id="sm-email" th:field="*{email}" type="text" placeholder="EMAIL" />
-                    <input id="sm-password" th:field="*{password}" type="password" placeholder="PASSWORD" />
-                    <p>Are you a rescue organization?</p>
-                    <select name="isOrganization">
-                        <option th:value="${false}" th:text="No"></option>
-                        <option th:value="${true}" th:text="Yes"></option>
-                    </select>
-                    <input id="smSubmit-btn" type="submit" value="SIGN UP"/>
-                </form>
-                <div class="row-2">
-                    <a id="smhome" href="/">HOME</a>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-
-
 <!--LARGE SCREEN SIZE -->
-    <div class="container-fluid d-sm-none d-none d-lg-block" id="h1-border">
+    <div id="h1-border">
         <div class="row">
-            <div class="col-8">
+            <div class="col-lg-9 col-sm">
                 <h1 class="text-center">USER REGISTER</h1>
                 <div class="form-group text-center" id="form-div" >
                     <form th:action="@{/sign-up}" th:method="post" th:object="${user}">
-                        <input id="username" th:field="*{username}" type="text" placeholder="USERNAME" />
-                        <input id="email" th:field="*{email}" type="text" placeholder="EMAIL" />
-                        <input id="password" th:field="*{password}" type="password" placeholder="PASSWORD" />
-                        <p>Are you a rescue organization?</p>
+                        <span>Are you a rescue organization?</span>
                         <select name="isOrganization">
                             <option th:value="${false}" th:text="No"></option>
                             <option th:value="${true}" th:text="Yes"></option>
                         </select>
+                        <input id="username" th:field="*{username}" type="text" placeholder="USERNAME" />
+                        <input id="email" th:field="*{email}" type="text" placeholder="EMAIL" />
+                        <input id="password" th:field="*{password}" type="password" placeholder="PASSWORD" />
                         <input id="submit-btn" type="submit" value="SIGN UP"/>
                     </form>
                         <div class="row-2">
@@ -62,10 +36,10 @@
                 </div>
             </div>
 
-            <div class="col-4">
-                <img class="img" src="img/signup-paw.jpg" width="475" height="310" alt="cat-paw">
-                <img class="img" src="img/signup-cat.jpg" width="475" height="310" alt="white-cat">
-                <img class="img" src="img/signup-dog.jpg" width="475" height="310" alt="french-bulldog">
+            <div class="col-lg-3">
+                <img class="img" src="img/signup-paw.jpg"  alt="cat-paw">
+                <img class="img" src="img/signup-cat.jpg"  alt="white-cat">
+                <img class="img" src="img/signup-dog.jpg"  alt="french-bulldog">
             </div>
         </div>
     </div>

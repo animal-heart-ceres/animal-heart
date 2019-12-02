@@ -5,41 +5,17 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css?family=Playfair+Display|Raleway&display=swap" rel="stylesheet">
     <link rel="stylesheet" type="text/css" th:href="@{/public/css/login.css}">
-    <title>Title</title>
+    <title>Login</title>
     <th:block th:replace="fragments/header :: main-header" />
 </head>
-<body>
+<body class="container-fluid">
 
 <th:block th:replace="fragments/navbar :: main-navbar"/>
 
-<!--SMALL SCREEN SIZE-->
-<div class="container-fluid d-lg-none text-center" id="sm-h1-border">
-    <div class="row">
-        <div class="col">
-            <div th:if="${param.error}">
-                Invalid Username and Password.
-            </div>
-            <div th:if="${param.logout}">
-                You have been logged out.
-            </div>
-            <h1 class="text-center">MEMBER LOGIN</h1>
-            <div class="form-group text-center" id="sm-form-div" >
-                <form th:action="@{/login}" method="post">
-                    <input id="smUsername" name="username" type="text" placeholder="USERNAME" />
-                    <input id="smPassword" name="password" type="password" placeholder="PASSWORD" />
-                    <input id="smSubmit-btn" type="submit" value="Log In"/>
-                </form>
-                <a href="/">HOME</a>
-            </div>
-        </div>
-    </div>
-</div>
-
-
 <!--LARGE SCREEN SIZE-->
-    <div class="container-fluid d-sm-none d-none d-lg-block" id="h1-border">
+    <div id="h1-border">
         <div class="row">
-            <div class="col-8">
+            <div class="col-lg-9 col-sm">
                 <div th:if="${param.error}">
                     Invalid Username and Password.
                 </div>
@@ -57,10 +33,10 @@
                 </div>
             </div>
 
-            <div class="col-4">
-                <img id="img"  src="img/login-dog-cat.jpg" width="475" height="300"  alt="animal-pals">
-                <img  id="img" src="img/login-cat.jpg" width="475" height="300" alt="calico-cat">
-                <img  id="img" src="img/login-dog.jpg" width="475" height="300" alt="black-lab">
+            <div class="col-lg-3">
+                <img class="img"  src="img/login-dog-cat.jpg"   alt="animal-pals">
+                <img  class="img" src="img/login-cat.jpg"  alt="calico-cat">
+                <img  class="img" src="img/login-dog.jpg"  alt="black-lab">
             </div>
         </div>
     </div>
