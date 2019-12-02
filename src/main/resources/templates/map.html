@@ -9,12 +9,43 @@
     <title>Map</title>
     <link rel="stylesheet" th:href="@{/public/css/view-animals.css}">
     <th:block th:replace="fragments/header :: main-header" />
+    <style>
+        #map {
+            width: 100%;
+            height: 400px;
+            background-color: grey;
+        }
+    </style>
 </head>
 <body>
 <th:block th:replace="fragments/navbar :: main-navbar"/>
 
 <div id="map"></div>
 
+
+
+
+
+
+<script th:inline="javascript">
+    // Initialize and add the map
+    function initMap() {
+        // The location of San Antonio
+        let sanAntonio = {lat: 29.4241, lng: -98.4936};
+        // The map, centered at San Antonio
+        let map = new google.maps.Map(
+            document.getElementById('map'), {zoom: 11, center: sanAntonio});
+        // The marker, positioned at San Antonio
+        let userProfiles = [[${userProfiles}]];
+        let organizationProfiles = [[${organizationProfiles}]];
+        userProfiles.map(u => console.log(u.address));
+        organizationProfiles.map(o => console.log(o.address));
+        let marker = new google.maps.Marker({position: sanAntonio, map: map});
+    }
+</script>
+<script async defer
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDhwlVcs0Hm6EZLY_g_Y87nPQXPoPZgfcY&callback=initMap">
+</script>
 
 
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
