@@ -49,7 +49,7 @@ public class OrganizationProfileController {
     }
 
     @GetMapping("/organization-profile")
-    public String showOrganizationProfile( Model vModel, @PathVariable Long orgProfileId) {
+    public String showOrganizationProfile( Model vModel, @PathVariable Long organizationProfileId) {
         //When I go to my profile, I expect to see all the animals I have added
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
@@ -67,14 +67,38 @@ public class OrganizationProfileController {
             }
         }
 
+        vModel.addAttribute("organizationProfile", loggedInOrganizationProfile);
         vModel.addAttribute("usersEvents", usersEvents);
         vModel.addAttribute("animal", new Animal());
         vModel.addAttribute("event", new Event());
-        vModel.addAttribute("organizationProfile", loggedInOrganizationProfile);
         vModel.addAttribute("animals", animalList);
 
         return "organization-profile";
     }
+
+    @GetMapping("/organization-profile/{id}")
+    public String showIndOrganizationProfile(@PathVariable Long id, Model vModel){
+        OrganizationProfile currentOrganizationProfile = organizationProfileDao.getOne(id);
+        List<Animal> animalList = currentOrganizationProfile.getOrganization().getAnimalList();
+
+        List<Event> allEvents = eventDao.findAll();
+
+        List<Event> usersEvents = new ArrayList<>();
+
+        for(Event event : allEvents) {
+            if(event.getUser().getId() == currentOrganizationProfile.getId()) {
+                usersEvents.add(event);
+            }
+        }
+        vModel.addAttribute("usersEvents", usersEvents);
+        vModel.addAttribute("animal", new Animal());
+        vModel.addAttribute("event", new Event());
+        vModel.addAttribute("animals", animalList);
+        vModel.addAttribute("organizationProfile", currentOrganizationProfile);
+        return "organization-profile";
+    }
+
+
     @PostMapping("/organization-profile/{id}/edit")
     public String editOrganizationProfile(@PathVariable long id, @RequestParam(name = "name") String name, @RequestParam(name = "taxNumber") String taxNumber, @RequestParam(name = "address") String address, @RequestParam(name = "description") String description){
         OrganizationProfile oldProfile = organizationProfileDao.getOne(id);
