@@ -49,7 +49,7 @@ public class OrganizationProfileController {
     }
 
     @GetMapping("/organization-profile")
-    public String showOrganizationProfile( Model vModel, @PathVariable Long organizationProfileId) {
+    public String showOrganizationProfile( Model vModel) {
         //When I go to my profile, I expect to see all the animals I have added
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
@@ -57,15 +57,10 @@ public class OrganizationProfileController {
 
         List<Animal> animalList = user.getAnimalList();
 
-        List<Event> allEvents = eventDao.findAll();
+        User loggedInUser = userDao.getOne(user.getId());
 
-        List<Event> usersEvents = new ArrayList<>();
+        List<Event> usersEvents = loggedInUser.getEventList();
 
-        for(Event event : allEvents) {
-            if(event.getUser().getId() == loggedInOrganizationProfile.getId()) {
-                usersEvents.add(event);
-            }
-        }
 
         vModel.addAttribute("organizationProfile", loggedInOrganizationProfile);
         vModel.addAttribute("usersEvents", usersEvents);
@@ -78,18 +73,16 @@ public class OrganizationProfileController {
 
     @GetMapping("/organization-profile/{id}")
     public String showIndOrganizationProfile(@PathVariable Long id, Model vModel){
+
         OrganizationProfile currentOrganizationProfile = organizationProfileDao.getOne(id);
+
         List<Animal> animalList = currentOrganizationProfile.getOrganization().getAnimalList();
 
-        List<Event> allEvents = eventDao.findAll();
+        User loggedInUser = currentOrganizationProfile.getOrganization();
 
-        List<Event> usersEvents = new ArrayList<>();
+        List<Event> usersEvents = loggedInUser.getEventList();
 
-        for(Event event : allEvents) {
-            if(event.getUser().getId() == currentOrganizationProfile.getId()) {
-                usersEvents.add(event);
-            }
-        }
+
         vModel.addAttribute("usersEvents", usersEvents);
         vModel.addAttribute("animal", new Animal());
         vModel.addAttribute("event", new Event());
