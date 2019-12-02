@@ -21,6 +21,7 @@
                 <form th:action="@{/create-organization-profile}" th:method="post" th:object="${organizationProfile}">
                     <input id="username" th:field="*{name}" type="text" placeholder="ORGANIZATION NAME" />
                     <input id="email" th:field="*{address}" type="text" placeholder="ADDRESS" />
+                    <input id="tax-number" th:field="*{taxNumber}" type="text" placeholder="TAX NUMBER" />
                     <input id="password" th:field="*{description}" type="text" placeholder="DESCRIPTION" />
                     <input id="organizationId" type="hidden" name="organizationId" th:value="${organizationId}">
                     <input id="submit-btn" type="submit" value="SIGN UP"/>

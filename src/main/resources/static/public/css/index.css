@@ -35,8 +35,8 @@ a{
 
 #index-jumbotron{
     border-bottom: 3px solid #A4A3A4;
-    border-left: 6px solid #A4A3A4;
-    border-right: 6px solid #A4A3A4;
+    /*border-left: 6px solid #A4A3A4;*/
+    /*border-right: 6px solid #A4A3A4;*/
 }
 
 #container-id{
@@ -44,41 +44,110 @@ a{
     padding-bottom: 20px;
 }
 
+.img{
+    width: 390px;
+    height: 460px;
+}
+
+/*SMALL SCREEN*/
+@media screen and (max-width:550px) {
+  .img{
+      width: 160px;
+      height: 220px;
+  }
+
+    h1{
+        font-size: 4rem !important;
+    }
+
+    p{
+        font-size: 14px;
+    }
+}
+
+/*MED TO SMALL SCREEN*/
+@media screen and (min-width:550px) and (max-width:780px) {
+    .img{
+        width: 235px;
+        height: 300px;
+    }
+
+    h1{
+        font-size: 5rem !important;
+    }
+
+    p{
+        font-size: 17px;
+    }
+}
+
+
+/*MED TO LORGE*/
+@media screen and (min-width:780px) and (max-width:900px){
+    .img{
+        width: 265px;
+        height: 340px;
+    }
+}
+
+
+/*LORGE SCREEN*/
+@media screen and (min-width:900px) and (max-width:1000px){
+    img{
+        width: 425px;
+        height: 450px;
+    }
+}
+
+
+/*VERY LORGE SCREEN*/
+@media screen and (min-width:1200px) {
+    .img{
+        width: 470px;
+        height: 550px;
+    }
+}
+
+
+
+
+
+
 
 /*SMALL SCREEN STYLE*/
 
-#smLinks{
-    display: flex;
-    flex-direction: column;
-    font-size: 80px;
-    margin-top: 250px;
-}
+/*#smLinks{*/
+/*    display: flex;*/
+/*    flex-direction: column;*/
+/*    font-size: 80px;*/
+/*    margin-top: 250px;*/
+/*}*/
 
-.link{
-    margin-bottom: 170px;
-    color: #49484A;
-}
+/*.link{*/
+/*    margin-bottom: 170px;*/
+/*    color: #49484A;*/
+/*}*/
 
-#smHead{
-    margin-top: 50px;
-    font-size: 130px;
-    font-family: 'Playfair Display', serif;
-    color: #49484A;
-    margin-bottom: 20px;
-}
+/*#smHead{*/
+/*    margin-top: 50px;*/
+/*    font-size: 130px;*/
+/*    font-family: 'Playfair Display', serif;*/
+/*    color: #49484A;*/
+/*    margin-bottom: 20px;*/
+/*}*/
 
-#heart{
-    font-family: 'Playfair Display', serif;
-    color: #A74115;
-}
+/*#heart{*/
+/*    font-family: 'Playfair Display', serif;*/
+/*    color: #A74115;*/
+/*}*/
 
-.animal {
-    font-family: 'Playfair Display', serif;
-}
+/*.animal {*/
+/*    font-family: 'Playfair Display', serif;*/
+/*}*/
 
-#smText{
-    font-size: 30px;
-    color: #49484A;
-    border-bottom: 5px solid #A74115;
-    padding-bottom: 50px;
-}
+/*#smText{*/
+/*    font-size: 30px;*/
+/*    color: #49484A;*/
+/*    border-bottom: 5px solid #A74115;*/
+/*    padding-bottom: 50px;*/
+/*}*/
