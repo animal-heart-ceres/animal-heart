@@ -9,6 +9,13 @@
     <title>Map</title>
     <link rel="stylesheet" th:href="@{/public/css/view-animals.css}">
     <th:block th:replace="fragments/header :: main-header" />
+    <style>
+        #map {
+            width: 100%;
+            height: 400px;
+            background-color: grey;
+        }
+    </style>
 </head>
 <body>
 <th:block th:replace="fragments/navbar :: main-navbar"/>
@@ -16,6 +23,47 @@
 <div id="map"></div>
 
 
+
+
+
+
+<script th:inline="javascript">
+    // Initialize and add the map
+    let geocoder;
+    let map;
+    let marker;
+
+    function initMap() {
+        geocoder = new google.maps.Geocoder();
+        let latlng = new google.maps.LatLng(29.4241, -98.4936);
+        let mapOptions = {
+            zoom: 11,
+            center: latlng
+        };
+        map = new google.maps.Map(document.getElementById('map'), mapOptions);
+        codeAddress();
+    }
+
+    function codeAddress() {
+        let addresses = [[${profiles}]];
+        addresses.map( address => {
+            geocoder.geocode( { 'address': address}, function(results, status) {
+                if (status === 'OK') {
+                    marker = new google.maps.Marker({
+                        map: map,
+                        position: results[0].geometry.location
+                    });
+                } else {
+                    alert('Geocode was not successful for the following reason: ' + status);
+                }
+            });
+        });
+    }
+
+</script>
+<script async defer
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDhwlVcs0Hm6EZLY_g_Y87nPQXPoPZgfcY&callback=initMap">
+</script>
 
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
