@@ -18,8 +18,6 @@
                 <div class="col-sm-9">
                     <h2><strong th:text="${organizationProfile.name}">Rescue Name</strong></h2>
                     <h5 class="text-muted">Animal Organization</h5>
-                </div>
-                <div class="col-sm-3">
                     <div class="button pull-right">
                         <th:block sec:authorize="isAuthenticated()">
                             <th:block th:if="${organizationProfile.organization.id == #authentication.principal.id}">
@@ -45,7 +43,7 @@
             <div class="col-sm-3 text-center">
                 <th:block sec:authorize="isAuthenticated()">
                     <form th:action="@{'/follower/' + ${organizationProfile.organization.id}}" th:method="post">
-                        <button class="btn btn-outline-success btn-block" type="submit">Follow</button>
+                        <button class="btn btn-outline-success btn-block mb-2" type="submit">Follow</button>
                     </form>
                     <th:block th:each="follower : ${followerList}">
                         <th:block th:if="${follower.getFollowerId() == #authentication.principal.id && follower.getUser().getId() == organizationProfile.organization.id}">
@@ -69,7 +67,7 @@
                 <th:block sec:authorize="isAuthenticated()">
                     <th:block th:if="${organizationProfile.organization.id == #authentication.principal.id}">
                         <div>
-                            <span><input class="btn btn-outline-success btn-sm" id="pet-btn" type="submit" data-toggle="modal" data-target="#add-pet-Modal" value="ADD PET"/></span>
+                            <span><input class="btn btn-success btn-sm mb-2" id="pet-btn" type="submit" data-toggle="modal" data-target="#add-pet-Modal" value="ADD ANIMAL"/></span>
                         </div>
                     </th:block>
                 </th:block>
@@ -78,13 +76,16 @@
                         <img th:src="${animal.img}" height="150" width="150" class="card-img-top" alt="">
                         <div class="card-body">
                             <h5 class="card-title" th:text="'Name: ' + ${animal.name}">Animal Name</h5>
-                            <p>Animal Type</p>
-                            <p>Animal Age</p>
-                            <a class="btn btn-outline-dark btn-sm" th:href="@{'/animal/' + ${animal.id}}">ANIMAL PROFILE</a>
+                            <p class="card-text" th:text="'Type: ' + ${animal.type}">Animal Type</p>
+                            <p class="card-text" th:text="'Size: ' + ${animal.size}">Animal Size</p>
+                            <p class="card-text" th:text="'Age: ' + ${animal.age}">Animal Age</p>
+                            <div class="card-footer">
+                                <a class="btn btn-light btn-sm mb-2" th:href="@{'/animal/' + ${animal.id}}">ANIMAL PROFILE</a>
+                            </div>
                             <th:block sec:authorize="isAuthenticated()">
                                 <th:block th:if="${animal.user.id == #authentication.principal.id}">
                                     <form th:action="@{'/delete-animal/' + ${animal.id}}" th:method="post">
-                                        <button class="btn btn-outline-danger btn-sm" type="submit">Delete Animal</button>
+                                        <button class="btn btn-danger btn-sm" type="submit">Delete Animal</button>
                                     </form>
                                 </th:block>
                             </th:block>
@@ -102,7 +103,7 @@
                 <th:block sec:authorize="isAuthenticated()">
                     <th:block th:if="${organizationProfile.organization.id == #authentication.principal.id}">
                         <div>
-                            <span><input class="btn btn-outline-success btn-sm" id="event-btn" type="submit" data-toggle="modal" data-target="#add-event-Modal" value="ADD EVENT"/></span>
+                            <span><input class="btn btn-success btn-sm" id="event-btn" type="submit" data-toggle="modal" data-target="#add-event-Modal" value="ADD EVENT"/></span>
                         </div>
                     </th:block>
                 </th:block>
@@ -115,7 +116,7 @@
                             <th:block sec:authorize="isAuthenticated()">
                                 <th:block th:if="${event.user.id == #authentication.principal.id}">
                                     <form th:action="@{'/event/' + ${event.id} + '/delete'}" th:method="post">
-                                        <button class="btn btn-outline-danger btn-sm" type="submit">Delete</button>
+                                        <button class="btn btn-danger btn-sm" type="submit">Delete</button>
                                     </form>
                                 </th:block>
                             </th:block>

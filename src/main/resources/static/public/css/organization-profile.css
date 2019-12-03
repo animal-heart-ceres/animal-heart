@@ -6,6 +6,9 @@ img{
     max-width:100%
 }
 
+.card-body {
+    padding: 0;
+}
 .container {
     margin-left: 0;
     margin-right: 0;
