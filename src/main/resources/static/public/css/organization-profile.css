@@ -1,6 +1,6 @@
 body{
     background: #DAE3E7;
-    font-family: "Roboto", sans-serif
+    font-family: 'Raleway', sans-serif;
 }
 img{
     max-width:100%;
@@ -42,7 +42,6 @@ img{
 
 .label-theme{
     background: #3AAA64;
-    font-size: 14px;
     padding: .3em .7em .3em;
     color: #fff;
     border-radius: .25em;
