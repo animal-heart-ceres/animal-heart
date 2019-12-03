@@ -61,39 +61,35 @@
 
 <div class="container">
     <div class="row">
-        <div class="col-sm-6 col-lg-6">
-            <div class="card-block">
-                <h5><i class="fa fa-rocket fa-fw"></i>Available Animals</h5>
+        <h5><i class="fa fa-rocket fa-fw"></i>Available Animals</h5>
+        <th:block sec:authorize="isAuthenticated()">
+            <th:block th:if="${organizationProfile.organization.id == #authentication.principal.id}">
+                <div>
+                    <span><input class="btn btn-success btn-sm mb-2" id="pet-btn" type="submit" data-toggle="modal" data-target="#add-pet-Modal" value="ADD ANIMAL"/></span>
+                </div>
+            </th:block>
+        </th:block>
+    </div>
+    <div class="row d-flex justify-content-between">
+        <div class="card" style="width: 18rem;"  th:each="animal : ${animals}">
+            <img src="../img/signup-dog.jpg" height="150" width="150" class="card-img-top" alt="">
+            <div class="card-body">
+                <h5 class="card-title" th:text="'Name: ' + ${animal.name}">Animal Name</h5>
+                <p class="card-text" th:text="'Type: ' + ${animal.type}">Animal Type</p>
+                <p class="card-text" th:text="'Size: ' + ${animal.size}">Animal Size</p>
+                <p class="card-text" th:text="'Age: ' + ${animal.age}">Animal Age</p>
+            </div>
+            <div class="card-footer">
+                <a class="btn btn-primary text-white btn-sm mb-2" th:href="@{'/animal/' + ${animal.id}}">ANIMAL PROFILE</a>
                 <th:block sec:authorize="isAuthenticated()">
-                    <th:block th:if="${organizationProfile.organization.id == #authentication.principal.id}">
-                        <div>
-                            <span><input class="btn btn-success btn-sm mb-2" id="pet-btn" type="submit" data-toggle="modal" data-target="#add-pet-Modal" value="ADD ANIMAL"/></span>
-                        </div>
+                    <th:block th:if="${animal.user.id == #authentication.principal.id}">
+                        <form th:action="@{'/delete-animal/' + ${animal.id}}" th:method="post">
+                            <button class="btn btn-danger btn-sm" type="submit">Delete Animal</button>
+                        </form>
                     </th:block>
                 </th:block>
-                <div class="d-flex">
-                    <div class="card" style="width: 18rem;"  th:each="animal : ${animals}">
-                        <img th:src="${animal.img}" height="150" width="150" class="card-img-top" alt="">
-                        <div class="card-body">
-                            <h5 class="card-title" th:text="'Name: ' + ${animal.name}">Animal Name</h5>
-                            <p class="card-text" th:text="'Type: ' + ${animal.type}">Animal Type</p>
-                            <p class="card-text" th:text="'Size: ' + ${animal.size}">Animal Size</p>
-                            <p class="card-text" th:text="'Age: ' + ${animal.age}">Animal Age</p>
-                            <div class="card-footer">
-                                <a class="btn btn-light btn-sm mb-2" th:href="@{'/animal/' + ${animal.id}}">ANIMAL PROFILE</a>
-                            </div>
-                            <th:block sec:authorize="isAuthenticated()">
-                                <th:block th:if="${animal.user.id == #authentication.principal.id}">
-                                    <form th:action="@{'/delete-animal/' + ${animal.id}}" th:method="post">
-                                        <button class="btn btn-danger btn-sm" type="submit">Delete Animal</button>
-                                    </form>
-                                </th:block>
-                            </th:block>
-                        </div>
-                    </div>
-                </div>
             </div>
-        </div>
+        </div>  <!-- end of card -->
     </div>
 
     <div class="row">
@@ -103,7 +99,7 @@
                 <th:block sec:authorize="isAuthenticated()">
                     <th:block th:if="${organizationProfile.organization.id == #authentication.principal.id}">
                         <div>
-                            <span><input class="btn btn-success btn-sm" id="event-btn" type="submit" data-toggle="modal" data-target="#add-event-Modal" value="ADD EVENT"/></span>
+                            <span><input class="btn btn-success btn-sm mb-2" id="event-btn" type="submit" data-toggle="modal" data-target="#add-event-Modal" value="ADD EVENT"/></span>
                         </div>
                     </th:block>
                 </th:block>

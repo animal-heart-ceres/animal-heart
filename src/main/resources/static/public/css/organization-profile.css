@@ -3,18 +3,15 @@ body{
     font-family: "Roboto", sans-serif
 }
 img{
-    max-width:100%
+    max-width:100%;
 }
 
-.card-body {
-    padding: 0;
-}
 .container {
     margin-left: 0;
     margin-right: 0;
 }
 .row{
-    margin-top: 40px;
+    margin-top: 20px;
     width: 100%;
 }
 
@@ -46,4 +43,8 @@ img{
 
 .label a{
     color: inherit;
+}
+
+a:hover {
+    cursor: pointer;
 }
