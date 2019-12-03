@@ -19,6 +19,10 @@ a, a:hover, a:focus {
     transition: all 0.3s;
 }
 
+.card {
+    background: #A24848 !important;
+}
+
 #map {
     width: 100%;
     min-height: 100vh;
@@ -35,7 +39,7 @@ a, a:hover, a:focus {
     min-width: 250px;
     max-width: 250px;
     min-height: 100vh;
-    background: #7386D5;
+    background: #A24848;
     color: #fff;
     transition: all 0.3s;
 }
@@ -58,12 +62,12 @@ a[data-toggle="collapse"] {
 
 #sidebar .sidebar-header {
     padding: 20px;
-    background: #6d7fcc;
+    background: #A24848;
 }
 
 #sidebar div.components {
     padding: 20px 0;
-    border-bottom: 1px solid #47748b;
+    border-bottom: 1px solid #A24848;
 }
 
 #sidebar div p {

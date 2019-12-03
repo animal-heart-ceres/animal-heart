@@ -29,7 +29,7 @@
 
             <div class="list-unstyled components">
                 <p>Animals</p>
-                <div id="animal-card">Animal Card 1</div>
+                <div id="animal-card"></div>
             </div>
         </nav>
 
@@ -59,26 +59,41 @@
 
     function codeAddress() {
         //variables
-        // let addresses = [[${profiles}]];
         const userProfiles = [[${userProfiles}]];
-        const userAnimals = [[${userProfiles[0].user.animalList}]];
-
         const organizationProfiles = [[${organizationProfiles}]];
-        const organizationAnimals = [[${organizationProfiles[0].organization.animalList}]];
-        // const users = [[${users}]];
+        const animals = [[${animals}]];
 
-
+        // Loop over User Profiles to GeoCode Addresses
         userProfiles.map(user => {
+
             geocoder.geocode({'address': user.address}, function (results, status) {
-                console.log(user.user.animal);
                 if (status === 'OK') {
                     marker = new google.maps.Marker({
                         map: map,
                         icon: 'http://maps.google.com/mapfiles/ms/icons/red-dot.png',
                         position: results[0].geometry.location
                     });
+                    // Click on Marker to do something
                     marker.addListener('click', function () {
-                        document.querySelector('#animal-card').innerHTML = user;
+                        let html = ``;
+                        let animal = animals.filter(animal => {
+                            return animal.user.id === user.user.id;
+                        });
+
+                        animal.map(a => {
+                            html += `<div class="card">
+                             <img src="${a.img}" class="card-img-top" alt="...">
+                          <div class="card-body">
+                            <h5 class="card-title">Name: ${a.name}</h5>
+                            <p class="card-text">Type: ${a.type}</p>
+                            <p class="card-text">Size: ${a.size}</p>
+                            <p class="card-text">Age: ${a.age}</p>
+                            <a href="/animal/${a.id}" class="btn btn-primary">View Animal Profile</a>
+                          </div>
+                      </div>`;
+                        });
+
+                        document.querySelector('#animal-card').innerHTML = html;
                         document.querySelector('#org-name').innerHTML = user.firstName;
                         document.querySelector('#sidebar').classList.remove('active');
                     });
@@ -97,6 +112,23 @@
                         position: results[0].geometry.location
                     });
                     marker.addListener('click', function () {
+                        let html = ``;
+                        let animal = animals.filter(animal => {
+                            return animal.user.id === org.organization.id;
+                        });
+                        animal.map(a => {
+                            html += `<div class="card">
+                            <img src="${a.img}" class="card-img-top" alt="...">
+                          <div class="card-body">
+                            <h5 class="card-title">Name: ${a.name}</h5>
+                            <p class="card-text">Type: ${a.type}</p>
+                            <p class="card-text">Size: ${a.size}</p>
+                            <p class="card-text">Age: ${a.age}</p>
+                            <a href="/animal/${a.id}" class="btn btn-primary">View Animal Profile</a>
+                          </div>
+                      </div>`;
+                        });
+                        document.querySelector('#animal-card').innerHTML = html;
                         document.querySelector('#org-name').innerHTML = org.name;
                         document.querySelector('#sidebar').classList.remove('active');
                     });

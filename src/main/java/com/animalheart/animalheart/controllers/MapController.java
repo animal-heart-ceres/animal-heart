@@ -1,8 +1,10 @@
 package com.animalheart.animalheart.controllers;
 
+import com.animalheart.animalheart.models.Animal;
 import com.animalheart.animalheart.models.OrganizationProfile;
 import com.animalheart.animalheart.models.User;
 import com.animalheart.animalheart.models.UserProfile;
+import com.animalheart.animalheart.repositories.AnimalRepository;
 import com.animalheart.animalheart.repositories.OrganizationProfileRepository;
 import com.animalheart.animalheart.repositories.UserProfileRepository;
 import com.animalheart.animalheart.repositories.UserRepository;
@@ -26,6 +28,9 @@ public class MapController {
     @Autowired
     UserRepository userDao;
 
+    @Autowired
+    AnimalRepository animalDao;
+
 
     @GetMapping("/map")
     public String index(Model vModel) {
@@ -33,6 +38,9 @@ public class MapController {
         List<OrganizationProfile> organizationProfiles = organizationProfileDao.findAll();
         List<User> users = userDao.findAll();
         List<String> addresses = new ArrayList<>();
+        List<Animal> animals = animalDao.findAll();
+
+
 
         for(UserProfile profile : userProfiles) {
             addresses.add(profile.getAddress());
@@ -41,6 +49,8 @@ public class MapController {
         for(OrganizationProfile profile : organizationProfiles) {
             addresses.add(profile.getAddress());
         }
+
+        vModel.addAttribute("animals", animals);
         vModel.addAttribute("users",users);
         vModel.addAttribute("profiles", addresses);
         vModel.addAttribute("userProfiles", userProfileDao.findAll());
