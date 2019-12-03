@@ -16,6 +16,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.assertj.AssertableApplicationContext;
 import org.springframework.http.HttpStatus;
 import org.springframework.mock.web.MockHttpSession;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -35,6 +36,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @AutoConfigureMockMvc
 public class UsersIntegrationTest {
 
+    private HttpSession httpSession;
 
     @Autowired
     private MockMvc mvc;
@@ -42,6 +44,21 @@ public class UsersIntegrationTest {
     @Autowired
     UserRepository userDao;
 
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
+
+    @Before
+    public void setup() throws Exception {
+        httpSession = this.mvc.perform(post("/login").with(csrf())
+                .param("username", "testUser")
+                .param("password", "pass"))
+                .andExpect(status().is(HttpStatus.FOUND.value()))
+                .andExpect(redirectedUrl("/ads"))
+                .andReturn()
+                .getRequest()
+                .getSession();
+    }
 
     @Test
     public void contextLoads() {
