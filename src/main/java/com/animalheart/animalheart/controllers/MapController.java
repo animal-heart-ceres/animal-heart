@@ -1,9 +1,11 @@
 package com.animalheart.animalheart.controllers;
 
 import com.animalheart.animalheart.models.OrganizationProfile;
+import com.animalheart.animalheart.models.User;
 import com.animalheart.animalheart.models.UserProfile;
 import com.animalheart.animalheart.repositories.OrganizationProfileRepository;
 import com.animalheart.animalheart.repositories.UserProfileRepository;
+import com.animalheart.animalheart.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,11 +23,15 @@ public class MapController {
     @Autowired
     OrganizationProfileRepository organizationProfileDao;
 
+    @Autowired
+    UserRepository userDao;
+
 
     @GetMapping("/map")
     public String index(Model vModel) {
         List<UserProfile> userProfiles = userProfileDao.findAll();
         List<OrganizationProfile> organizationProfiles = organizationProfileDao.findAll();
+        List<User> users = userDao.findAll();
         List<String> addresses = new ArrayList<>();
 
         for(UserProfile profile : userProfiles) {
@@ -35,7 +41,7 @@ public class MapController {
         for(OrganizationProfile profile : organizationProfiles) {
             addresses.add(profile.getAddress());
         }
-
+        vModel.addAttribute("users",users);
         vModel.addAttribute("profiles", addresses);
         vModel.addAttribute("userProfiles", userProfileDao.findAll());
         vModel.addAttribute("organizationProfiles", organizationProfileDao.findAll());

@@ -17,6 +17,12 @@
     });
 
 
+        $('#sidebarCollapse').on('click', function () {
+            $('#sidebar').removeClass('active');
+        });
+
+
+
 })(jQuery);
 
 
