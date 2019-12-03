@@ -60,8 +60,8 @@
 </header>
 
 <div class="container">
-    <div class="row">
-        <h5><i class="fa fa-rocket fa-fw"></i>Available Animals</h5>
+    <div class="row d-flex justify-content-start">
+        <h5 class="mr-4">Available Animals</h5>
         <th:block sec:authorize="isAuthenticated()">
             <th:block th:if="${organizationProfile.organization.id == #authentication.principal.id}">
                 <div>
@@ -92,37 +92,38 @@
         </div>  <!-- end of card -->
     </div>
 
-    <div class="row">
-        <div class="col-sm-6 col-lg-6">
-            <div class="card-block">
-                <h5><i class="fa fa-rocket fa-fw"></i>Upcoming Events</h5>
+    <div class="row d-flex justify-content-start">
+        <h5 class="mr-4">Upcoming Events</h5>
+        <th:block sec:authorize="isAuthenticated()">
+            <th:block th:if="${organizationProfile.organization.id == #authentication.principal.id}">
+                <div>
+                    <span><input class="btn btn-success btn-sm mb-2" id="event-btn" type="submit" data-toggle="modal" data-target="#add-event-Modal" value="ADD EVENT"/></span>
+                </div>
+            </th:block>
+        </th:block>
+    </div>
+
+    <div class="row d-flex justify-content-between">
+        <div class="card" style="width: 18rem;" th:each="event : ${usersEvents}">
+            <img src="../img/signup-dog.jpg" height="150" width="150" class="card-img-top" alt="">
+            <div class="card-body">
+                <h5 class="card-title" th:text="${event.title}">Card title</h5>
+                <p class="card-text" th:text="'Location: ' + ${event.location}">Location</p>
+            </div>
+            <div class="card-footer">
+                <a class="btn btn-primary text-white btn-sm mb-2" th:href="@{'/event-profile/' + ${event.id}}">EVENT PROFILE</a>
                 <th:block sec:authorize="isAuthenticated()">
-                    <th:block th:if="${organizationProfile.organization.id == #authentication.principal.id}">
-                        <div>
-                            <span><input class="btn btn-success btn-sm mb-2" id="event-btn" type="submit" data-toggle="modal" data-target="#add-event-Modal" value="ADD EVENT"/></span>
-                        </div>
+                    <th:block th:if="${event.user.id == #authentication.principal.id}">
+                        <form th:action="@{'/event/' + ${event.id} + '/delete'}" th:method="post">
+                            <button class="btn btn-danger btn-sm" type="submit">Delete</button>
+                        </form>
                     </th:block>
                 </th:block>
-                <div class="d-flex">
-                    <div class="card" style="width: 12rem; height: 12rem;" th:each="event : ${usersEvents}">
-                        <img src="/static/img/signup-cat.jpg" height="150" width="150" class="card-img-top" alt="">
-                        <div class="card-body">
-                            <h5 class="card-title" th:text="${event.title}">Card title</h5>
-                            <p class="card-text" th:text="'Location: ' + ${event.location}">Location</p>
-                            <th:block sec:authorize="isAuthenticated()">
-                                <th:block th:if="${event.user.id == #authentication.principal.id}">
-                                    <form th:action="@{'/event/' + ${event.id} + '/delete'}" th:method="post">
-                                        <button class="btn btn-danger btn-sm" type="submit">Delete</button>
-                                    </form>
-                                </th:block>
-                            </th:block>
-                        </div>
-                    </div>
-                </div>
             </div>
-        </div>
+        </div> <!-- end of card -->
     </div>
-</div>
+
+</div> <!-- end of container div -->
 
 
 <!--MODALS-->
