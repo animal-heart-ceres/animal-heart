@@ -31,11 +31,12 @@
                 <p>Animals</p>
                 <div id="animal-card"></div>
             </div>
+
+
         </nav>
 
     </div>
 
-</div>
 </div>
 
 
@@ -75,25 +76,11 @@
                     });
                     // Click on Marker to do something
                     marker.addListener('click', function () {
-                        let html = ``;
                         let animal = animals.filter(animal => {
                             return animal.user.id === user.user.id;
                         });
 
-                        animal.map(a => {
-                            html += `<div class="card">
-                             <img src="${a.img}" class="card-img-top" alt="...">
-                          <div class="card-body">
-                            <h5 class="card-title">Name: ${a.name}</h5>
-                            <p class="card-text">Type: ${a.type}</p>
-                            <p class="card-text">Size: ${a.size}</p>
-                            <p class="card-text">Age: ${a.age}</p>
-                            <a href="/animal/${a.id}" class="btn btn-primary">View Animal Profile</a>
-                          </div>
-                      </div>`;
-                        });
-
-                        document.querySelector('#animal-card').innerHTML = html;
+                        document.querySelector('#animal-card').innerHTML = htmlBuilder(animal);;
                         document.querySelector('#org-name').innerHTML = user.firstName;
                         document.querySelector('#sidebar').classList.remove('active');
                     });
@@ -112,23 +99,11 @@
                         position: results[0].geometry.location
                     });
                     marker.addListener('click', function () {
-                        let html = ``;
                         let animal = animals.filter(animal => {
                             return animal.user.id === org.organization.id;
                         });
-                        animal.map(a => {
-                            html += `<div class="card">
-                            <img src="${a.img}" class="card-img-top" alt="...">
-                          <div class="card-body">
-                            <h5 class="card-title">Name: ${a.name}</h5>
-                            <p class="card-text">Type: ${a.type}</p>
-                            <p class="card-text">Size: ${a.size}</p>
-                            <p class="card-text">Age: ${a.age}</p>
-                            <a href="/animal/${a.id}" class="btn btn-primary">View Animal Profile</a>
-                          </div>
-                      </div>`;
-                        });
-                        document.querySelector('#animal-card').innerHTML = html;
+
+                        document.querySelector('#animal-card').innerHTML = htmlBuilder(animal);
                         document.querySelector('#org-name').innerHTML = org.name;
                         document.querySelector('#sidebar').classList.remove('active');
                     });
@@ -138,6 +113,25 @@
             });
         });
     }
+
+    function htmlBuilder(animals){
+        let html='';
+        animals.map(a => {
+            html += `<div class="card">
+                             <img src="${a.img}" class="card-img-top" alt="...">
+                          <div class="card-body">
+                            <h5 class="card-title">Name: ${a.name}</h5>
+                            <p class="card-text">Type: ${a.type}</p>
+                            <p class="card-text">Size: ${a.size}</p>
+                            <p class="card-text">Age: ${a.age}</p>
+                            <a href="/animal/${a.id}" class="btn btn-primary">View Animal Profile</a>
+                          </div>
+                      </div>`;
+        });
+        console.log(html);
+        return html;
+    }
+
 
 
 </script>

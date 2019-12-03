@@ -21,6 +21,7 @@ a, a:hover, a:focus {
 
 .card {
     background: #A24848 !important;
+    z-index: -3;
 }
 
 #map {
@@ -41,7 +42,8 @@ a, a:hover, a:focus {
     min-height: 100vh;
     background: #A24848;
     color: #fff;
-    transition: all 0.3s;
+    transition: all 0.4s;
+    z-index: -10;
 }
 
 #sidebar.active {
