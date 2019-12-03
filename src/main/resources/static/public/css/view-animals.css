@@ -9,6 +9,7 @@ p{
 h1{
     font-family: 'Playfair Display', serif;
     color: #49484A;
+    font-size: 4.5rem !important;
 }
 
 .navbar-brand{
@@ -28,8 +29,8 @@ nav{
 
 #animal-jumbotron {
     box-sizing: border-box;
-    border: 3px solid black;
-    padding-top: 100px;
+    border-bottom: 5px solid #49484A;
+    padding-top: 40px;
     border-radius: 5px;
 }
 
@@ -51,3 +52,37 @@ nav{
 
 }
 
+@media screen and (min-width:300px) and (max-width:550px) {
+    h1{
+        font-size: 3rem !important;
+    }
+
+    #dropdownMenuButton{
+        border: none;
+        border-radius: 10px;
+        width: 90px;
+        height: 35px;
+    }
+
+    .search{
+        float: right;
+        border: none;
+        width: 142px;
+    }
+}
+
+@media screen and (min-width:550px) and (max-width:780px) {
+    #dropdownMenuButton{
+        border: none;
+        border-radius: 10px;
+        width: 90px;
+        height: 35px;
+    }
+
+    .search{
+        float: right;
+        border: none;
+        border-radius: 10px;
+        width: 160px;
+    }
+}

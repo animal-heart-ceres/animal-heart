@@ -50,14 +50,14 @@ a{
 }
 
 /*SMALL SCREEN*/
-@media screen and (max-width:550px) {
+@media screen and (min-width:300px) and (max-width:550px) {
   .img{
-      width: 160px;
-      height: 220px;
+      width: 120px;
+      height: 190px;
   }
 
     h1{
-        font-size: 4rem !important;
+        font-size: 2.5rem !important;
     }
 
     p{
