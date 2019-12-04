@@ -13,11 +13,13 @@
 <body>
 <th:block th:replace="fragments/navbar :: main-navbar"/>
 <div class="container-fluid" id="h1-border">
-    <header class="jumbotron my-1 bg-white" id="animal-jumbotron">
-        <h1 class="text-center">AVAILABLE ANIMALS</h1>
+    <header class="jumbotron my-1 bg-white d-flex flex-column" id="animal-jumbotron">
+        <div>
+            <h1 class="text-center">AVAILABLE ANIMALS</h1>
+        </div>
 
         <!--        hoping to use this similarly to how the coffee projects filter works-->
-        <div class="dropdown">
+        <div class="mt-2 d-flex justify-content-center dropdown">
             <button class="btn btn-white dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
                     aria-haspopup="true" aria-expanded="false">
                 FILTER
@@ -32,26 +34,26 @@
                 <a class="dropdown-item">Exotic</a>
             </div>
         </div>
-
-        <div class="search">
-            <input id="myInput" type="text" placeholder="Search.." name="search">
-        </div>
-
     </header>
-
-    <div class="row d-flex justify-content-between flex-wrap">
-        <div class="card m-3" style="width: 18rem;"  th:each="animal : ${animalList}">
-            <img src="../img/signup-dog.jpg" height="150" width="150" class="card-img-top" alt="">
-            <div class="card-body">
-                <h5 class="card-title" th:text="'Name: ' + ${animal.name}">Animal Name</h5>
-                <p class="card-text" th:text="'Type: ' + ${animal.type}">Animal Type</p>
-                <p class="card-text" th:text="'Size: ' + ${animal.size}">Animal Size</p>
-                <p class="card-text" th:text="'Age: ' + ${animal.age}">Animal Age</p>
+    <div class="container">
+        <div class="row text-center">
+            <div class="col-sm-12 col-md-4 col-lg-4 mb-3 d-flex justify-content-center" th:each="animal : ${animalList}">
+                <div class="card" style="width: 18rem;">
+                    <img src="../img/signup-dog.jpg" height="150" width="150" class="card-img-top" alt="">
+                    <div class="card-body">
+                        <h5 class="card-title" th:text="'Hi! My name is ' + ${animal.name}">Animal Name</h5>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item"><strong>Type: </strong><span th:text="${animal.type}">Animal Type</span></li>
+                            <li class="list-group-item"><strong>Size: </strong><span th:text="${animal.size}">Animal Size</span></li>
+                            <li class="list-group-item"><strong>Age: </strong><span th:text="${animal.age}">Animal Age</span></li>
+                        </ul>
+                    </div>
+                    <div class="card-footer d-flex flex-column justify-content-center">
+                        <a class="btn btn-primary text-white btn-sm mb-2" th:href="@{'/animal/' + ${animal.id}}">ANIMAL PROFILE</a>
+                    </div>
+                </div>  <!-- end of card -->
             </div>
-            <div class="card-footer">
-                <a class="btn btn-primary text-white btn-sm mb-2" th:href="@{'/animal/' + ${animal.id}}">ANIMAL PROFILE</a>
-            </div>
-        </div>  <!-- end of card -->
+        </div>
     </div>
 </div>
 

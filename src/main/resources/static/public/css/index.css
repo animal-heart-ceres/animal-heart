@@ -6,24 +6,24 @@
 }
 h1{
     font-family: 'Playfair Display', serif;
-    font-size: 6.5rem !important;
+    font-size: 3rem !important;
     color: #49484A;
 }
 
-span{
+.heart {
     color: #A74115;
 }
 
-p{
-    font-family: 'Playfair Display', serif;
-    font-size: 20px;
-    font-weight: bold;
-    color: #A74115;
-}
+/*p{*/
+/*    font-family: 'Playfair Display', serif;*/
+/*    font-size: 20px;*/
+/*    font-weight: bold;*/
+/*    color: #A74115;*/
+/*}*/
 
 #quote{
     font-family: 'Raleway', sans-serif;
-    font-size: 20px;
+    font-size: 1.5em;
     font-weight: bold;
     color: #A74115;
 }
