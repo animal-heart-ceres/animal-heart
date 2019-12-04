@@ -89,14 +89,15 @@ public class UserController {
 
     @PostMapping("/follower/{userId}/{orgId}/delete")
     public String deleteFollower(@PathVariable Long userId, @PathVariable Long orgId) {
-
+        User organization = userDao.getOne(orgId);
+        OrganizationProfile organizationProfile = organizationProfileDao.findByOrganizationId(organization.getId());
         List<Follower> followerList = followerDao.findAll();
         for(Follower follower : followerList){
             if(follower.getFollowerId() == userId && follower.getUser().getId() == orgId) {
                 followerDao.delete(follower);
             }
         }
-        return "redirect:/organization-profile";
+        return "redirect:/organization-profile/" + organizationProfile.getId();
     }
 
 

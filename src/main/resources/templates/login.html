@@ -25,7 +25,7 @@
                 <h1 class="text-center">MEMBER LOGIN</h1>
                 <div class="form-group text-center" id="form-div" >
                     <form th:action="@{/login}" method="post">
-                        <input id="username" name="username" type="text" placeholder="USERNAME" />
+                        <input class="form-control" id="username" name="username" type="text" placeholder="USERNAME" />
                         <input id="password" name="password" type="password" placeholder="PASSWORD" />
                         <input id="submit-btn" type="submit" value="Log In"/>
                     </form>
@@ -40,6 +40,7 @@
             </div>
         </div>
     </div>
+<th:block th:replace="fragments/about-us-footer :: about-us-footer"/>
 <th:block th:replace="fragments/footer :: main-footer"/>
 </body>
 </html>

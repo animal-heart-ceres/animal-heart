@@ -39,35 +39,24 @@
 
     </header>
 
-    <!--    <div class="d-flex">-->
-
-    <div class="row text-center">
-        <div class="col-sm-12 col-md-6 col-lg-4 mb-3 mt-4 d-flex justify-content-center" th:each="animal : ${animalList}">
-            <div class="card" style="width: 18rem;">
-                <img th:src="${animal.img}" height="150" width="150" class="card-img-top" alt="">
-                <div class="card-body">
-                    <h5 class="card-title" th:text="'Name: ' + ${animal.name}">Animal Name</h5>
-                    <p class="card-text" th:text="'Type: ' + ${animal.type}">Animal Type</p>
-                    <p class="card-text" th:text="'Size: ' + ${animal.size}">Animal Size</p>
-                    <p class="card-text" th:text="'Age: ' + ${animal.age}">Animal Age</p>
-                    <a th:href="@{${animal.id}}" class="btn">VIEW ANIMAL</a>
-                    <div class="underline"></div>
-                </div>
+    <div class="row d-flex justify-content-between flex-wrap">
+        <div class="card m-3" style="width: 18rem;"  th:each="animal : ${animalList}">
+            <img src="../img/signup-dog.jpg" height="150" width="150" class="card-img-top" alt="">
+            <div class="card-body">
+                <h5 class="card-title" th:text="'Name: ' + ${animal.name}">Animal Name</h5>
+                <p class="card-text" th:text="'Type: ' + ${animal.type}">Animal Type</p>
+                <p class="card-text" th:text="'Size: ' + ${animal.size}">Animal Size</p>
+                <p class="card-text" th:text="'Age: ' + ${animal.age}">Animal Age</p>
             </div>
-        </div>
+            <div class="card-footer">
+                <a class="btn btn-primary text-white btn-sm mb-2" th:href="@{'/animal/' + ${animal.id}}">ANIMAL PROFILE</a>
+            </div>
+        </div>  <!-- end of card -->
     </div>
 </div>
 
-
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-        crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
-        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
-        crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
-        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
-        crossorigin="anonymous"></script>
+<th:block th:replace="fragments/about-us-footer :: about-us-footer"/>
+<th:block th:replace="fragments/footer :: main-footer"/>
 <!-- include the JS file with the AJAX request -->
 <script src="/js/main.js"></script>
 </body>

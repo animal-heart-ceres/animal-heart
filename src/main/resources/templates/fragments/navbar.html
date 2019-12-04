@@ -20,6 +20,9 @@
                     <a class="navbar-brand dropdown-item" href="/organizations">RESCUES</a>
                 </li>
 
+                <li class="nav-item d-lg-none" sec:authorize="isAuthenticated()">
+                    <a class="navbar-brand dropdown-item" href="/user-profile">MY PROFILE</a>
+                </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle d-none d-lg-block" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         More Links

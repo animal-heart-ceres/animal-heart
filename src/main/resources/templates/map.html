@@ -4,30 +4,41 @@
     <meta charset="UTF-8">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <link href="https://fonts.googleapis.com/css?family=Playfair+Display|Raleway&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <title>Map</title>
-    <link rel="stylesheet" th:href="@{/public/css/view-animals.css}">
-    <th:block th:replace="fragments/header :: main-header" />
-    <style>
-        #map {
-            width: 100%;
-            height: 400px;
-            background-color: grey;
-        }
-    </style>
+    <!--    <link rel="stylesheet" th:href="@{/public/css/view-animals.css}">-->
+    <link rel="stylesheet" th:href="@{/public/css/map.css}">
+    <th:block th:replace="fragments/header :: main-header"/>
 </head>
 <body>
 <th:block th:replace="fragments/navbar :: main-navbar"/>
 
-<div id="map"></div>
+
+<div class="container">
 
 
+    <div class="wrapper">
+        <div id="map"></div>
+
+        <!-- Sidebar -->
+        <div id="sidebar" class="active">
+            <div class="sidebar-header">
+                <h3 class="text-center"><strong id="org-name">Organization Name</strong></h3>
+            </div>
+
+            <div class="components pb-4">
+                <div id="animal-card"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
 
 
-
-
+<!--javascript-->
 <script th:inline="javascript">
+
     // Initialize and add the map
     let geocoder;
     let map;
@@ -45,13 +56,85 @@
     }
 
     function codeAddress() {
-        let addresses = [[${profiles}]];
-        addresses.map( address => {
-            geocoder.geocode( { 'address': address}, function(results, status) {
+        //variables
+        const userProfiles = [[${userProfiles}]];
+        const organizationProfiles = [[${organizationProfiles}]];
+        const animals = [[${animals}]];
+
+        // Loop over User Profiles to GeoCode Addresses
+        userProfiles.map(user => {
+
+            geocoder.geocode({'address': user.address}, function (results, status) {
                 if (status === 'OK') {
                     marker = new google.maps.Marker({
                         map: map,
+                        icon: 'http://maps.google.com/mapfiles/ms/icons/red-dot.png',
                         position: results[0].geometry.location
+                    });
+                    // Click on Marker to do something
+                    marker.addListener('click', function () {
+                        let html = ``;
+                        let animal = animals.filter(animal => {
+                            return animal.user.id === user.user.id;
+                        });
+
+                        animal.map(a => {
+                            html += `<div class="card mx-auto mb-2" style="max-width: 280px">
+                             <img src="${a.img}" class="card-img-top" alt="...">
+                          <div class="card-body">
+                            <h5 class="card-title">Name: ${a.name}</h5>
+                            <p class="card-text">Type: ${a.type}</p>
+                            <p class="card-text">Size: ${a.size}</p>
+                            <p class="card-text">Age: ${a.age}</p>
+                          </div>
+                          <div class="card-footer">
+                                <a href="/animal/${a.id}" class="btn btn-primary text-white btn-sm mb-2">View Animal Profile</a>
+                            </div>
+                      </div>`
+                        });
+
+                        document.querySelector('#animal-card').innerHTML = html;
+                        document.querySelector('#org-name').innerHTML = user.firstName;
+                        document.querySelector('#sidebar').classList.remove('active');
+                    });
+                } else {
+                    alert('Geocode was not successful for the following reason: ' + status);
+                }
+            });
+        });
+
+        organizationProfiles.map(org => {
+            geocoder.geocode({'address': org.address}, function (results, status) {
+                if (status === 'OK') {
+                    marker = new google.maps.Marker({
+                        map: map,
+                        icon: 'http://maps.google.com/mapfiles/ms/icons/blue-dot.png',
+                        position: results[0].geometry.location
+                    });
+                    marker.addListener('click', function () {
+                        let html = ``;
+                        let animal = animals.filter(animal => {
+                            return animal.user.id === org.organization.id;
+                        });
+
+                        animal.map(a => {
+                            html += `<div class="card mx-auto mb-2" style="max-width: 280px">
+                             <img src="${a.img}" class="card-img-top" alt="...">
+                          <div class="card-body">
+                            <h5 class="card-title">Name: ${a.name}</h5>
+                            <p class="card-text">Type: ${a.type}</p>
+                            <p class="card-text">Size: ${a.size}</p>
+                            <p class="card-text">Age: ${a.age}</p>
+                            </div>
+                            <div class="card-footer">
+                            <a href="/animal/${a.id}" class="btn btn-primary text-white btn-sm mb-2">View Animal Profile</a>
+                            </div>
+                      </div>`
+                        });
+
+                        document.querySelector('#animal-card').innerHTML = html;
+                        document.querySelector('#org-name').innerHTML = org.name;
+                        document.querySelector('#sidebar').classList.remove('active');
                     });
                 } else {
                     alert('Geocode was not successful for the following reason: ' + status);
@@ -60,15 +143,22 @@
         });
     }
 
+
 </script>
 <script async defer
         src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDhwlVcs0Hm6EZLY_g_Y87nPQXPoPZgfcY&callback=initMap">
 </script>
 
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
 <!-- include the JS file with the AJAX request -->
-<script src="/js/main.js"></script>
+<script th:src="@{/js/main.js}"></script>
 </body>
 </html>
