@@ -54,7 +54,7 @@
                 </li>
                 <li class="nav-item navbar-right">
                     <form sec:authorize="isAuthenticated()" th:action="@{/logout}" th:method="post">
-                        <a class="navbar-brand" type="submit">LOGOUT</a>
+                        <button class="navbar-brand" type="submit">LOGOUT</button>
                     </form>
                 </li>
                 <li class="nav-item navbar-right">
@@ -65,27 +65,6 @@
             </ul>
         </div>
     </nav>
-<!--    <nav class="navbar sticky-top navbar-light bg-white" id="index-navbar">-->
-<!--        <a href="/"><p class="navbar-brand animal">ANIMAL<span id="heart" >HEART</span></p></a>-->
-<!--        <span class="d-flex flex-row bd-highlight mb-3">-->
-<!--            <a class="navbar-brand" href="/events/showAll">EVENTS</a>-->
-<!--            <a class="navbar-brand" href="/animal/showAll">ANIMALS</a>-->
-<!--            <a class="navbar-brand" href="/organizations">RESCUES</a>-->
-<!--&lt;!&ndash;            <a class="navbar-brand" href="/map" >MAP</a>&ndash;&gt;-->
-<!--            <th:block sec:authorize="isAuthenticated()">-->
-<!--                <a class="navbar-brand" href="/user-profile" >MY PROFILE</a>-->
-<!--            </th:block>-->
-<!--            <form sec:authorize="isAuthenticated()" th:action="@{/logout}" th:method="post">-->
-<!--                <button class="navbar-brand" type="submit">LOGOUT</button>-->
-<!--            </form>-->
-<!--            <div sec:authorize="!isAuthenticated()" class="border border-primary m-1" th:href="@{/login}">-->
-<!--                <a th:href="@{/login}" class="btn-link btn ml-auto">Login</a>-->
-<!--            </div>-->
-<!--            <form sec:authorize="!isAuthenticated()" class="border border-primary m-1" th:action="@{/sign-up}" th:method="GET">-->
-<!--                <button class="btn-link btn ml-auto">Signup</button>-->
-<!--            </form>-->
-<!--        </span>-->
-<!--    </nav>-->
 </th:block>
 </html>
 
