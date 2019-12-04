@@ -35,22 +35,25 @@
             </div>
         </div>
     </header>
-
-    <div class="row d-flex justify-content-center flex-wrap">
-        <div class="card m-3" style="width: 18rem;"  th:each="animal : ${animalList}">
-            <img src="../img/signup-dog.jpg" height="150" width="150" class="card-img-top" alt="">
-            <div class="card-body">
-                <h5 class="card-title" th:text="'Hi! My name is ' + ${animal.name}">Animal Name</h5>
-                <ul class="list-group list-group-flush">
-                    <li class="list-group-item"><strong>Type: </strong><span th:text="${animal.type}">Animal Type</span></li>
-                    <li class="list-group-item"><strong>Size: </strong><span th:text="${animal.size}">Animal Size</span></li>
-                    <li class="list-group-item"><strong>Age: </strong><span th:text="${animal.age}">Animal Age</span></li>
-                </ul>
+    <div class="container">
+        <div class="row text-center">
+            <div class="col-sm-12 col-md-4 col-lg-4 mb-3 d-flex justify-content-center" th:each="animal : ${animalList}">
+                <div class="card" style="width: 18rem;">
+                    <img src="../img/signup-dog.jpg" height="150" width="150" class="card-img-top" alt="">
+                    <div class="card-body">
+                        <h5 class="card-title" th:text="'Hi! My name is ' + ${animal.name}">Animal Name</h5>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item"><strong>Type: </strong><span th:text="${animal.type}">Animal Type</span></li>
+                            <li class="list-group-item"><strong>Size: </strong><span th:text="${animal.size}">Animal Size</span></li>
+                            <li class="list-group-item"><strong>Age: </strong><span th:text="${animal.age}">Animal Age</span></li>
+                        </ul>
+                    </div>
+                    <div class="card-footer d-flex flex-column justify-content-center">
+                        <a class="btn btn-primary text-white btn-sm mb-2" th:href="@{'/animal/' + ${animal.id}}">ANIMAL PROFILE</a>
+                    </div>
+                </div>  <!-- end of card -->
             </div>
-            <div class="card-footer d-flex flex-column justify-content-center">
-                <a class="btn btn-primary text-white btn-sm mb-2" th:href="@{'/animal/' + ${animal.id}}">ANIMAL PROFILE</a>
-            </div>
-        </div>  <!-- end of card -->
+        </div>
     </div>
 </div>
 
