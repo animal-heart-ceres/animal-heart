@@ -20,10 +20,10 @@ input {
 }
 
 #form-div{
-    border-top: 10px solid #A74115;
+    border-top: 10px solid #E2252B;
 }
 
-form{
+#userinput{
     padding-top: 25px;
 }
 
@@ -53,7 +53,6 @@ label{
 }
 
 a{
-    float: bottom;
     font-family: 'Raleway', sans-serif;
     color: #49484A;
     font-weight: bold;
