@@ -37,18 +37,18 @@
                     </div>
                 </li>
                 <li class="nav-item">
-                    <div sec:authorize="!isAuthenticated()" class="border border-primary m-1" th:href="@{/login}">
-                        <a th:href="@{/login}" class="btn-link btn">Login</a>
+                    <div sec:authorize="!isAuthenticated()" class="m-1" th:href="@{/login}">
+                        <a th:href="@{/login}" class="login">Login</a>
                     </div>
                 </li>
                 <li class="nav-item">
                     <form sec:authorize="isAuthenticated()" th:action="@{/logout}" th:method="post">
-                        <button class="navbar-brand" type="submit">LOGOUT</button>
+                        <a class="navbar-brand" type="submit">LOGOUT</a>
                     </form>
                 </li>
                 <li class="nav-item">
-                    <form sec:authorize="!isAuthenticated()" class="border border-primary m-1" th:action="@{/sign-up}" th:method="GET">
-                        <button class="btn-link btn">Signup</button>
+                    <form sec:authorize="!isAuthenticated()" class=" m-1" th:action="@{/sign-up}" th:method="GET">
+                        <a class="signup" th:action="@{/sign-up}">Signup</a>
                     </form>
                 </li>
             </ul>
