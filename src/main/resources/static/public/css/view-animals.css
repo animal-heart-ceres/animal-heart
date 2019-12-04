@@ -1,3 +1,11 @@
+html {
+    padding-bottom: 100px;
+}
+
+body {
+    font-family: 'Raleway', sans-serif !important;
+}
+
 a{
     font-family: 'Raleway', sans-serif;
 }
@@ -9,16 +17,13 @@ p{
 h1{
     font-family: 'Playfair Display', serif;
     color: #49484A;
-    font-size: 4.5rem !important;
+    font-size: 3em !important;
 }
 
 .navbar-brand{
     font-size: 27px;
 }
 
-nav{
-    border-bottom: 5px solid #A24848;
-}
 
 #heart{
     color: #A24848;
@@ -29,27 +34,19 @@ nav{
 
 #animal-jumbotron {
     box-sizing: border-box;
-    border-bottom: 5px solid #49484A;
-    padding-top: 40px;
-    border-radius: 5px;
+    border-bottom: 2px solid #49484A;
+    border-radius: 2px;
+
 }
 
-.dropdown{
-    float: left;
+div > .jumbotron {
+    padding: 1em;
 }
 
 #dropdownMenuButton{
     border: 5px solid #49484A;
     border-radius: 10px;
     width: 170px;
-}
-
-.search{
-    float: right;
-    border: 5px solid #49484A;
-    border-radius: 10px;
-    width: 220px;
-
 }
 
 h5{
@@ -60,9 +57,26 @@ h5{
     color: #027eba;
     background: #f0f0f0;
 }
+/*CARDS*/
 
-.card{
-    border: #49484A;
+div > .card-body {
+    padding: 0;
+    text-align: center;
+}
+.delete-button {
+    font-size: 1em;
+}
+.card-body > .card-title {
+    margin-top: 1em;
+    margin-bottom: 1em;
+    font-size: 1.5em;
+}
+
+.card-footer > a {
+    font-size: 1em;
+}
+.list-group > .list-group-item {
+    font-size: 1em;
 }
 
 .card:hover {
@@ -84,11 +98,6 @@ h5{
         height: 35px;
     }
 
-    .search{
-        float: right;
-        border: none;
-        width: 142px;
-    }
 }
 
 @media screen and (min-width:550px) and (max-width:780px) {
@@ -99,10 +108,4 @@ h5{
         height: 35px;
     }
 
-    .search{
-        float: right;
-        border: none;
-        border-radius: 10px;
-        width: 160px;
-    }
 }
