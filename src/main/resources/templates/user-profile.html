@@ -12,69 +12,93 @@
 
 <body>
 <th:block th:replace="fragments/navbar :: main-navbar"/>
-<div class="container-fluid" id="h1-border">
-    <div class="row">
-        <div id="org-pic" class="col-5">
-            <h1 class="text-center" th:text="${userProfile.firstName}">User's Profile</h1>
-            <div class="form-group text-center" id="form-div">
-                <img id="img" src="../static/img/login-dog-cat.jpg" width="475" height="300" alt="animal-pals">
-            </div>
 
-            <!--            MODAL TRIGGERS-->
-            <th:block sec:authorize="isAuthenticated()">
-                <th:block th:if="${userProfile.user.id == #authentication.principal.id}">
-                    <div>
-                        <input id="edit-btn" type="submit" data-toggle="modal" data-target="#edit-user-Modal" value="EDIT PROFILE"/>
-                        <input id="pet-btn" type="submit" data-toggle="modal" data-target="#add-pet-Modal" value="ADD PET"/>
-                    </div>
-                </th:block>
-            </th:block>
-        </div>
-        <div class="col-7">
-            <h3>YOUR PETS</h3>
-            <div class="d-flex">
-                <div class="card" style="width: 18rem;" th:each="animal : ${animals}">
-                    <img th:src="${animal.img}" height="150" width="150" class="card-img-top" alt="">
-                    <div class="card-body">
-                        <h5 class="card-title" th:text="'Name: ' + ${animal.name}">Animal Name</h5>
-                        <a th:href="@{'/animal/' + ${animal.id}}" class="btn">VIEW ANIMAL PROFILE</a>
+<header class="header">
+    <div class="container">
+        <div class="teacher-name">
+            <div class="row">
+                <div class="col-sm-9">
+                    <h2><strong th:text="${userProfile.firstName}">First Name</strong> <strong th:text="${userProfile.lastName}">First Name</strong></h2>
+                    <h5 class="text-muted">Rescuer</h5>
+                    <div class="button pull-right">
                         <th:block sec:authorize="isAuthenticated()">
-                            <th:block th:if="${animal.user.id == #authentication.principal.id}">
-                                <form th:action="@{'/delete-animal/' + ${animal.id}}" th:method="post">
-                                    <button type="submit">Delete</button>
-                                </form>
+                            <th:block th:if="${userProfile.user.id == #authentication.principal.id}">
+                                <div>
+                                    <input class="btn btn-success btn-sm" id="edit-btn" type="button" data-toggle="modal" data-target="#edit-profile-Modal" value="EDIT PROFILE"/><i class="fa fa-pencil"></i>
+                                </div>
                             </th:block>
                         </th:block>
                     </div>
                 </div>
             </div>
-            <h3>Your Events</h3>
-            <div class="d-flex">
+        </div>
 
-                        <div class="card" style="width: 18rem;" th:each="event : ${events}" >
-                            <img  height="150" width="150" class="card-img-top" alt="">
-                            <div class="card-body">
-                                <h5 class="card-title" th:text="'Title: ' + ${event.title}">Event Title</h5>
-                                <p class="card-text" th:text="'Location: ' + ${event.location}">Location</p>
-                                <a th:href="@{'/event-profile/' + ${event.id}}" class="btn">VIEW Event PROFILE</a>
-                                <th:block sec:authorize="isAuthenticated()">
-                                    <th:block th:if="${event.user.id == #authentication.principal.id}">
-                                        <form th:action="@{'/event/' + ${event.id} + '/delete'}" th:method="post">
-                                            <button type="submit">DELETE EVENT</button>
-                                        </form>
-                                    </th:block>
-                                </th:block>
-                            </div>
-                        </div>
-
+        <div class="row" style="margin-top:20px;">
+            <div class="col-sm-3">
+                <img class="img-thumbnail" src="../img/san-antonio-animal-shelter.jpg" alt="User" >
             </div>
         </div>
     </div>
-    <div class="row">
-        <div class="col-12">
-        </div>
+</header>
+
+<div class="container">
+
+    <div class="row d-flex justify-content-start">
+        <h5 class="mr-4">Available Animals</h5>
+        <th:block sec:authorize="isAuthenticated()">
+            <th:block th:if="${userProfile.user.id == #authentication.principal.id}">
+                <div>
+                    <span><input class="btn btn-success btn-sm mb-2" id="pet-btn" type="submit" data-toggle="modal" data-target="#add-pet-Modal" value="ADD ANIMAL"/></span>
+                </div>
+            </th:block>
+        </th:block>
     </div>
-</div>
+
+    <div class="row d-flex justify-content-between">
+        <div class="card" style="width: 18rem;"  th:each="animal : ${animals}">
+            <img src="../img/signup-dog.jpg" height="150" width="150" class="card-img-top" alt="">
+            <div class="card-body">
+                <h5 class="card-title" th:text="'Hi! My name is ' + ${animal.name}">Animal Name</h5>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item"><strong>Type: </strong><span th:text="${animal.type}">Animal Type</span></li>
+                    <li class="list-group-item"><strong>Size: </strong><span th:text="${animal.size}">Animal Size</span></li>
+                    <li class="list-group-item"><strong>Age: </strong><span th:text="${animal.age}">Animal Age</span></li>
+                </ul>
+            </div>
+            <div class="card-footer d-flex flex-column justify-content-center">
+                <a class="btn btn-primary text-white btn-sm mb-2" th:href="@{'/animal/' + ${animal.id}}">ANIMAL PROFILE</a>
+                <th:block sec:authorize="isAuthenticated()">
+                    <th:block th:if="${animal.user.id == #authentication.principal.id}">
+                        <form th:action="@{'/delete-animal/' + ${animal.id}}" th:method="post">
+                            <button class="btn btn-danger btn-sm" type="submit">Delete Animal</button>
+                        </form>
+                    </th:block>
+                </th:block>
+            </div>
+        </div>  <!-- end of card -->
+    </div>
+
+
+    <div class="row d-flex justify-content-start">
+        <h5 class="mr-4">Upcoming Events</h5>
+    </div>
+
+    <div class="row d-flex justify-content-between">
+        <div class="card" style="width: 18rem;" th:each="event : ${events}">
+            <img src="../img/signup-dog.jpg" height="150" width="150" class="card-img-top" alt="">
+            <div class="card-body">
+                <h5 class="card-title" th:text="${event.title}">Card title</h5>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item"><strong>Location: </strong><span th:text="${event.location}">Event Location</span></li>
+                </ul>
+            </div>
+            <div class="card-footer d-flex flex-column justify-content-center">
+                <a class="btn btn-primary text-white btn-sm mb-2" th:href="@{'/event-profile/' + ${event.id}}">EVENT PROFILE</a>
+            </div>
+        </div> <!-- end of card -->
+    </div>
+
+</div> <!-- end of container div -->
 
 <!--MODALS-->
 
@@ -156,15 +180,7 @@
 
 
 
-
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-        crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
-        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
-        crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
-        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
-        crossorigin="anonymous"></script>
+<th:block th:replace="fragments/about-us-footer :: about-us-footer"/>
+<th:block th:replace="fragments/footer :: main-footer"/>
 </body>
 </html>

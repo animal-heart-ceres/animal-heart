@@ -1,11 +1,37 @@
-body{
+html {
+    padding-bottom: 100px;
+}
+body {
     background: #DAE3E7;
-    font-family: "Roboto", sans-serif
+    font-family: 'Raleway', sans-serif !important;
+}
+
+div > h5 {
+    font-size: 1.5em;
 }
 img{
     max-width:100%;
 }
 
+div > .card-body {
+    padding: 0;
+    text-align: center;
+}
+.delete-button {
+    font-size: 1em;
+}
+.card-body > .card-title {
+    margin-top: 1em;
+    margin-bottom: 1em;
+    font-size: 1.5em;
+}
+
+.card-footer > a {
+    font-size: 1em;
+}
+.list-group > .list-group-item {
+    font-size: 1em;
+}
 .container {
     margin-left: 0;
     margin-right: 0;
@@ -42,7 +68,6 @@ img{
 
 .label-theme{
     background: #3AAA64;
-    font-size: 14px;
     padding: .3em .7em .3em;
     color: #fff;
     border-radius: .25em;
