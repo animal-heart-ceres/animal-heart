@@ -6,9 +6,10 @@
 }
 h1{
     font-family: 'Playfair Display', serif;
-    font-size: 6.5rem !important;
+    font-size: 3rem !important;
     color: #49484A;
 }
+
 
 span{
     color: #E2252B;
@@ -20,9 +21,10 @@ p{
     font-weight: bold;
 }
 
+
 #quote{
     font-family: 'Raleway', sans-serif;
-    font-size: 20px;
+    font-size: 1.5em;
     font-weight: bold;
     color: #E2252B;
 }

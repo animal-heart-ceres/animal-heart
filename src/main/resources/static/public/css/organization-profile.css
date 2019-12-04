@@ -13,6 +13,8 @@ img{
     max-width:100%;
 }
 
+/*CARDS*/
+
 div > .card-body {
     padding: 0;
     text-align: center;
@@ -32,14 +34,7 @@ div > .card-body {
 .list-group > .list-group-item {
     font-size: 1em;
 }
-.container {
-    margin-left: 0;
-    margin-right: 0;
-}
-.row{
-    margin-top: 20px;
-    width: 100%;
-}
+
 
 .card {
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1), 0 3px 10px 0 rgba(0, 0, 0, 0.1);
@@ -55,6 +50,15 @@ div > .card-body {
 .header {
     padding: 10px 0;
     background: #f5f5f5;
+}
+
+.container {
+    margin-left: 0;
+    margin-right: 0;
+}
+.row {
+    margin-top: 20px;
+    width: 100%;
 }
 
 .button-email{
