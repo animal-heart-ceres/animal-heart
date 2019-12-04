@@ -2,11 +2,12 @@
 <html xmlns:th="https://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css?family=Playfair+Display|Raleway&display=swap" rel="stylesheet">
     <link rel="stylesheet" type="text/css" th:href="@{/public/css/login.css}">
     <title>Login</title>
-    <th:block th:replace="fragments/header :: main-header" />
+    <th:block th:replace="fragments/header :: main-header"/>
 </head>
 <th:block th:replace="fragments/navbar :: main-navbar"/>
 <body class="container-fluid">
@@ -17,8 +18,8 @@
             <div class="col-lg-9 col-sm">
                 <div class="form-group text-center" id="form-div" >
                     <form id="userinput" th:action="@{/login}" method="post">
-                        <input id="username" name="username" type="text" placeholder="USERNAME" />
-                        <input id="password" name="password" type="password" placeholder="PASSWORD" />
+                        <input id="username" name="username" type="text" placeholder="USERNAME"/>
+                        <input id="password" name="password" type="password" placeholder="PASSWORD"/>
                         <input id="submit-btn" type="submit" value="Log In"/>
                     </form>
                 <div th:if="${param.error}">

@@ -63,23 +63,26 @@
 
         // Loop over User Profiles to GeoCode Addresses
         userProfiles.map(user => {
+            let animal = animals.filter(animal => {
+                return animal.user.id === user.user.id;
+            });
+                if(animal.length !== 0) {
+                    geocoder.geocode({'address': user.address}, function (results, status) {
+                        if (status === 'OK') {
+                            marker = new google.maps.Marker({
+                                map: map,
+                                icon: 'http://maps.google.com/mapfiles/ms/icons/red-dot.png',
+                                position: results[0].geometry.location
+                            });
+                            // Click on Marker to do something
+                            marker.addListener('click', function () {
+                                let html = ``;
+                                let animal = animals.filter(animal => {
+                                    return animal.user.id === user.user.id;
+                                });
 
-            geocoder.geocode({'address': user.address}, function (results, status) {
-                if (status === 'OK') {
-                    marker = new google.maps.Marker({
-                        map: map,
-                        icon: 'http://maps.google.com/mapfiles/ms/icons/red-dot.png',
-                        position: results[0].geometry.location
-                    });
-                    // Click on Marker to do something
-                    marker.addListener('click', function () {
-                        let html = ``;
-                        let animal = animals.filter(animal => {
-                            return animal.user.id === user.user.id;
-                        });
-
-                        animal.map(a => {
-                            html += `<div class="card mx-auto mb-2" style="max-width: 280px">
+                                animal.map(a => {
+                                    html += `<div class="card mx-auto mb-2" style="max-width: 280px">
                              <img src="${a.img}" height="150" width="150" class="card-img-top" alt="...">
                           <div class="card-body">
                             <h5 class="card-title">Hi! My name is ${a.name}</h5>
@@ -93,34 +96,39 @@
                                 <a href="/animal/${a.id}" class="btn btn-primary text-white btn-sm mb-2">View Animal Profile</a>
                             </div>
                       </div>`
-                        });
+                                });
 
-                        document.querySelector('#animal-card').innerHTML = html;
-                        document.querySelector('#org-name').innerHTML = user.firstName;
-                        document.querySelector('#sidebar').classList.remove('active');
+                                document.querySelector('#animal-card').innerHTML = html;
+                                document.querySelector('#org-name').innerHTML = user.firstName;
+                                document.querySelector('#sidebar').classList.remove('active');
+                            });
+                        } else {
+                            alert('Geocode for user was not successful for the following reason: ' + status);
+                        }
                     });
-                } else {
-                    alert('Geocode for user was not successful for the following reason: ' + status);
                 }
-            });
         });
 
         organizationProfiles.map(org => {
-            geocoder.geocode({'address': org.address}, function (results, status) {
-                if (status === 'OK') {
-                    marker = new google.maps.Marker({
-                        map: map,
-                        icon: 'http://maps.google.com/mapfiles/ms/icons/blue-dot.png',
-                        position: results[0].geometry.location
-                    });
-                    marker.addListener('click', function () {
-                        let html = ``;
-                        let animal = animals.filter(animal => {
-                            return animal.user.id === org.organization.id;
+            let animal = animals.filter(animal => {
+                return animal.user.id === org.organization.id;
+            });
+            if(animal.length !== 0) {
+                geocoder.geocode({'address': org.address}, function (results, status) {
+                    if (status === 'OK') {
+                        marker = new google.maps.Marker({
+                            map: map,
+                            icon: 'http://maps.google.com/mapfiles/ms/icons/blue-dot.png',
+                            position: results[0].geometry.location
                         });
+                        marker.addListener('click', function () {
+                            let html = ``;
+                            let animal = animals.filter(animal => {
+                                return animal.user.id === org.organization.id;
+                            });
 
-                        animal.map(a => {
-                            html += `<div class="card mx-auto mb-2" style="max-width: 280px">
+                            animal.map(a => {
+                                html += `<div class="card mx-auto mb-2" style="max-width: 280px">
                              <img src="${a.img}" height="150" width="150" class="card-img-top" alt="...">
                           <div class="card-body">
                             <h5 class="card-title">Hi! My name is ${a.name}</h5>
@@ -134,18 +142,34 @@
                                 <a href="/animal/${a.id}" class="btn btn-primary text-white btn-sm mb-2">View Animal Profile</a>
                             </div>
                       </div>`
-                        });
+                            });
 
-                        document.querySelector('#animal-card').innerHTML = html;
-                        document.querySelector('#org-name').innerHTML = org.name;
-                        document.querySelector('#sidebar').classList.remove('active');
-                    });
-                } else {
-                    alert('Geocode for organization was not successful for the following reason: ' + status);
-                }
-            });
+                            document.querySelector('#animal-card').innerHTML = html;
+                            document.querySelector('#org-name').innerHTML = org.name;
+                            document.querySelector('#sidebar').classList.remove('active');
+                        });
+                    } else {
+                        alert('Geocode for organization was not successful for the following reason: ' + status);
+                    }
+                });
+            }
         });
     }
+
+    // fetch function
+    // async function fetchData(data){
+    //     const URL = `${data}.json`;
+    //     const fetchResult = fetch(URL);
+    //     const response = await fetchResult;
+    //     const jsonData = await response.json();
+    //     return jsonData;
+    // }
+    // fetch
+    // fetch('animals.json')
+    //     .then(resp => resp.json())
+    //     .then(json => console.log(json));
+    // fetch function call
+    // fetchData("animals").then(json => console.log(json));
 
 
 </script>
