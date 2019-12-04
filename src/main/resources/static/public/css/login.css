@@ -64,6 +64,17 @@ a{
     height: 236px;
 }
 
+#animal-jumbotron {
+    box-sizing: border-box;
+    border-bottom: 2px solid #49484A;
+    border-radius: 2px;
+}
+
+div > .jumbotron {
+    padding: 1em;
+    background-color: #eae0c8;
+}
+
 /*SMALL SCREEN*/
 @media screen and (max-width:550px) {
     .img{
@@ -86,6 +97,7 @@ a{
 
 
 }
+
 
 /*MED TO SMALL SCREEN*/
 @media screen and (min-width:550px) and (max-width:780px) {
