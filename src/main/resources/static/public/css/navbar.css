@@ -47,7 +47,8 @@ nav{
     padding: 0;
 }
 
-#navbarDropdownMenuLink{
+#navbarDropdownMenuLink,
+#navbarDropdownAnimalLink{
     font-family: 'Raleway', sans-serif;
     font-size: 27px;
 }
