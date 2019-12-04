@@ -15,7 +15,6 @@ a{
 
 #nav-line{
     border-bottom: 3px solid #E2252B;
-    /*margin-bottom: px;*/
 }
 
 #index-navbar{
@@ -32,10 +31,6 @@ a{
     -moz-box-shadow: 0px -5px 5px 0px rgba(0,0,0,0.2);
     box-shadow: 0px -5px 5px 0px rgba(0,0,0,0.2);
     border-bottom: 5px solid #E2252B;
-}
-
-nav{
-    margin-bottom: 5px;
 }
 
 #heart{

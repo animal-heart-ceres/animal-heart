@@ -9,40 +9,29 @@
     <title>Login</title>
     <th:block th:replace="fragments/header :: main-header"/>
 </head>
-<body>
 <th:block th:replace="fragments/navbar :: main-navbar"/>
-<div class="container-fluid">
-
-    <!--LARGE SCREEN SIZE-->
-    <div id="h1-border">
+<body class="container-fluid">
+        <header class="jumbotron d-flex flex-column" id="animal-jumbotron">
+            <h1 class="display-3 text-center text-center">LOGIN</h1>
+        </header>
         <div class="row">
             <div class="col-lg-9 col-sm">
-
-                <h1 class="text-center">MEMBER LOGIN</h1>
+                <div class="form-group text-center" id="form-div" >
+                    <form id="userinput" th:action="@{/login}" method="post">
+                        <input id="username" name="username" type="text" placeholder="USERNAME"/>
+                        <input id="password" name="password" type="password" placeholder="PASSWORD"/>
+                        <input id="submit-btn" type="submit" value="Log In"/>
+                    </form>
                 <div th:if="${param.error}">
                     Invalid Username and Password.
                 </div>
                 <div th:if="${param.logout}">
                     You have been logged out.
                 </div>
-                <div class="form-group text-center" id="form-div">
-                    <form id="userinput" th:action="@{/login}" method="post">
-                        <input id="username" name="username" type="text" placeholder="USERNAME"/>
-                        <input id="password" name="password" type="password" placeholder="PASSWORD"/>
-                        <input id="submit-btn" type="submit" value="Log In"/>
-                    </form>
-                    <a href="/">HOME</a>
                 </div>
             </div>
-
-            <div class="col-lg-3">
-                <img class="img" src="img/login-dog-cat.jpg" alt="animal-pals">
-                <img class="img" src="img/login-cat.jpg" alt="calico-cat">
-                <img class="img" src="img/login-dog.jpg" alt="black-lab">
-            </div>
         </div>
-    </div>
-</div>
+
 <th:block th:replace="fragments/about-us-footer :: about-us-footer"/>
 <th:block th:replace="fragments/footer :: main-footer"/>
 </body>
