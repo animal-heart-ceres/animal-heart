@@ -4,10 +4,8 @@
     <meta charset="UTF-8">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <link href="https://fonts.googleapis.com/css?family=Playfair+Display|Raleway&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <title>Map</title>
-    <link rel="stylesheet" th:href="@{/public/css/view-animals.css}">
+    <!--    <link rel="stylesheet" th:href="@{/public/css/view-animals.css}">-->
     <link rel="stylesheet" th:href="@{/public/css/map.css}">
     <th:block th:replace="fragments/header :: main-header"/>
 </head>
@@ -22,17 +20,16 @@
         <div id="map"></div>
 
         <!-- Sidebar -->
-        <nav id="sidebar" class="active">
+        <div id="sidebar" class="active">
             <div class="sidebar-header">
                 <h3 class="text-center"><strong id="org-name">Organization Name</strong></h3>
             </div>
 
-            <div class="list-unstyled components overflow-auto pb-4">
-<!--                <p>Animals</p>-->
+            <div class="components pb-4">
                 <div id="animal-card"></div>
             </div>
 
-        </nav>
+        </div>
 
     </div>
 
@@ -41,6 +38,7 @@
 
 <!--javascript-->
 <script th:inline="javascript">
+
     // Initialize and add the map
     let geocoder;
     let map;
@@ -75,7 +73,7 @@
                     });
                     // Click on Marker to do something
                     marker.addListener('click', function () {
-                        let html=``;
+                        let html = ``;
                         let animal = animals.filter(animal => {
                             return animal.user.id === user.user.id;
                         });
@@ -114,21 +112,23 @@
                         position: results[0].geometry.location
                     });
                     marker.addListener('click', function () {
-                        let html=``;
+                        let html = ``;
                         let animal = animals.filter(animal => {
                             return animal.user.id === org.organization.id;
                         });
 
                         animal.map(a => {
-                            html += `<div class="card">
+                            html += `<div class="card mx-auto mb-2" style="max-width: 280px">
                              <img src="${a.img}" class="card-img-top" alt="...">
                           <div class="card-body">
                             <h5 class="card-title">Name: ${a.name}</h5>
                             <p class="card-text">Type: ${a.type}</p>
                             <p class="card-text">Size: ${a.size}</p>
                             <p class="card-text">Age: ${a.age}</p>
-                            <a href="/animal/${a.id}" class="btn btn-primary">View Animal Profile</a>
-                          </div>
+                            </div>
+                            <div class="card-footer">
+                            <a href="/animal/${a.id}" class="btn btn-primary text-white btn-sm mb-2">View Animal Profile</a>
+                            </div>
                       </div>`
                         });
 
@@ -142,8 +142,6 @@
             });
         });
     }
-
-
 
 
 </script>
