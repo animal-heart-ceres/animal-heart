@@ -58,9 +58,9 @@ div > .card-body {
 
 #animal-jumbotron {
     box-sizing: border-box;
-    border-bottom: 5px solid #49484A;
+    border-bottom: 2px solid #49484A;
     padding-top: 40px;
-    border-radius: 5px;
+    border-radius: 2px;
 }
 
 .dropdown{
