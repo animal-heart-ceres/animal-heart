@@ -53,6 +53,7 @@ a, a:hover, a:focus {
 #sidebar .sidebar-header {
     padding: 20px;
     background: #f5f5f5;
+    border-bottom: 5px solid #A24848;
 }
 
 #sidebar div.components {
@@ -67,6 +68,9 @@ a, a:hover, a:focus {
 
 #animal-card {
     max-height: 100%;
+}
+.card-footer > a {
+    font-size: 1em;
 }
 
 

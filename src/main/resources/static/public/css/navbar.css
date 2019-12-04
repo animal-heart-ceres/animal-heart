@@ -10,6 +10,12 @@ a{
     font-size: 27px;
 }
 
+#about-us-nav {
+    -webkit-box-shadow: 0px -5px 5px 0px rgba(0,0,0,0.2);
+    -moz-box-shadow: 0px -5px 5px 0px rgba(0,0,0,0.2);
+    box-shadow: 0px -5px 5px 0px rgba(0,0,0,0.2);
+}
+
 nav{
     border-bottom: 5px solid #A24848;
     margin-bottom: 5px;
