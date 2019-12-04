@@ -42,6 +42,7 @@
 </header>
 
 <div class="container">
+
     <div class="row d-flex justify-content-start">
         <h5 class="mr-4">Available Animals</h5>
         <th:block sec:authorize="isAuthenticated()">
@@ -52,16 +53,19 @@
             </th:block>
         </th:block>
     </div>
+
     <div class="row d-flex justify-content-between">
         <div class="card" style="width: 18rem;"  th:each="animal : ${animals}">
             <img src="../img/signup-dog.jpg" height="150" width="150" class="card-img-top" alt="">
             <div class="card-body">
-                <h5 class="card-title" th:text="'Name: ' + ${animal.name}">Animal Name</h5>
-                <p class="card-text" th:text="'Type: ' + ${animal.type}">Animal Type</p>
-                <p class="card-text" th:text="'Size: ' + ${animal.size}">Animal Size</p>
-                <p class="card-text" th:text="'Age: ' + ${animal.age}">Animal Age</p>
+                <h5 class="card-title" th:text="'Hi! My name is ' + ${animal.name}">Animal Name</h5>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item"><strong>Type: </strong><span th:text="${animal.type}">Animal Type</span></li>
+                    <li class="list-group-item"><strong>Size: </strong><span th:text="${animal.size}">Animal Size</span></li>
+                    <li class="list-group-item"><strong>Age: </strong><span th:text="${animal.age}">Animal Age</span></li>
+                </ul>
             </div>
-            <div class="card-footer">
+            <div class="card-footer d-flex flex-column justify-content-center">
                 <a class="btn btn-primary text-white btn-sm mb-2" th:href="@{'/animal/' + ${animal.id}}">ANIMAL PROFILE</a>
                 <th:block sec:authorize="isAuthenticated()">
                     <th:block th:if="${animal.user.id == #authentication.principal.id}">
@@ -74,6 +78,7 @@
         </div>  <!-- end of card -->
     </div>
 
+
     <div class="row d-flex justify-content-start">
         <h5 class="mr-4">Upcoming Events</h5>
     </div>
@@ -83,9 +88,11 @@
             <img src="../img/signup-dog.jpg" height="150" width="150" class="card-img-top" alt="">
             <div class="card-body">
                 <h5 class="card-title" th:text="${event.title}">Card title</h5>
-                <p class="card-text" th:text="'Location: ' + ${event.location}">Location</p>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item"><strong>Location: </strong><span th:text="${event.location}">Event Location</span></li>
+                </ul>
             </div>
-            <div class="card-footer">
+            <div class="card-footer d-flex flex-column justify-content-center">
                 <a class="btn btn-primary text-white btn-sm mb-2" th:href="@{'/event-profile/' + ${event.id}}">EVENT PROFILE</a>
             </div>
         </div> <!-- end of card -->
