@@ -10,7 +10,6 @@ p {
     font-size: 1.1em;
     font-weight: 300;
     line-height: 1.7em;
-    color: #999;
 }
 
 a, a:hover, a:focus {
@@ -19,35 +18,31 @@ a, a:hover, a:focus {
     transition: all 0.3s;
 }
 
-.card {
-    background: #A24848 !important;
-    z-index: -3;
-}
 
 #map {
     width: 100%;
-    min-height: 100vh;
+    max-height: 90vh;
     background-color: grey;
+    z-index: 100;
 }
 .wrapper {
     display: flex;
     width: 100%;
+    height: 100vh;
     align-items: stretch;
-    z-index: -1;
 }
 
 #sidebar {
-    min-width: 250px;
-    max-width: 250px;
+    min-width: 300px;
+    max-width: 300px;
     min-height: 100vh;
-    background: #A24848;
-    color: #fff;
+    max-height: 100vh;
     transition: all 0.4s;
-    z-index: -10;
+    border-right: 5px solid #A24848;
 }
 
 #sidebar.active {
-    margin-left: -250px;
+    margin-left: -300px;
 }
 
 a[data-toggle="collapse"] {
@@ -64,16 +59,16 @@ a[data-toggle="collapse"] {
 
 #sidebar .sidebar-header {
     padding: 20px;
-    background: #A24848;
+    background: #f5f5f5;
 }
 
 #sidebar div.components {
     padding: 20px 0;
-    border-bottom: 1px solid #A24848;
+    width: 100%;
+    height: 100%;
 }
 
 #sidebar div p {
-    color: #fff;
     padding: 10px;
 }
 
@@ -99,7 +94,7 @@ a[data-toggle="collapse"] {
 
 @media (max-width: 768px) {
     #sidebar {
-        margin-left: -250px;
+        margin-right: -300px;
     }
     #sidebar.active {
         margin-left: 0;

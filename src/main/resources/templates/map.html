@@ -24,14 +24,13 @@
         <!-- Sidebar -->
         <nav id="sidebar" class="active">
             <div class="sidebar-header">
-                <h3 id="org-name">Organization Name</h3>
+                <h3 class="text-center"><strong id="org-name">Organization Name</strong></h3>
             </div>
 
-            <div class="list-unstyled components">
-                <p>Animals</p>
+            <div class="list-unstyled components overflow-auto pb-4">
+<!--                <p>Animals</p>-->
                 <div id="animal-card"></div>
             </div>
-
 
         </nav>
 
@@ -76,11 +75,27 @@
                     });
                     // Click on Marker to do something
                     marker.addListener('click', function () {
+                        let html=``;
                         let animal = animals.filter(animal => {
                             return animal.user.id === user.user.id;
                         });
 
-                        document.querySelector('#animal-card').innerHTML = htmlBuilder(animal);;
+                        animal.map(a => {
+                            html += `<div class="card mx-auto mb-2" style="max-width: 280px">
+                             <img src="${a.img}" class="card-img-top" alt="...">
+                          <div class="card-body">
+                            <h5 class="card-title">Name: ${a.name}</h5>
+                            <p class="card-text">Type: ${a.type}</p>
+                            <p class="card-text">Size: ${a.size}</p>
+                            <p class="card-text">Age: ${a.age}</p>
+                          </div>
+                          <div class="card-footer">
+                                <a href="/animal/${a.id}" class="btn btn-primary text-white btn-sm mb-2">View Animal Profile</a>
+                            </div>
+                      </div>`
+                        });
+
+                        document.querySelector('#animal-card').innerHTML = html;
                         document.querySelector('#org-name').innerHTML = user.firstName;
                         document.querySelector('#sidebar').classList.remove('active');
                     });
@@ -99,11 +114,25 @@
                         position: results[0].geometry.location
                     });
                     marker.addListener('click', function () {
+                        let html=``;
                         let animal = animals.filter(animal => {
                             return animal.user.id === org.organization.id;
                         });
 
-                        document.querySelector('#animal-card').innerHTML = htmlBuilder(animal);
+                        animal.map(a => {
+                            html += `<div class="card">
+                             <img src="${a.img}" class="card-img-top" alt="...">
+                          <div class="card-body">
+                            <h5 class="card-title">Name: ${a.name}</h5>
+                            <p class="card-text">Type: ${a.type}</p>
+                            <p class="card-text">Size: ${a.size}</p>
+                            <p class="card-text">Age: ${a.age}</p>
+                            <a href="/animal/${a.id}" class="btn btn-primary">View Animal Profile</a>
+                          </div>
+                      </div>`
+                        });
+
+                        document.querySelector('#animal-card').innerHTML = html;
                         document.querySelector('#org-name').innerHTML = org.name;
                         document.querySelector('#sidebar').classList.remove('active');
                     });
@@ -114,23 +143,6 @@
         });
     }
 
-    function htmlBuilder(animals){
-        let html='';
-        animals.map(a => {
-            html += `<div class="card">
-                             <img src="${a.img}" class="card-img-top" alt="...">
-                          <div class="card-body">
-                            <h5 class="card-title">Name: ${a.name}</h5>
-                            <p class="card-text">Type: ${a.type}</p>
-                            <p class="card-text">Size: ${a.size}</p>
-                            <p class="card-text">Age: ${a.age}</p>
-                            <a href="/animal/${a.id}" class="btn btn-primary">View Animal Profile</a>
-                          </div>
-                      </div>`;
-        });
-        console.log(html);
-        return html;
-    }
 
 
 
@@ -149,6 +161,6 @@
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
         crossorigin="anonymous"></script>
 <!-- include the JS file with the AJAX request -->
-<script src="/js/main.js"></script>
+<script th:src="@{/js/main.js}"></script>
 </body>
 </html>
