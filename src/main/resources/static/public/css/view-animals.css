@@ -1,3 +1,8 @@
+body {
+    font-family: 'Raleway', sans-serif !important;
+    padding-bottom: 100px;
+}
+
 a{
     font-family: 'Raleway', sans-serif;
 }
@@ -9,7 +14,7 @@ p{
 h1{
     font-family: 'Playfair Display', serif;
     color: #49484A;
-    font-size: 4.5rem !important;
+    font-size: 3.0em !important;
 }
 
 .navbar-brand{
@@ -24,14 +29,38 @@ nav{
     color: #A24848;
 }
 
+div > .jumbotron {
+    padding: 1em;
+}
+
+div > .card-body {
+    padding: 0;
+    text-align: center;
+}
+.delete-button {
+    font-size: 1em;
+}
+.card-body > .card-title {
+    margin-top: 1em;
+    margin-bottom: 1em;
+    font-size: 1.5em;
+}
+
+.card-footer > a {
+    font-size: 1em;
+}
+.list-group > .list-group-item {
+    font-size: 1em;
+}
+
 
 /*EVERYTHING IN THE JUMBOTRON*/
 
 #animal-jumbotron {
     box-sizing: border-box;
-    border-bottom: 5px solid #49484A;
+    border-bottom: 2px solid #49484A;
     padding-top: 40px;
-    border-radius: 5px;
+    border-radius: 2px;
 }
 
 .dropdown{

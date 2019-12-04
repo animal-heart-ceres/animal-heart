@@ -19,18 +19,25 @@
         <h1 class="display-3 text-center">EVENTS</h1>
     </header>
 
-    <div class="row text-center">
-        <div class="col-sm-12 col-md-6 col-lg-4 mb-3 mt-4 d-flex justify-content-center" th:each="event : ${eventList}">
-            <div class="card" style="width: 18rem;">
-                <div class="card-body text-truncate">
-                    <h5 class="card-title" th:text="${event.title}">Title</h5>
-                    <p class="card-text" th:text="${event.location}">Location</p>
-                    <p class="card-text" th:text="${event.description}">Description</p>
-                    <a th:href="@{'/event/' + ${event.id}}" class="btn">View Event Profile</a>
+    <div class="container">
+        <div class="row text-center">
+            <div class="col-sm-12 col-md-4 col-lg-4 mb-3 mt-4 d-flex justify-content-center" th:each="event : ${eventList}">
+                <div class="card" style="width: 18rem;">
+                    <img src="../img/signup-dog.jpg" height="150" width="150" class="card-img-top" alt="">
+                    <div class="card-body">
+                        <h5 class="card-title" th:text="${event.title}">Title</h5>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item"><strong>Location:</strong> <span th:text="${event.location}">Event Location</span></li>
+                        </ul>
+                    </div>
+                    <div class="card-footer d-flex flex-column justify-content-center">
+                        <a th:href="@{'/event/' + ${event.id}}" class="btn btn-primary text-white btn-sm mb-2">View Event Profile</a>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
+
 </div>
 
 <th:block th:replace="fragments/about-us-footer :: about-us-footer"/>
