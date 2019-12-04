@@ -2,31 +2,33 @@
 <html xmlns:th="https://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css?family=Playfair+Display|Raleway&display=swap" rel="stylesheet">
     <link rel="stylesheet" type="text/css" th:href="@{/public/css/login.css}">
     <title>Login</title>
-    <th:block th:replace="fragments/header :: main-header" />
+    <th:block th:replace="fragments/header :: main-header"/>
 </head>
-<body class="container-fluid">
-
+<body>
 <th:block th:replace="fragments/navbar :: main-navbar"/>
+<div class="container-fluid">
 
-<!--LARGE SCREEN SIZE-->
+    <!--LARGE SCREEN SIZE-->
     <div id="h1-border">
         <div class="row">
             <div class="col-lg-9 col-sm">
+
+                <h1 class="text-center">MEMBER LOGIN</h1>
                 <div th:if="${param.error}">
                     Invalid Username and Password.
                 </div>
                 <div th:if="${param.logout}">
                     You have been logged out.
                 </div>
-                <h1 class="text-center">MEMBER LOGIN</h1>
-                <div class="form-group text-center" id="form-div" >
+                <div class="form-group text-center" id="form-div">
                     <form id="userinput" th:action="@{/login}" method="post">
-                        <input id="username" name="username" type="text" placeholder="USERNAME" />
-                        <input id="password" name="password" type="password" placeholder="PASSWORD" />
+                        <input id="username" name="username" type="text" placeholder="USERNAME"/>
+                        <input id="password" name="password" type="password" placeholder="PASSWORD"/>
                         <input id="submit-btn" type="submit" value="Log In"/>
                     </form>
                     <a href="/">HOME</a>
@@ -34,12 +36,13 @@
             </div>
 
             <div class="col-lg-3">
-                <img class="img"  src="img/login-dog-cat.jpg"   alt="animal-pals">
-                <img  class="img" src="img/login-cat.jpg"  alt="calico-cat">
-                <img  class="img" src="img/login-dog.jpg"  alt="black-lab">
+                <img class="img" src="img/login-dog-cat.jpg" alt="animal-pals">
+                <img class="img" src="img/login-cat.jpg" alt="calico-cat">
+                <img class="img" src="img/login-dog.jpg" alt="black-lab">
             </div>
         </div>
     </div>
+</div>
 <th:block th:replace="fragments/about-us-footer :: about-us-footer"/>
 <th:block th:replace="fragments/footer :: main-footer"/>
 </body>
