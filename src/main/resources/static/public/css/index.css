@@ -10,22 +10,23 @@ h1{
     color: #49484A;
 }
 
-.heart {
-    color: #A74115;
+
+span{
+    color: #E2252B;
 }
 
-/*p{*/
-/*    font-family: 'Playfair Display', serif;*/
-/*    font-size: 20px;*/
-/*    font-weight: bold;*/
-/*    color: #A74115;*/
-/*}*/
+p{
+    font-family: 'Playfair Display', serif;
+    font-size: 20px;
+    font-weight: bold;
+}
+
 
 #quote{
     font-family: 'Raleway', sans-serif;
     font-size: 1.5em;
     font-weight: bold;
-    color: #A74115;
+    color: #E2252B;
 }
 
 a{
@@ -40,9 +41,6 @@ a{
     margin-top: 72px;
 }
 
-#index-navbar {
-    border-bottom: 3px solid #A4A3A4;
-}
 
 #index-jumbotron{
     border-bottom: 3px solid #A4A3A4;

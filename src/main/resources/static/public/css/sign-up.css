@@ -34,11 +34,12 @@ label{
 
 #form-div{
     border-top: 15px solid #A74115;
-}
-
-form{
     padding-top: 20px;
 }
+
+/*#userinput{*/
+/*    padding-top: 20px;*/
+/*}*/
 
 
 #rescue-signup{
@@ -47,14 +48,18 @@ form{
 
 #home{
     float: left;
-}
-
-a{
     font-family: 'Raleway', sans-serif;
     color: #49484A;
     font-weight: bold;
     font-size: 23px;
 }
+
+/*a{*/
+/*    font-family: 'Raleway', sans-serif;*/
+/*    color: #49484A;*/
+/*    font-weight: bold;*/
+/*    font-size: 23px;*/
+/*}*/
 
 .img{
     width: 335px;

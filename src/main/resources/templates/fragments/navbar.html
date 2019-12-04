@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <th:block th:fragment="main-navbar">
-    <nav class="d-flex flex-row navbar sticky-top navbar-expand-lg navbar-light bg-white" id="index-navbar">
-        <a href="/"><p class="navbar-brand animal">ANIMAL<span id="heart" >HEART</span></p></a>
+    <nav class="d-flex flex-row navbar sticky-top navbar-expand-lg  navbar-lighter bg-white" id="nav-line">
+        <a id="index-navbar" href="/"><p class="navbar-brand animal">ANIMAL<span id="heart" >HEART</span></p></a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
+            <span class="navbar-toggler-icon">	&equiv; </span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNavDropdown">
             <ul class="navbar-nav ml-auto">
@@ -36,19 +36,19 @@
                         </th:block>
                     </div>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item navbar-right">
                     <div sec:authorize="!isAuthenticated()" class="m-1" th:href="@{/login}">
-                        <a th:href="@{/login}" class="login">Login</a>
+                        <a th:href="@{/login}" class="login">LOGIN</a>
                     </div>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item navbar-right">
                     <form sec:authorize="isAuthenticated()" th:action="@{/logout}" th:method="post">
                         <a class="navbar-brand" type="submit">LOGOUT</a>
                     </form>
                 </li>
-                <li class="nav-item">
-                    <form sec:authorize="!isAuthenticated()" class=" m-1" th:action="@{/sign-up}" th:method="GET">
-                        <a class="signup"  th:action="@{/sign-up}">Signup</a>
+                <li class="nav-item navbar-right">
+                    <form sec:authorize="!isAuthenticated()" class="m-1" th:href="@{/sign-up}" th:method="GET">
+                        <a th:href="@{/sign-up}" class="login">SIGNUP</a>
                     </form>
                 </li>
             </ul>
