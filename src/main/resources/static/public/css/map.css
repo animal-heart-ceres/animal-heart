@@ -14,8 +14,45 @@ p {
     line-height: 1.7em;
 }
 
+h1{
+    font-family: 'Playfair Display', serif;
+    font-size: 3rem !important;
+    color: #49484A;
+}
+
+aside  {
+    float: left;
+    border: 1px solid #49484A;
+    border-radius: 3px;
+    padding: 10px 20px;
+    margin-left: 4.5em;
+    background: #e9ecef;;
+}
+
+#user {
+    list-style-image: url('http://maps.google.com/mapfiles/ms/icons/red-dot.png');
+    margin-bottom: 1em;
+    border-bottom: 1px solid #49484A;
+}
+
+#rescue {
+    list-style-image: url('http://maps.google.com/mapfiles/ms/icons/blue-dot.png');
+    border-bottom: 1px solid #49484A;
+}
+
 #index-navbar{
     font-family: 'Playfair Display', serif;
+    color: #49484A;
+}
+
+#animal-jumbotron {
+    box-sizing: border-box;
+    border-bottom: 2px solid #49484A;
+    border-radius: 2px;
+}
+
+div > .jumbotron {
+    padding: 1em;
     color: #49484A;
 }
 
