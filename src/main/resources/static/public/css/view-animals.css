@@ -17,7 +17,7 @@ p{
 
 h1{
     font-family: 'Playfair Display', serif;
-    color: white;
+    color: black;
     font-size: 3em !important;
 }
 .container-fluid {
@@ -68,7 +68,7 @@ div > .card-body {
 
 div > .jumbotron {
     padding: 1em;
-    background-color: #eae0c8;
+    background-color: white;
 }
 
 #dropdownMenuButton{
