@@ -2,16 +2,21 @@
 
 
 html, body {
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Playfair Display', sans-serif;
     background: #fafafa;
     min-height: 100vh;
 }
 
 p {
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Playfair Display', sans-serif;
     font-size: 1.1em;
     font-weight: 300;
     line-height: 1.7em;
+}
+
+#index-navbar{
+    font-family: 'Playfair Display', serif;
+    color: #49484A;
 }
 
 a, a:hover, a:focus {
