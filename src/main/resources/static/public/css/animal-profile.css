@@ -1,34 +1,3 @@
-/*a{*/
-/*    font-family: 'Raleway', sans-serif;*/
-/*}*/
-
-/*p{*/
-/*    font-family: 'Playfair Display', serif;*/
-/*}*/
-
-/*h1{*/
-/*    font-family: 'Playfair Display', serif;*/
-/*    color: #49484A;*/
-/*}*/
-
-/*.navbar-brand{*/
-/*    font-size: 27px;*/
-/*}*/
-
-/*nav{*/
-/*    border-bottom: 5px solid #A24848;*/
-/*}*/
-
-/*#heart{*/
-/*    color: #A24848;*/
-/*}*/
-
-
-/***
-User Profile Sidebar by @keenthemes
-A component of Metronic Theme - #1 Selling Bootstrap 3 Admin Theme in Themeforest: https://j.mp/metronictheme
-Licensed under MIT
-***/
 
 body {
     background: #F1F3FA;
@@ -45,39 +14,48 @@ body {
     background: #fff;
 }
 
-/*.profile-userpic img {*/
-/*    float: none;*/
-/*    margin: 0 auto;*/
-/*    width: 50%;*/
-/*    height: 50%;*/
-/*    -webkit-border-radius: 50% !important;*/
-/*    -moz-border-radius: 50% !important;*/
-/*    border-radius: 50% !important;*/
+.profile-userpic img {
+    float: none;
+    margin: 0 auto;
+    width: 50%;
+    height: 50%;
+    -webkit-border-radius: 50% !important;
+    -moz-border-radius: 50% !important;
+    border-radius: 50% !important;
+}
+
+.comment{
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    display: flex;
+}
+
+/*.profile-usertitle {*/
+/*    text-align: center;*/
+/*    margin-top: 20px;*/
 /*}*/
 
-.profile-usertitle {
-    text-align: center;
-    margin-top: 20px;
-}
+/*.profile-usertitle-name {*/
+/*    font-family: 'Raleway', sans-serif;*/
+/*    font-size: 2em;*/
+/*    margin-bottom: 7px;*/
+/*}*/
 
-.profile-usertitle-name {
-    color: #5a7391;
-    font-size: 16px;
-    font-weight: 600;
-    margin-bottom: 7px;
-}
-
-.profile-usertitle-job {
-    text-transform: uppercase;
-    color: #5b9bd1;
-    font-size: 12px;
-    font-weight: 600;
-    margin-bottom: 15px;
-}
+/*.profile-usertitle-job {*/
+/*    font-family: 'Raleway', sans-serif;*/
+/*    text-transform: uppercase;*/
+/*    color: red;*/
+/*    font-size: 1.5em;*/
+/*    margin-bottom: 15px;*/
+/*}*/
 
 .profile-userbuttons {
     text-align: center;
     margin-top: 10px;
+    vertical-align: bottom;
+    display: flex;
+    justify-content: space-between;
 }
 
 .profile-userbuttons .btn {
@@ -139,9 +117,6 @@ body {
 }
 
 
-#comment{
-
-}
 
 
 
@@ -174,8 +149,8 @@ a, button, code, div, img, input, label, li, p, pre, select, span, svg, table, t
     -o-border-radius: 4px;
 }
 .portlet {
-    margin-top: 0;
-    margin-bottom: 25px;
+    margin-top: 7;
+    margin-bottom: 10px;
     padding: 0;
     border-radius: 4px;
 }
@@ -213,13 +188,13 @@ a, button, code, div, img, input, label, li, p, pre, select, span, svg, table, t
     text-align: center;
 }
 .profile-desc-title {
-    color: #7f90a4;
-    font-size: 17px;
-    font-weight: 600;
+    font-family: 'Raleway', sans-serif;
+    font-size: 2em;
+    /*font-weight: 600;*/
 }
 .profile-desc-text {
-    color: #7e8c9e;
-    font-size: 14px;
+    font-size: 1.5em;
+    font-family: 'Raleway', sans-serif;
 }
 .margin-top-20 {
     margin-top: 20px!important;
