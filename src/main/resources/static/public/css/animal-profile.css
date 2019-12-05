@@ -1,3 +1,6 @@
+html{
+  padding-bottom: 100px;
+}
 
 body {
     background: #F1F3FA;
@@ -24,12 +27,49 @@ body {
     border-radius: 50% !important;
 }
 
+
+/*for the COMMENTS*/
 .comment{
     position: absolute;
     bottom: 0;
     left: 0;
     display: flex;
 }
+
+#leave-comment{
+    width: 500px !important;
+}
+
+#user-comments{
+    background-color: #ececec;
+    border-radius: 10px !important;
+    border: 1px solid #ececec;
+    width: 200px;
+    padding-left: 5px;
+    margin-bottom: 7px;
+}
+
+/*BUTTONS*/
+#delete-comment-btn{
+    font-size: 13px;
+    float: right;
+}
+
+#comment-edit-btn{
+    font-size: 13px;
+    float: right;
+}
+
+#submit-btn-2{
+    font-size: 11px;
+    font-weight: 600;
+    padding: 6px 15px;
+    margin-right: 5px;
+    background-color: dimgrey;
+    border: 1px solid dimgray;
+    border-radius: 4px !important;
+}
+
 
 /*.profile-usertitle {*/
 /*    text-align: center;*/
@@ -64,7 +104,17 @@ body {
     font-weight: 600;
     padding: 6px 15px;
     margin-right: 5px;
+    background-color: dimgrey;
+    border: 1px solid dimgray;
+    border-radius: 4px !important;
 }
+
+
+
+
+
+
+
 
 .profile-userbuttons .btn:last-child {
     margin-right: 0px;
@@ -149,7 +199,7 @@ a, button, code, div, img, input, label, li, p, pre, select, span, svg, table, t
     -o-border-radius: 4px;
 }
 .portlet {
-    margin-top: 7;
+    margin-top: 7px;
     margin-bottom: 10px;
     padding: 0;
     border-radius: 4px;
