@@ -100,6 +100,11 @@ div > .card-body {
     font-size: 1.5em;
 }
 
+.btn-primary{
+    background-color: #49484A !important;
+    border-color: #49484A !important;
+}
+
 .card-footer > a {
     font-size: 1em;
 }
@@ -108,7 +113,7 @@ div > .card-body {
 }
 
 .card:hover {
-    transform: scale(1.05);
+    /*transform: scale(1.05);*/
     -webkit-box-shadow: 0px 0px 30px 3px rgba(0,0,0,0.4);
     -moz-box-shadow: 0px 0px 30px 3px rgba(0,0,0,0.4);
     box-shadow: 0px 0px 30px 3px rgba(0,0,0,0.4);

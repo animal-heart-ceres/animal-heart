@@ -45,12 +45,13 @@ a{
 #navbarDropdownMenuLink,
 #navbarDropdownAnimalLink{
     font-family: 'Raleway', sans-serif;
-    font-size: 27px;
+    font-size: 20px;
 }
 
 .login{
     font-family: 'Raleway', sans-serif;
-    font-size: 27px;
+    font-size: 20px;
+    padding-left: 17px;
 }
 
 
