@@ -36,7 +36,7 @@
                         <h2 class="profile-desc-text">I am <span  th:text="${animal.age}"></span> years old.</h2>
                         <h2 class="profile-desc-text">I am <span  th:text="${animal.size}">.</span></h2>
                         <h2 class="profile-desc-text">I am a <span th:text="${animal.type}">.</span></h2>
-                        <h2 class="profile-desc-text">I available through <a th:href="@{/login}">.</a></h2>
+                        <h2 class="profile-desc-text"><a th:href="@{/login}">Adopt me!</a></h2>
                         <div class="margin-top-20 profile-desc-link">
                             <i class="fa fa-globe"></i>
                             <a href="https://www.apollowebstudio.com"></a>
@@ -56,7 +56,7 @@
                             <th:block sec:authorize="isAuthenticated()">
                                 <th:block th:if="${animal.user.id == #authentication.principal.id}">
                                     <form th:action="@{'/delete-animal/' + ${animal.id}}" th:method="post">
-                                        <button type="submit" class="btn btn-success btn-sm">Delete</button>
+                                        <button type="submit" id="delete-pet-btn" class="btn btn-success btn-sm">Delete</button>
                                     </form>
                                 </th:block>
                             </th:block>
@@ -68,17 +68,18 @@
         </div>
         <div class="col-md-7 d-flex align-items-end profile-content">
             <div class="profile-content">
-                <div th:each="comment : ${comments}">
+<!--               the actual comment-->
+                <div id="user-comments" th:each="comment : ${comments}">
                     <p th:text="${comment.comment}"></p>
                     <th:block sec:authorize="isAuthenticated()">
                         <th:block th:if="${comment.userId == #authentication.principal.id}">
                             <form th:action="@{'/comment/' + ${comment.id} + '/delete'}" th:method="post">
-                                <button type="submit">Delete Comment</button>
+                                <a id="delete-comment-btn" type="submit">X</a>
                             </form>
                             <div>
-                                <button type="button" data-toggle="modal" data-target="#editCommentModal"
-                                        id="comment-edit-btn">Edit Comment
-                                </button>
+                                <a type="button" data-toggle="modal" data-target="#editCommentModal"
+                                        id="comment-edit-btn">Edit
+                                </a>
                             </div>
                             <div class="modal fade" id="editCommentModal" tabindex="-1" role="dialog"
                                  aria-labelledby="exampleModalLabel"
@@ -116,8 +117,8 @@
                     <form class="comment" th:action="@{'/create-comment/' + ${animal.id} + '/' + ${#authentication.principal.id}}"
                           th:method="post">
 <!--                        this is the leave comment input-->
-                        <input id="leave-comment" class="form-control" th:name="comment" type="text">
-                        <button type="submit">Leave Comment</button>
+                        <input id="leave-comment" class="form-control" placeholder="Write a comment..." th:name="comment" type="text">
+                        <button type="submit" id="submit-btn-2">Submit</button>
                     </form>
                 </th:block>
             </div>
