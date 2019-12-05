@@ -3,9 +3,7 @@ html {
 }
 h1{
     font-family: 'Playfair Display', serif;
-    font-size: 6.5rem !important;
-    padding-bottom: 55px;
-    padding-top: 50px;
+    font-size: 3rem !important;
     color: #49484A;
 }
 
@@ -19,14 +17,20 @@ input {
     box-sizing: border-box;
 }
 
-#form-div{
-    border-top: 10px solid #E2252B;
-}
-
 #userinput{
     padding-top: 25px;
 }
 
+#animal-jumbotron {
+    box-sizing: border-box;
+    border-bottom: 2px solid #49484A;
+    border-radius: 2px;
+}
+
+.container-fluid {
+    padding-right: 0;
+    padding-left: 0;
+}
 input {
     width: 75%;
     padding: 20px 20px;
@@ -62,12 +66,6 @@ a{
 .img{
     width: 335px;
     height: 236px;
-}
-
-#animal-jumbotron {
-    box-sizing: border-box;
-    border-bottom: 2px solid #49484A;
-    border-radius: 2px;
 }
 
 div > .jumbotron {
