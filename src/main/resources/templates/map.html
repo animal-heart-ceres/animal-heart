@@ -103,7 +103,7 @@
                                 document.querySelector('#sidebar').classList.remove('active');
                             });
                         } else {
-                            alert('Geocode for user was not successful for the following reason: ' + status);
+                            console.log('Geocode for user was not successful for the following reason: ' + status);
                         }
                     });
                 }
@@ -149,7 +149,7 @@
                             document.querySelector('#sidebar').classList.remove('active');
                         });
                     } else {
-                        alert('Geocode for organization was not successful for the following reason: ' + status);
+                        console.log('Geocode for organization was not successful for the following reason: ' + status);
                     }
                 });
             }
