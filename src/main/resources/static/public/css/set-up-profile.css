@@ -1,29 +1,9 @@
-input {
-    width: 75%;
-    padding: 20px 20px;
-    margin: 25px 0;
-    display: inline-block;
-    border: 5px solid #A4A3A4;
-    border-radius: 15px;
-    box-sizing: border-box;
-    /*font-weight: bold;*/
-    font-size: 20px;
-}
-
-
-#submit-btn{
-    width: 25%;
-    background-color: #C7D0D8;
-    font-family: 'Playfair Display', serif;
-    font-size: 35px;
-    border: 5px solid #99a6b1;
-    margin-bottom: 55px;
+html {
+    padding-bottom: 100px;
 }
 
 h1{
     font-family: 'Playfair Display', serif;
-    font-size: 5rem !important;
-    padding-bottom: 55px;
-    padding-top: 50px;
+    font-size: 3rem !important;
     color: #49484A;
 }
