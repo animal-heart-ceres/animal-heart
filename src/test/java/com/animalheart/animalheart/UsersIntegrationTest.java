@@ -47,19 +47,6 @@ public class UsersIntegrationTest {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
-
-    @Before
-    public void setup() throws Exception {
-        httpSession = this.mvc.perform(post("/login").with(csrf())
-                .param("username", "testUser")
-                .param("password", "pass"))
-                .andExpect(status().is(HttpStatus.FOUND.value()))
-                .andExpect(redirectedUrl("/ads"))
-                .andReturn()
-                .getRequest()
-                .getSession();
-    }
-
     @Test
     public void contextLoads() {
         // Sanity Test, just to make sure the MVC bean is working
@@ -71,7 +58,7 @@ public class UsersIntegrationTest {
     public void CreateUser() throws Exception {
         // Makes a Post request to /sign-up and expect a redirection to the home
         this.mvc.perform(
-                post("/sign-up")
+                post("/sign-up").with(csrf())
                         .param("username", "testUserSignUp")
                         .param("email", "testUserSignUp@email.com")
                         .param("password", "testUserSignUpPassword")
