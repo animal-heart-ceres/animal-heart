@@ -13,6 +13,10 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.http.HttpStatus;
+import org.springframework.mock.web.MockHttpSession;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
@@ -20,10 +24,11 @@ import javax.servlet.http.HttpSession;
 import javax.transaction.Transactional;
 
 import static org.hamcrest.CoreMatchers.containsString;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = AnimalHeartApplication.class)
@@ -44,6 +49,9 @@ public class ProfileIntegrationTests {
 
     @Autowired
     private MockMvc mvc;
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     @Autowired
     UserRepository userDao;
@@ -72,7 +80,7 @@ public class ProfileIntegrationTests {
         if (testUser == null) {
             User newUser = new User();
             newUser.setUsername("testUser");
-            newUser.setPassword("password");
+            newUser.setPassword(passwordEncoder.encode("password"));
             newUser.setEmail("testUser@codeup.com");
             newUser.setAdmin(false);
             newUser.setOrganization(false);
@@ -82,7 +90,7 @@ public class ProfileIntegrationTests {
         if (testOrganization == null) {
             User newUser = new User();
             newUser.setUsername("testOrganization");
-            newUser.setPassword("password");
+            newUser.setPassword(passwordEncoder.encode("password"));
             newUser.setEmail("testOrganization@codeup.com");
             newUser.setAdmin(false);
             newUser.setOrganization(true);
@@ -146,7 +154,12 @@ public class ProfileIntegrationTests {
             organizationProfileToDelete = organizationProfileDao.save(organizationProfileToDelete);
         }
 
+    }
 
+    @Test
+    public void contextLoads() {
+        // Sanity Test, just to make sure the MVC bean is working
+        assertNotNull(mvc);
     }
 
     public UserProfile findUserProfileByFirstName(String firstName) {
@@ -160,10 +173,11 @@ public class ProfileIntegrationTests {
     @Test
     public void CreateUserProfile() throws Exception {
         this.mvc.perform(
-                post("/create-user-profile")
+                post("/create-user-profile").with(csrf())
                         .param("firstName", "testFirstName")
                         .param("lastName", "testLastName")
                         .param("address", "testAddress"))
+                       //need to insert param userId, thats why its failing
                 .andExpect(status().is3xxRedirection());
 
         UserProfile createdUserProfile = findUserProfileByFirstName("testFirstName");
@@ -181,7 +195,7 @@ public class ProfileIntegrationTests {
     @Test
     public void CreateOrganizationProfile() throws Exception {
         this.mvc.perform(
-                post("/create-organization-profile")
+                post("/create-organization-profile").with(csrf())
                         .param("name", "testOrganizationName")
                         .param("taxNumber", "123456789")
                         .param("description", "A San Antonio rescue shelter")
@@ -201,13 +215,13 @@ public class ProfileIntegrationTests {
 
     @Test
     public void ViewUserProfile() throws Exception {
-        this.mvc.perform(get("/user-profile/" + userProfileToView.getId()))
+        this.mvc.perform(get("/user-profile/" + userProfileToView.getId()).with(csrf()))
                 .andExpect(status().isOk());
     }
 
     @Test
     public void ViewOrganizationProfile() throws Exception {
-        this.mvc.perform(get("/organization-profile/" + organizationProfileToView.getId()))
+        this.mvc.perform(get("/organization-profile/" + organizationProfileToView.getId()).with(csrf()))
                 .andExpect(status().isOk());
     }
 
@@ -215,7 +229,7 @@ public class ProfileIntegrationTests {
     public void EditUserProfile() throws Exception{
 
         this.mvc.perform(
-                post("/profile/" + userProfileToEdit.getId() + "/edit")
+                post("/profile/" + userProfileToEdit.getId() + "/edit").with(csrf())
                         .param("firstName", "FirstNameEdited")
                         .param("lastName", "LastNameEdited")
                         .param("address", "AddressEdited"))
@@ -233,7 +247,7 @@ public class ProfileIntegrationTests {
     public void EditOrganizationProfile() throws Exception{
 
         this.mvc.perform(
-                post("/organization-profile/" + organizationProfileToEdit.getId() + "/edit")
+                post("/organization-profile/" + organizationProfileToEdit.getId() + "/edit").with(csrf())
                         .param("name", "organizationNameEdited")
                         .param("taxNumber", "12333333")
                         .param("address", "organizationAddressEdited")
