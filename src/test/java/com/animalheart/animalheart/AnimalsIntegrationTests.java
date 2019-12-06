@@ -36,6 +36,7 @@ import java.util.List;
 import static org.hamcrest.CoreMatchers.containsString;
 import static org.junit.Assert.assertNotNull;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
+import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.user;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
@@ -55,7 +56,8 @@ public class AnimalsIntegrationTests {
     private Animal animalToView;
     private Animal animalToEdit;
     private Animal animalToDelete;
-    private HttpSession httpSession;
+    private HttpSession httpSessionUser;
+    private HttpSession httpSessionOrganization;
 
     @Autowired
     private MockMvc mvc;
@@ -103,7 +105,7 @@ public class AnimalsIntegrationTests {
             testUserProfile.setLastName("testUserLastName");
             testUserProfile.setAddress("testUserAddress");
             testUserProfile.setUser(testUser);
-            testUserProfile = userProfileDao.save(testUserProfile);
+            userProfileDao.save(testUserProfile);
         }
 
         if (testOrganization == null) {
@@ -146,20 +148,20 @@ public class AnimalsIntegrationTests {
             animalDao.save(animalToDelete);
         }
 
-        httpSession = this.mvc.perform(post("/login").with(csrf())
+        httpSessionUser = this.mvc.perform(post("/login").with(csrf())
                 .param("username", "testUser")
                 .param("password", "password"))
                 .andExpect(status().is(HttpStatus.FOUND.value()))
-                .andExpect(redirectedUrl("/index"))
+                .andExpect(redirectedUrl("/"))
                 .andReturn()
                 .getRequest()
                 .getSession();
 
-        httpSession = this.mvc.perform(post("/login").with(csrf())
+        httpSessionOrganization = this.mvc.perform(post("/login").with(csrf())
                 .param("username", "testOrganization")
                 .param("password", "password"))
                 .andExpect(status().is(HttpStatus.FOUND.value()))
-                .andExpect(redirectedUrl("/index"))
+                .andExpect(redirectedUrl("/"))
                 .andReturn()
                 .getRequest()
                 .getSession();
@@ -175,14 +177,14 @@ public class AnimalsIntegrationTests {
     @Test
     public void testIfUserSessionIsActive() throws Exception {
         // It makes sure the returned session is not null
-        assertNotNull(httpSession);
+        assertNotNull(httpSessionUser);
     }
 
     @Test
     public void CreateAnimal() throws Exception {
         this.mvc.perform(
                 post("/create-animal").with(csrf())
-                        .session((MockHttpSession) httpSession)
+                        .session((MockHttpSession) httpSessionUser)
                         .param("name", "createdAnimal")
                         .param("type", "dog")
                         .param("size", "Large")
@@ -215,19 +217,23 @@ public class AnimalsIntegrationTests {
     @Test
     public void showAnimal() throws Exception {
         Animal currentAnimal = findAnimalByName("animalToView");
-        this.mvc.perform(get("/animal/" + currentAnimal.getId()))
+        this.mvc.perform(get("/animal/" + currentAnimal.getId())
+                .with(csrf()))
                 .andExpect(status().isOk())
                 .andExpect(content().string(containsString(currentAnimal.getName())));
     }
 
-//    @Test
-//    public void showUsersAnimals() throws Exception {
-//        List<Animal> userAnimals = userDao.getOne(testUser.getId()).getAnimalList();
-//        this.mvc.perform(
-//                get("/user-profile/" + testUserProfile.getId()).with(csrf())
-//                .session((MockHttpSession) httpSession))
-//                .andExpect(status().isOk());
-//    }
+    @Test
+    public void showUsersAnimals() throws Exception {
+        List<Animal> userAnimals = testUserProfile.getUser().getAnimalList();
+        String animalName = userAnimals.get(0).getName();
+        this.mvc.perform(
+                get("/user-profile")
+                        .with(csrf())
+                        .session((MockHttpSession) httpSessionUser))
+                        .andExpect(status().isOk())
+                        .andExpect(content().string(containsString(animalName)));
+    }
 //
 //    @Test
 //    public void editAnimal() throws Exception {
