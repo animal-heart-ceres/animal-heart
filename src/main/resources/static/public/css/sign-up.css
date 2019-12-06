@@ -3,11 +3,28 @@ html {
 }
 
 h1{
-    font-family: 'Playfair Display', serif;
-    font-size: 3em !important;
+    font-family: 'Playfair Display', serif !important;
+    font-size: 2.5em !important;
     color: #49484A;
 }
 
+#btn{
+    background-color: #49484A;
+    border-color: #49484A;
+    border-radius: 4px;
+    transition: .5s all ease;
+    color: white;
+    margin-bottom: 20px;
+}
 
+#btn:hover{
+    background-color: #ad0d0d !important;
+    transition: .5s all ease;
+}
+
+#container-id{
+    padding-bottom: 48px;
+    margin-top: 60px;
+}
 
 

@@ -2,24 +2,26 @@ html {
     padding-bottom: 100px;
 }
 h1{
-    font-family: 'Playfair Display', serif;
-    font-size: 3rem !important;
+    font-family: 'Playfair Display', serif !important;
+    font-size: 4rem !important;
     color: #49484A;
 }
 
-#animal-jumbotron {
-    box-sizing: border-box;
-    border-bottom: 2px solid #49484A;
-    border-radius: 2px;
+#btn{
+    background-color: #49484A;
+    border-color: #49484A;
+    border-radius: 4px;
+    transition: .5s all ease;
+    color: white;
+    margin-bottom: 20px;
 }
 
-.container-fluid {
-    padding-right: 0;
-    padding-left: 0;
+#btn:hover{
+    background-color: #ad0d0d !important;
+    transition: .5s all ease;
 }
 
-div > .jumbotron {
-    padding: 1em;
-    color: #49484A;
+#container-id{
+    padding-bottom: 48px;
+    margin-top: 60px;
 }
-
