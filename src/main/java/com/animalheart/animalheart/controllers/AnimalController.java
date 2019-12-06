@@ -51,6 +51,12 @@ public class AnimalController {
     @GetMapping("/animal/{id}")
     public String showAnimal(@PathVariable Long id, Model vModel){
         Animal animal = animalDao.getOne(id);
+
+        User organizationThatOwnsThisAnimal = animal.getUser();
+
+        OrganizationProfile organizationProfile = organizationProfileDao.findByOrganizationId(organizationThatOwnsThisAnimal.getId());
+
+        vModel.addAttribute("organizationProfile", organizationProfile);
         List<Comment> commentList =  animal.getCommentList();
         vModel.addAttribute("animal", animal);
         vModel.addAttribute("comment", new Comment());
