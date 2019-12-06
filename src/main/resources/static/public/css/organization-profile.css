@@ -19,9 +19,26 @@ div > .card-body {
     padding: 0;
     text-align: center;
 }
+
+/*CARD BUTTONS*/
+
 .delete-button {
     font-size: 1em;
 }
+
+.btn-primary{
+    background-color: #49484A !important;
+    border-color: #49484A !important;
+    border-radius: 4px !important;
+    transition: .3s all ease;
+}
+
+.btn-primary:hover{
+    background-color: #ad0d0d !important;
+    transition: .3s all ease;
+}
+/*CARD BUTTONS END*/
+
 .card-body > .card-title {
     margin-top: 1em;
     margin-bottom: 1em;
@@ -46,6 +63,7 @@ div > .card-body {
     -moz-box-shadow: 0px 0px 30px 3px rgba(0,0,0,0.4);
     box-shadow: 0px 0px 30px 3px rgba(0,0,0,0.4);
 }
+
 
 .header {
     padding: 10px 0;

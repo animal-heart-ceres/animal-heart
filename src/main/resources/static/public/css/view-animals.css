@@ -101,12 +101,12 @@ div > .card-body {
     background-color: #49484A !important;
     border-color: #49484A !important;
     border-radius: 4px !important;
-    transition: .3s all ease;
+    transition: .5s all ease;
 }
 
 .btn-primary:hover{
     background-color: #ad0d0d !important;
-    transition: .3s all ease;
+    transition: .5s all ease;
 }
 
 .card-footer > a {
