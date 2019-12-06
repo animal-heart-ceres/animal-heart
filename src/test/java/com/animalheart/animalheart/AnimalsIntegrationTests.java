@@ -1,7 +1,6 @@
 package com.animalheart.animalheart;
 
 
-import com.animalheart.animalheart.controllers.AnimalController;
 import com.animalheart.animalheart.models.Animal;
 import com.animalheart.animalheart.models.User;
 import com.animalheart.animalheart.models.UserProfile;
@@ -18,6 +17,7 @@ import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.TestMethodOrder;
 import org.junit.runner.RunWith;
+import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -47,7 +47,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 public class AnimalsIntegrationTests {
 
     public Animal findAnimalByName(String animalName) {
-        return animalDao.findByName(animalName).get(0);
+        return animalDao.findByName(animalName);
     }
 
     private User testUser;
@@ -84,9 +84,9 @@ public class AnimalsIntegrationTests {
         testOrganization = userDao.findByUsername("testOrganization");
         testUserProfile = userProfileDao.findByFirstName("testUserFirstName");
 
-//        animalToView = findAnimalByName("animalToView");
-//        animalToEdit = findAnimalByName("animalToEdit");
-//        animalToDelete = findAnimalByName("animalToDelete");
+        animalToView = findAnimalByName("animalToView");
+        animalToEdit = findAnimalByName("animalToEdit");
+        animalToDelete = findAnimalByName("animalToDelete");
 
         // Creates the test user if not exists
         if (testUser == null) {
@@ -126,6 +126,7 @@ public class AnimalsIntegrationTests {
             animalToView.setSize("large");
             animalToView.setUser(testUser);
             animalDao.save(animalToView);
+            animalToView = animalDao.findByName("animalToView");
         }
 
         if(animalToEdit == null) {
@@ -136,6 +137,7 @@ public class AnimalsIntegrationTests {
             animalToEdit.setSize("large");
             animalToEdit.setUser(testUser);
             animalDao.save(animalToEdit);
+            animalToEdit = animalDao.findByName("animalToEdit");
         }
 
         if(animalToDelete == null) {
@@ -146,6 +148,7 @@ public class AnimalsIntegrationTests {
             animalToDelete.setSize("large");
             animalToDelete.setUser(testUser);
             animalDao.save(animalToDelete);
+            animalToDelete = animalDao.findByName("animalToDelete");
         }
 
         httpSessionUser = this.mvc.perform(post("/login").with(csrf())
@@ -169,6 +172,7 @@ public class AnimalsIntegrationTests {
     }
 
     @Test
+
     public void contextLoads() {
         // Sanity Test, just to make sure the MVC bean is working
         assertNotNull(mvc);
@@ -221,51 +225,59 @@ public class AnimalsIntegrationTests {
                 .with(csrf()))
                 .andExpect(status().isOk())
                 .andExpect(content().string(containsString(currentAnimal.getName())));
+
+
     }
 
     @Test
     public void showUsersAnimals() throws Exception {
-        List<Animal> userAnimals = testUserProfile.getUser().getAnimalList();
-        String animalName = userAnimals.get(0).getName();
+        Animal currentAnimal = findAnimalByName("animalToView");
         this.mvc.perform(
                 get("/user-profile")
                         .with(csrf())
                         .session((MockHttpSession) httpSessionUser))
                         .andExpect(status().isOk())
-                        .andExpect(content().string(containsString(animalName)));
+                        .andExpect(content().string(containsString(currentAnimal.getName())));
+
+        animalDao.delete(currentAnimal);
     }
-//
-//    @Test
-//    public void editAnimal() throws Exception {
-//        Animal currentAnimal = findAnimalByName("animalToEdit");
-//
-//        this.mvc.perform(
-//                post("/animal/" + currentAnimal.getId() + "/edit")
-//            .param("name", "animalNameEdited")
-//            .param("size", "medium")
-//            .param("age", "3"))
-//                .andExpect(status().is3xxRedirection());
-//
-//        String editedName = findAnimalByName("animalNameEdited").getName();
-//
-//        Animal editedAnimal = findAnimalByName("animalNameEdited");
-//
-//        Assert.assertNotEquals("animalToEdit", editedName);
-//
-//        animalDao.delete(editedAnimal);
-//
-//    }
-//
-//    @Test
-//    public void deleteAnimal() throws Exception {
-//
-//        Animal currentAnimal = findAnimalByName("animalToDelete");
-//
-//        this.mvc.perform(
-//                post("/delete-animal/" + currentAnimal.getId()))
-//        .andExpect(status().is3xxRedirection());
-//
-//        Assert.assertNotEquals("", currentAnimal.getName());
-//    }
+
+    @Test
+    public void editAnimal() throws Exception {
+        Animal currentAnimal = findAnimalByName("animalToEdit");
+
+        this.mvc.perform(
+                post("/animal/" + currentAnimal.getId() + "/edit")
+                        .with(csrf())
+                        .session((MockHttpSession) httpSessionUser)
+            .param("name", "animalNameEdited")
+            .param("type", "dog")
+            .param("size", "medium")
+            .param("age", "3"))
+                .andExpect(status().is3xxRedirection());
+
+        String editedName = findAnimalByName("animalNameEdited").getName();
+
+        Animal editedAnimal = findAnimalByName("animalNameEdited");
+
+        Assert.assertNotEquals("animalToEdit", editedName);
+
+        animalDao.delete(editedAnimal);
+
+    }
+
+    @Test
+    public void deleteAnimal() throws Exception {
+
+        Animal currentAnimal = findAnimalByName("animalToDelete");
+
+        this.mvc.perform(
+                post("/delete-animal/" + currentAnimal.getId()).with(csrf())
+        .session((MockHttpSession) httpSessionUser))
+        .andExpect(status().is3xxRedirection());
+
+        Assert.assertNotEquals("", currentAnimal.getName());
+    }
+
 
 }
