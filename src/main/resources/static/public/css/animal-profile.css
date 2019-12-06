@@ -33,6 +33,9 @@ body {
 
 #leave-comment{
     width: 500px !important;
+    border: 1px solid;
+    border-radius: 10px !important;
+    margin-left: 25px;
 }
 
 #user-comments{
