@@ -3,7 +3,7 @@ html{
 }
 
 body {
-    background: #F1F3FA;
+    background-color: whitesmoke;
 }
 
 /* Profile container */
@@ -18,13 +18,8 @@ body {
 }
 
 .profile-userpic img {
-    float: none;
-    margin: 0 auto;
-    width: 50%;
-    height: 50%;
-    -webkit-border-radius: 50% !important;
-    -moz-border-radius: 50% !important;
-    border-radius: 50% !important;
+    width: 90%;
+    height: 100%;
 }
 
 
@@ -44,7 +39,7 @@ body {
     background-color: #ececec;
     border-radius: 10px !important;
     border: 1px solid #ececec;
-    width: 200px;
+    width: 300px;
     padding-left: 5px;
     margin-bottom: 7px;
 }
@@ -61,34 +56,21 @@ body {
 }
 
 #submit-btn-2{
-    font-size: 11px;
-    font-weight: 600;
-    padding: 6px 15px;
+    font-size: 13px;
+    padding: 10px 17px;
     margin-right: 5px;
     background-color: dimgrey;
     border: 1px solid dimgray;
     border-radius: 4px !important;
+    transition: .3s all ease;
+    color: white;
 }
 
-
-/*.profile-usertitle {*/
-/*    text-align: center;*/
-/*    margin-top: 20px;*/
-/*}*/
-
-/*.profile-usertitle-name {*/
-/*    font-family: 'Raleway', sans-serif;*/
-/*    font-size: 2em;*/
-/*    margin-bottom: 7px;*/
-/*}*/
-
-/*.profile-usertitle-job {*/
-/*    font-family: 'Raleway', sans-serif;*/
-/*    text-transform: uppercase;*/
-/*    color: red;*/
-/*    font-size: 1.5em;*/
-/*    margin-bottom: 15px;*/
-/*}*/
+#submit-btn-2:hover{
+    background-color: #ad0d0d;
+    color: white;
+    transition: .3s all ease;
+}
 
 .profile-userbuttons {
     text-align: center;
@@ -99,25 +81,19 @@ body {
 }
 
 .profile-userbuttons .btn {
-    text-transform: uppercase;
-    font-size: 11px;
-    font-weight: 600;
-    padding: 6px 15px;
+    font-size: 13px;
+    padding: 10px 17px;
     margin-right: 5px;
     background-color: dimgrey;
     border: 1px solid dimgray;
     border-radius: 4px !important;
+    transition: .3s all ease;
 }
 
-
-
-
-
-
-
-
-.profile-userbuttons .btn:last-child {
-    margin-right: 0px;
+.profile-userbuttons .btn:hover{
+    background-color: #ad0d0d;
+    color: white;
+    transition: .3s all ease;
 }
 
 .profile-usermenu {
@@ -227,9 +203,6 @@ a, button, code, div, img, input, label, li, p, pre, select, span, svg, table, t
     font-size: 25px;
     text-align: center;
 }
-.uppercase {
-    text-transform: uppercase!important;
-}
 
 .profile-stat-text {
     color: #5b9bd1;
@@ -238,26 +211,14 @@ a, button, code, div, img, input, label, li, p, pre, select, span, svg, table, t
     text-align: center;
 }
 .profile-desc-title {
-    font-family: 'Raleway', sans-serif;
+    font-family: 'Playfair Display', serif;
     font-size: 2em;
-    /*font-weight: 600;*/
 }
 .profile-desc-text {
     font-size: 1.5em;
     font-family: 'Raleway', sans-serif;
 }
-.margin-top-20 {
-    margin-top: 20px!important;
-}
-[class*=" fa-"]:not(.fa-stack), [class*=" glyphicon-"], [class*=" icon-"], [class^=fa-]:not(.fa-stack), [class^=glyphicon-], [class^=icon-] {
-    display: inline-block;
-    line-height: 14px;
-    -webkit-font-smoothing: antialiased;
-}
-.profile-desc-link i {
-    width: 22px;
-    font-size: 19px;
-    color: #abb6c4;
-    margin-right: 5px;
-}
+
+
+
 

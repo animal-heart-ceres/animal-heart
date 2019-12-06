@@ -58,6 +58,7 @@ div > .card-body {
 }
 
 
+
 /*EVERYTHING IN THE JUMBOTRON*/
 
 #animal-jumbotron {
@@ -81,10 +82,6 @@ h5{
     font-family: 'Playfair Display', serif;
 }
 
-.btn:hover {
-    color: #027eba;
-    background: #f0f0f0;
-}
 /*CARDS*/
 
 div > .card-body {
@@ -103,6 +100,13 @@ div > .card-body {
 .btn-primary{
     background-color: #49484A !important;
     border-color: #49484A !important;
+    border-radius: 4px !important;
+    transition: .3s all ease;
+}
+
+.btn-primary:hover{
+    background-color: #ad0d0d !important;
+    transition: .3s all ease;
 }
 
 .card-footer > a {
