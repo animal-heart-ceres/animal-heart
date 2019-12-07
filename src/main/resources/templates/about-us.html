@@ -13,34 +13,65 @@
 <th:block th:replace="fragments/navbar :: main-navbar"/>
 
 <div class="container-fluid">
-    <h1 class="text-center">OUR <span class="text-center" id="mission">MISSION</span></h1>
-    <p class="text-center">placeholder until we can figure out completely what we are going to put here</p>
+    <h1 class="text-center our-mission">OUR <span class="text-center" id="mission">MISSION</span></h1>
+    <p class="text-center our-mission">placeholder until we can figure out completely what we are going to put here</p>
 
-    <div class="row">
-        <div class="col-4 text-center">
-            <img class="img" src="img/lemon.jpg" alt="lemon">
-            <p><a href="">Linkedin</a></p>
-            <p><a href="">Github</a></p>
-            <p><a href="">Email?</a></p>
+<!--    <div class="row">-->
 
+<!--        <div class="col-4 text-center">-->
+<!--            <img class="img" th:src="@{img/lemon.jpg}" alt="lemon">-->
+<!--            <p><a href="">Linkedin</a></p>-->
+<!--            <p><a href="">Github</a></p>-->
+<!--            <p><a href="">Email?</a></p>-->
+<!--        </div>-->
+
+<!--        <div class="col-4 text-center">-->
+<!--            <img class="img" th:src="@{img/kyndall.jpg}" alt="kyndall">-->
+<!--            <p><a href="">Linkedin</a></p>-->
+<!--            <p><a href="">Github</a></p>-->
+<!--            <p><a href="">Email?</a></p>-->
+<!--        </div>-->
+
+<!--        <div class="col-4 text-center">-->
+<!--            <img class="img" th:src="@{img/ryan-codeup.jpeg}" alt="ryan">-->
+<!--            <p><a href="">Linkedin</a></p>-->
+<!--            <p><a href="">Github</a></p>-->
+<!--            <p><a href="">Email?</a></p>-->
+<!--        </div>-->
+
+<!--    </div>-->
+<div class="container">
+    <div class="card-deck justify-content-around">
+        <div class="card" style="max-width: 17rem;">
+            <img src="img/lemon.jpg" class="card-img-top" alt="...">
+            <div class="card-body">
+                <h4 class="card-title text-center">Jonathan Lemman</h4>
+                <p class="card-text"><a href="https://www.linkedin.com/in/jonathanlemman/" target="_blank"><i class="fab fa-linkedin"></i>LinkedIn</a></p>
+                <p class="card-text"><a href="https://github.com/JonathanLemman" target="_blank"><i class="fab fa-github"></i>Github</a></p>
+                <p class="card-text"><a href="mailto:jonathan.lemman@gmail.com" target="_blank"><i class="fas fa-envelope-square"></i>Email</a></p>
+            </div>
         </div>
-
-        <div class="col-4 text-center">
-            <img class="img" src="img/kyndall.jpg" alt="kyndall">
-
-            <p><a href="">Linkedin</a></p>
-            <p><a href="">Github</a></p>
-            <p><a href="">Email?</a></p>
-
+        <div class="card" style="max-width: 17rem;">
+            <img src="img/kyndall.jpg" class="card-img-top" alt="...">
+            <div class="card-body">
+                <h4 class="card-title text-center">Kyndall Sims</h4>
+                <p class="card-text"><a href="https://www.linkedin.com/in/kyndall-sims-a40a16195/" target="_blank"><i class="fab fa-linkedin"></i>LinkedIn</a></p>
+                <p class="card-text"><a href="https://github.com/Kyndall707" target="_blank"><i class="fab fa-github"></i>Github</a></p>
+                <p class="card-text"><a href="mailto:kyndall.sims@gmail.com" target="_blank"><i class="fas fa-envelope-square"></i>Email</a></p>
+            </div>
         </div>
-        <div class="col-4 text-center">
-            <img class="img" src="img/ryan.jpeg" alt="ryan">
-            <p><a href="">Linkedin</a></p>
-            <p><a href="">Github</a></p>
-            <p><a href="">Email?</a></p>
-
+        <div class="card" style="max-width: 17rem;">
+            <img src="img/ryan.jpeg" class="card-img-top" alt="...">
+            <div class="card-body">
+                <h4 class="card-title text-center">Ryan Smith</h4>
+                <p class="card-text"><a href="https://www.linkedin.com/in/ryanlsmith142/" target="_blank"><i class="fab fa-linkedin"></i>LinkedIn</a></p>
+                <p class="card-text"><a href="https://github.com/ryanlsmith142" target="_blank"><i class="fab fa-github"></i>Github</a></p>
+                <p class="card-text"><a href="mailto:ryan.l.smith142@gmail.com" target="_blank"><i class="fas fa-envelope-square"></i>Email</a></p>
+            </div>
         </div>
     </div>
+</div>
+
 </div>
 
 <th:block th:replace="fragments/footer :: main-footer"/>

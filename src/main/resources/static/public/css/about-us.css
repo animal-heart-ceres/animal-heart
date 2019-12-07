@@ -1,13 +1,17 @@
+body{
+    font-size: 1rem;
+}
+
 .row{
     margin-top: 90px;
 }
 
 .img{
-    position: relative;
-    overflow: hidden;
-    border-radius: 50%;
-    height: 180px;
-    width: 180px;
+    /*position: relative;*/
+    /*overflow: hidden;*/
+    /*border-radius: 50%;*/
+    /*max-height: 100%;*/
+    /*width: 180px;*/
 }
 
 a{
@@ -19,13 +23,17 @@ a{
 
 
 
-.text-center{
+.our-mission{
     margin-top: 50px;
 }
 
 h1{
     font-family: 'Playfair Display', serif;
     font-size: 3rem !important;
+}
+
+h4 {
+    font-family: 'Playfair Display', serif;
 }
 
 .container-fluid p:first-of-type{
@@ -41,13 +49,13 @@ p{
 }
 
 /*SMALL SCREEN*/
-@media screen and (max-width:550px) {
-    .img{
-        position: relative;
-        overflow: hidden;
-        border-radius: 50%;
-        height: 130px;
-        width: 130px;
-    }
+/*@media screen and (max-width:550px) {*/
+/*    .img{*/
+/*        position: relative;*/
+/*        overflow: hidden;*/
+/*        border-radius: 50%;*/
+/*        height: 130px;*/
+/*        width: 130px;*/
+/*    }*/
 
-}
+/*}*/
