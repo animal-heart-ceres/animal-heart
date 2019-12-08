@@ -201,7 +201,6 @@ public class ProfileIntegrationTests {
                         .param("lastName", "testLastName")
                         .param("address", "testAddress")
                         .param("userId", testUserId))
-                       //need to insert param userId, thats why its failing
                 .andExpect(status().is3xxRedirection());
 
         UserProfile createdUserProfile = findUserProfileByFirstName("testFirstName");

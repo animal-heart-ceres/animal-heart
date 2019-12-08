@@ -64,7 +64,7 @@ public class FollowersIntegrationTests {
         if (testUser == null) {
             User newUser = new User();
             newUser.setUsername("testUser");
-            newUser.setPassword("password");
+            newUser.setPassword(passwordEncoder.encode("password"));
             newUser.setEmail("testUser@codeup.com");
             newUser.setAdmin(false);
             newUser.setOrganization(false);
@@ -73,7 +73,7 @@ public class FollowersIntegrationTests {
 
         if (testOrganization == null) {
             User newUser = new User();
-            newUser.setUsername("testOrganization");
+            newUser.setUsername(passwordEncoder.encode("password"));
             newUser.setPassword("password");
             newUser.setEmail("testOrganization@codeup.com");
             newUser.setAdmin(false);

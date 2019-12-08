@@ -99,19 +99,19 @@
 
                                 animal.map(a => {
                                     html += `<div class="card mx-auto mb-2" style="max-width: 280px">
-                             <img src="${a.img}" height="150" width="150" class="card-img-top" alt="...">
-                          <div class="card-body">
-                            <h5 class="card-title">Hi! My name is ${a.name}</h5>
-                            <ul class="list-group list-group-flush text-center">
-                                <li class="list-group-item"><strong>Type:</strong> ${a.type}</li>
-                                <li class="list-group-item"><strong>Size:</strong> ${a.size}</li>
-                                <li class="list-group-item"><strong>Age:</strong> ${a.age}</li>
-                            </ul>
-                          </div>
-                          <div class="card-footer d-flex flex-column justify-content-center">
-                                <a href="/animal/${a.id}" class="btn btn-primary text-white btn-sm mb-2">View Animal Profile</a>
-                            </div>
-                      </div>`
+                                                <img src="${a.img}" height="220" width="150" class="card-img-top p-2" alt="...">
+                                                <div class="card-body">
+                                                    <h5 class="m-1 card-title">Hi! My name is ${a.name}</h5>
+                                                    <ul class="list-group list-group-flush text-center">
+                                                         <li class="list-group-item"><strong>Type:</strong> ${a.type}</li>
+                                                         <li class="list-group-item"><strong>Size:</strong> ${a.size}</li>
+                                                         <li class="list-group-item"><strong>Age:</strong> ${a.age}</li>
+                                                    </ul>
+                                                </div>
+                                                <div class="card-footer d-flex flex-column justify-content-center">
+                                                     <a href="/animal/${a.id}" class="btn btn-primary text-white btn-sm mb-2">View Animal Profile</a>
+                                                </div>
+                                            </div>`
                                 });
 
                                 document.querySelector('#animal-card').innerHTML = html;

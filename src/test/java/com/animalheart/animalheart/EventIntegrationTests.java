@@ -77,7 +77,7 @@ public class EventIntegrationTests {
         if (testUser == null) {
             User newUser = new User();
             newUser.setUsername("testUser");
-            newUser.setPassword("password");
+            newUser.setPassword(passwordEncoder.encode("password"));
             newUser.setEmail("testUser@codeup.com");
             newUser.setAdmin(false);
             newUser.setOrganization(false);
@@ -87,7 +87,7 @@ public class EventIntegrationTests {
         if (testOrganization == null) {
             User newUser = new User();
             newUser.setUsername("testOrganization");
-            newUser.setPassword("password");
+            newUser.setPassword(passwordEncoder.encode("password"));
             newUser.setEmail("testOrganization@codeup.com");
             newUser.setAdmin(false);
             newUser.setOrganization(true);

@@ -43,7 +43,7 @@
                                 <th:block th:if="${animal.user.id == #authentication.principal.id}">
                                     <div>
                                         <button type="button" data-toggle="modal" data-target="#exampleModal" id="pet-edit-btn" class="btn btn-success btn-sm">
-                                            Edit
+                                            Edit Animal Profile
                                         </button>
                                     </div>
                                 </th:block>
@@ -51,7 +51,7 @@
                             <th:block sec:authorize="isAuthenticated()">
                                 <th:block th:if="${animal.user.id == #authentication.principal.id}">
                                     <form th:action="@{'/delete-animal/' + ${animal.id}}" th:method="post">
-                                        <button type="submit" id="delete-pet-btn" class="btn btn-success btn-sm">Delete</button>
+                                        <button type="submit" id="delete-pet-btn" class="btn btn-success btn-sm">Delete Animal</button>
                                     </form>
                                 </th:block>
                             </th:block>
@@ -69,11 +69,13 @@
                     <th:block sec:authorize="isAuthenticated()">
                         <th:block th:if="${comment.userId == #authentication.principal.id}">
                             <form th:action="@{'/comment/' + ${comment.id} + '/delete'}" th:method="post">
-                                <button id="delete-comment-btn" type="submit">X</button>
+                                <button id="delete-comment-btn" type="submit">
+                                    Delete
+                                </button>
                             </form>
                             <div>
-                                <a type="button" data-toggle="modal" data-target="#editCommentModal"
-                                        id="comment-edit-btn">Edit
+                                <a type="button" data-toggle="modal" data-target="#editCommentModal" id="comment-edit-btn">
+                                    Edit
                                 </a>
                             </div>
                             <div class="modal fade" id="editCommentModal" tabindex="-1" role="dialog"
@@ -92,8 +94,7 @@
                                             <div class="modal-body">
                                                 <div class="form-group">
                                                     <label for="edit-animal">Comment</label>
-                                                    <input id="edit-message" class="form-control" name="comment"
-                                                           th:value="${comment.comment}" type="text">
+                                                    <input id="edit-message" class="form-control" name="comment" th:value="${comment.comment}" type="text">
                                                 </div>
                                             </div>
                                         </div>
@@ -108,6 +109,75 @@
                         </th:block>
                     </th:block>
                 </div>
+<!--                -->
+
+                <div class="row bootstrap snippets">
+                    <div class="col-md-6 col-md-offset-2 col-sm-12">
+                        <div class="comment-wrapper">
+                            <div class="panel panel-info">
+                                <div class="panel-heading">
+                                    Comment panel
+                                </div>
+                                <div class="panel-body">
+                                    <textarea class="form-control" placeholder="write a comment..." rows="3"></textarea>
+                                    <br>
+                                    <button type="button" class="btn btn-info pull-right">Post</button>
+                                    <div class="clearfix"></div>
+                                    <hr>
+                                    <ul class="media-list">
+                                        <li class="media">
+                                            <a href="#" class="pull-left">
+                                                <img src="https://bootdey.com/img/Content/user_1.jpg" alt="" class="img-circle">
+                                            </a>
+                                            <div class="media-body">
+                                <span class="text-muted pull-right">
+                                    <small class="text-muted">30 min ago</small>
+                                </span>
+                                                <strong class="text-success">@MartinoMont</strong>
+                                                <p>
+                                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                                                    Lorem ipsum dolor sit amet, <a href="#">#consecteturadipiscing </a>.
+                                                </p>
+                                            </div>
+                                        </li>
+                                        <li class="media">
+                                            <a href="#" class="pull-left">
+                                                <img src="https://bootdey.com/img/Content/user_2.jpg" alt="" class="img-circle">
+                                            </a>
+                                            <div class="media-body">
+                                <span class="text-muted pull-right">
+                                    <small class="text-muted">30 min ago</small>
+                                </span>
+                                                <strong class="text-success">@LaurenceCorreil</strong>
+                                                <p>
+                                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                                                    Lorem ipsum dolor <a href="#">#ipsumdolor </a>adipiscing elit.
+                                                </p>
+                                            </div>
+                                        </li>
+                                        <li class="media">
+                                            <a href="#" class="pull-left">
+                                                <img src="https://bootdey.com/img/Content/user_3.jpg" alt="" class="img-circle">
+                                            </a>
+                                            <div class="media-body">
+                                <span class="text-muted pull-right">
+                                    <small class="text-muted">30 min ago</small>
+                                </span>
+                                                <strong class="text-success">@JohnNida</strong>
+                                                <p>
+                                                    Lorem ipsum dolor <a href="#">#sitamet</a> sit amet, consectetur adipiscing elit.
+                                                </p>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+<!--                -->
                 <th:block sec:authorize="isAuthenticated()">
                     <form class="comment" th:action="@{'/create-comment/' + ${animal.id} + '/' + ${#authentication.principal.id}}"
                           th:method="post">
