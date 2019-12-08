@@ -13,14 +13,19 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.http.HttpStatus;
+import org.springframework.mock.web.MockHttpSession;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
+import javax.servlet.http.HttpSession;
 import javax.transaction.Transactional;
 
+import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+import static org.hamcrest.CoreMatchers.containsString;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = AnimalHeartApplication.class)
@@ -32,7 +37,7 @@ public class CommentsIntegrationTests {
     private Comment commentToView;
     private Comment commentToEdit;
     private Comment commentToDelete;
-
+    private HttpSession httpSessionUser;
     @Autowired
     UserRepository userDao;
 
@@ -76,7 +81,8 @@ public class CommentsIntegrationTests {
             commentToView.setComment("This is a comment to view");
             commentToView.setAnimal(testAnimal);
             commentToView.setUserId(testUser.getId());
-            commentToView = commentDao.save(commentToView);
+            commentDao.save(commentToView);
+            commentToView = commentDao.findByComment("This is a comment to view").get(0);
         }
 
         if(commentToDelete == null) {
@@ -95,6 +101,15 @@ public class CommentsIntegrationTests {
             commentToEdit = commentDao.save(commentToEdit);
         }
 
+        httpSessionUser = this.mvc.perform(post("/login").with(csrf())
+                .param("username", "testUser")
+                .param("password", "password"))
+                .andExpect(status().is(HttpStatus.FOUND.value()))
+                .andExpect(redirectedUrl("/"))
+                .andReturn()
+                .getRequest()
+                .getSession();
+
     }
 
     public Comment findCommentByMessage(String message) {
@@ -105,6 +120,8 @@ public class CommentsIntegrationTests {
     public void createComment() throws Exception {
         this.mvc.perform(
                 post("/create-comment/" + testAnimal.getId() + "/" + testUser.getId())
+                        .with(csrf())
+                        .session((MockHttpSession) httpSessionUser)
                     .param("comment", "Test Comment!"))
         .andExpect(status().is3xxRedirection());
 
@@ -116,11 +133,13 @@ public class CommentsIntegrationTests {
 
     }
 
-    //Logic is in the animal profile view controller
     @Test
     public void viewComments() throws Exception {
-        this.mvc.perform(get("/animal/" + testAnimal.getId()))
-                .andExpect(status().isOk());
+        this.mvc.perform(get("/animal/" + testAnimal.getId())
+                .with(csrf()))
+                .andExpect(status().isOk())
+                .andExpect(content().string(containsString(commentToView.getComment())));
+
     }
 
     @Test
