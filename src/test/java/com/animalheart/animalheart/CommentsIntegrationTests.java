@@ -6,20 +6,25 @@ import com.animalheart.animalheart.models.User;
 import com.animalheart.animalheart.repositories.AnimalRepository;
 import com.animalheart.animalheart.repositories.CommentRepository;
 import com.animalheart.animalheart.repositories.UserRepository;
+import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.jupiter.api.AfterAll;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.HttpStatus;
 import org.springframework.mock.web.MockHttpSession;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
 import javax.servlet.http.HttpSession;
 import javax.transaction.Transactional;
+
+import java.util.List;
 
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -38,6 +43,10 @@ public class CommentsIntegrationTests {
     private Comment commentToEdit;
     private Comment commentToDelete;
     private HttpSession httpSessionUser;
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
     @Autowired
     UserRepository userDao;
 
@@ -63,7 +72,7 @@ public class CommentsIntegrationTests {
         if (testUser == null) {
             User newUser = new User();
             newUser.setUsername("testUser");
-            newUser.setPassword("password");
+            newUser.setPassword(passwordEncoder.encode("password"));
             newUser.setEmail("testUser@codeup.com");
             newUser.setAdmin(false);
             newUser.setOrganization(false);
@@ -144,7 +153,7 @@ public class CommentsIntegrationTests {
         this.mvc.perform(get("/animal/" + testAnimal.getId())
                 .with(csrf()))
                 .andExpect(status().isOk())
-                .andExpect(content().string(containsString(commentToView.getComment())));
+                .andExpect(content().string(containsString("This is a comment to view")));
     }
 
     @Test
@@ -179,6 +188,40 @@ public class CommentsIntegrationTests {
 
         Assert.assertNotEquals("", commentToBeDeleted.getComment());
     }
+
+    @AfterAll
+    public void clearDatabase() {
+        commentDao.findByComment("This is a comment to view");
+        commentToDelete = commentDao.findByComment("This is a comment to delete");
+        commentToEdit = commentDao.findByComment("This is a comment to edit");
+
+        testUser = userDao.findByUsername("testUser");
+        testAnimal = animalDao.findByName("testAnimalName");
+
+        if(commentToView != null) {
+            commentDao.delete(commentToView);
+        }
+
+        if(commentToDelete != null) {
+            commentDao.delete(commentToDelete);
+        }
+
+        if(commentToEdit != null) {
+            commentDao.delete(commentToEdit);
+        }
+
+        if(testAnimal != null) {
+            List<Animal> animalList = userDao.findByUsername("testUser").getAnimalList();
+            for(Animal animal : animalList) {
+                animalDao.delete(animal);
+            }
+        }
+
+        if(testUser != null) {
+            userDao.delete(testUser);
+        }
+    }
+
 
 
 

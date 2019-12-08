@@ -14,16 +14,22 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.http.HttpStatus;
+import org.springframework.mock.web.MockHttpSession;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
+import javax.servlet.http.HttpSession;
 import javax.transaction.TransactionScoped;
 import javax.transaction.Transactional;
+import static org.hamcrest.CoreMatchers.containsString;
 
+import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = AnimalHeartApplication.class)
@@ -38,8 +44,13 @@ public class EventIntegrationTests {
     private Event eventToEdit;
     private Event eventToDelete;
 
+    private HttpSession httpSessionUser;
+    private HttpSession httpSessionOrganization;
+
     @Autowired
     private MockMvc mvc;
+
+    private PasswordEncoder passwordEncoder;
 
     @Autowired
     UserRepository userDao;
@@ -90,7 +101,8 @@ public class EventIntegrationTests {
             testOrganizationProfile.setTaxNumber(123456789);
             testOrganizationProfile.setDescription("An organization to test");
             testOrganizationProfile.setOrganization(testOrganization);
-            testOrganizationProfile = organizationProfileDao.save(testOrganizationProfile);
+            organizationProfileDao.save(testOrganizationProfile);
+            testOrganizationProfile = organizationProfileDao.findByName("testOrganizationProfile");
         }
 
         if (eventToView == null) {
@@ -99,7 +111,8 @@ public class EventIntegrationTests {
             eventToView.setDescription("An event to view");
             eventToView.setLocation("eventToViewLocation");
             eventToView.setUser(testOrganization);
-            eventToView = eventDao.save(eventToView);
+            eventDao.save(eventToView);
+            eventToView = eventDao.findByTitle("eventToView");
         }
 
         if (eventToEdit == null) {
@@ -108,7 +121,8 @@ public class EventIntegrationTests {
             eventToEdit.setDescription("An event to Edit");
             eventToEdit.setLocation("eventToEditLocation");
             eventToEdit.setUser(testOrganization);
-            eventToEdit = eventDao.save(eventToEdit);
+            eventDao.save(eventToEdit);
+            eventToEdit = eventDao.findByTitle("eventToEdit");
         }
 
         if (eventToDelete == null) {
@@ -117,14 +131,35 @@ public class EventIntegrationTests {
             eventToDelete.setDescription("An event to Delete");
             eventToDelete.setLocation("eventToDeleteLocation");
             eventToDelete.setUser(testOrganization);
-            eventToDelete = eventDao.save(eventToDelete);
+            eventDao.save(eventToDelete);
+            eventToDelete = eventDao.findByTitle("eventToDelete");
         }
+
+        httpSessionUser = this.mvc.perform(post("/login").with(csrf())
+                .param("username", "testUser")
+                .param("password", "password"))
+                .andExpect(status().is(HttpStatus.FOUND.value()))
+                .andExpect(redirectedUrl("/"))
+                .andReturn()
+                .getRequest()
+                .getSession();
+
+        httpSessionOrganization = this.mvc.perform(post("/login").with(csrf())
+                .param("username", "testOrganization")
+                .param("password", "password"))
+                .andExpect(status().is(HttpStatus.FOUND.value()))
+                .andExpect(redirectedUrl("/"))
+                .andReturn()
+                .getRequest()
+                .getSession();
     }
 
     @Test
     public void CreateEvent() throws Exception {
         this.mvc.perform(
                 post("/create-event")
+                        .with(csrf())
+                        .session((MockHttpSession) httpSessionOrganization)
                         .param("title", "testEvent")
                         .param("description", "test event description")
                         .param("location", "600 Navarro, San Antonio, TX"))
@@ -142,29 +177,37 @@ public class EventIntegrationTests {
     @Test
     public void showAllEvents() throws Exception {
 
-        this.mvc.perform(get("/events"))
-                .andExpect(status().isOk());
+        this.mvc.perform(get("/events/showAll")
+                .with(csrf()))
+                .andExpect(status().isOk())
+                .andExpect(content().string(containsString("eventToView")));
     }
 
     @Test
     public void showEvent() throws Exception {
         Event eventToView = eventDao.findByTitle("eventToView");
-        this.mvc.perform(get("/event-profile/" + eventToView.getId()))
-                .andExpect(status().isOk());
+        this.mvc.perform(get("/event-profile/" + eventToView.getId())
+                .with(csrf()))
+                .andExpect(status().isOk())
+                .andExpect(content().string(containsString("eventToView")));
     }
 
     @Test
     public void showUsersEvents() throws Exception {
-        OrganizationProfile testOrganizationProfile = organizationProfileDao.findByName("eventToView");
-        this.mvc.perform(get("/organization-profile/" + testOrganizationProfile.getId()))
-                .andExpect(status().isOk());
+        OrganizationProfile testOrganizationProfile = organizationProfileDao.findByName("testOrganizationProfile");
+        this.mvc.perform(get("/organization-profile/" + testOrganizationProfile.getId())
+                .with(csrf()))
+                .andExpect(status().isOk())
+                .andExpect(content().string(containsString("eventToView")));
     }
 
     @Test
     public void editEvent() throws Exception {
-        Event currentEvent = eventDao.findByTitle("testEvent");
+        Event currentEvent = eventDao.findByTitle("eventToEdit");
         this.mvc.perform(
                 post("/event/" + currentEvent.getId() + "/edit")
+                        .with(csrf())
+                        .session((MockHttpSession) httpSessionOrganization)
                         .param("title", "testEventEdited")
                         .param("description", "test event description Edited")
                         .param("location", "600 Navarrow, San Antonio, TX Edited"))
@@ -179,11 +222,15 @@ public class EventIntegrationTests {
 
     @Test
     public void deleteEvent() throws Exception {
-        Event currentEvent = eventDao.findByTitle("testEventEdited");
+        Event currentEvent = eventDao.findByTitle("eventToDelete");
 
         this.mvc.perform(
-                post("/event/" + currentEvent.getId() + "/delete"))
+                post("/event/" + currentEvent.getId() + "/delete")
+                        .with(csrf())
+                        .session((MockHttpSession) httpSessionOrganization))
                 .andExpect(status().is3xxRedirection());
+
+        Assert.assertNotNull(currentEvent);
     }
 
 }
