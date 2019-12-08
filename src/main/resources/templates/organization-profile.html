@@ -92,6 +92,7 @@
                     <li class="list-group-item"><strong>Age: </strong><span th:text="${animal.age}">Animal Age</span></li>
                 </ul>
             </div>
+
             <div class="card-footer d-flex flex-column justify-content-center">
                 <a class="btn btn-primary text-white btn-sm mb-2" th:href="@{'/animal/' + ${animal.id}}">ANIMAL PROFILE</a>
                 <th:block sec:authorize="isAuthenticated()">
