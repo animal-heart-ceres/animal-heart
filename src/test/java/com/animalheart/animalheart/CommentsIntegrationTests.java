@@ -54,6 +54,10 @@ public class CommentsIntegrationTests {
     public void setup() throws Exception {
 
         testUser = userDao.findByUsername("testUser");
+        testAnimal = animalDao.findByName("testAnimalName");
+        commentToView = commentDao.findByComment("This is a comment to view");
+        commentToDelete = commentDao.findByComment("This is a comment to delete");
+        commentToEdit = commentDao.findByComment("This is a comment to edit");
 
         // Creates the test user if not exists
         if (testUser == null) {
@@ -82,7 +86,7 @@ public class CommentsIntegrationTests {
             commentToView.setAnimal(testAnimal);
             commentToView.setUserId(testUser.getId());
             commentDao.save(commentToView);
-            commentToView = commentDao.findByComment("This is a comment to view").get(0);
+            commentToView = commentDao.findByComment("This is a comment to view");
         }
 
         if(commentToDelete == null) {
@@ -90,7 +94,8 @@ public class CommentsIntegrationTests {
             commentToDelete.setComment("This is a comment to delete");
             commentToDelete.setAnimal(testAnimal);
             commentToDelete.setUserId(testUser.getId());
-            commentToDelete = commentDao.save(commentToDelete);
+            commentDao.save(commentToDelete);
+            commentToDelete = commentDao.findByComment("This is a comment to delete");
         }
 
         if(commentToEdit == null) {
@@ -98,7 +103,8 @@ public class CommentsIntegrationTests {
             commentToEdit.setComment("This is a comment to edit");
             commentToEdit.setAnimal(testAnimal);
             commentToEdit.setUserId(testUser.getId());
-            commentToEdit = commentDao.save(commentToEdit);
+            commentDao.save(commentToEdit);
+            commentToEdit = commentDao.findByComment("This is a comment to edit");
         }
 
         httpSessionUser = this.mvc.perform(post("/login").with(csrf())
@@ -113,7 +119,7 @@ public class CommentsIntegrationTests {
     }
 
     public Comment findCommentByMessage(String message) {
-        return commentDao.findByComment(message).get(0);
+        return commentDao.findByComment(message);
     }
 
     @Test
@@ -139,7 +145,6 @@ public class CommentsIntegrationTests {
                 .with(csrf()))
                 .andExpect(status().isOk())
                 .andExpect(content().string(containsString(commentToView.getComment())));
-
     }
 
     @Test
@@ -147,7 +152,10 @@ public class CommentsIntegrationTests {
         Comment commentToBeEdited = findCommentByMessage("This is a comment to edit");
 
         this.mvc.perform(post("/comment/" + commentToBeEdited.getId() + "/edit")
-            .param("comment", "This comment has been edited"));
+                .with(csrf())
+                .session((MockHttpSession) httpSessionUser)
+            .param("comment", "This comment has been edited"))
+            .andExpect(status().is3xxRedirection());
 
         Comment commentThatWasEdited = findCommentByMessage("This comment has been edited");
 
@@ -164,7 +172,10 @@ public class CommentsIntegrationTests {
 
         Assert.assertNotNull(commentToBeDeleted);
 
-        this.mvc.perform(post("/comment/" + commentToBeDeleted.getId() + "/delete"));
+        this.mvc.perform(post("/comment/" + commentToBeDeleted.getId() + "/delete")
+            .with(csrf())
+            .session((MockHttpSession) httpSessionUser))
+        .andExpect(status().is3xxRedirection());
 
         Assert.assertNotEquals("", commentToBeDeleted.getComment());
     }
