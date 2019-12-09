@@ -45,7 +45,11 @@ body {
 
 /*BUTTONS*/
 
-
+.btn{
+   padding-right: 0;
+    padding-left: 7px;
+    border-top-width: 6px;
+}
 
 .profile-userbuttons {
     text-align: center;
@@ -124,6 +128,8 @@ body {
     justify-content: center;
     flex-direction: column;
     background-color: #3AAA64;
+    border-radius: 1.25rem!important;
+    margin-left: 15px;
 }
 
 .not-users-comment-box {
@@ -132,11 +138,20 @@ body {
     display: flex;
     justify-content: center;
     flex-direction: column;
-    background-color: lightgrey;
+    background-color: dimgrey;
+    border-radius: 1.25rem!important;
+    margin-left: 15px;
 }
 
 .comment-text {
     color: white;
+}
+
+.comment{
+    bottom: -25px;
+    width: 500px;
+    position: absolute;
+    border-radius: 1rem!important;
 }
 
 ul {
