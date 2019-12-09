@@ -6,7 +6,7 @@ body{
 a{
     font-family: 'Raleway', sans-serif !important;
     color: #49484A;
-    font-weight: bold;
+    /*font-weight: bold;*/
     font-size: 23px;
 }
 

@@ -95,28 +95,28 @@ a{
 }
 
 
-/*MED TO LORGE*/
-@media screen and (min-width:780px) and (max-width:900px){
-    .img{
-        width: 265px;
-        height: 340px;
-    }
-}
+/*!*MED TO LORGE*!*/
+/*@media screen and (min-width:780px) and (max-width:900px){*/
+/*    .img{*/
+/*        width: 265px;*/
+/*        height: 340px;*/
+/*    }*/
+/*}*/
 
 
-/*LORGE SCREEN*/
-@media screen and (min-width:900px) and (max-width:1000px){
-    img{
-        width: 425px;
-        height: 450px;
-    }
-}
+/*!*LORGE SCREEN*!*/
+/*@media screen and (min-width:900px) and (max-width:1000px){*/
+/*    img{*/
+/*        width: 425px;*/
+/*        height: 450px;*/
+/*    }*/
+/*}*/
 
 
 /*VERY LORGE SCREEN*/
-@media screen and (min-width:1200px) {
-    .img{
-        width: 450px;
-        height: 400px;
-    }
-}
+/*@media screen and (min-width:1200px) {*/
+/*    .img{*/
+/*        width: 450px;*/
+/*        height: 400px;*/
+/*    }*/
+/*}*/

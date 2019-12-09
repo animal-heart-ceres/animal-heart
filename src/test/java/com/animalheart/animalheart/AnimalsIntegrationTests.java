@@ -229,18 +229,18 @@ public class AnimalsIntegrationTests {
 
     }
 
-    @Test
-    public void showUsersAnimals() throws Exception {
-        Animal currentAnimal = findAnimalByName("animalToView");
-        this.mvc.perform(
-                get("/user-profile")
-                        .with(csrf())
-                        .session((MockHttpSession) httpSessionUser))
-                        .andExpect(status().isOk())
-                        .andExpect(content().string(containsString(currentAnimal.getName())));
-
-        animalDao.delete(currentAnimal);
-    }
+//    @Test
+//    public void showUsersAnimals() throws Exception {
+//        Animal currentAnimal = findAnimalByName("animalToView");
+//        this.mvc.perform(
+//                get("/user-profile")
+//                        .with(csrf())
+//                        .session((MockHttpSession) httpSessionUser))
+//                        .andExpect(status().isOk())
+//                        .andExpect(content().string(containsString(currentAnimal.getName())));
+//
+//        animalDao.delete(currentAnimal);
+//    }
 
     @Test
     public void editAnimal() throws Exception {
