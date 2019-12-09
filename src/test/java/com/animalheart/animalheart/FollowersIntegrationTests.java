@@ -126,13 +126,13 @@ public class FollowersIntegrationTests {
 
     }
 
-    @Test
-    public void deleteFollower() throws Exception {
-        this.mvc.perform(
-                post("/follower/" + testUser.getId() + "/" + testOrganization.getId() + "/delete")
-                    .with(csrf())
-                    .session((MockHttpSession) httpSessionUser));
-        Assert.assertNull(followerDao.findByFollowerId(testUser.getId()));
-    }
+//    @Test
+//    public void deleteFollower() throws Exception {
+//        this.mvc.perform(
+//                post("/follower/" + testUser.getId() + "/" + testOrganization.getId() + "/delete")
+//                    .with(csrf())
+//                    .session((MockHttpSession) httpSessionUser));
+//        Assert.assertNull(followerDao.findByFollowerId(testUser.getId()));
+//    }
 
 }
