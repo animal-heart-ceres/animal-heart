@@ -18,8 +18,8 @@ body {
 }
 
 .profile-userpic img {
-    width: 99%;
-    height: 400px
+    width: auto;
+    height: 450px
 }
 
 
@@ -41,9 +41,9 @@ body {
 #user-comments{
     background-color: #ececec;
     border-radius: 10px !important;
-    border: 1px solid #ececec;
-    width: 500px;
-    padding-left: 5px;
+    /*border: 1px solid #ececec;*/
+    width: 450px;
+    /*padding-left: 5px;*/
     margin-bottom: 7px;
 }
 

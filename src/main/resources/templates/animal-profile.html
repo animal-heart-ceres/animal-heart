@@ -5,6 +5,8 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css?family=Playfair+Display|Raleway&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.7/semantic.min.css"
+          integrity="sha256-wT6CFc7EKRuf7uyVfi+MQNHUzojuHN2pSw0YWFt2K5E=" crossorigin="anonymous"/>
     <title>Animal Profile</title>
     <th:block th:replace="fragments/header :: main-header"/>
     <link rel="stylesheet" th:href="@{/public/css/animal-profile.css}">
@@ -14,7 +16,7 @@
 
 <div class="container-fluid">
     <div class="row profile">
-        <div class="col-md-4">
+        <div class="col-md-5">
             <div class="profile-sidebar">
 
                 <!-- SIDEBAR -->
@@ -61,10 +63,10 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-8  profile-content">
+        <div class="col-md-7  profile-content">
             <div class="profile-content">
 <!--               the actual comment-->
-                <div id="user-comments" th:each="comment : ${comments}">
+                <div id="user-comments" class="ui floating compact message" th:each="comment : ${comments}">
                     <p th:text="${comment.comment}"></p>
                     <th:block sec:authorize="isAuthenticated()">
                         <th:block th:if="${comment.userId == #authentication.principal.id}">
