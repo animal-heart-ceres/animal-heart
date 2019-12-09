@@ -137,3 +137,10 @@ div > .card-body {
 }
 
 /* Light blue #ACCBFF*/
+
+.truncate {
+    width: 250px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}

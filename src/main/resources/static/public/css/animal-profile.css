@@ -24,23 +24,23 @@ body {
 
 
 /*for the COMMENTS*/
-body{margin-top:20px;}
+/*body{margin-top:20px;}*/
 
-.comment-wrapper .panel-body {
-    max-height:650px;
-    overflow:auto;
-}
+/*.comment-wrapper .panel-body {*/
+/*    max-height:650px;*/
+/*    overflow:auto;*/
+/*}*/
 
-.comment-wrapper .media-list .media img {
-    width:64px;
-    height:64px;
-    border:2px solid #e5e7e8;
-}
+/*.comment-wrapper .media-list .media img {*/
+/*    width:64px;*/
+/*    height:64px;*/
+/*    border:2px solid #e5e7e8;*/
+/*}*/
 
-.comment-wrapper .media-list .media {
-    border-bottom:1px dashed #efefef;
-    margin-bottom:25px;
-}
+/*.comment-wrapper .media-list .media {*/
+/*    border-bottom:1px dashed #efefef;*/
+/*    margin-bottom:25px;*/
+/*}*/
 
 /*BUTTONS*/
 
@@ -114,6 +114,37 @@ body{margin-top:20px;}
     padding: 20px;
     background: #fff;
     min-height: 460px;
+}
+
+.users-comment-box {
+    width: 75%;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    background-color: #3AAA64;
+}
+
+.not-users-comment-box {
+    width: 75%;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    background-color: lightgrey;
+}
+
+.comment-text {
+    color: white;
+}
+
+ul {
+    list-style: none;
+}
+
+.border {
+    border: 2em black;
+    height: 75%;
 }
 
 
