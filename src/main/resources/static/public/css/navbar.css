@@ -12,6 +12,9 @@ a{
     font-size: 27px;
 }
 
+#logout-btn {
+    font-size: 20px;
+}
 
 #nav-line{
     border-bottom: 3px solid #E2252B;

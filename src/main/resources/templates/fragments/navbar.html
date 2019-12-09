@@ -11,55 +11,55 @@
 
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle d-none d-lg-block" href="#" id="navbarDropdownAnimalLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        VIEW ANIMALS
+                        View Animals
                     </a>
                     <div class="dropdown-menu text-md-center" aria-labelledby="navbarDropdownAnimalLink">
-                        <a class="navbar-brand dropdown-item" href="/animal/showAll">LIST</a>
-                        <a class="navbar-brand dropdown-item" href="/map">MAP</a>
+                        <a class="navbar-brand dropdown-item" href="/animal/showAll">List</a>
+                        <a class="navbar-brand dropdown-item" href="/map">Map</a>
                     </div>
                 </li>
 
                 <li class="nav-item d-lg-none">
-                    <a class="navbar-brand dropdown-item" href="/animal/showAll">VIEW ANIMALS</a>
+                    <a class="navbar-brand dropdown-item" href="/animal/showAll">View Animals</a>
                 </li>
 
                 <li class="nav-item d-lg-none">
-                    <a class="navbar-brand dropdown-item" href="/events/showAll">EVENTS</a>
+                    <a class="navbar-brand dropdown-item" href="/events/showAll">Events</a>
                 </li>
 
                 <li class="nav-item d-lg-none">
-                    <a class="navbar-brand dropdown-item" href="/organizations">RESCUES</a>
+                    <a class="navbar-brand dropdown-item" href="/organizations">Rescues</a>
                 </li>
 
                 <li class="nav-item d-lg-none" sec:authorize="isAuthenticated()">
-                    <a class="navbar-brand dropdown-item" href="/user-profile">MY PROFILE</a>
+                    <a class="navbar-brand dropdown-item" href="/user-profile">My Profile</a>
                 </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle d-none d-lg-block" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        MORE LINKS
+                        More Links
                     </a>
 
                     <div class="dropdown-menu text-md-center" aria-labelledby="navbarDropdownMenuLink">
-                        <a class="navbar-brand dropdown-item" href="/events/showAll">EVENTS</a>
-                        <a class="navbar-brand dropdown-item" href="/organizations">RESCUES</a>
+                        <a class="navbar-brand dropdown-item" href="/events/showAll">Events</a>
+                        <a class="navbar-brand dropdown-item" href="/organizations">Rescues</a>
                         <th:block sec:authorize="isAuthenticated()">
-                            <a class="navbar-brand dropdown-item" href="/user-profile" >MY PROFILE</a>
+                            <a class="navbar-brand dropdown-item" href="/user-profile" >My Profile</a>
                         </th:block>
                     </div>
                 </li>
                 <li class="nav-item navbar-right">
                     <div sec:authorize="!isAuthenticated()" class="m-1" th:href="@{/login}">
-                        <a th:href="@{/login}" class="login">LOG IN</a>
+                        <a th:href="@{/login}" class="login">Login</a>
                     </div>
                 </li>
                 <li class="nav-item navbar-right">
                     <form sec:authorize="isAuthenticated()" th:action="@{/logout}" th:method="post">
-                        <button class="navbar-brand" type="submit">LOGOUT</button>
+                        <button class="navbar-brand btn" id="logout-btn" type="submit">Logout</button>
                     </form>
                 </li>
                 <li class="nav-item navbar-right">
                     <form sec:authorize="!isAuthenticated()" class="m-1" th:href="@{/sign-up}" th:method="GET">
-                        <a th:href="@{/sign-up}" class="login">SIGN UP</a>
+                        <a th:href="@{/sign-up}" class="login">Sign Up</a>
                     </form>
                 </li>
             </ul>
