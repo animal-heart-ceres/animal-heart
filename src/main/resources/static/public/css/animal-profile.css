@@ -18,8 +18,8 @@ body {
 }
 
 .profile-userpic img {
-    width: 99%;
-    height: 400px
+    width: auto;
+    height: 450px
 }
 
 
@@ -36,6 +36,7 @@ body {
 /*    height:64px;*/
 /*    border:2px solid #e5e7e8;*/
 /*}*/
+
 
 /*.comment-wrapper .media-list .media {*/
 /*    border-bottom:1px dashed #efefef;*/

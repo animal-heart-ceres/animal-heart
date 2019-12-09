@@ -7,34 +7,72 @@
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css?family=Playfair+Display|Raleway&display=swap" rel="stylesheet">
     <title>Animal Heart</title>
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <link rel="stylesheet" th:href="@{/public/css/index.css}">
-    <th:block th:replace="fragments/header :: main-header" />
+    <th:block th:replace="fragments/header :: main-header"/>
 </head>
 <body>
 <th:block th:replace="fragments/navbar :: main-navbar"/>
-<div class="container-fluid">
 
-<header class="jumbotron bg-white" id="index-jumbotron">
-    <h1 class="display-3 text-center">ANIMAL<span class="heart">HEART</span></h1>
-    <p id="quote" class="text-center">Finding homes for homeless pets by bringing San Antonio residents and rescues together in one place </p>
-</header>
-
-
-
-<div id="container-id">
-    <div class="row no-gutters text-center">
-        <div class="col-4">
-            <img class="img" src="img/cat-with-mom.jpeg" alt="dog outside">
-        </div>
-        <div class="col-4">
-            <img class="img" src="img/dog-adoption.jpg" alt="cat">
-        </div>
-        <div class="col-4">
-            <img class="img" src="img/pet-owner.jpg" alt="dog outside">
+<div>
+    <div class="row">
+        <div class="col w3-content w3-section">
+            <img class="img w3-animate-left" src="img/index-pic-3.jpg" alt="dog outside">
+            <img class="img w3-animate-left" src="img/shih-tzu.jpeg" alt="dog getting adopted">
+            <img class="img w3-animate-left" src="img/woman-kissing-cat.jpg" alt="cat">
         </div>
     </div>
+
+    <div class="container">
+        <!--        <header class="jumbotron bg-white" id="index-jumbotron">-->
+        <h1 class="display-3 text-center">ANIMAL<span class="heart">HEART</span></h1>
+        <p id="quote" class="text-center">Finding homes for homeless pets by bringing San Antonio residents and rescues
+            together in one place </p>
+        <!--        </header>-->
+    </div>
 </div>
-</div>
+
+<script>
+    var myIndex = 0;
+    carousel();
+
+    function carousel() {
+        var i;
+        var x = document.getElementsByClassName("img");
+        for (i = 0; i < x.length; i++) {
+            x[i].style.display = "none";
+        }
+        myIndex++;
+        if (myIndex > x.length) {
+            myIndex = 1
+        }
+        x[myIndex - 1].style.display = "block";
+        setTimeout(carousel, 5500);
+    }
+</script>
+
+<!--<div class="container-fluid">-->
+
+<!--<header class="jumbotron bg-white" id="index-jumbotron">-->
+<!--    <h1 class="display-3 text-center">ANIMAL<span class="heart">HEART</span></h1>-->
+<!--    <p id="quote" class="text-center">Finding homes for homeless pets by bringing San Antonio residents and rescues together in one place </p>-->
+<!--</header>-->
+
+
+<!--<div id="container-id">-->
+<!--    <div class="row">-->
+<!--        <div class="col-4">-->
+<!--            <img class="img" src="img/cat-with-mom.jpeg" alt="dog outside">-->
+<!--        </div>-->
+<!--        <div class="col-4">-->
+<!--            <img class="img" src="img/index-dog3.jpg" alt="cat">-->
+<!--        </div>-->
+<!--        <div class="col-4">-->
+<!--            <img class="img" src="img/pet-owner.jpg" alt="dog outside">-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</div>-->
+<!--</div>-->
 
 
 <th:block th:replace="fragments/about-us-footer :: about-us-footer"/>
