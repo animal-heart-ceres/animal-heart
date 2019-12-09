@@ -6,9 +6,13 @@ import com.animalheart.animalheart.models.UserProfile;
 import com.animalheart.animalheart.repositories.OrganizationProfileRepository;
 import com.animalheart.animalheart.repositories.UserProfileRepository;
 import com.animalheart.animalheart.repositories.UserRepository;
+import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -154,6 +158,24 @@ public class ProfileIntegrationTests {
             organizationProfileToDelete = organizationProfileDao.save(organizationProfileToDelete);
         }
 
+        httpSessionUser = this.mvc.perform(post("/login").with(csrf())
+                .param("username", "testUser")
+                .param("password", "password"))
+                .andExpect(status().is(HttpStatus.FOUND.value()))
+                .andExpect(redirectedUrl("/"))
+                .andReturn()
+                .getRequest()
+                .getSession();
+
+        httpSessionOrganization = this.mvc.perform(post("/login").with(csrf())
+                .param("username", "testOrganization")
+                .param("password", "password"))
+                .andExpect(status().is(HttpStatus.FOUND.value()))
+                .andExpect(redirectedUrl("/"))
+                .andReturn()
+                .getRequest()
+                .getSession();
+
     }
 
     @Test
@@ -172,12 +194,13 @@ public class ProfileIntegrationTests {
 
     @Test
     public void CreateUserProfile() throws Exception {
+        String testUserId = Long.toString(testUser.getId());
         this.mvc.perform(
                 post("/create-user-profile").with(csrf())
                         .param("firstName", "testFirstName")
                         .param("lastName", "testLastName")
-                        .param("address", "testAddress"))
-                       //need to insert param userId, thats why its failing
+                        .param("address", "testAddress")
+                        .param("userId", testUserId))
                 .andExpect(status().is3xxRedirection());
 
         UserProfile createdUserProfile = findUserProfileByFirstName("testFirstName");
@@ -194,19 +217,17 @@ public class ProfileIntegrationTests {
 
     @Test
     public void CreateOrganizationProfile() throws Exception {
+        String organizationId = Long.toString(testOrganization.getId());
         this.mvc.perform(
                 post("/create-organization-profile").with(csrf())
                         .param("name", "testOrganizationName")
                         .param("taxNumber", "123456789")
                         .param("description", "A San Antonio rescue shelter")
-                        .param("address", "600 Navarro St, San Antonio, TX"))
+                        .param("address", "600 Navarro St, San Antonio, TX")
+                        .param("organizationId", organizationId))
                 .andExpect(status().is3xxRedirection());
 
         OrganizationProfile createdOrganizationProfile = findOrganizationProfileByName("testOrganizationName");
-
-        createdOrganizationProfile.setOrganization(testOrganization);
-
-        organizationProfileDao.save(createdOrganizationProfile);
 
         Assert.assertNotNull(createdOrganizationProfile);
 
@@ -215,21 +236,29 @@ public class ProfileIntegrationTests {
 
     @Test
     public void ViewUserProfile() throws Exception {
-        this.mvc.perform(get("/user-profile/" + userProfileToView.getId()).with(csrf()))
-                .andExpect(status().isOk());
+        this.mvc.perform(get("/user-profile/" + userProfileToView.getId())
+                .with(csrf())
+                .session((MockHttpSession) httpSessionUser))
+                .andExpect(status().isOk())
+                .andExpect(content().string(containsString(userProfileToView.getFirstName())));
     }
 
     @Test
     public void ViewOrganizationProfile() throws Exception {
-        this.mvc.perform(get("/organization-profile/" + organizationProfileToView.getId()).with(csrf()))
-                .andExpect(status().isOk());
+        this.mvc.perform(get("/organization-profile/" + organizationProfileToView.getId())
+                .with(csrf())
+                .session((MockHttpSession) httpSessionOrganization))
+                .andExpect(status().isOk())
+                .andExpect(content().string(containsString(organizationProfileToView.getName())));
     }
 
     @Test
     public void EditUserProfile() throws Exception{
 
         this.mvc.perform(
-                post("/profile/" + userProfileToEdit.getId() + "/edit").with(csrf())
+                post("/profile/" + userProfileToEdit.getId() + "/edit")
+                        .with(csrf())
+                        .session((MockHttpSession) httpSessionOrganization)
                         .param("firstName", "FirstNameEdited")
                         .param("lastName", "LastNameEdited")
                         .param("address", "AddressEdited"))
@@ -247,7 +276,9 @@ public class ProfileIntegrationTests {
     public void EditOrganizationProfile() throws Exception{
 
         this.mvc.perform(
-                post("/organization-profile/" + organizationProfileToEdit.getId() + "/edit").with(csrf())
+                post("/organization-profile/" + organizationProfileToEdit.getId() + "/edit")
+                        .with(csrf())
+                        .session((MockHttpSession) httpSessionOrganization)
                         .param("name", "organizationNameEdited")
                         .param("taxNumber", "12333333")
                         .param("address", "organizationAddressEdited")
@@ -258,4 +289,27 @@ public class ProfileIntegrationTests {
 
         organizationProfileDao.delete(editedTestOrganizationProfile);
     }
+
+//    @AfterAll
+//    public void ensureDatabaseIsCleared() {
+//        UserProfile userProfileToView = userProfileDao.findByFirstName("userProfileToViewFirstName");
+//        userProfileDao.delete(userProfileToView);
+//
+//        UserProfile userProfileToEdit = userProfileDao.findByFirstName("userProfileToEditFirstName");
+//        userProfileDao.delete(userProfileToEdit);
+//
+//        UserProfile userProfileToDelete = userProfileDao.findByFirstName("userProfileToDeleteFirstName");
+//        userProfileDao.delete(userProfileToDelete);
+//
+//        OrganizationProfile organizationProfileToView = organizationProfileDao.findByName("organizationProfileToViewName");
+//        organizationProfileDao.delete(organizationProfileToView);
+//
+//        OrganizationProfile organizationProfileToEdit = organizationProfileDao.findByName("organizationProfileToEditName");
+//        organizationProfileDao.delete(organizationProfileToEdit);
+//
+//        OrganizationProfile organizationProfileToDelete = organizationProfileDao.findByName("organizationProfileToDeleteName");
+//        organizationProfileDao.delete(organizationProfileToDelete);
+//    }
+
+
 }

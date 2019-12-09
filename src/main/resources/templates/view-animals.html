@@ -15,7 +15,7 @@
 <div class="container-fluid p-0" id="h1-border">
     <header class="jumbotron d-flex flex-column" id="animal-jumbotron">
         <div>
-            <h1 class="text-center">AVAILABLE ANIMALS</h1>
+            <h1 class="text-center font-weight-bold">AVAILABLE ANIMALS</h1>
         </div>
 
         <!--        hoping to use this similarly to how the coffee projects filter works-->
@@ -39,9 +39,9 @@
         <div class="row text-center">
             <div class="col-sm-12 col-md-4 col-lg-4 mb-3 d-flex justify-content-center" th:each="animal : ${animalList}">
                 <div class="card" style="width: 18rem;">
-                    <img src="../img/signup-dog.jpg" height="150" width="150" class="card-img-top" alt="">
+                    <img src="../img/signup-dog.jpg" height="220" width="150" class="card-img-top p-2" alt="">
                     <div class="card-body">
-                        <h5 class="card-title" th:text="'Hi! My name is ' + ${animal.name}">Animal Name</h5>
+                        <h5 class="m-1 card-title" th:text="'Hi! My name is ' + ${animal.name}">Animal Name</h5>
                         <ul class="list-group list-group-flush">
                             <li class="list-group-item"><strong>Type: </strong><span th:text="${animal.type}">Animal Type</span></li>
                             <li class="list-group-item"><strong>Size: </strong><span th:text="${animal.size}">Animal Size</span></li>

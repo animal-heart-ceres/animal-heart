@@ -24,18 +24,11 @@ body {
 
 
 /*for the COMMENTS*/
-.comment{
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    display: flex;
-}
+body{margin-top:20px;}
 
-#leave-comment{
-    width: 500px !important;
-    border: 1px solid;
-    border-radius: 10px !important;
-    margin-left: 25px;
+.comment-wrapper .panel-body {
+    max-height:650px;
+    overflow:auto;
 }
 
 #user-comments{
@@ -47,33 +40,14 @@ body {
     margin-bottom: 7px;
 }
 
+.comment-wrapper .media-list .media {
+    border-bottom:1px dashed #efefef;
+    margin-bottom:25px;
+}
+
 /*BUTTONS*/
-#delete-comment-btn{
-    font-size: 13px;
-    float: right;
-}
 
-#comment-edit-btn{
-    font-size: 13px;
-    float: right;
-}
 
-#submit-btn-2{
-    font-size: 13px;
-    padding: 10px 17px;
-    margin-right: 5px;
-    background-color: dimgrey;
-    border: 1px solid dimgray;
-    border-radius: 4px !important;
-    transition: .3s all ease;
-    color: white;
-}
-
-#submit-btn-2:hover{
-    background-color: #ad0d0d;
-    color: white;
-    transition: .3s all ease;
-}
 
 .profile-userbuttons {
     text-align: center;
