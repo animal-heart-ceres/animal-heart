@@ -13,7 +13,7 @@
                     <a class="nav-link dropdown-toggle d-none d-lg-block" href="#" id="navbarDropdownAnimalLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         View Animals
                     </a>
-                    <div class="dropdown-menu text-md-center" aria-labelledby="navbarDropdownAnimalLink">
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdownAnimalLink">
                         <a class="navbar-brand dropdown-item" href="/animal/showAll">List</a>
                         <a class="navbar-brand dropdown-item" href="/map">Map</a>
                     </div>
@@ -39,7 +39,7 @@
                         More Links
                     </a>
 
-                    <div class="dropdown-menu text-md-center" aria-labelledby="navbarDropdownMenuLink">
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                         <a class="navbar-brand dropdown-item" href="/events/showAll">Events</a>
                         <a class="navbar-brand dropdown-item" href="/organizations">Rescues</a>
                         <th:block sec:authorize="isAuthenticated()">
@@ -54,7 +54,7 @@
                 </li>
                 <li class="nav-item navbar-right">
                     <form sec:authorize="isAuthenticated()" th:action="@{/logout}" th:method="post">
-                        <button class="navbar-brand btn" id="logout-btn" type="submit">Logout</button>
+                        <button class="navbar-brand btn-warning" id="logout-btn" type="submit">Logout</button>
                     </form>
                 </li>
                 <li class="nav-item navbar-right">

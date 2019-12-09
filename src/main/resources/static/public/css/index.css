@@ -8,6 +8,7 @@ h1{
     font-family: 'Playfair Display', serif;
     font-size: 5rem !important;
     color: #49484A;
+    margin-top: 15px;
 }
 
 
@@ -60,6 +61,7 @@ a{
    min-width: 100%;
     background-size: cover;
     object-fit: cover;
+    height: 530px;
 }
 
 /*SMALL SCREEN*/
