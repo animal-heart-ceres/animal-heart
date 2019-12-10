@@ -64,6 +64,10 @@ div > .card-body {
     font-size: 1em;
 }
 
+.animal-fix {
+    object-fit: cover;
+}
+
 
 
 /*EVERYTHING IN THE JUMBOTRON*/
@@ -75,9 +79,10 @@ div > .card-body {
 }
 
 #dropdownMenuButton{
-    border: 5px solid #49484A;
+    border: 5px solid white;
     border-radius: 10px;
     width: 170px;
+    color: white;
 }
 
 h5{
