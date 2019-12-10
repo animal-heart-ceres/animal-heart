@@ -52,8 +52,8 @@ div > .card-body {
     font-size: 1em;
 }
 .card-body > .card-title {
-    margin-top: 1em;
-    margin-bottom: 1em;
+    /*margin-top: 1em;*/
+    /*margin-bottom: 1em;*/
     font-size: 1.5em;
 }
 
@@ -99,9 +99,16 @@ div > .card-body {
     font-size: 1em;
 }
 .card-body > .card-title {
-    margin-top: 1em;
     margin-bottom: 1em;
     font-size: 1.5em;
+}
+
+#event-card {
+    padding-top: 1em;
+    padding-bottom: 1em;
+    font-size: 1.5em;
+    background:  #ad0d0d;
+    color: white;
 }
 
 .btn-primary{

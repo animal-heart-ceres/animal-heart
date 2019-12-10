@@ -23,12 +23,13 @@
         <div class="row text-center">
             <div class="col-sm-12 col-md-4 col-lg-4 mb-3 d-flex justify-content-center" th:each="organization : ${organizations}">
                 <div class="d-flex justify-content-around">
-                    <div class="card" style="min-width: 18rem; max-width: 18rem;">
-                        <img th:src="@{https://picsum.photos/150}" height="220px" width="150px" class="card-img-top p-2" alt="">
+                    <div class="card shadow" style="min-width: 18rem; max-width: 18rem;">
+<!--                        <img th:src="@{https://picsum.photos/150}" height="220px" width="150px" class="card-img-top p-2" alt="">-->
                         <div class="card-body">
-                            <h5 class="card-title" th:text="${organization.name}">Rescue Name</h5>
+                            <h5 class="card-title mb-0" id="event-card" th:text="${organization.name}">Rescue Name</h5>
                             <ul class="list-group list-group-flush">
                                 <li class="list-group-item truncate"><span class="" th:text="${organization.description}">Description</span></li>
+                                <li class="list-group-item truncate"><span class="" th:text="${organization.address}">Description</span></li>
                             </ul>
                         </div>
                         <div class="card-footer d-flex flex-column justify-content-center">
