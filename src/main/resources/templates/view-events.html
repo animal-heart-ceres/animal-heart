@@ -22,10 +22,10 @@
     <div class="container">
         <div class="row text-center">
             <div class="col-sm-12 col-md-4 col-lg-4 mb-3 mt-4 d-flex justify-content-center" th:each="event : ${eventList}">
-                <div class="card" style="width: 18rem;">
-                    <img src="../img/event.jpg" height="220" width="150" class="card-img-top p-2" alt="">
+                <div class="card shadow" style="width: 18rem;">
+<!--                    <img src="../img/event.jpg" height="220" width="150" class="card-img-top p-2" alt="">-->
                     <div class="card-body">
-                        <h5 class="card-title" th:text="${event.title}">Title</h5>
+                        <h5 class="card-title" id="event-card" th:text="${event.title}">Title</h5>
                         <ul class="list-group list-group-flush">
                             <li class="list-group-item"><strong>Location:</strong> <span th:text="${event.location}">Event Location</span></li>
                         </ul>
