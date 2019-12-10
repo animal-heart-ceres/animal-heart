@@ -22,6 +22,10 @@ body {
     height: 450px
 }
 
+.profile-fix {
+    object-fit: cover;
+}
+
 
 
 /*BUTTONS*/

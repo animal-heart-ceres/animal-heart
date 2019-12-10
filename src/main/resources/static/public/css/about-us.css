@@ -12,6 +12,7 @@ a{
 
 .our-mission{
     margin-top: 25px;
+    font-size: 1.4em;
 }
 
 h1{
@@ -52,8 +53,8 @@ p{
 }
 
 .profile-card .profile-picture {
-    width: 9.4rem;
-    height: 9.4rem;
+    width: 10.4rem;
+    height: 10.4rem;
     object-fit:cover;
 }
 
@@ -70,8 +71,8 @@ p{
     line-height: 3.15rem;
     width: 3.2rem;
     height: 3.2rem;
-    border: 1px solid #d6d6d6;
-    color: #d6d6d6;
+    border: 1px solid #8e8e8e;
+    color: #8e8e8e;
     border-radius: 50%;
     margin: 0 .5rem;
 }
