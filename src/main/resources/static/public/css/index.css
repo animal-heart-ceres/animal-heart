@@ -47,13 +47,22 @@ a{
     margin-bottom: 0px;
 }
 
-#container-id{
-    padding-top: 15px;
-    padding-bottom: 20px;
+.container{
+    margin-bottom: 40px;
+    margin-top: 30px;
 }
+
+/*#container-id{*/
+/*    padding-top: 15px;*/
+/*    padding-bottom: 20px;*/
+/*}*/
 
 .col{
     margin-top: 0 !important;
+}
+
+.row{
+    background-color: #49484A;
 }
 
 .img{
