@@ -25,7 +25,13 @@ h1{
     font-size: 27px;
 }
 
+.outline {
+    outline: 5px solid white;
+}
 
+.white {
+    color: white;
+}
 #heart{
     color: #A24848;
 }
