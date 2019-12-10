@@ -15,7 +15,6 @@
 
 </head>
 <body>
-
 <div class="ui raised very padded center aligned text container segment" id="container-id">
     <h1>Create Your Profile</h1>
     <br>
@@ -34,6 +33,7 @@
             <label for="address">Please Enter Your Complete Address</label>
             <input name="address" type="text" class="form-control" id="address" th:field="*{address}"
                    placeholder="Enter Complete Address"/>
+
         </div>
         <input type="hidden" name="userId" th:value="${userId}">
         <button type="submit" id="btn" class="btn btn-sm btn-default">Finish Your Profile</button>

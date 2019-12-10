@@ -4,6 +4,7 @@
     padding: 0;
     box-sizing: border-box;
 }
+
 h1{
     font-family: 'Playfair Display', serif;
     font-size: 5.4rem !important;
@@ -67,10 +68,14 @@ a{
 
 .img{
     display: block;
-   min-width: 100%;
+    min-width: 100%;
     background-size: cover;
     object-fit: cover;
     height: 530px;
+}
+
+.w3-content {
+    background: gray;
 }
 
 /*SMALL SCREEN*/
