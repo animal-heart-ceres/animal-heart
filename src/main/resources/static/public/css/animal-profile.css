@@ -103,25 +103,25 @@ body {
 }
 
 .users-comment-box {
-    width: 75%;
-    height: 50px;
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
+    /*width: 75%;*/
+    /*height: 50px;*/
+    /*display: flex;*/
+    /*justify-content: center;*/
+    /*flex-direction: column;*/
     background-color: #3AAA64;
     border-radius: 1.25rem!important;
-    margin-left: 15px;
+    /*margin-left: 15px;*/
 }
 
 .not-users-comment-box {
-    width: 75%;
-    height: 50px;
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
+    /*width: 75%;*/
+    /*height: 50px;*/
+    /*display: flex;*/
+    /*justify-content: center;*/
+    /*flex-direction: column;*/
     background-color: dimgrey;
     border-radius: 1.25rem!important;
-    margin-left: 15px;
+    /*margin-left: 15px;*/
 }
 
 .comment-text {

@@ -28,8 +28,8 @@
                         </div>
                         <th:block sec:authorize="isAuthenticated()">
                             <th:block th:if="${organizationProfile.organization.id == #authentication.principal.id}">
-                                <div>
-                                    <input class="btn btn-success btn-sm" id="edit-btn" type="button" data-toggle="modal" data-target="#edit-profile-Modal" value="EDIT PROFILE"/><i class="fa fa-pencil"></i>
+                                <div class="mt-3">
+                                    <input class="btn btn-success btn-sm" id="edit-btn" type="button" data-toggle="modal" data-target="#edit-profile-Modal" value="EDIT PROFILE"/><i class="fa fa-pencil ml-2"></i>
                                 </div>
                             </th:block>
                         </th:block>
