@@ -3,43 +3,72 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css?family=Playfair+Display|Raleway&display=swap" rel="stylesheet">
     <link rel="stylesheet" type="text/css" th:href="@{/public/css/set-up-profile.css}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.7/semantic.min.css"
+          integrity="sha256-wT6CFc7EKRuf7uyVfi+MQNHUzojuHN2pSw0YWFt2K5E=" crossorigin="anonymous"/>
     <title>Organization Sign Up</title>
-    <th:block th:replace="fragments/header :: main-header" />
+    <th:block th:replace="fragments/header :: main-header"/>
     <th:block th:replace="fragments/navbar :: main-navbar"/>
 
 </head>
 <body>
-<header class="jumbotron p-1 d-flex flex-row justify-content-center" id="animal-jumbotron">
-    <h1 class="display-3 text-center text-center">Create Your Profile</h1>
-</header>
-<div class="row">
-    <div class="container" style="margin-top:30px">
-        <div class="col-md-4">
-            <div class="panel panel-default">
-                <div class="panel-body">
-                    <form th:action="@{/create-user-profile}" th:method="post" th:object="${userProfile}">
-                        <div class="form-group">
-                            <label for="firstName">First Name</label>
-                            <input class="form-control" id="firstName" th:field="*{firstName}" name="firstName" type="text" placeholder="Enter First Name" />
-                        </div>
-                        <div class="form-group">
-                            <label for="lastName">Last Name</label>
-                            <input name="lastName" type="text" class="form-control" id="lastName" th:field="*{lastName}" placeholder="Enter Last Name" />
-                        </div>
-                        <div class="form-group">
-                            <label for="address">Please Enter Your Complete Address</label>
-                            <input name="address" type="text" class="form-control" id="address" th:field="*{address}" placeholder="Enter Complete Address" />
-                        </div>
-                        <button type="submit" class="btn btn-sm btn-default">Finish Your Profile</button>
-                    </form>
-                </div>
-            </div>
+
+<div class="ui raised very padded center aligned text container segment" id="container-id">
+    <h1>Create Your Profile</h1>
+    <br>
+    <form th:action="@{/create-user-profile}" th:method="post" th:object="${userProfile}">
+        <div class="form-group">
+            <label for="firstName">First Name</label>
+            <input class="form-control" id="firstName" th:field="*{firstName}" name="firstName" type="text"
+                   placeholder="Enter First Name"/>
         </div>
-    </div>
+        <div class="form-group">
+            <label for="lastName">Last Name</label>
+            <input name="lastName" type="text" class="form-control" id="lastName" th:field="*{lastName}"
+                   placeholder="Enter Last Name"/>
+        </div>
+        <div class="form-group">
+            <label for="address">Please Enter Your Complete Address</label>
+            <input name="address" type="text" class="form-control" id="address" th:field="*{address}"
+                   placeholder="Enter Complete Address"/>
+        </div>
+        <input type="hidden" name="userId" th:value="${userId}">
+        <button type="submit" id="btn" class="btn btn-sm btn-default">Finish Your Profile</button>
+    </form>
 </div>
+
+
+<!--<header class="jumbotron p-1 d-flex flex-row justify-content-center" id="animal-jumbotron">-->
+<!--    <h1 class="display-3 text-center text-center">Create Your Profile</h1>-->
+<!--</header>-->
+<!--<div class="row">-->
+<!--    <div class="container" style="margin-top:30px">-->
+<!--        <div class="col-md-4">-->
+<!--            <div class="panel panel-default">-->
+<!--                <div class="panel-body">-->
+<!--                    <form th:action="@{/create-user-profile}" th:method="post" th:object="${userProfile}">-->
+<!--                        <div class="form-group">-->
+<!--                            <label for="firstName">First Name</label>-->
+<!--                            <input class="form-control" id="firstName" th:field="*{firstName}" name="firstName" type="text" placeholder="Enter First Name" />-->
+<!--                        </div>-->
+<!--                        <div class="form-group">-->
+<!--                            <label for="lastName">Last Name</label>-->
+<!--                            <input name="lastName" type="text" class="form-control" id="lastName" th:field="*{lastName}" placeholder="Enter Last Name" />-->
+<!--                        </div>-->
+<!--                        <div class="form-group">-->
+<!--                            <label for="address">Please Enter Your Complete Address</label>-->
+<!--                            <input name="address" type="text" class="form-control" id="address" th:field="*{address}" placeholder="Enter Complete Address" />-->
+<!--                        </div>-->
+<!--                        <button type="submit" class="btn btn-sm btn-default">Finish Your Profile</button>-->
+<!--                    </form>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</div>-->
 <th:block th:replace="fragments/about-us-footer :: about-us-footer"/>
 <th:block th:replace="fragments/footer :: main-footer"/>
 </body>
