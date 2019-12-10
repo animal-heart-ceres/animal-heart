@@ -7,7 +7,7 @@
 
 h1{
     font-family: 'Playfair Display', serif;
-    font-size: 5rem !important;
+    font-size: 5.4rem !important;
     color: #49484A;
     margin-top: 15px;
 }
@@ -38,23 +38,32 @@ a{
     padding: 2rem 2rem !important;
 }
 
-#top-line{
-    margin-top: 72px;
-}
+/*#top-line{*/
+/*    margin-top: 72px;*/
+/*}*/
 
 
-#index-jumbotron{
-    border-bottom: 3px solid #A4A3A4;
-    margin-bottom: 0px;
+/*#index-jumbotron{*/
+/*    border-bottom: 3px solid #A4A3A4;*/
+/*    margin-bottom: 0px;*/
+/*}*/
+
+.container{
+    margin-bottom: 30px;
+    margin-top: 20px;
 }
 
-#container-id{
-    padding-top: 15px;
-    padding-bottom: 20px;
-}
+/*#container-id{*/
+/*    padding-top: 15px;*/
+/*    padding-bottom: 20px;*/
+/*}*/
 
 .col{
     margin-top: 0 !important;
+}
+
+.row{
+    background-color: #49484A;
 }
 
 .img{
