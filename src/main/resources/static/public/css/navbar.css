@@ -14,7 +14,15 @@ a{
 
 #logout-btn {
     font-size: 20px;
+    margin-left: 11px;
+    padding-left: 15px;
+    padding-right: 15px;
+    border-radius: 22px;
+    background-color: #E2252B;
+    border: #49484A;
+    color: white;
 }
+
 
 #nav-line{
     border-bottom: 3px solid #E2252B;
