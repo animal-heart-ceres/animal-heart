@@ -67,38 +67,52 @@
                 </div>
             </div>
         </div>
-        <ul class="shadow media-list col-md-7  profile-content">
+        <ul class="shadow media-list col-md-7 mb-0 profile-content">
             <div id="user-comment profile-contents" th:each="comment : ${comments}">
-                <li>
+<!--                <li>-->
                     <!--                                    <strong class="text-success" th:text="${comment.}">Author Name</strong>-->
-                    <div class="row">
+                    <div class="row pl-3">
                         <th:block sec:authorize="!isAuthenticated()">
-                            <p class="mb-2 mt-2 not-users-comment-box rounded border-dark"><span class="ml-2 comment-text" th:text="${comment.comment}">Comment</span>
+                            <p class="mb-2 mt-2 not-users-comment-box rounded border-dark p-2"><span class="comment-text" th:text="${comment.comment}">Comment</span>
                             </p>
                         </th:block>
                         <th:block sec:authorize="isAuthenticated()">
                             <th:block th:if="${comment.userId == #authentication.principal.id}">
-                                <p class="mb-2 mt-2 users-comment-box rounded border-dark"><span class="ml-2 comment-text" th:text="${comment.comment}">Comment</span></p>
+                                <p class="mb-2 mt-2 users-comment-box rounded border-dark p-2"><span class="comment-text" th:text="${comment.comment}">Comment</span></p>
                             </th:block>
                             <th:block th:if="${comment.userId != #authentication.principal.id}">
-                                <p class="mb-2 mt-2 not-users-comment-box rounded border-dark"><span class="ml-2 comment-text" th:text="${comment.comment}">Comment</span>
+                                <p class="mb-2 mt-2 not-users-comment-box rounded border-dark p-2"><span class="comment-text" th:text="${comment.comment}">Comment</span>
                                 </p>
                             </th:block>
-                        </th:block>
-                    </div>
-                    <div class="row">
-                        <th:block sec:authorize="isAuthenticated()">
-                            <th:block th:if="${comment.userId == #authentication.principal.id}">
-                                <div>
-                                    <button type="button" data-toggle="modal" data-target="#editCommentModal" class="ml-4 pb-2 rounded btn-secondary btn-sm">Edit
-                                    </button>
-                                </div>
-                                <form th:action="@{'/comment/' + ${comment.id} + '/delete'}" th:method="post">
-                                    <button class="ml-4 rounded btn-secondary btn-sm pb-2" type="submit">Delete</button>
-                                </form>
+
+                            <th:block sec:authorize="isAuthenticated()">
+                                <th:block th:if="${comment.userId == #authentication.principal.id}">
+                                    <div class="my-auto">
+                                        <button type="button" data-toggle="modal" data-target="#editCommentModal" class="pb-2 rounded btn btn-link"><i class="fa fa-pencil ml-2"></i>
+                                        </button>
+                                    </div>
+                                    <form class="my-auto" th:action="@{'/comment/' + ${comment.id} + '/delete'}" th:method="post">
+                                        <button class=" rounded btn btn-link text-danger pb-2" type="submit">X</button>
+                                    </form>
+                                </th:block>
                             </th:block>
+
+
                         </th:block>
                     </div>
+<!--                    <div class="row pl-3">-->
+<!--                        <th:block sec:authorize="isAuthenticated()">-->
+<!--                            <th:block th:if="${comment.userId == #authentication.principal.id}">-->
+<!--                                <div>-->
+<!--                                    <button type="button" data-toggle="modal" data-target="#editCommentModal" class="ml-4 pb-2 rounded btn-secondary btn-sm">Edit-->
+<!--                                    </button>-->
+<!--                                </div>-->
+<!--                                <form th:action="@{'/comment/' + ${comment.id} + '/delete'}" th:method="post">-->
+<!--                                    <button class="ml-4 rounded btn-secondary btn-sm pb-2" type="submit">Delete</button>-->
+<!--                                </form>-->
+<!--                            </th:block>-->
+<!--                        </th:block>-->
+<!--                    </div>-->
 
                     <!--                                    Modal-->
                     <div class="modal fade" id="editCommentModal" tabindex="-1" role="dialog"
@@ -129,7 +143,7 @@
                             </form>
                         </div>
                     </div>
-                </li>
+<!--                </li>-->
 
             </div> <!-- End of single comment-->
             <th:block sec:authorize="isAuthenticated()">
