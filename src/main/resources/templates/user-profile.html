@@ -56,7 +56,7 @@
 
     <div class="row d-flex justify-content-between">
         <div class="card" style="width: 18rem;"  th:each="animal : ${animals}">
-            <img src="../img/signup-dog.jpg" height="220" width="150" class="card-img-top p-2" alt="">
+            <img th:src="${animal.img}" height="220" width="150" class="card-img-top p-2" alt="">
             <div class="card-body">
                 <h5 class="card-title" th:text="'Hi! My name is ' + ${animal.name}">Animal Name</h5>
                 <ul class="list-group list-group-flush">
@@ -85,7 +85,7 @@
 
     <div class="row d-flex justify-content-between">
         <div class="card" style="width: 18rem;" th:each="event : ${events}">
-            <img src="../img/signup-dog.jpg" height="220" width="150" class="card-img-top p-2" alt="">
+            <img src="../img/event.jpg" height="220" width="150" class="card-img-top p-2" alt="">
             <div class="card-body">
                 <h5 class="card-title" th:text="${event.title}">Card title</h5>
                 <ul class="list-group list-group-flush">
