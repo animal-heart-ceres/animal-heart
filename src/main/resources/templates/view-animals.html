@@ -39,7 +39,7 @@
         <div class="row text-center">
             <div class="col-sm-12 col-md-4 col-lg-4 mb-3 d-flex justify-content-center" th:each="animal : ${animalList}">
                 <div class="card" style="width: 18rem;">
-                    <img src="${animal.img}" height="220" width="150" class="card-img-top p-2" alt="">
+                    <img th:src="@{animal.img}" height="220" width="150" class="card-img-top p-2" alt="">
                     <div class="card-body">
                         <h5 class="m-1 card-title" th:text="'Hi! My name is ' + ${animal.name}">Animal Name</h5>
                         <ul class="list-group list-group-flush">
