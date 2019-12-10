@@ -59,10 +59,14 @@ a{
 
 .img{
     display: block;
-   min-width: 100%;
+    min-width: 100%;
     background-size: cover;
     object-fit: cover;
     height: 530px;
+}
+
+.w3-content {
+    background: gray;
 }
 
 /*SMALL SCREEN*/
