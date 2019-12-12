@@ -2,7 +2,6 @@ package com.animalheart.animalheart.controllers;
 
 import com.animalheart.animalheart.models.Animal;
 import com.animalheart.animalheart.models.Comment;
-import com.animalheart.animalheart.models.User;
 import com.animalheart.animalheart.repositories.AnimalRepository;
 import com.animalheart.animalheart.repositories.CommentRepository;
 import com.animalheart.animalheart.repositories.UserRepository;
@@ -11,7 +10,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 public class CommentController {
@@ -47,7 +45,6 @@ public class CommentController {
 
         commentDao.save(commentToBeEdited);
 
-        //Gets the animal profile, so that we can redirect to it after edit.
         Animal animalProfileToReturnTo = commentToBeEdited.getAnimal();
 
         return "redirect:/animal/" + animalProfileToReturnTo.getId();
@@ -59,7 +56,6 @@ public class CommentController {
 
         Comment commentToBeDeleted = commentDao.getOne(commentId);
 
-        //Gets the animal profile, so that we can redirect to it after delete.
         Animal animalProfileToReturnTo = commentToBeDeleted.getAnimal();
 
         commentDao.delete(commentToBeDeleted);

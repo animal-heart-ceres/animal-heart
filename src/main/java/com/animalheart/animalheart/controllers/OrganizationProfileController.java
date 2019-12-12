@@ -10,8 +10,6 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -53,7 +51,6 @@ public class OrganizationProfileController {
 
     @GetMapping("/organization-profile")
     public String showOrganizationProfile( Model vModel) {
-        //When I go to my profile, I expect to see all the animals I have added
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
         User loggedInUser = userDao.getOne(user.getId());

@@ -56,8 +56,9 @@ public class AnimalController {
 
         OrganizationProfile organizationProfile = organizationProfileDao.findByOrganizationId(organizationThatOwnsThisAnimal.getId());
 
-        vModel.addAttribute("organizationProfile", organizationProfile);
         List<Comment> commentList =  animal.getCommentList();
+
+        vModel.addAttribute("organizationProfile", organizationProfile);
         vModel.addAttribute("animal", animal);
         vModel.addAttribute("comment", new Comment());
         vModel.addAttribute("comments", commentList);
